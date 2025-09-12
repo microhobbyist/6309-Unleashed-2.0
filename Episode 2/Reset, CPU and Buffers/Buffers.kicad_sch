@@ -1,0 +1,14 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "880696d8-7c27-46b9-b3de-8eade4c00598")
+	(paper "USLetter")
+	(title_block
+		(date "2025-09-11")
+		(rev "2.0")
+		(company "MicroHobbyist")
+		(comment 1 "Frédéric Segard")
+	)
+	(lib_symbols)
+)
