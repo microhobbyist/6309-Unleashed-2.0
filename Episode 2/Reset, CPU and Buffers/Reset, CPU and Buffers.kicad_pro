@@ -410,6 +410,14 @@
       "version": 1
     },
     "net_format_name": "",
+    "ngspice": {
+      "fix_include_paths": true,
+      "meta": {
+        "version": 0
+      },
+      "model_mode": 4,
+      "workbook_filename": ""
+    },
     "page_layout_descr_file": "kicad-embed://MicroHobbyistSheetPrefs.kicad_wks",
     "plot_directory": "",
     "space_save_all_events": true,
@@ -428,12 +436,8 @@
       "Root"
     ],
     [
-      "45c85402-81b5-463d-a862-d580e1c6b1a8",
-      "Reset & CPU"
-    ],
-    [
-      "d5543734-2ff2-4d7b-b5ef-3ea0207e0a56",
-      "Buffers"
+      "154d3636-9585-43f9-bdff-90ca5096544f",
+      "CPU, Reset & Buffers"
     ]
   ],
   "text_variables": {}
