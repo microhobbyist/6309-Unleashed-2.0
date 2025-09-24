@@ -3642,6 +3642,144 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:R_Small_US"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "R"
+				(at 0.762 0.508 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "R_Small_US"
+				(at 0.762 -1.016 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Resistor, small US symbol"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "r resistor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "R_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "R_Small_US_1_1"
+				(polyline
+					(pts
+						(xy 0 1.524) (xy 1.016 1.143) (xy 0 0.762) (xy -1.016 0.381) (xy 0 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 1.016 -0.381) (xy 0 -0.762) (xy -1.016 -1.143) (xy 0 -1.524)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 0 2.54 270)
+					(length 1.016)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 90)
+					(length 1.016)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Jumper:SolderJumper_2_Open"
 			(pin_numbers
 				(hide yes)
@@ -4388,6 +4526,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ab3f3763-b500-42a1-ac44-66c95c8e3019")
+	)
+	(junction
+		(at 93.98 144.78)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ab6a3e7c-1968-4c80-9ce8-6802fa01b830")
 	)
 	(junction
 		(at 124.46 196.85)
@@ -5789,7 +5933,7 @@
 	)
 	(wire
 		(pts
-			(xy 88.9 144.78) (xy 104.14 144.78)
+			(xy 88.9 144.78) (xy 93.98 144.78)
 		)
 		(stroke
 			(width 0)
@@ -5806,6 +5950,16 @@
 			(type default)
 		)
 		(uuid "3acbfb3e-a25a-4e5f-ad6e-f6d2d9f1e41a")
+	)
+	(wire
+		(pts
+			(xy 93.98 144.78) (xy 104.14 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3c931750-4b84-4420-b1d4-2459be7d91aa")
 	)
 	(wire
 		(pts
@@ -7069,6 +7223,16 @@
 	)
 	(wire
 		(pts
+			(xy 93.98 135.89) (xy 93.98 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a68b2575-871a-4c4e-9beb-a6498602dce2")
+	)
+	(wire
+		(pts
 			(xy 177.8 93.98) (xy 177.8 119.38)
 		)
 		(stroke
@@ -7356,6 +7520,16 @@
 			(type default)
 		)
 		(uuid "b8460546-40fb-44e3-a6a4-6fd018fbc378")
+	)
+	(wire
+		(pts
+			(xy 93.98 142.24) (xy 93.98 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b924a55f-6f0b-445d-992f-8bb3ee968fdb")
 	)
 	(bus
 		(pts
@@ -9667,6 +9841,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+5V")
+		(at 93.98 135.89 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3911e4d9-89e4-4193-93f5-eef88e46643d")
+		(property "Reference" "#PWR027"
+			(at 93.98 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+5V"
+			(at 93.98 131.445 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 93.98 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 93.98 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 93.98 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "da264913-c845-4651-91c0-eb584f805e70")
+		)
+		(instances
+			(project "Reset, CPU and Buffers"
+				(path "/2180879c-3df6-4382-a01a-a65e59e9c299/154d3636-9585-43f9-bdff-90ca5096544f"
+					(reference "#PWR027")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 134.62 81.28 0)
 		(unit 1)
@@ -10194,7 +10433,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "74AHCT244"
+		(property "Value" "74HCT244"
 			(at 203.2 146.685 0)
 			(effects
 				(font
@@ -12092,7 +12331,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "74AHCT541"
+		(property "Value" "74HCT541"
 			(at 135.89 146.685 0)
 			(effects
 				(font
@@ -12216,7 +12455,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "74AHCT541"
+		(property "Value" "74HCT541"
 			(at 135.89 78.105 0)
 			(effects
 				(font
@@ -12718,6 +12957,75 @@
 			(project "Reset, CPU and Buffers"
 				(path "/2180879c-3df6-4382-a01a-a65e59e9c299/154d3636-9585-43f9-bdff-90ca5096544f"
 					(reference "#PWR021")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_Small_US")
+		(at 93.98 139.7 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "edd63905-f2aa-4ce3-b4f8-fa84aa5008b5")
+		(property "Reference" "R2"
+			(at 95.885 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "3K3Ω"
+			(at 95.885 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 93.98 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 93.98 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, small US symbol"
+			(at 93.98 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "434475b3-f984-4aaf-898d-6ed97d1fc348")
+		)
+		(pin "1"
+			(uuid "9ef0b4c8-bd63-4313-a5ea-af6f0cde511c")
+		)
+		(instances
+			(project "Reset, CPU and Buffers"
+				(path "/2180879c-3df6-4382-a01a-a65e59e9c299/154d3636-9585-43f9-bdff-90ca5096544f"
+					(reference "R2")
 					(unit 1)
 				)
 			)
