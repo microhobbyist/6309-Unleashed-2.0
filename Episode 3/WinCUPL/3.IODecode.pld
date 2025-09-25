@@ -1,12 +1,12 @@
 Name     SystemDecode ;
-PartNo   ATF750C ;
-Date     2025-07-20 ;
-Revision v3r7 ;
+PartNo   ATF22V10C ;
+Date     2025-09-25 ;
+Revision v4.1 ;
 Designer Frederic Segard ;
 Company  MicroHobbyist ;
 Assembly None ;
 Location None ;
-Device   v750c ;
+Device   g22v10 ;
 
 /* ==============================================
    System I/O Decode and MRDY Clock-Stretch Logic
@@ -24,11 +24,7 @@ Device   v750c ;
    1. PIN ASSIGNMENTS AND SYSTEM OVERVIEW
    2. INPUT/OUTPUT DECLARATIONS
    3. ADDRESS DECODE EQUATIONS (I/O Chip Selects)
-   4. INTERNAL E_LIKE CLOCK GENERATOR
-   5. CPU SPEED MODE DETECTION (from PLD 1)
-   6. MRDY STRETCH LOGIC FOR SLOW PERIPHERALS
-   7. MRDY OUTPUT COMBINATION
-   8. END OF FILE
+   4. END OF FILE
    ========================================================= */
 
 /* =========================================================
@@ -37,15 +33,15 @@ Device   v750c ;
         E  i---|1     24|---p  Vcc
     !IORQ  i---|2     23|---o  !ROMdis
        RW  i---|3     22|---o  !SPDreg
-       A7  i---|4     21|---o  !POSTcs
-       A6  i---|5     20|---o  !IRQreg
-       A5  i---|6     19|---o  !FIRQreg
-       A4  i---|7     18|---o  !STATreg
-       A3  i---|8     17|---o  !RTCcs
-       A2  i---|9     16|---o  RTCas
-       A1  i---|10    15|---o  RTCds
-       A0  i---|11    14|---o  !ACIA1cs
-      GND  p---|12    13|---o  !ACIA2cs
+       A7  i---|4     21|---o  !IRQreg
+       A6  i---|5     20|---o  !FIRQreg
+       A5  i---|6     19|---o  !STATreg
+       A4  i---|7     18|---o  !RTCcs
+       A3  i---|8     17|---o   RTCas
+       A2  i---|9     16|---o   RTCds
+       A1  i---|10    15|---o  !ACIA1cs
+       A0  i---|11    14|---o  !ACIA2cs
+      GND  p---|12    13|---i  GND
    ---------------------------------------------------------
    CLKin and E are both clocks; all other inputs are 
    for I/O decoding or MRDY/clock stretching support.
@@ -73,15 +69,12 @@ PIN 23 = !ROMdis  ;  /* ROM disable (active-low) */
 PIN 22 = !SPDreg  ;  /* Speed register (active-low) */
 PIN 21 = !IRQreg  ;  /* Interrupt register (active-low) */
 PIN 20 = !FIRQreg ;  /* Fast Interrupt register (active-low) */
-PIN 19 = !POSTreg ;  /* Power-On-Self-Test */
-PIN 18 = !STATreg ;  /* Status Register */
-PIN 17 = !RTCcs   ;  /* RTC chip select (active-low) */
-PIN 16 =  RTCas   ;  /* RTC address strobe */
-PIN 15 =  RTCds   ;  /* RTC data strobe */
-PIN 14 = !ACIA1cs ;  /* ACIA1 serial port chip select (active-low) */
-PIN 13 = !ACIA2cs ;  /* ACIA2 serial port chip select (active-low) */
-         
-		 
+PIN 19 = !STATreg ;  /* Status Register */
+PIN 18 = !RTCcs   ;  /* RTC chip select (active-low) */
+PIN 17 =  RTCas   ;  /* RTC address strobe */
+PIN 16 =  RTCds   ;  /* RTC data strobe */
+PIN 15 = !ACIA1cs ;  /* ACIA1 serial port chip select (active-low) */
+PIN 14 = !ACIA2cs ;  /* ACIA2 serial port chip select (active-low) */
            
 /* ======================================================
    3. ADDRESS DECODE EQUATIONS (I/O CHIP SELECTS)
@@ -92,15 +85,14 @@ PIN 13 = !ACIA2cs ;  /* ACIA2 serial port chip select (active-low) */
 
 FIELD ADDR = [A7..A0] ;  /* (shortcut) for decoding 8-bit address space */
 
-!ROMdis  = ADDR:[00] & !RW & IORQ & E ;  /* ROM disable */
+!ROMdis  = ADDR:[00] & !RW & IORQ & E ;  /* ROM disable (Write) */
 !SPDreg  = ADDR:[01]       & IORQ & E ;  /* Speed register */
 !IRQreg  = ADDR:[02]       & IORQ & E ;  /* IRQ Priority Interrupt register */
 !FIRQreg = ADDR:[03]       & IORQ & E ;  /* FIRQ Priority Interrupt register */
-!POSTreg = ADDR:[04]       & IORQ & E ;  /* Power-On-Self-Test */
-!STATreg = ADDR:[05] & RW  & IORQ & E ;  /* Status register */
-!RTCcs   = ADDR:[06..07]   & IORQ & E ;  /* RTC chip select */
-RTCas    = ADDR:[06]       & IORQ & E ;  /* RTC address strobe */
-RTCds    = ADDR:[07]       & IORQ & E ;  /* RTC data strobe */
+!STATreg = ADDR:[04] &  RW & IORQ & E ;  /* Status register (Read) */
+!RTCcs   = ADDR:[05..06]   & IORQ & E ;  /* RTC chip select */
+RTCas    = ADDR:[05]       & IORQ & E ;  /* RTC address strobe */
+RTCds    = ADDR:[06]       & IORQ & E ;  /* RTC data strobe */
 !ACIA1cs = ADDR:[08..0B]   & IORQ & E ;  /* ACIA1 serial port */
 !ACIA2cs = ADDR:[0C..0F]   & IORQ & E ;  /* ACIA1 serial port */
 
