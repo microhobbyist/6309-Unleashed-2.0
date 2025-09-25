@@ -1,0 +1,239 @@
+Name     ClkShadowFW ;
+PartNo   ATF750C ;
+Date     2025-09-16 ;
+Revision v4.1 ;
+Designer Frederic Segard ;
+Company  MicroHobbyist ;
+Assembly None ;
+Location None ;
+Device   v750c ;
+
+/* ==================================================
+   Clock, Shadow ROM, and CPU frequency Speed Control
+   ================================================== */
+
+/* WinCUPL Options:
+      General: Deactivate Unused OR Terms, One-hot-bit State Machine
+      Minimization: Presto
+      Optimization: Keep XOR Equations
+*/
+
+/* ==========================================================
+   LEGEND / FILE MAP
+   ----------------------------------------------------------
+   1.  PIN ASSIGNMENTS AND SYSTEM OVERVIEW
+   2.  INPUT/OUTPUT DECLARATIONS
+   3.  NODES (Internal Flip-Flops)
+   4.  SHADOW REGISTER LOGIC (ROM Disable Latch)
+   5.  CHIP SELECT AND OUTPUT ENABLE LOGIC
+   6.  SPEED REGISTER / BUS LOGIC
+   7.  CLOCK DIVIDERS (/2, /4, /8, /16)
+   8.  HALT PULSE LOGIC
+   9.  CLOCK SELECTOR MUX AND LEDS
+   10. END OF FILE
+   ========================================================= */
+
+/* ==========================================================
+   1. PIN ASSIGNMENTS AND SYSTEM OVERVIEW
+   ----------------------------------------------------------
+      CLKin   i---|01     24|---p  Vcc
+          E   i---|02     23|---o  CPUclk
+         RW   i---|03     22|---b  !HALT
+      !MREQ   i---|04     21|---b  !ROMcs
+   !ROMaddr   i---|05     20|---o  !RAMoe
+   !RAMaddr   i---|06     19|---o  !CARTcs
+   !HALTbus   i---|07     18|---o  SPDledR
+    !ROMdis   i---|08     17|---o  SPDledG
+    !SPDreg   i---|09     16|---o  D2
+     !PAUSE   i---|10     15|---o  D1
+     !RESET   i---|11     14|---o  !CARTdet
+        GND   p---|12     13|---i  FWupdate
+   ----------------------------------------------------------
+   Only one clock domain: CLKin. All internal FFs are clocked on CLKin.
+   ========================================================= */
+
+/* ==========================================================
+   2. INPUT/OUTPUT DECLARATIONS
+   ========================================================= */
+
+/* ---- Inputs ---- */
+PIN 01 = CLKin    ;  /* System master clock (e.g., 14.318 MHz) */
+PIN 02 = E        ;  /* E clock (used for bus cycle qualification) */
+PIN 03 = RW       ;  /* Read/Write from CPU (1=Read, 0=Write) */
+PIN 04 = !MREQ    ;  /* Memory request (active low) */
+PIN 05 = !ROMaddr ;  /* ROM address region (for firmware update) */
+PIN 06 = !RAMaddr ;  /* RAM address region (for firmware update) */
+PIN 07 = !HALTbus ;  /* External HALT bus signal (active low) */
+PIN 08 = !ROMdis  ;  /* ROM disable (active low) */
+PIN 09 = !SPDreg  ;  /* Software Speed select */
+PIN 10 = !PAUSE   ;  /* Manual Pause switch */
+PIN 11 = !RESET   ;  /* System reset (active low) */
+PIN 13 = FWupdate ;  /* Firmware update mode (high = updating) */
+PIN 14 = !CARTdet ;  /* Cartridge detected (active low) */
+
+/* ---- Bidirectional Data Bus (Speed Register) ---- */
+PIN 22 = D0       ;  /* Data bus bit 0 */
+PIN 21 = D1       ;  /* Data bus bit 1 */
+
+/* ---- Outputs ---- */
+PIN 23 = CLKout   ;  /* CPU clock output (selectable divide) */
+PIN 20 = !HALT    ;  /* HALT signal to CPU (active low) */
+PIN 19 = !ROMcs   ;  /* ROM chip select (active low) */
+PIN 18 = !CARTcs  ;  /* Cartridge chip select (active low) */
+PIN 17 = !RAMoe   ;  /* RAM output enable (active low) */
+PIN 16 = !RAMcs   ;  /* RAM chip select (active low) */
+PIN 15 = SPDledR  ;  /* Red speed LED */
+PIN 14 = SPDledG  ;  /* Green speed LED */
+
+/* ==========================================================
+   3. NODES (Internal Flip-Flops)
+   ========================================================= */
+NODE shadow ;
+NODE haltPulse ;
+NODE speed0, speed1 ;
+NODE Q0, Q1, Q2, Q3 ;
+
+/* ==========================================================
+   4. SHADOW REGISTER LOGIC (ROM Disable Latch)
+   ----------------------------------------------------------
+   Use CLKin as clock, but latch only updates on E & !RESET.
+   ========================================================= */
+
+/* Latch ROM disable request (from !ROMdis) on rising E and !RESET; else hold previous value. */
+shadow.d  = (E & !RESET & ROMdis) #  /* Set when E and ROMdis asserted and not in reset */
+             (!E & shadow) #         /* Hold value if E is low */
+             (RESET & 'b'0) ;        /* Clear on reset */
+shadow.ck = CLKin ;
+shadow.ar = 'b'0 ;
+shadow.sp = 'b'0 ;
+
+/* ==========================================================
+   5. CHIP SELECT AND OUTPUT ENABLE LOGIC
+   ========================================================= */
+
+/* --- ROM chip select (active low) --- */
+ROMcs  = (!FWupd & (CARTdet & !shadow & MREQ)) #  /* Normal mode: onboard flash, no cart, not shadowed, mem req */
+         (FWupd & ROMaddr) ;                      /* Firmware update mode: ROM update region selected */
+
+/* --- Cartridge chip select --- */
+CARTcs = (!FWupd & (!CARTdet & MREQ)) ;  /* Normal mode: cart detected, memory access, not updating */
+
+/* --- RAM output enable --- */
+RAMoe  = (!FWupd & shadow & RW & E) #  /* Normal: shadowed, read, E high */
+         (FWupd & RW & E) ;            /* Update mode: read, E high */
+
+/* --- RAM chip select --- */
+RAMcs  = (!FWupd & MREQ) #    /* Normal mode: memory request */
+         (FWupd & RAMaddr) ;  /* Update mode: RAM update region selected */
+
+/* ==========================================================
+   6. SPEED REGISTER / BUS LOGIC
+   ----------------------------------------------------------
+   All flip-flops clocked on CLKin, but logic only allows
+   register to change on E clock (bus cycle).
+   Default on reset: speed0=0, speed1=1 (divide by 2).
+   ========================================================= */
+
+/* --- Speed0 (LSB) --- */
+speed0.d  = (E & !RESET & !SPDreg & !RW & D0) #  /* On write to speed reg (E, select, write), set from D0 */
+            (!E & speed0) # (RESET & 'b'0) ;     /* Hold value when not E, and clear on reset */
+speed0.ck = CLKin ;
+speed0.ar = 'b'0 ;
+speed0.sp = 'b'0 ;
+
+/* --- Speed1 (MSB) --- */
+speed1.d  = (E & !RESET & !SPDreg & !RW & D1) #  /* On write, set from D1 */
+            (!E & speed1) # (RESET & 'b'1) ;     /* Hold when not E, and set to 1 on reset (default divide by 2) */
+speed1.ck = CLKin ;
+speed1.ar = 'b'0 ;
+speed1.sp = 'b'0 ;
+
+/* --- Data bus output enable for register reads --- */
+D0.OE = SPDreg & RW ;  /* Output when reading speed reg */
+D1.OE = SPDreg & RW ;
+D0    = speed0 ;       /* Output value of speed */
+D1    = speed1 ;
+
+/* ==========================================================
+   7. CLOCK DIVIDERS (/2, /4, /8, /16)
+   ----------------------------------------------------------
+   All flip-flops clocked by CLKin only.
+   Each Qn divides by 2 from previous.
+   ========================================================= */
+
+/* Q0: Divide by 2 from CLKin */
+Q0.d  = !RESET & !Q0 ;  /* Toggle on every clock when not in reset */
+Q0.ck = CLKin ;
+Q0.ar = 'b'0 ;
+Q0.sp = 'b'0 ;
+
+/* Q1: Divide by 4 from CLKin */
+Q1.d  = !RESET & Q0 & !Q1 ;  /* Toggle when Q0 is high and not in reset */
+Q1.ck = CLKin ;
+Q1.ar = 'b'0 ;
+Q1.sp = 'b'0 ;
+
+/* Q2: Divide by 8 from CLKin */
+Q2.d  = !RESET & Q1 & !Q2 ;  /* Toggle when Q1 is high and not in reset */
+Q2.ck = CLKin ;
+Q2.ar = 'b'0 ;
+Q2.sp = 'b'0 ;
+
+/* Q3: Divide by 16 from CLKin */
+Q3.d  = !RESET & Q2 & !Q3 ;  /* Toggle when Q2 is high and not in reset */
+Q3.ck = CLKin ;
+Q3.ar = 'b'0 ;
+Q3.sp = 'b'0 ;
+
+/* Assign divided clocks for selection */
+clkdiv2  = Q0 ;  /* Divide by 2 */
+clkdiv4  = Q1 ;  /* Divide by 4 */
+clkdiv8  = Q2 ;  /* Divide by 8 */
+clkdiv16 = Q3 ;  /* Divide by 16 */
+
+/* ==========================================================
+   8. HALT PULSE LOGIC
+   ----------------------------------------------------------
+   Generate short HALT pulse when speed register is written.
+   All clocked by CLKin; pulse updates only on clkdiv16.
+   ========================================================= */
+
+/* Detect write to speed register */
+haltWrite = !SPDreg & !RW ;
+
+/* Latch for HALT pulse: set on clkdiv16 & haltWrite, else hold value. */
+haltPulse.d = (clkdiv16 & !RESET & (haltWrite # haltPulse)) #
+              (!clkdiv16 & haltPulse) # (RESET & 'b'0) ;
+haltPulse.ck = CLKin ;
+haltPulse.ar = 'b'0 ;
+haltPulse.sp = 'b'0 ;
+
+/* HALT is asserted if either haltPulse or HALTbus is asserted */
+HALT = haltPulse # HALTbus ;
+
+/* ==========================================================
+   9. CLOCK SELECTOR MUX AND LEDS
+   ----------------------------------------------------------
+   Output divided (or undivided) clock based on speed0/speed1.
+   LEDs indicate mode.
+   ========================================================= */
+
+/* Clock select state: */
+is_div8  = !speed1 & !speed0 ;  /* SLOW: /8 (not usually used) */
+is_div4  = !speed1 &  speed0 ;  /* NORMAL: /4 (Green LED) */
+is_div2  =  speed1 & !speed0 ;  /* FAST: /2 (Yellow/Red LED) */
+is_div1  =  speed1 &  speed0 ;  /* TURBO: undivided (Red LED) */
+
+/* CPU clock output */
+CLKout = (is_div8 & clkdiv8) #
+         (is_div4 & clkdiv4) #
+         (is_div2 & clkdiv2) #
+         (is_div1 & CLKin) ;
+
+/* Speed LEDs: */
+SPDledR = is_div1 # is_div2 ;   /* Red: Turbo and Fast */
+SPDledG = is_div2 # is_div4 ;   /* Green: Fast and Normal */
+
+/* ==========================================================
+   10. END OF FILE
+   ========================================================= */

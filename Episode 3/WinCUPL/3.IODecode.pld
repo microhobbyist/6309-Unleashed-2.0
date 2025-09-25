@@ -1,0 +1,109 @@
+Name     SystemDecode ;
+PartNo   ATF750C ;
+Date     2025-07-20 ;
+Revision v3r7 ;
+Designer Frederic Segard ;
+Company  MicroHobbyist ;
+Assembly None ;
+Location None ;
+Device   v750c ;
+
+/* ==============================================
+   System I/O Decode and MRDY Clock-Stretch Logic
+   ============================================== */
+
+/* WinCUPL Options:
+      General: Deactivate Unused OR Terms, One-hot-bit State Machine
+      Minimization: Presto
+      Optimization: Keep XOR Equations
+*/
+
+/* =========================================================
+   LEGEND / FILE MAP
+   ---------------------------------------------------------
+   1. PIN ASSIGNMENTS AND SYSTEM OVERVIEW
+   2. INPUT/OUTPUT DECLARATIONS
+   3. ADDRESS DECODE EQUATIONS (I/O Chip Selects)
+   4. INTERNAL E_LIKE CLOCK GENERATOR
+   5. CPU SPEED MODE DETECTION (from PLD 1)
+   6. MRDY STRETCH LOGIC FOR SLOW PERIPHERALS
+   7. MRDY OUTPUT COMBINATION
+   8. END OF FILE
+   ========================================================= */
+
+/* =========================================================
+   1. PIN ASSIGNMENTS AND SYSTEM OVERVIEW
+   ---------------------------------------------------------
+        E  i---|1     24|---p  Vcc
+    !IORQ  i---|2     23|---o  !ROMdis
+       RW  i---|3     22|---o  !SPDreg
+       A7  i---|4     21|---o  !POSTcs
+       A6  i---|5     20|---o  !IRQreg
+       A5  i---|6     19|---o  !FIRQreg
+       A4  i---|7     18|---o  !STATreg
+       A3  i---|8     17|---o  !RTCcs
+       A2  i---|9     16|---o  RTCas
+       A1  i---|10    15|---o  RTCds
+       A0  i---|11    14|---o  !ACIA1cs
+      GND  p---|12    13|---o  !ACIA2cs
+   ---------------------------------------------------------
+   CLKin and E are both clocks; all other inputs are 
+   for I/O decoding or MRDY/clock stretching support.
+   ========================================================= */
+
+/* =========================================================
+   2. INPUT/OUTPUT DECLARATIONS
+   ========================================================= */
+
+/* ---- Inputs ---- */
+PIN 1  = E     ;     /* CPU E clock (for decode qualification) */
+PIN 2  = !IORQ ;     /* (from PLD 1) I/O request, active-low */
+PIN 3  = RW    ;     /* Read/Write line */
+PIN 4  = A7    ;     /* Address bit 7 */
+PIN 5  = A6    ;     /* Address bit 6 */
+PIN 6  = A5    ;     /* Address bit 5 */
+PIN 7  = A4    ;     /* Address bit 4 */
+PIN 8  = A3    ;     /* Address bit 3 */
+PIN 9  = A2    ;     /* Address bit 2 */
+PIN 10 = A1    ;     /* Address bit 1 */
+PIN 11 = A0    ;     /* Address bit 0 */
+
+/* ---- Outputs ---- */
+PIN 23 = !ROMdis  ;  /* ROM disable (active-low) */
+PIN 22 = !SPDreg  ;  /* Speed register (active-low) */
+PIN 21 = !IRQreg  ;  /* Interrupt register (active-low) */
+PIN 20 = !FIRQreg ;  /* Fast Interrupt register (active-low) */
+PIN 19 = !POSTreg ;  /* Power-On-Self-Test */
+PIN 18 = !STATreg ;  /* Status Register */
+PIN 17 = !RTCcs   ;  /* RTC chip select (active-low) */
+PIN 16 =  RTCas   ;  /* RTC address strobe */
+PIN 15 =  RTCds   ;  /* RTC data strobe */
+PIN 14 = !ACIA1cs ;  /* ACIA1 serial port chip select (active-low) */
+PIN 13 = !ACIA2cs ;  /* ACIA2 serial port chip select (active-low) */
+         
+		 
+           
+/* ======================================================
+   3. ADDRESS DECODE EQUATIONS (I/O CHIP SELECTS)
+   ------------------------------------------------------
+   All chip selects are active only when IORQ (from PLD 2) is
+   low, E is high, and the address matches the target.
+   ====================================================== */
+
+FIELD ADDR = [A7..A0] ;  /* (shortcut) for decoding 8-bit address space */
+
+!ROMdis  = ADDR:[00] & !RW & IORQ & E ;  /* ROM disable */
+!SPDreg  = ADDR:[01]       & IORQ & E ;  /* Speed register */
+!IRQreg  = ADDR:[02]       & IORQ & E ;  /* IRQ Priority Interrupt register */
+!FIRQreg = ADDR:[03]       & IORQ & E ;  /* FIRQ Priority Interrupt register */
+!POSTreg = ADDR:[04]       & IORQ & E ;  /* Power-On-Self-Test */
+!STATreg = ADDR:[05] & RW  & IORQ & E ;  /* Status register */
+!RTCcs   = ADDR:[06..07]   & IORQ & E ;  /* RTC chip select */
+RTCas    = ADDR:[06]       & IORQ & E ;  /* RTC address strobe */
+RTCds    = ADDR:[07]       & IORQ & E ;  /* RTC data strobe */
+!ACIA1cs = ADDR:[08..0B]   & IORQ & E ;  /* ACIA1 serial port */
+!ACIA2cs = ADDR:[0C..0F]   & IORQ & E ;  /* ACIA1 serial port */
+
+/* ==========================================================
+   4. END OF FILE
+   ========================================================== */
