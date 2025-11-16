@@ -1,0 +1,93 @@
+Name     IODecode ;
+PartNo   ATF22V10C ;
+Date     2025/11/09 ;
+Revision 6         ;
+Designer Frederic Segard ;
+Company  MicroHobbyist ;
+Assembly None ;
+Location None ;
+Device   g22v10 ;
+
+/* =========================================================
+   Compiler Options
+   ---------------------------------------------------------
+   cupl -m2lxfjanb -u C:\Wincupl\Shared\Atmel.DL %1.PLD
+   ========================================================= */
+
+/* =========================================================
+   DYNAMIC WAIT-STATE DECODER (TRISTATE, +1 RULE)
+   ---------------------------------------------------------
+   - WS bus pulled down externally.
+   - Only drives WS1/WS2 when AnyCS=1.
+   - SPDsel = 0 -> 3 MHz, base WS
+              1 -> 5 MHz, adds +1 WS globally
+   - WS encoding (2 bits):
+        WS2 WS1 | Meaning
+        0   0   | 0 WS
+        0   1   | 1 WS
+        1   0   | 2 WS
+        1   1   | 3 WS  (max)
+   ========================================================= */
+
+PIN 1  =  E         ; /* CPU E (data phase) */
+PIN 2  = !IORQ      ; /* I/O Request, Active-low during I/O cycle */
+PIN 3  =  RW        ; /* Read/Write (NOT USED) */
+PIN 4  =  A0        ; /* Address bit 0 - LSB */
+PIN 5  =  A1        ;
+PIN 6  =  A2        ;
+PIN 7  =  A3        ;
+PIN 8  =  A4        ;
+PIN 9  =  A5        ;
+PIN 10 =  A6        ;
+PIN 11 =  A7        ; /* Address bit 7 - MSB of I/O window */
+/*  12 =  GND       ; /* Ground connection */
+PIN 13 =  WSsel     ; /* The red LED indicates the high speeds */
+
+/*  24 =  VCC       ; /* +5V connection */
+PIN 23 = !TIMERcs   ; /* WS: 0,2 $FF00-07, Timer (HD63B40) */
+PIN 22 = !ACIAcs    ; /* WS: 0,1 $FF08-0B, ACIA (R65C51R4) */
+PIN 21 = !RTCcs     ; /* WS: 0,1 $FF0C-0D, Realtime clock (DS12C887A) */
+PIN 20 =  RTCas     ; /* WS: 0,1 $FF0C, RTCs Address Strobe */
+PIN 19 =  RTCds     ; /* WS: 0,1 $FF0D, RTCs Data Strobe */
+PIN 18 = !CFcs      ; /* WS: 1,3 $FF10-17, Compact Flash card */
+PIN 17 =  AnyCS     ; /* Any one of the chip selects [feedback pin] */
+PIN 16 =  WS0       ;
+PIN 15 =  WS1       ; /* Multiplexed Waitstate level (Tristate)*/
+PIN 14 =  WS2       ;
+
+IOBASE  = !A7 & !A6 & !A5 & IORQ & E ;
+
+TIMERcs = IOBASE & !A4 & !A3 ;                    /* 8 : $00-$07 */
+CFcs    = IOBASE & !A4 &  A3 ;                    /* 8 : $08-$0F */
+ACIAcs  = IOBASE &  A4 & !A3 & !A2 ;              /* 4 : $10-$13 */
+RTCcs   = IOBASE &  A4 &  A3 & !A2 & !A1 ;        /* 2 : $14-$15 */
+RTCas   = IOBASE &  A4 &  A3 & !A2 & !A1 & !A0 ;  /*   : $14     */
+RTCds   = IOBASE &  A4 &  A3 & !A2 & !A1 &  A0 ;  /*   : $15     */
+
+/* =========================================================
+   WAIT-STATE LOGIC
+   ========================================================= */
+FIELD CS = [TIMERcs, ACIAcs, RTCcs, CFcs, WSsel] ;
+FIELD WS = [WS2,WS1,WS0] ;
+TABLE CS => WS {
+/* Slow mode (speed=0) */
+'b'00000 => 'b'000;
+'b'10000 => 'b'001;
+'b'01000 => 'b'000;
+'b'00100 => 'b'000;
+'b'00010 => 'b'010;
+/* Fast mode (speed=1) */
+'b'00001 => 'b'000;
+'b'10001 => 'b'011;
+'b'01001 => 'b'001;
+'b'00101 => 'b'001;
+'b'00011 => 'b'100;
+}
+
+/* Combine selects */
+AnyCS = TIMERcs # ACIAcs # RTCcs # CFcs ;
+
+/* --- Tri-state outputs when idle --- */
+WS0.oe = AnyCS ;
+WS1.oe = AnyCS ;
+WS2.oe = AnyCS ;

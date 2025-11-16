@@ -218,7 +218,7 @@
       "label_dangling": "error",
       "label_multiple_wires": "warning",
       "lib_symbol_issues": "warning",
-      "lib_symbol_mismatch": "warning",
+      "lib_symbol_mismatch": "ignore",
       "missing_bidi_pin": "warning",
       "missing_input_pin": "warning",
       "missing_power_pin": "error",
@@ -248,11 +248,14 @@
   "libraries": {
     "pinned_footprint_libs": [],
     "pinned_symbol_libs": [
-      "6309 v2.0"
+      "6309 v2.0",
+      "6309 Unleashed 2.0",
+      "MicroHobbyist",
+      "test"
     ]
   },
   "meta": {
-    "filename": "PLDs.kicad_pro",
+    "filename": "Glue Logic.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -441,7 +444,7 @@
     ],
     [
       "9306ad1f-5aa3-46b2-af38-3ae5a6feccbb",
-      "Logic Devices"
+      "Glue Logic"
     ]
   ],
   "text_variables": {}

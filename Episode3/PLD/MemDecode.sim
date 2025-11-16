@@ -1,0 +1,158 @@
+%SIGNAL
+PIN   4 =  A4 
+PIN   5 =  A5 
+PIN   6 =  A6 
+PIN   7 =  A7 
+PIN   8 =  A8 
+PIN   9 =  A9 
+PIN  10 =  A10 
+PIN  11 =  A11 
+PIN  13 =  A12 
+PIN  14 =  A13 
+PIN  15 =  A14 
+PIN  16 =  A15 
+PIN  23 = !CONST 
+PIN   1 =  E 
+PIN  22 = !IORQ 
+PIN  19 = !MREQ 
+PIN  20 = !PAGE 
+PIN   2 =  Q 
+PIN  18 = !RAMaddr 
+PIN  21 = !REG 
+PIN  17 = !ROMaddr 
+PIN   3 =  RW 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+BlockCONST =>
+    A12 & A13 & A14 & A15
+
+BlockIORQ =>
+    !A7 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
+  # !A6 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
+  # !A4 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
+  # !A5 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
+
+BlockMEM =>
+    !A15
+  # !A14
+  # !A13
+  # !A12
+  # !A11
+  # !A10
+  # A4 & A5 & A6 & A7 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
+
+BlockPAGE =>
+    !A9 & A10 & A11 & A12 & A13 & A14 & A15
+
+BlockRAM =>
+    !A15
+  # !A11 & A12 & A13 & A14 & A15
+  # A4 & A5 & A6 & A7 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
+
+BlockREG =>
+    !A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
+
+BlockROM =>
+    !A12 & A15
+
+CONST =>
+    A12 & A13 & A14 & A15 & E
+  # A12 & A13 & A14 & A15 & Q
+
+FFFx =>
+    A4 & A5 & A6 & A7 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
+
+Fxxx =>
+    A12 & A13 & A14 & A15
+
+IORQ =>
+    !A4 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
+  # !A5 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
+  # !A6 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
+  # !A7 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
+  # !A4 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
+  # !A5 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
+  # !A6 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
+  # !A7 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
+
+MREQ =>
+    !A10 & E
+  # !A11 & E
+  # !A12 & E
+  # !A13 & E
+  # !A14 & E
+  # !A15 & E
+  # !A10 & Q
+  # !A11 & Q
+  # !A12 & Q
+  # !A13 & Q
+  # !A14 & Q
+  # !A15 & Q
+  # A4 & A5 & A6 & A7 & A8 & A9 & E
+  # A4 & A5 & A6 & A7 & A8 & A9 & Q
+
+PAGE =>
+    !A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
+  # !A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
+
+RAMaddr =>
+    !A15 & E
+  # !A15 & Q
+  # !A11 & A12 & A13 & A14 & E
+  # !A11 & A12 & A13 & A14 & Q
+  # A4 & A5 & A6 & A7 & A8 & A9 & A10 & A12 & A13 & A14 & E
+  # A4 & A5 & A6 & A7 & A8 & A9 & A10 & A12 & A13 & A14 & Q
+
+REG =>
+    !A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
+  # !A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
+
+ROMaddr =>
+    !A12 & A15 & E
+  # !A12 & A15 & Q
+
+VMA =>
+    Q
+  # E
+
+xFxx =>
+    A8 & A9 & A10 & A11
+
+xxFx =>
+    A4 & A5 & A6 & A7
+
+A13.oe  =>
+    0 
+
+A14.oe  =>
+    0 
+
+A15.oe  =>
+    0 
+
+CONST.oe  =>
+    1 
+
+IORQ.oe  =>
+    1 
+
+MREQ.oe  =>
+    1 
+
+PAGE.oe  =>
+    1 
+
+RAMaddr.oe  =>
+    1 
+
+REG.oe  =>
+    1 
+
+ROMaddr.oe  =>
+    1 
+
+%END

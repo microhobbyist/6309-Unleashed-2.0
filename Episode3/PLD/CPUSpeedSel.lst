@@ -1,0 +1,177 @@
+LISTING FOR LOGIC DESCRIPTION FILE: CPUSpeedSel.pld                  Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Nov 15 21:52:41 2025
+
+  1:Name     CPUSpeedSel ;
+  2:PartNo   ATF750CL ;
+  3:Date     2025/11/12 ;
+  4:Revision 10 ;
+  5:Designer Frederic Segard ;
+  6:Company  MicroHobbyist ;
+  7:Assembly None ;
+  8:Location None ;
+  9:Device   v750c ;
+ 10:
+ 11:/* =========================================================
+ 12:   Compiler Options
+ 13:   ---------------------------------------------------------
+ 14:   cupl -m2lxfjanb -u C:\Wincupl\Shared\Atmel.DL %1.PLD
+ 15:   ========================================================= */
+ 16:   
+ 17:/********************************************************************
+ 18: *  6309 CLOCK MUX (4 SPEEDS out of one 16MHz clock)                *
+ 19: *  SPEEDS: ~5.34, 4, ~2.67, 1 MHz (16M div)                        *
+ 20: *  RGB + PSG_CLK (8 MHz) + !PAUSE BUTTON                           *
+ 21: *  DEFAULT: 2.67 MHz (S1=1, S0=0)                                  *
+ 22: ********************************************************************/
+ 23: 
+ 24:/* INPUTS */
+ 25:PIN  1 =  CLK_16M ;   /* Single 16 MHz source */
+ 26:PIN  2 =  E ;         /* Quadrature E clock from CPU */
+ 27:PIN  3 =  RW ;        /* 0=write, 1=read */
+ 28:PIN  4 = !RESET ;     /* System reset (active low) */
+ 29:PIN  5 =  MREQ ;      /* Memory Request (any ROM or RAM area) */
+ 30:PIN  6 = !SPDsel ;     /* $FFxx chip select (active-low) */
+ 31:PIN  7 =  RAMaddr ;   /* Future update to keep RAM and ROM simultaneously */
+ 32:PIN  8 = !ROMaddr ;   /* Future update to keep RAM and ROM simultaneously */
+ 33:PIN  9 = !ROMdis ;    /* ROM disable pin */
+ 34:PIN 10 = !HALT_IN1 ;  /* External halt request 1 (active-low) */
+ 35:PIN 11 = !HALT_IN2 ;  /* External halt request 2 (active-low) */
+ 36:/*  12 =  GND */
+ 37:PIN 13 = !PAUSE_SW ;  /* Debounced pushbutton halt (active low) */
+ 38:
+ 39:/* BIDIR DATA BUS (OUTPUTS) */
+ 40:PIN 14 =  D1 ;        /* Speed reg bit 1 (S1) */
+ 41:PIN 15 =  D0 ;        /* Speed reg bit 0 (S0) */
+ 42:
+ 43:/* OUTPUTS */
+ 44:/*  24 =  VCC        */
+ 45:PIN 23 =  CPU_CLK ;   /* To 6309 EXTAL */
+ 46:PIN 22 = !HALT_OUT ;  /* To 6309 HALT */
+ 47:PIN 21 =  PSG_CLK ;   /* 8 MHz (16M /2) */
+ 48:PIN 20 =  LED_R ;     /* Red = 5.33 + 4 MHz (Yellow), Also for SPDsel */
+ 49:PIN 19 =  LED_G ;     /* Green = 2.67 + 4 + 1 MHz */
+ 50:PIN 18 =  LED_B ;     /* Blue = 1 MHz (Cyan) */
+ 51:PIN 17 = !ROMcs ;     /* ROM chip select */
+ 52:PIN 16 = !RAMoe ;     /* RAM output enable */
+ 53:
+
+LISTING FOR LOGIC DESCRIPTION FILE: CPUSpeedSel.pld                  Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Nov 15 21:52:41 2025
+
+ 54:/* BURIED DIVIDERS */
+ 55:PINNODE 25 = DIV2 ;   /* 16M /2 = 8M */
+ 56:PINNODE 26 = DIV3 ;   /* 16M /3 = 5.333M */
+ 57:PINNODE 27 = DIV4 ;   /* 16M /4 = 4M */
+ 58:PINNODE 28 = DIV6 ;   /* 16M /6 = 2.667M */
+ 59:PINNODE 29 = DIV16 ;  /* 16M /16 = 1M */
+ 60:PINNODE 30 = DIV3_Q ; /* /3 phase */
+ 61:PINNODE 31 = S0 ;
+ 62:PINNODE 32 = S1 ;
+ 63:PINNODE 33 = ROMdisQ ; /* For Shadow ROM to lock in ROM */
+ 64:
+ 65:/* SHADOW ROM LOGIC */
+ 66:ROMdisQ.d  = 'b'1 ;     /* Locks the register into place */
+ 67:ROMdisQ.ck = ROMdis ;
+ 68:ROMdisQ.ar = !RESET ;
+ 69:ROMdisQ.sp = 'b'0 ;
+ 70:
+ 71:RD = !(RW & E) ;
+ 72:ROMcs = MREQ # ROMdisQ ;
+ 73:RAMoe = RD # !ROMdisQ ;
+ 74:
+ 75:/* SPEED REG (2 bits: S1, S0) */
+ 76:REG_WRITE = !SPDsel & !RW ;
+ 77:
+ 78:/* DEFAULT: 2.67 MHz (S1=1, S0=0) */
+ 79:S1.d = REG_WRITE & D1 # !REG_WRITE & 'b'1 ;
+ 80:S0.d = REG_WRITE & D0 # !REG_WRITE & 'b'0 ;
+ 81:S1.ar = !RESET ;
+ 82:S0.ar = !RESET ;
+ 83:S1.sp = 'b'0 ;
+ 84:S0.sp = 'b'0 ;
+ 85:
+ 86:/* DIVIDERS - USE $ FOR XOR */
+ 87:DIV2.d = DIV2 $ CLK_16M ;
+ 88:DIV2.ck = CLK_16M ;
+ 89:DIV2.ar = !RESET ;
+ 90:DIV2.sp = 'b'0 ;
+ 91:
+ 92:DIV4.d = DIV4 $ DIV2 ;
+ 93:DIV4.ck = DIV2 ;
+ 94:DIV4.ar = !RESET ;
+ 95:DIV4.sp = 'b'0 ;
+ 96:
+ 97:DIV16.d = DIV16 $ DIV4 ;
+ 98:DIV16.ck = DIV4 ;
+ 99:DIV16.ar = !RESET ;
+100:DIV16.sp = 'b'0 ;
+101:
+102:/* /3 Johnson counter - NO == - USE Q1 & !Q0 */
+103:DIV3_Q.d = DIV3_Q $ CLK_16M ;
+104:DIV3_Q.ck = CLK_16M ;
+105:DIV3_Q.ar = !RESET ;
+106:DIV3_Q.sp = 'b'0 ;
+107:
+
+LISTING FOR LOGIC DESCRIPTION FILE: CPUSpeedSel.pld                  Page 3
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Nov 15 21:52:41 2025
+
+108:DIV3.d = DIV3_Q & !DIV3 # !DIV3_Q & DIV3 ;
+109:DIV3.ck = DIV3_Q ;
+110:DIV3.ar = !RESET ;
+111:DIV3.sp = 'b'0 ;
+112:
+113:/* /6 = /2 x /3 - NO == */
+114:DIV6.d = DIV3_Q & !DIV6 # !DIV3_Q & DIV6 ;
+115:DIV6.ck = DIV3_Q ;
+116:DIV6.ar = !RESET ;
+117:DIV6.sp = 'b'0 ;
+118:
+119:/* SPEED MUX */
+120:SPD_533 = S1 & S0 ;
+121:SPD_4   = S1 & !S0 ;
+122:SPD_267 = !S1 & S0 ;
+123:SPD_1   = !S1 & !S0 ;
+124:
+125:CPU_CLK = (SPD_533 & DIV3) #
+126:          (SPD_4   & DIV4) #
+127:          (SPD_267 & DIV6) #
+128:          (SPD_1   & DIV16) ;
+129:
+130:/* RGB LED */
+131:LED_R = SPD_533 # SPD_4 ; /* It is also for SPDsel on IODecoder ICs */
+132:LED_G = SPD_267 # SPD_4 # SPD_1 ;
+133:LED_B = SPD_1 ;
+134:
+135:/* HALT LOGIC - NO != */
+136:CHANGE_S1 = (REG_WRITE & D1 & !S1) # (REG_WRITE & !D1 & S1) ;
+137:CHANGE_S0 = (REG_WRITE & D0 & !S0) # (REG_WRITE & !D0 & S0) ;
+138:CHANGE = CHANGE_S1 # CHANGE_S0 ;
+139:HALT_ACTIVE = CHANGE & REG_WRITE ;
+140:!HALT_OUT = !HALT_IN1 # !HALT_IN2 # !PAUSE_SW # HALT_ACTIVE ;
+141:
+142:/* READBACK */
+143:D1 = (!SPDsel & RW) & S1 # (SPDsel # !RW) & 'b'0 ;
+144:D0 = (!SPDsel & RW) & S0 # (SPDsel # !RW) & 'b'0 ;
+145:
+146:/* PSG_CLK = 8 MHz */
+147:PSG_CLK = DIV2 ;
+148:
+149:
+
+
+
+Jedec Fuse Checksum       (a3e4)
+Jedec Transmit Checksum   (4488)

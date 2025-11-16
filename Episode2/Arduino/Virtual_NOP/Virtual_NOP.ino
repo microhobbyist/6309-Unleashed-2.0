@@ -1,4 +1,3 @@
-const uint32_t halfCycle = 25;      // Half cycle of the clock output: halfCycle x 2 = full clock cycle.
 const uint8_t pinClock = 4;         // Clock output from Arduino to pin 38 of CPU.
 const uint8_t pinE = 2;             // E clock phase from CPU (preceeds Q by 90°).
 const uint8_t pinLED = 13;          // Typically pin 13, this is the onboard LED

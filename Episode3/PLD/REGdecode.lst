@@ -1,0 +1,75 @@
+LISTING FOR LOGIC DESCRIPTION FILE: REGdecode.pld                    Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Nov 15 21:52:42 2025
+
+  1:Name     REGdecode ;
+  2:PartNo   ATF22V10C ;
+  3:Date     2025/11/15 ;
+  4:Revision 1         ;
+  5:Designer Frederic Segard ;
+  6:Company  MicroHobbyist ;
+  7:Assembly None ;
+  8:Location None ;
+  9:Device   g22v10 ;
+ 10:
+ 11:/* =========================================================
+ 12:   Compiler Options
+ 13:   ---------------------------------------------------------
+ 14:   cupl -m2lxfjanb -u C:\Wincupl\Shared\Atmel.DL %1.PLD
+ 15:   ========================================================= */
+ 16:
+ 17:PIN 1  =  E ;         /* CPU E (data phase) */
+ 18:PIN 2  = !IORQ ;      /* I/O Request, Active-low during I/O cycle */
+ 19:PIN 3  =  RW ;        /* Read/Write */
+ 20:PIN 4  =  A0 ;        /* Address bit 0 - LSB */
+ 21:PIN 5  =  A1 ;
+ 22:PIN 6  =  A2 ;
+ 23:PIN 7  =  A3 ;
+ 24:PIN 8  =  A4 ;
+ 25:PIN 9  =  A5 ;
+ 26:PIN 10 =  A6 ;
+ 27:PIN 11 =  A7 ;        /* Address bit 7 - MSB of I/O window */
+ 28:/*  12 =  GND         /* Ground connection */
+ 29:/*  13 =  NC          /* Connected to ground */
+ 30:
+ 31:PIN 23 = !ROMdis ;    /* ROM disable */
+ 32:PIN 22 = !SPDsel ;    /* Speed select */
+ 33:PIN 21 = !IRQvec ;    /* Returns IRQ vector (maybe maskable?) */
+ 34:PIN 20 = !FIRQvec ;   /* Returns FIRQ vector (maybe maskable?) */
+ 35:PIN 19 = !STAT1reg ;  /* Various status bits */
+ 36:PIN 18 = !STAT2reg ;  /* Various status bits */
+ 37:PIN 17 = !PHY1reg ;   /* Physical Register to the outside world */
+ 38:PIN 16 = !PHY2reg ;   /* Physical Register to the outside world */
+ 39:PIN 15 = !TBD1 ;      /* Single byte future expansion */
+ 40:PIN 14 = !TBD2 ;      /* Single byte future expansion */
+ 41:
+ 42:REGBASE  = !A7 & !A6 & !A5 & A4 & IORQ & E ;
+ 43:
+ 44:TBD1     = REGBASE & !A3 &  A2 &  A1 & !A0 ;       /* $FF16 */
+ 45:TBD2     = REGBASE & !A3 &  A2 &  A1 &  A0 ;       /* $FF17 */
+ 46:ROMdis   = REGBASE &  A3 & !A2 & !A1 & !A0 & !RW ; /* $FF18 */
+ 47:SPDsel   = REGBASE &  A3 & !A2 & !A1 &  A0 ;       /* $FF19 */
+ 48:IRQvec   = REGBASE &  A3 & !A2 &  A1 & !A0 ;       /* $FF1A */
+ 49:FIRQvec  = REGBASE &  A3 & !A2 &  A1 &  A0 ;       /* $FF1B */
+ 50:STAT1reg = REGBASE &  A3 &  A2 & !A1 & !A0 & RW ;  /* $FF1C */
+ 51:STAT2reg = REGBASE &  A3 &  A2 & !A1 &  A0 & RW ;  /* $FF1D */
+ 52:PHY1reg  = REGBASE &  A3 &  A2 &  A1 & !A0 ;       /* $FF1E */
+ 53:PHY2reg  = REGBASE &  A3 &  A2 &  A1 &  A0 ;       /* $FF1F */
+
+LISTING FOR LOGIC DESCRIPTION FILE: REGdecode.pld                    Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Nov 15 21:52:42 2025
+
+ 54:
+ 55:
+
+
+
+Jedec Fuse Checksum       (6e38)
+Jedec Transmit Checksum   (a145)

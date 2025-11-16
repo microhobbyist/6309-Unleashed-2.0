@@ -1,0 +1,143 @@
+Name     WaitStateGen ;
+PartNo   ATF750C ;
+Date     2025/11/15 ;
+Revision 7 ;
+Designer Frederic Segard ;
+Company  MicroHobbyist ;
+Assembly None ;
+Location None ;
+Device   v750c ;
+
+/* =========================================================
+   6309 WAIT-STATE STRETCHER (ATF750C VERSION)
+   ---------------------------------------------------------
+   Supports true 0..7 wait states (WS2..WS0).
+   Quarter-cycle timing using CLK4X.
+   1 wait state = 4 quarter cycles.
+   Preload = WS * 4 = 0..28.
+   5-bit down counter (CNT4..CNT0) handles 0..31.
+   MRDY held low while counter > 0.
+   ========================================================= */
+
+/* ------------------------- INPUTS ------------------------- */
+PIN  1 =  CLK4X ;    /* 4x EXTAL clock input */
+PIN  2 =  E ;        /* CPU E */
+PIN  3 =  RW ;       /* CPU R W */
+PIN  4 = !RESET ;    /* System reset, active low */
+PIN  5 = !VDPWAIT ;  /* VDP wait, active low */
+PIN  6 = !PSGDT ;    /* PSG dtack OR, active low */
+PIN  7 = !WAIT1 ;    /* External wait 1 */
+PIN  8 = !WAIT2 ;    /* External wait 2 */
+PIN  9 = !WAIT3 ;    /* External wait 3 */
+PIN 10 =  WS0 ;      /* Wait state bit 0 */
+PIN 11 =  WS1 ;      /* Wait state bit 1 */
+/*  12 =  VCC ;      /* Connected to 5V */
+PIN 13 =  WS2 ;      /* Wait state bit 2 */
+
+/* ------------------------- OUTPUTS ------------------------ */
+PIN 23 = !MRDY ;     /* MRDY to CPU, active low */
+PIN 22 = !RD ;       /* Read pin */
+PIN 21 = !WR ;       /* Write pin */
+
+/* ----------------------- BURIED NODES --------------------- */
+PINNODE 31 =  CNT0 ;    /* Counter bit 0 */
+PINNODE 36 =  CNT1 ;    /* Counter bit 1 */
+PINNODE 37 =  CNT2 ;    /* Counter bit 2 */
+PINNODE 35 =  CNT3 ;    /* Counter bit 3 */
+PINNODE 29 =  CNT4 ;    /* Counter bit 4 */
+PINNODE 30 =  RUN ;     /* Stretch active */
+PINNODE 28 =  E_prev ;  /* Previous E (synced) */
+PINNODE 32 =  E_sync ;  /* Synchronized E */
+
+RD =  RW & E ;
+WR = !RW & E ;
+
+/* =========================================================
+   E SYNCHRONIZERS (CLK4X DOMAIN)
+   ========================================================= */
+
+E_sync.d  = E ;
+E_sync.ar = RESET ;
+E_sync.sp = 'b'0 ;
+
+E_prev.d  = E_sync ;
+E_prev.ar = RESET ;
+E_prev.sp = 'b'0 ;
+
+/* Rising-edge detect */
+E_rise = E_sync & !E_prev ;
+
+/* =========================================================
+   EXTERNAL WAIT SOURCES
+   ========================================================= */
+/* These inputs are active low at the pin. Internal EXT_WAIT is active high. */
+
+EXT_WAIT = VDPWAIT # PSGDT # WAIT1 # WAIT2 # WAIT3 ;
+
+/* =========================================================
+   WAIT-STATE VALUE (0..7) AND PRELOAD (WS * 4)
+   ========================================================= */
+
+/* Raw WS bits */
+WS_NUM0 = WS0 ;
+WS_NUM1 = WS1 ;
+WS_NUM2 = WS2 ;
+
+/* Non-zero WS request */
+WAIT_NZ = WS_NUM0 # WS_NUM1 # WS_NUM2 ;
+
+/* Preload = WS * 4 (shift left by two) */
+LOAD0 = 'b'0 ;
+LOAD1 = 'b'0 ;
+LOAD2 = WS_NUM0 ;
+LOAD3 = WS_NUM1 ;
+LOAD4 = WS_NUM2 ;
+
+/* =========================================================
+   RUN CONTROL AND DOWN COUNTER (5 BITS)
+   ========================================================= */
+
+CNT_ZERO = !CNT4 & !CNT3 & !CNT2 & !CNT1 & !CNT0 ;
+
+/* Load counter on E rising when WS > 0 and not already running */
+LOAD = E_rise & WAIT_NZ & !RUN ;
+
+/* RUN stays active while counter not zero */
+RUN.d  = LOAD # (RUN & !CNT_ZERO) ;
+RUN.ar = RESET ;
+RUN.sp = 'b'0 ;
+
+/* Decrement when RUN is active */
+DEC = RUN & !CNT_ZERO ;
+
+/* ---------------- 5-bit down counter ---------------------- */
+
+CNT0.d = (LOAD & LOAD0) # (!LOAD & (DEC $ CNT0)) ;
+CNT0.ar = RESET ;
+CNT0.sp = 'b'0 ;
+
+CNT1.d = (LOAD & LOAD1) # (!LOAD & ((DEC & !CNT0) $ CNT1)) ;
+CNT1.ar = RESET ;
+CNT1.sp = 'b'0 ;
+
+CNT2.d = (LOAD & LOAD2) # (!LOAD & ((DEC & !CNT1 & !CNT0) $ CNT2)) ;
+CNT2.ar = RESET ;
+CNT2.sp = 'b'0 ;
+
+CNT3.d = (LOAD & LOAD3) # (!LOAD & ((DEC & !CNT2 & !CNT1 & !CNT0) $ CNT3)) ;
+CNT3.ar = RESET ;
+CNT3.sp = 'b'0 ;
+
+CNT4.d = (LOAD & LOAD4) # (!LOAD & ((DEC & !CNT3 & !CNT2 & !CNT1 & !CNT0) $ CNT4)) ;
+CNT4.ar = RESET ;
+CNT4.sp = 'b'0 ;
+
+/* =========================================================
+   OUTPUTS
+   ========================================================= */
+
+MRDY = RUN # EXT_WAIT ;
+
+/* =========================================================
+   END OF FILE
+   ========================================================= */

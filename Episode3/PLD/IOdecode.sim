@@ -1,0 +1,101 @@
+%SIGNAL
+PIN   4 =  A0 
+PIN   5 =  A1 
+PIN   6 =  A2 
+PIN   7 =  A3 
+PIN   8 =  A4 
+PIN   9 =  A5 
+PIN  10 =  A6 
+PIN  11 =  A7 
+PIN  22 = !ACIAcs 
+PIN  17 =  AnyCS 
+PIN  18 = !CFcs 
+PIN   1 =  E 
+PIN   2 = !IORQ 
+PIN  20 =  RTCas 
+PIN  21 = !RTCcs 
+PIN  19 =  RTCds 
+PIN   3 =  RW 
+PIN  23 = !TIMERcs 
+PIN  16 =  WS0 
+PIN  15 =  WS1 
+PIN  14 =  WS2 
+PIN  13 =  WSsel 
+%END
+
+%FIELD
+FIELD CS = TIMERcs,ACIAcs,RTCcs,CFcs,WSsel
+FIELD WS = WS2,WS1,WS0
+%END
+
+%EQUATION
+ACIAcs =>
+    !A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+AnyCS =>
+    !ACIAcs
+  # !CFcs
+  # !RTCcs
+  # !TIMERcs
+
+CFcs =>
+    A3 & !A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+IOBASE =>
+    !A5 & !A6 & !A7 & E & IORQ
+
+RTCas =>
+    !A0 & !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+RTCcs =>
+    !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+RTCds =>
+    A0 & !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+TIMERcs =>
+    !A3 & !A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+WS0 =>
+    ACIAcs & CFcs & RTCcs & !TIMERcs
+  # ACIAcs & CFcs & !RTCcs & TIMERcs & WSsel
+  # !ACIAcs & CFcs & RTCcs & TIMERcs & WSsel
+
+WS0.oe  =>
+    AnyCS
+
+WS1 =>
+    ACIAcs & CFcs & RTCcs & !TIMERcs & WSsel
+  # ACIAcs & !CFcs & RTCcs & TIMERcs & !WSsel
+
+WS1.oe  =>
+    AnyCS
+
+WS2 =>
+    ACIAcs & !CFcs & RTCcs & TIMERcs & WSsel
+
+WS2.oe  =>
+    AnyCS
+
+ACIAcs.oe  =>
+    1 
+
+AnyCS.oe  =>
+    1 
+
+CFcs.oe  =>
+    1 
+
+RTCas.oe  =>
+    1 
+
+RTCcs.oe  =>
+    1 
+
+RTCds.oe  =>
+    1 
+
+TIMERcs.oe  =>
+    1 
+
+%END

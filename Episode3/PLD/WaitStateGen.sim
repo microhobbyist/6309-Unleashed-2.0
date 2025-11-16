@@ -1,0 +1,213 @@
+%SIGNAL
+PIN   1 =  CLK4X 
+PIN  31 =  CNT0 
+PIN  36 =  CNT1 
+PIN  37 =  CNT2 
+PIN  35 =  CNT3 
+PIN  29 =  CNT4 
+PIN   2 =  E 
+PIN  28 =  E_prev 
+PIN  32 =  E_sync 
+PIN  23 = !MRDY 
+PIN   6 = !PSGDT 
+PIN  22 = !RD 
+PIN   4 = !RESET 
+PIN  30 =  RUN 
+PIN   3 =  RW 
+PIN   5 = !VDPWAIT 
+PIN   7 = !WAIT1 
+PIN   8 = !WAIT2 
+PIN   9 = !WAIT3 
+PIN  21 = !WR 
+PIN  10 =  WS0 
+PIN  11 =  WS1 
+PIN  13 =  WS2 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+CNT0.d  =>
+    !CNT0 & CNT1 & RUN
+  # !CNT0 & CNT2 & RUN
+  # !CNT0 & CNT3 & RUN
+  # !CNT0 & CNT4 & RUN
+  # CNT0 & E_prev & !RUN
+  # CNT0 & !E_sync & !RUN
+  # CNT0 & !RUN & !WS0 & !WS1 & !WS2
+
+CNT0.ar  =>
+    !RESET
+
+CNT0.sp CNT1.sp CNT2.sp CNT3.sp CNT4.sp E_prev.sp E_sync.sp RUN.sp  =>
+    0 
+
+CNT1.d  =>
+    CNT0 & CNT1 & RUN
+  # CNT1 & E_prev & !RUN
+  # CNT1 & !E_sync & !RUN
+  # !CNT0 & !CNT1 & CNT2 & RUN
+  # !CNT0 & !CNT1 & CNT3 & RUN
+  # !CNT0 & !CNT1 & CNT4 & RUN
+  # CNT1 & !RUN & !WS0 & !WS1 & !WS2
+
+CNT1.ar  =>
+    !RESET
+
+CNT1.sp  =>
+    
+CNT2.d  =>
+    CNT0 & CNT2 & RUN
+  # CNT1 & CNT2 & RUN
+  # CNT2 & E_prev & !RUN
+  # CNT2 & !E_sync & !RUN
+  # !E_prev & E_sync & !RUN & WS0
+  # CNT2 & !RUN & !WS1 & !WS2
+  # !CNT0 & !CNT1 & !CNT2 & CNT3 & RUN
+  # !CNT0 & !CNT1 & !CNT2 & CNT4 & RUN
+
+CNT2.ar  =>
+    !RESET
+
+CNT2.sp  =>
+    
+CNT3.d  =>
+    CNT0 & CNT3 & RUN
+  # CNT1 & CNT3 & RUN
+  # CNT2 & CNT3 & RUN
+  # CNT3 & E_prev & !RUN
+  # CNT3 & !E_sync & !RUN
+  # !E_prev & E_sync & !RUN & WS1
+  # CNT3 & !RUN & !WS0 & !WS2
+  # !CNT0 & !CNT1 & !CNT2 & !CNT3 & CNT4 & RUN
+
+CNT3.ar  =>
+    !RESET
+
+CNT3.sp  =>
+    
+CNT4.d  =>
+    CNT0 & CNT4 & RUN
+  # CNT1 & CNT4 & RUN
+  # CNT2 & CNT4 & RUN
+  # CNT3 & CNT4 & RUN
+  # CNT4 & E_prev & !RUN
+  # CNT4 & !E_sync & !RUN
+  # CNT4 & !RUN & !WS0 & !WS1
+  # !E_prev & E_sync & !RUN & WS2
+
+CNT4.ar  =>
+    !RESET
+
+CNT4.sp  =>
+    
+CNT_ZERO =>
+    !CNT0 & !CNT1 & !CNT2 & !CNT3 & !CNT4
+
+DEC =>
+    CNT4 & RUN
+  # CNT3 & RUN
+  # CNT2 & RUN
+  # CNT1 & RUN
+  # CNT0 & RUN
+
+EXT_WAIT =>
+    VDPWAIT
+  # PSGDT
+  # WAIT1
+  # WAIT2
+  # WAIT3
+
+E_prev.d  =>
+    E_sync
+
+E_prev.ar  =>
+    !RESET
+
+E_prev.sp  =>
+    
+E_rise =>
+    !E_prev & E_sync
+
+E_sync.d  =>
+    E
+
+E_sync.ar  =>
+    !RESET
+
+E_sync.sp  =>
+    
+LOAD =>
+    !E_prev & E_sync & !RUN & WS0
+  # !E_prev & E_sync & !RUN & WS2
+  # !E_prev & E_sync & !RUN & WS1
+
+LOAD0 =>
+    0 
+
+LOAD1 =>
+    0 
+
+LOAD2 =>
+    WS0
+
+LOAD3 =>
+    WS1
+
+LOAD4 =>
+    WS2
+
+MRDY =>
+    !PSGDT
+  # RUN
+  # !VDPWAIT
+  # !WAIT1
+  # !WAIT2
+  # !WAIT3
+
+RD =>
+    E & RW
+
+RUN.d  =>
+    CNT0 & RUN
+  # CNT1 & RUN
+  # CNT2 & RUN
+  # CNT3 & RUN
+  # CNT4 & RUN
+  # !E_prev & E_sync & !RUN & WS0
+  # !E_prev & E_sync & !RUN & WS1
+  # !E_prev & E_sync & !RUN & WS2
+
+RUN.ar  =>
+    !RESET
+
+RUN.sp  =>
+    
+WAIT_NZ =>
+    WS0
+  # WS1
+  # WS2
+
+WR =>
+    E & !RW
+
+WS_NUM0 =>
+    WS0
+
+WS_NUM1 =>
+    WS1
+
+WS_NUM2 =>
+    WS2
+
+MRDY.oe  =>
+    1 
+
+RD.oe  =>
+    1 
+
+WR.oe  =>
+    1 
+
+%END

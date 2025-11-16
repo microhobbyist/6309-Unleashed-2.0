@@ -1,0 +1,92 @@
+%SIGNAL
+PIN   4 =  A0 
+PIN   5 =  A1 
+PIN   6 =  A2 
+PIN   7 =  A3 
+PIN   8 =  A4 
+PIN   9 =  A5 
+PIN  10 =  A6 
+PIN  11 =  A7 
+PIN   1 =  E 
+PIN  20 = !FIRQvec 
+PIN   2 = !IORQ 
+PIN  21 = !IRQvec 
+PIN  17 = !PHY1reg 
+PIN  16 = !PHY2reg 
+PIN  23 = !ROMdis 
+PIN   3 =  RW 
+PIN  22 = !SPDsel 
+PIN  19 = !STAT1reg 
+PIN  18 = !STAT2reg 
+PIN  15 = !TBD1 
+PIN  14 = !TBD2 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+FIRQvec =>
+    A0 & A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+IRQvec =>
+    !A0 & A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+PHY1reg =>
+    !A0 & A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+PHY2reg =>
+    A0 & A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+REGBASE =>
+    A4 & !A5 & !A6 & !A7 & E & IORQ
+
+ROMdis =>
+    !A0 & !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & !RW
+
+SPDsel =>
+    A0 & !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+STAT1reg =>
+    !A0 & !A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & RW
+
+STAT2reg =>
+    A0 & !A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & RW
+
+TBD1 =>
+    !A0 & A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+TBD2 =>
+    A0 & A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+FIRQvec.oe  =>
+    1 
+
+IRQvec.oe  =>
+    1 
+
+PHY1reg.oe  =>
+    1 
+
+PHY2reg.oe  =>
+    1 
+
+ROMdis.oe  =>
+    1 
+
+SPDsel.oe  =>
+    1 
+
+STAT1reg.oe  =>
+    1 
+
+STAT2reg.oe  =>
+    1 
+
+TBD1.oe  =>
+    1 
+
+TBD2.oe  =>
+    1 
+
+%END

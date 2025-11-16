@@ -1,0 +1,253 @@
+%SIGNAL
+PIN   1 =  CLK_16M 
+PIN  23 =  CPU_CLK 
+PIN  15 =  D0 
+PIN  14 =  D1 
+PIN  25 =  DIV2 
+PIN  26 =  DIV3 
+PIN  27 =  DIV4 
+PIN  28 =  DIV6 
+PIN  29 =  DIV16 
+PIN  30 =  DIV3_Q 
+PIN   2 =  E 
+PIN  10 = !HALT_IN1 
+PIN  11 = !HALT_IN2 
+PIN  22 = !HALT_OUT 
+PIN  18 =  LED_B 
+PIN  19 =  LED_G 
+PIN  20 =  LED_R 
+PIN   5 =  MREQ 
+PIN  13 = !PAUSE_SW 
+PIN  21 =  PSG_CLK 
+PIN   7 =  RAMaddr 
+PIN  16 = !RAMoe 
+PIN   4 = !RESET 
+PIN   8 = !ROMaddr 
+PIN  17 = !ROMcs 
+PIN   9 = !ROMdis 
+PIN  33 =  ROMdisQ 
+PIN   3 =  RW 
+PIN  31 =  S0 
+PIN  32 =  S1 
+PIN   6 = !SPDsel 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+CHANGE =>
+    D1 & !RW & !S1 & !SPDsel
+  # !D1 & !RW & S1 & !SPDsel
+  # D0 & !RW & !S0 & !SPDsel
+  # !D0 & !RW & S0 & !SPDsel
+
+CHANGE_S0 =>
+    D0 & !RW & !S0 & !SPDsel
+  # !D0 & !RW & S0 & !SPDsel
+
+CHANGE_S1 =>
+    D1 & !RW & !S1 & !SPDsel
+  # !D1 & !RW & S1 & !SPDsel
+
+CPU_CLK =>
+    DIV3 & S0 & S1
+  # DIV4 & !S0 & S1
+  # DIV6 & S0 & !S1
+  # DIV16 & !S0 & !S1
+
+D0 =>
+    RW & S0 & SPDsel
+
+D1 =>
+    RW & S1 & SPDsel
+
+DIV2.d  =>
+    !CLK_16M & DIV2
+  # CLK_16M & !DIV2
+
+DIV2.ar  =>
+    RESET
+
+DIV2.ck  =>
+    CLK_16M
+
+DIV2.sp DIV3.sp DIV4.sp DIV6.sp DIV16.sp DIV3_Q.sp ROMdisQ.sp S0.sp S1.sp  =>
+    0 
+
+DIV3.d  =>
+    !DIV3 & DIV3_Q
+  # DIV3 & !DIV3_Q
+
+DIV3.ar  =>
+    RESET
+
+DIV3.ck  =>
+    DIV3_Q
+
+DIV3.sp  =>
+    
+DIV4.d  =>
+    !DIV2 & DIV4
+  # DIV2 & !DIV4
+
+DIV4.ar  =>
+    RESET
+
+DIV4.ck  =>
+    DIV2
+
+DIV4.sp  =>
+    
+DIV6.d  =>
+    !DIV6 & DIV3_Q
+  # DIV6 & !DIV3_Q
+
+DIV6.ar  =>
+    RESET
+
+DIV6.ck  =>
+    DIV3_Q
+
+DIV6.sp  =>
+    
+DIV16.d  =>
+    !DIV4 & DIV16
+  # DIV4 & !DIV16
+
+DIV16.ar  =>
+    RESET
+
+DIV16.ck  =>
+    DIV4
+
+DIV16.sp  =>
+    
+DIV3_Q.d  =>
+    !CLK_16M & DIV3_Q
+  # CLK_16M & !DIV3_Q
+
+DIV3_Q.ar  =>
+    RESET
+
+DIV3_Q.ck  =>
+    CLK_16M
+
+DIV3_Q.sp  =>
+    
+HALT_ACTIVE =>
+    !D0 & !RW & S0 & !SPDsel
+  # D0 & !RW & !S0 & !SPDsel
+  # !D1 & !RW & S1 & !SPDsel
+  # D1 & !RW & !S1 & !SPDsel
+
+!HALT_OUT =>
+    HALT_IN1
+  # HALT_IN2
+  # PAUSE_SW
+  # !D0 & !RW & S0 & SPDsel
+  # D0 & !RW & !S0 & SPDsel
+  # !D1 & !RW & S1 & SPDsel
+  # D1 & !RW & !S1 & SPDsel
+
+LED_B =>
+    !S0 & !S1
+
+LED_G =>
+    !S0
+  # !S1
+
+LED_R =>
+    S1
+
+PSG_CLK =>
+    DIV2
+
+RAMoe =>
+    !E
+  # !ROMdisQ
+  # !RW
+
+RD =>
+    !RW
+  # !E
+
+REG_WRITE =>
+    !RW & !SPDsel
+
+ROMcs =>
+    MREQ
+  # ROMdisQ
+
+ROMdisQ.d  =>
+    1 
+
+ROMdisQ.ar  =>
+    RESET
+
+ROMdisQ.ck  =>
+    !ROMdis
+
+ROMdisQ.sp  =>
+    
+S0.d  =>
+    D0 & !RW & SPDsel
+
+S0.ar  =>
+    RESET
+
+S0.sp  =>
+    
+S1.d  =>
+    D1
+  # RW
+  # !SPDsel
+
+S1.ar  =>
+    RESET
+
+S1.sp  =>
+    
+SPD_1 =>
+    !S0 & !S1
+
+SPD_4 =>
+    !S0 & S1
+
+SPD_267 =>
+    S0 & !S1
+
+SPD_533 =>
+    S0 & S1
+
+CPU_CLK.oe  =>
+    1 
+
+D0.oe  =>
+    1 
+
+D1.oe  =>
+    1 
+
+HALT_OUT.oe  =>
+    1 
+
+LED_B.oe  =>
+    1 
+
+LED_G.oe  =>
+    1 
+
+LED_R.oe  =>
+    1 
+
+PSG_CLK.oe  =>
+    1 
+
+RAMoe.oe  =>
+    1 
+
+ROMcs.oe  =>
+    1 
+
+%END

@@ -1,0 +1,147 @@
+Name     CPUSpeedSel ;
+PartNo   ATF750CL ;
+Date     2025/11/12 ;
+Revision 10 ;
+Designer Frederic Segard ;
+Company  MicroHobbyist ;
+Assembly None ;
+Location None ;
+Device   v750c ;
+
+/* =========================================================
+   Compiler Options
+   ---------------------------------------------------------
+   cupl -m2lxfjanb -u C:\Wincupl\Shared\Atmel.DL %1.PLD
+   ========================================================= */
+   
+/********************************************************************
+ *  6309 CLOCK MUX (4 SPEEDS out of one 16MHz clock)                *
+ *  SPEEDS: ~5.34, 4, ~2.67, 1 MHz (16M div)                        *
+ *  RGB + PSG_CLK (8 MHz) + !PAUSE BUTTON                           *
+ *  DEFAULT: 2.67 MHz (S1=1, S0=0)                                  *
+ ********************************************************************/
+ 
+/* INPUTS */
+PIN  1 =  CLK_16M ;   /* Single 16 MHz source */
+PIN  2 =  E ;         /* Quadrature E clock from CPU */
+PIN  3 =  RW ;        /* 0=write, 1=read */
+PIN  4 = !RESET ;     /* System reset (active low) */
+PIN  5 =  MREQ ;      /* Memory Request (any ROM or RAM area) */
+PIN  6 = !SPDsel ;     /* $FFxx chip select (active-low) */
+PIN  7 =  RAMaddr ;   /* Future update to keep RAM and ROM simultaneously */
+PIN  8 = !ROMaddr ;   /* Future update to keep RAM and ROM simultaneously */
+PIN  9 = !ROMdis ;    /* ROM disable pin */
+PIN 10 = !HALT_IN1 ;  /* External halt request 1 (active-low) */
+PIN 11 = !HALT_IN2 ;  /* External halt request 2 (active-low) */
+/*  12 =  GND */
+PIN 13 = !PAUSE_SW ;  /* Debounced pushbutton halt (active low) */
+
+/* BIDIR DATA BUS (OUTPUTS) */
+PIN 14 =  D1 ;        /* Speed reg bit 1 (S1) */
+PIN 15 =  D0 ;        /* Speed reg bit 0 (S0) */
+
+/* OUTPUTS */
+/*  24 =  VCC        */
+PIN 23 =  CPU_CLK ;   /* To 6309 EXTAL */
+PIN 22 = !HALT_OUT ;  /* To 6309 HALT */
+PIN 21 =  PSG_CLK ;   /* 8 MHz (16M /2) */
+PIN 20 =  LED_R ;     /* Red = 5.33 + 4 MHz (Yellow), Also for SPDsel */
+PIN 19 =  LED_G ;     /* Green = 2.67 + 4 + 1 MHz */
+PIN 18 =  LED_B ;     /* Blue = 1 MHz (Cyan) */
+PIN 17 = !ROMcs ;     /* ROM chip select */
+PIN 16 = !RAMoe ;     /* RAM output enable */
+
+/* BURIED DIVIDERS */
+PINNODE 25 = DIV2 ;   /* 16M /2 = 8M */
+PINNODE 26 = DIV3 ;   /* 16M /3 = 5.333M */
+PINNODE 27 = DIV4 ;   /* 16M /4 = 4M */
+PINNODE 28 = DIV6 ;   /* 16M /6 = 2.667M */
+PINNODE 29 = DIV16 ;  /* 16M /16 = 1M */
+PINNODE 30 = DIV3_Q ; /* /3 phase */
+PINNODE 31 = S0 ;
+PINNODE 32 = S1 ;
+PINNODE 33 = ROMdisQ ; /* For Shadow ROM to lock in ROM */
+
+/* SHADOW ROM LOGIC */
+ROMdisQ.d  = 'b'1 ;     /* Locks the register into place */
+ROMdisQ.ck = ROMdis ;
+ROMdisQ.ar = !RESET ;
+ROMdisQ.sp = 'b'0 ;
+
+RD = !(RW & E) ;
+ROMcs = MREQ # ROMdisQ ;
+RAMoe = RD # !ROMdisQ ;
+
+/* SPEED REG (2 bits: S1, S0) */
+REG_WRITE = !SPDsel & !RW ;
+
+/* DEFAULT: 2.67 MHz (S1=1, S0=0) */
+S1.d = REG_WRITE & D1 # !REG_WRITE & 'b'1 ;
+S0.d = REG_WRITE & D0 # !REG_WRITE & 'b'0 ;
+S1.ar = !RESET ;
+S0.ar = !RESET ;
+S1.sp = 'b'0 ;
+S0.sp = 'b'0 ;
+
+/* DIVIDERS - USE $ FOR XOR */
+DIV2.d = DIV2 $ CLK_16M ;
+DIV2.ck = CLK_16M ;
+DIV2.ar = !RESET ;
+DIV2.sp = 'b'0 ;
+
+DIV4.d = DIV4 $ DIV2 ;
+DIV4.ck = DIV2 ;
+DIV4.ar = !RESET ;
+DIV4.sp = 'b'0 ;
+
+DIV16.d = DIV16 $ DIV4 ;
+DIV16.ck = DIV4 ;
+DIV16.ar = !RESET ;
+DIV16.sp = 'b'0 ;
+
+/* /3 Johnson counter - NO == - USE Q1 & !Q0 */
+DIV3_Q.d = DIV3_Q $ CLK_16M ;
+DIV3_Q.ck = CLK_16M ;
+DIV3_Q.ar = !RESET ;
+DIV3_Q.sp = 'b'0 ;
+
+DIV3.d = DIV3_Q & !DIV3 # !DIV3_Q & DIV3 ;
+DIV3.ck = DIV3_Q ;
+DIV3.ar = !RESET ;
+DIV3.sp = 'b'0 ;
+
+/* /6 = /2 x /3 - NO == */
+DIV6.d = DIV3_Q & !DIV6 # !DIV3_Q & DIV6 ;
+DIV6.ck = DIV3_Q ;
+DIV6.ar = !RESET ;
+DIV6.sp = 'b'0 ;
+
+/* SPEED MUX */
+SPD_533 = S1 & S0 ;
+SPD_4   = S1 & !S0 ;
+SPD_267 = !S1 & S0 ;
+SPD_1   = !S1 & !S0 ;
+
+CPU_CLK = (SPD_533 & DIV3) #
+          (SPD_4   & DIV4) #
+          (SPD_267 & DIV6) #
+          (SPD_1   & DIV16) ;
+
+/* RGB LED */
+LED_R = SPD_533 # SPD_4 ; /* It is also for SPDsel on IODecoder ICs */
+LED_G = SPD_267 # SPD_4 # SPD_1 ;
+LED_B = SPD_1 ;
+
+/* HALT LOGIC - NO != */
+CHANGE_S1 = (REG_WRITE & D1 & !S1) # (REG_WRITE & !D1 & S1) ;
+CHANGE_S0 = (REG_WRITE & D0 & !S0) # (REG_WRITE & !D0 & S0) ;
+CHANGE = CHANGE_S1 # CHANGE_S0 ;
+HALT_ACTIVE = CHANGE & REG_WRITE ;
+!HALT_OUT = !HALT_IN1 # !HALT_IN2 # !PAUSE_SW # HALT_ACTIVE ;
+
+/* READBACK */
+D1 = (!SPDsel & RW) & S1 # (SPDsel # !RW) & 'b'0 ;
+D0 = (!SPDsel & RW) & S0 # (SPDsel # !RW) & 'b'0 ;
+
+/* PSG_CLK = 8 MHz */
+PSG_CLK = DIV2 ;

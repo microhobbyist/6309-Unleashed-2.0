@@ -1,0 +1,53 @@
+Name     REGdecode ;
+PartNo   ATF22V10C ;
+Date     2025/11/15 ;
+Revision 1         ;
+Designer Frederic Segard ;
+Company  MicroHobbyist ;
+Assembly None ;
+Location None ;
+Device   g22v10 ;
+
+/* =========================================================
+   Compiler Options
+   ---------------------------------------------------------
+   cupl -m2lxfjanb -u C:\Wincupl\Shared\Atmel.DL %1.PLD
+   ========================================================= */
+
+PIN 1  =  E ;         /* CPU E (data phase) */
+PIN 2  = !IORQ ;      /* I/O Request, Active-low during I/O cycle */
+PIN 3  =  RW ;        /* Read/Write */
+PIN 4  =  A0 ;        /* Address bit 0 - LSB */
+PIN 5  =  A1 ;
+PIN 6  =  A2 ;
+PIN 7  =  A3 ;
+PIN 8  =  A4 ;
+PIN 9  =  A5 ;
+PIN 10 =  A6 ;
+PIN 11 =  A7 ;        /* Address bit 7 - MSB of I/O window */
+/*  12 =  GND         /* Ground connection */
+/*  13 =  NC          /* Connected to ground */
+
+PIN 23 = !ROMdis ;    /* ROM disable */
+PIN 22 = !SPDsel ;    /* Speed select */
+PIN 21 = !IRQvec ;    /* Returns IRQ vector (maybe maskable?) */
+PIN 20 = !FIRQvec ;   /* Returns FIRQ vector (maybe maskable?) */
+PIN 19 = !STAT1reg ;  /* Various status bits */
+PIN 18 = !STAT2reg ;  /* Various status bits */
+PIN 17 = !PHY1reg ;   /* Physical Register to the outside world */
+PIN 16 = !PHY2reg ;   /* Physical Register to the outside world */
+PIN 15 = !TBD1 ;      /* Single byte future expansion */
+PIN 14 = !TBD2 ;      /* Single byte future expansion */
+
+REGBASE  = !A7 & !A6 & !A5 & A4 & IORQ & E ;
+
+TBD1     = REGBASE & !A3 &  A2 &  A1 & !A0 ;       /* $FF16 */
+TBD2     = REGBASE & !A3 &  A2 &  A1 &  A0 ;       /* $FF17 */
+ROMdis   = REGBASE &  A3 & !A2 & !A1 & !A0 & !RW ; /* $FF18 */
+SPDsel   = REGBASE &  A3 & !A2 & !A1 &  A0 ;       /* $FF19 */
+IRQvec   = REGBASE &  A3 & !A2 &  A1 & !A0 ;       /* $FF1A */
+FIRQvec  = REGBASE &  A3 & !A2 &  A1 &  A0 ;       /* $FF1B */
+STAT1reg = REGBASE &  A3 &  A2 & !A1 & !A0 & RW ;  /* $FF1C */
+STAT2reg = REGBASE &  A3 &  A2 & !A1 &  A0 & RW ;  /* $FF1D */
+PHY1reg  = REGBASE &  A3 &  A2 &  A1 & !A0 ;       /* $FF1E */
+PHY2reg  = REGBASE &  A3 &  A2 &  A1 &  A0 ;       /* $FF1F */

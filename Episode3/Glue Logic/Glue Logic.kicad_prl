@@ -59,7 +59,7 @@
     "ssh_key": ""
   },
   "meta": {
-    "filename": "PLDs.kicad_prl",
+    "filename": "Glue Logic.kicad_prl",
     "version": 5
   },
   "net_inspector_panel": {
