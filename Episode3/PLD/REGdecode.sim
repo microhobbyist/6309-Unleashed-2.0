@@ -27,37 +27,37 @@ PIN  14 = !TBD2
 
 %EQUATION
 FIRQvec =>
-    A0 & A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    A0 & !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
 
 IRQvec =>
-    !A0 & A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    !A0 & !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
 
 PHY1reg =>
-    !A0 & A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    !A0 & !A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
 
 PHY2reg =>
-    A0 & A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    A0 & !A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
 
 REGBASE =>
     A4 & !A5 & !A6 & !A7 & E & IORQ
 
 ROMdis =>
-    !A0 & !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & !RW
+    !A0 & A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & !RW
 
 SPDsel =>
-    A0 & !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    A0 & A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
 
 STAT1reg =>
-    !A0 & !A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & RW
+    !A0 & A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & RW
 
 STAT2reg =>
-    A0 & !A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & RW
+    A0 & A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & RW
 
 TBD1 =>
-    !A0 & A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    !A0 & A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
 
 TBD2 =>
-    A0 & A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    A0 & A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
 
 FIRQvec.oe  =>
     1 

@@ -1,7 +1,7 @@
 
 CUPL(WM)        5.0a  Serial# MW-10400000
 Device          v750c  Library DLIB-h-40-2
-Created         Sat Nov 15 21:52:42 2025
+Created         Sun Nov 16 21:42:18 2025
 Name            WaitStateGen 
 Partno          ATF750C 
 Revision        7 
@@ -212,4 +212,4 @@ Location        None
 *L14432 00001000001010101000100011000110
 *L14464 11100110101001100000100001100100
 *CAE75
-*5985
+*5996

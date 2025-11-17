@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: WaitStateGen.pld                 Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Nov 15 21:52:42 2025
+Created Sun Nov 16 21:42:18 2025
 
   1:Name     WaitStateGen ;
   2:PartNo   ATF750C ;
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: WaitStateGen.pld                 Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Nov 15 21:52:42 2025
+Created Sun Nov 16 21:42:18 2025
 
  54:
  55:/* =========================================================
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: WaitStateGen.pld                 Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Nov 15 21:52:42 2025
+Created Sun Nov 16 21:42:18 2025
 
 108:RUN.sp = 'b'0 ;
 109:
@@ -170,4 +170,4 @@ Created Sat Nov 15 21:52:42 2025
 
 
 Jedec Fuse Checksum       (ae75)
-Jedec Transmit Checksum   (5985)
+Jedec Transmit Checksum   (5996)

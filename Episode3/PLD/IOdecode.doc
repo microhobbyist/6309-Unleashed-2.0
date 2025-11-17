@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# MW-10400000
 Device          g22v10  Library DLIB-h-40-1
-Created         Sat Nov 15 21:52:42 2025
+Created         Sun Nov 16 21:42:17 2025
 Name            IODecode 
 Partno          ATF22V10C 
 Revision        6         
@@ -32,19 +32,19 @@ CFcs =>
     A3 & !A4 & !A5 & !A6 & !A7 & E & IORQ
 
 CS =>
-    TIMERcs , ACIAcs , RTCcs , CFcs , WSsel
+    !TIMERcs , !ACIAcs , !RTCcs , !CFcs , WSsel
 
 IOBASE =>
     !A5 & !A6 & !A7 & E & IORQ
 
 RTCas =>
-    !A0 & !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & IORQ
+    !A0 & !A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & IORQ
 
 RTCcs =>
-    !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & IORQ
+    !A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & IORQ
 
 RTCds =>
-    A0 & !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & IORQ
+    A0 & !A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & IORQ
 
 TIMERcs =>
     !A3 & !A4 & !A5 & !A6 & !A7 & E & IORQ
@@ -53,22 +53,22 @@ WS =>
     WS2 , WS1 , WS0
 
 WS0 =>
-    !ACIAcs & !CFcs & !RTCcs & TIMERcs
-  # !ACIAcs & !CFcs & RTCcs & !TIMERcs & WSsel
-  # ACIAcs & !CFcs & !RTCcs & !TIMERcs & WSsel
+    ACIAcs & CFcs & RTCcs & !TIMERcs
+  # !ACIAcs & CFcs & RTCcs & TIMERcs & WSsel
+  # ACIAcs & CFcs & !RTCcs & TIMERcs & WSsel
 
 WS0.oe  =>
     AnyCS
 
 WS1 =>
-    !ACIAcs & !CFcs & !RTCcs & TIMERcs & WSsel
-  # !ACIAcs & CFcs & !RTCcs & !TIMERcs & !WSsel
+    ACIAcs & CFcs & RTCcs & !TIMERcs & WSsel
+  # ACIAcs & !CFcs & RTCcs & TIMERcs & !WSsel
 
 WS1.oe  =>
     AnyCS
 
 WS2 =>
-    !ACIAcs & CFcs & !RTCcs & !TIMERcs & WSsel
+    ACIAcs & !CFcs & RTCcs & TIMERcs & WSsel
 
 WS2.oe  =>
     AnyCS
@@ -111,17 +111,16 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     A5                          9        V        -       -       -     
     A6                          10       V        -       -       -     
     A7                          11       V        -       -       -     
- !  ACIAcs                      22       V        1       10      3     
+ !  ACIAcs                      21       V        1       12      3     
     AnyCS                       17       V        4       14      3     
- !  CFcs                        18       V        1       16      3     
+ !  CFcs                        22       V        1       10      3     
     CS                          0        F        -       -       -     
     E                           1        V        -       -       -     
     IOBASE                      0        I        1       -       -     
  !  IORQ                        2        V        -       -       -     
-    RTCas                       20       V        1       14      3     
- !  RTCcs                       21       V        1       12      3     
-    RTCds                       19       V        1       16      3     
-    RW                          3        V        -       -       -     
+    RTCas                       19       V        1       16      3     
+ !  RTCcs                       20       V        1       14      3     
+    RTCds                       18       V        1       16      3     
  !  TIMERcs                     23       V        1       8       3     
     WS                          0        F        -       -       -     
     WS0                         16       V        3       12      3     
@@ -130,13 +129,13 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     WS1                 oe      15       X        1       1       1     
     WS2                         14       V        1       8       3     
     WS2                 oe      14       X        1       1       1     
-    WSsel                       13       V        -       -       -     
-    ACIAcs              oe      22       D        1       1       0     
+    WSsel                       3        V        -       -       -     
+    ACIAcs              oe      21       D        1       1       0     
     AnyCS               oe      17       D        1       1       0     
-    CFcs                oe      18       D        1       1       0     
-    RTCas               oe      20       D        1       1       0     
-    RTCcs               oe      21       D        1       1       0     
-    RTCds               oe      19       D        1       1       0     
+    CFcs                oe      22       D        1       1       0     
+    RTCas               oe      19       D        1       1       0     
+    RTCcs               oe      20       D        1       1       0     
+    RTCds               oe      18       D        1       1       0     
     TIMERcs             oe      23       D        1       1       0     
 
 
@@ -168,7 +167,7 @@ Pin #23  05808 Mode  x-
  00396 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
 Pin #22  05810 Mode  x- 
  00440 -------------------------------------------- 
- 00484 x----x---------------x---x--x----x---x---x-- 
+ 00484 x----x------------------x----x---x---x---x-- 
  00528 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  00572 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  00616 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -180,7 +179,7 @@ Pin #22  05810 Mode  x-
  00880 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
 Pin #21  05812 Mode  x- 
  00924 -------------------------------------------- 
- 00968 x----x-----------x---x--x---x----x---x---x-- 
+ 00968 x----x---------------x---x--x----x---x---x-- 
  01012 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01056 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01100 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -192,9 +191,9 @@ Pin #21  05812 Mode  x-
  01364 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01408 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01452 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
-Pin #20  05814 Mode  -- 
+Pin #20  05814 Mode  x- 
  01496 -------------------------------------------- 
- 01540 x----x-------x---x---x--x---x----x---x---x-- 
+ 01540 x----x-----------x--x----x--x----x---x---x-- 
  01584 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01628 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01672 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -210,7 +209,7 @@ Pin #20  05814 Mode  --
  02112 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
 Pin #19  05816 Mode  -- 
  02156 -------------------------------------------- 
- 02200 x----x------x----x---x--x---x----x---x---x-- 
+ 02200 x----x-------x---x--x----x--x----x---x---x-- 
  02244 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  02288 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  02332 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -226,9 +225,9 @@ Pin #19  05816 Mode  --
  02772 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  02816 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  02860 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
-Pin #18  05818 Mode  x- 
+Pin #18  05818 Mode  -- 
  02904 -------------------------------------------- 
- 02948 x----x------------------x----x---x---x---x-- 
+ 02948 x----x------x----x--x----x--x----x---x---x-- 
  02992 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03036 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03080 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -246,9 +245,9 @@ Pin #18  05818 Mode  x-
  03608 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
 Pin #17  05820 Mode  -- 
  03652 -------------------------------------------- 
- 03696 -------x------------------------------------ 
- 03740 -----------------------x-------------------- 
- 03784 -----------x-------------------------------- 
+ 03696 -----------x-------------------------------- 
+ 03740 -------x------------------------------------ 
+ 03784 ---------------x---------------------------- 
  03828 ---x---------------------------------------- 
  03872 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03916 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -262,9 +261,9 @@ Pin #17  05820 Mode  --
  04268 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
 Pin #16  05822 Mode  -- 
  04312 --------------------------x----------------- 
- 04356 ---x--x---x-----------x--------------------- 
- 04400 --x---x----x----------x-------------------x- 
- 04444 --x----x--x-----------x-------------------x- 
+ 04356 --x----x---x---x---------------------------- 
+ 04400 ---x---xx-x----x---------------------------- 
+ 04444 ---x---xx--x--x----------------------------- 
  04488 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  04532 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  04576 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -276,8 +275,8 @@ Pin #16  05822 Mode  --
  04840 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
 Pin #15  05824 Mode  -- 
  04884 --------------------------x----------------- 
- 04928 ---x--x---x-----------x-------------------x- 
- 04972 --x---x---x------------x-------------------x 
+ 04928 --x----xx--x---x---------------------------- 
+ 04972 ---x--x--x-x---x---------------------------- 
  05016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05060 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05104 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -288,7 +287,7 @@ Pin #15  05824 Mode  --
  05324 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
 Pin #14  05826 Mode  -- 
  05368 --------------------------x----------------- 
- 05412 --x---x---x------------x------------------x- 
+ 05412 ---x--x-x--x---x---------------------------- 
  05456 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05500 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05544 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -309,15 +308,15 @@ LEGEND    X : fuse not blown
                               |   IODecode   |
                         E x---|1           24|---x Vcc                      
                     !IORQ x---|2           23|---x !TIMERcs                 
-                       RW x---|3           22|---x !ACIAcs                  
-                       A0 x---|4           21|---x !RTCcs                   
-                       A1 x---|5           20|---x RTCas                    
-                       A2 x---|6           19|---x RTCds                    
-                       A3 x---|7           18|---x !CFcs                    
+                    WSsel x---|3           22|---x !CFcs                    
+                       A0 x---|4           21|---x !ACIAcs                  
+                       A1 x---|5           20|---x !RTCcs                   
+                       A2 x---|6           19|---x RTCas                    
+                       A3 x---|7           18|---x RTCds                    
                        A4 x---|8           17|---x AnyCS                    
                        A5 x---|9           16|---x WS0                      
                        A6 x---|10          15|---x WS1                      
                        A7 x---|11          14|---x WS2                      
-                      GND x---|12          13|---x WSsel                    
+                      GND x---|12          13|---x                          
                               |______________|
 

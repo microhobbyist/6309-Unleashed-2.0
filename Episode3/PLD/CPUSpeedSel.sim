@@ -4,11 +4,8 @@ PIN  23 =  CPU_CLK
 PIN  15 =  D0 
 PIN  14 =  D1 
 PIN  25 =  DIV2 
-PIN  26 =  DIV3 
-PIN  27 =  DIV4 
-PIN  28 =  DIV6 
-PIN  29 =  DIV16 
-PIN  30 =  DIV3_Q 
+PIN  26 =  DIV4 
+PIN  27 =  DIV8 
 PIN   2 =  E 
 PIN  10 = !HALT_IN1 
 PIN  11 = !HALT_IN2 
@@ -51,10 +48,10 @@ CHANGE_S1 =>
   # !D1 & !RW & S1 & !SPDsel
 
 CPU_CLK =>
-    DIV3 & S0 & S1
-  # DIV4 & !S0 & S1
-  # DIV6 & S0 & !S1
-  # DIV16 & !S0 & !S1
+    CLK_16M & S0 & S1
+  # DIV2 & !S0 & S1
+  # DIV4 & S0 & !S1
+  # DIV8 & !S0 & !S1
 
 D0 =>
     RW & S0 & SPDsel
@@ -72,21 +69,9 @@ DIV2.ar  =>
 DIV2.ck  =>
     CLK_16M
 
-DIV2.sp DIV3.sp DIV4.sp DIV6.sp DIV16.sp DIV3_Q.sp ROMdisQ.sp S0.sp S1.sp  =>
+DIV2.sp DIV4.sp DIV8.sp ROMdisQ.sp S0.sp S1.sp  =>
     0 
 
-DIV3.d  =>
-    !DIV3 & DIV3_Q
-  # DIV3 & !DIV3_Q
-
-DIV3.ar  =>
-    RESET
-
-DIV3.ck  =>
-    DIV3_Q
-
-DIV3.sp  =>
-    
 DIV4.d  =>
     !DIV2 & DIV4
   # DIV2 & !DIV4
@@ -99,41 +84,17 @@ DIV4.ck  =>
 
 DIV4.sp  =>
     
-DIV6.d  =>
-    !DIV6 & DIV3_Q
-  # DIV6 & !DIV3_Q
+DIV8.d  =>
+    !DIV4 & DIV8
+  # DIV4 & !DIV8
 
-DIV6.ar  =>
+DIV8.ar  =>
     RESET
 
-DIV6.ck  =>
-    DIV3_Q
-
-DIV6.sp  =>
-    
-DIV16.d  =>
-    !DIV4 & DIV16
-  # DIV4 & !DIV16
-
-DIV16.ar  =>
-    RESET
-
-DIV16.ck  =>
+DIV8.ck  =>
     DIV4
 
-DIV16.sp  =>
-    
-DIV3_Q.d  =>
-    !CLK_16M & DIV3_Q
-  # CLK_16M & !DIV3_Q
-
-DIV3_Q.ar  =>
-    RESET
-
-DIV3_Q.ck  =>
-    CLK_16M
-
-DIV3_Q.sp  =>
+DIV8.sp  =>
     
 HALT_ACTIVE =>
     !D0 & !RW & S0 & !SPDsel
@@ -191,7 +152,9 @@ ROMdisQ.ck  =>
 ROMdisQ.sp  =>
     
 S0.d  =>
-    D0 & !RW & SPDsel
+    D0
+  # RW
+  # !SPDsel
 
 S0.ar  =>
     RESET
@@ -199,25 +162,23 @@ S0.ar  =>
 S0.sp  =>
     
 S1.d  =>
-    D1
-  # RW
-  # !SPDsel
+    D1 & !RW & SPDsel
 
 S1.ar  =>
     RESET
 
 S1.sp  =>
     
-SPD_1 =>
-    !S0 & !S1
-
-SPD_4 =>
+SPD_FAST =>
     !S0 & S1
 
-SPD_267 =>
+SPD_NORMAL =>
     S0 & !S1
 
-SPD_533 =>
+SPD_SLOW =>
+    !S0 & !S1
+
+SPD_TURBO =>
     S0 & S1
 
 CPU_CLK.oe  =>

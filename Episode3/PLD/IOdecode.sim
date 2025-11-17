@@ -7,24 +7,23 @@ PIN   8 =  A4
 PIN   9 =  A5 
 PIN  10 =  A6 
 PIN  11 =  A7 
-PIN  22 = !ACIAcs 
+PIN  21 = !ACIAcs 
 PIN  17 =  AnyCS 
-PIN  18 = !CFcs 
+PIN  22 = !CFcs 
 PIN   1 =  E 
 PIN   2 = !IORQ 
-PIN  20 =  RTCas 
-PIN  21 = !RTCcs 
-PIN  19 =  RTCds 
-PIN   3 =  RW 
+PIN  19 =  RTCas 
+PIN  20 = !RTCcs 
+PIN  18 =  RTCds 
 PIN  23 = !TIMERcs 
 PIN  16 =  WS0 
 PIN  15 =  WS1 
 PIN  14 =  WS2 
-PIN  13 =  WSsel 
+PIN   3 =  WSsel 
 %END
 
 %FIELD
-FIELD CS = TIMERcs,ACIAcs,RTCcs,CFcs,WSsel
+FIELD CS = !TIMERcs,!ACIAcs,!RTCcs,!CFcs,WSsel
 FIELD WS = WS2,WS1,WS0
 %END
 
@@ -45,34 +44,34 @@ IOBASE =>
     !A5 & !A6 & !A7 & E & IORQ
 
 RTCas =>
-    !A0 & !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    !A0 & !A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
 
 RTCcs =>
-    !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    !A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
 
 RTCds =>
-    A0 & !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    A0 & !A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
 
 TIMERcs =>
     !A3 & !A4 & !A5 & !A6 & !A7 & E & !IORQ
 
 WS0 =>
-    ACIAcs & CFcs & RTCcs & !TIMERcs
-  # ACIAcs & CFcs & !RTCcs & TIMERcs & WSsel
-  # !ACIAcs & CFcs & RTCcs & TIMERcs & WSsel
+    !ACIAcs & !CFcs & !RTCcs & TIMERcs
+  # ACIAcs & !CFcs & !RTCcs & !TIMERcs & WSsel
+  # !ACIAcs & !CFcs & RTCcs & !TIMERcs & WSsel
 
 WS0.oe  =>
     AnyCS
 
 WS1 =>
-    ACIAcs & CFcs & RTCcs & !TIMERcs & WSsel
-  # ACIAcs & !CFcs & RTCcs & TIMERcs & !WSsel
+    !ACIAcs & !CFcs & !RTCcs & TIMERcs & WSsel
+  # !ACIAcs & CFcs & !RTCcs & !TIMERcs & !WSsel
 
 WS1.oe  =>
     AnyCS
 
 WS2 =>
-    ACIAcs & !CFcs & RTCcs & TIMERcs & WSsel
+    !ACIAcs & CFcs & !RTCcs & !TIMERcs & WSsel
 
 WS2.oe  =>
     AnyCS

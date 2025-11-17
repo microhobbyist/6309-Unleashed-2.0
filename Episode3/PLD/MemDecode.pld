@@ -15,36 +15,34 @@ Device   g22v10 ;
    ========================================================= */
 
 /* -------- Inputs -------- */
-PIN 1  = E        ;  /* CPU E clock */
-PIN 2  = Q        ;  /* CPU Q clock for pre-qualifying the addresses */
-PIN 3  = RW       ;  /* Read/Write line form the CPU */
-PIN 4  = A4       ;
-PIN 5  = A5       ;
-PIN 6  = A6       ;
-PIN 7  = A7       ;
-PIN 8  = A8       ;
-PIN 9  = A9       ;
-PIN 10 = A10      ;
-PIN 11 = A11      ;
-/*  12 = GND         /* Tie to Ground */
-PIN 13 = A12      ;
-PIN 14 = A13      ;
-PIN 15 = A14      ;
-PIN 16 = A15      ;
+PIN 1  = E   ;  /* CPU E clock */
+PIN 2  = A4  ;
+PIN 3  = A5  ;
+PIN 4  = A6  ;
+PIN 5  = A7  ;
+PIN 6  = A8  ;
+PIN 7  = A9  ;
+PIN 8  = A10 ;
+PIN 9  = A11 ;
+PIN 10 = A12 ;
+PIN 11 = A13 ;
+/*  12 = GND ;  /* Tie to Ground */
+/*  13 = GND ;  /* Tie to Groung */
+PIN 14 = A14 ;
+PIN 15 = A15 ;
 
 /* -------- Outputs (active-LOW) -------- */
 /*  24 =  VCC        /* Tie to +5V */
-PIN 23 = !CONST   ;  /* MMU Constant Region window ($F000-$FFFF, 4KB) */
-PIN 22 = !IORQ    ;  /* I/O mapped area ($FF00-$FFEF, 240B) */
-PIN 21 = !REG     ;  /* Registers or future expansion ($FE00-$FEFF, 256B) */
-PIN 20 = !PAGE    ;  /* MMU Page/Task registers ($FC00-$FDFF, 512B) */
-PIN 19 = !MREQ    ;  /* All Memory area ($0000-$FBFF  63KB  */
+PIN 23 = !CONST ;    /* MMU Constant Region window ($F000-$FFFF, 4KB) */
+PIN 22 = !IORQ ;     /* I/O mapped area ($FF00-$FFEF, 240B) */
+PIN 21 = !REG ;      /* Registers or future expansion ($FE00-$FEFF, 256B) */
+PIN 20 = !PAGE ;     /* MMU Page/Task registers ($FC00-$FDFF, 512B) */
+PIN 19 = !MREQ ;     /* All Memory area ($0000-$FBFF  63KB  */
                      /*             and  $FFF0-$FFFF  16B ) */
-PIN 18 = !RAMaddr ;  /* Classical RAM Addressing (future option?) */
-PIN 17 = !ROMaddr ;  /* Classical ROM Addressing (future option?) */
+PIN 18 = !EXP ;      /* Future Expansion */
+PIN 17 = !RAMaddr ;  /* Classical RAM Addressing (future option?) */
+PIN 16 = !ROMaddr ;  /* Classical ROM Addressing (future option?) */
 
-/* Pre-qualifying address bus at rising of Q so I/O PLDs are ready */
-VMA = Q # E ;
 
 Fxxx = A15 & A14 & A13 & A12 ;
 xFxx = A11 & A10 & A9  & A8  ;
@@ -71,10 +69,10 @@ BlockRAM = (!A15) # (Fxxx & !A11) # FFFx ;
 BlockROM = A15 & !A12;
 
 /* Output Equations (active-HIGH internal) */
-CONST   = BlockCONST & VMA ;
-IORQ    = BlockIORQ  & VMA ;
-REG     = BlockREG   & VMA ;
-PAGE    = BlockPAGE  & VMA ;
-MREQ    = BlockMEM   & VMA ;
-RAMaddr = BlockRAM   & VMA ;
-ROMaddr = BlockROM   & VMA ;
+CONST   = BlockCONST & E ;
+IORQ    = BlockIORQ  & E ;
+REG     = BlockREG   & E ;
+PAGE    = BlockPAGE  & E ;
+MREQ    = BlockMEM   & E ;
+RAMaddr = BlockRAM   & E ;
+ROMaddr = BlockROM   & E ;

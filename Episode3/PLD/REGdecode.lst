@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: REGdecode.pld                    Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Nov 15 21:52:42 2025
+Created Sun Nov 16 21:42:18 2025
 
   1:Name     REGdecode ;
   2:PartNo   ATF22V10C ;
@@ -33,7 +33,7 @@ Created Sat Nov 15 21:52:42 2025
  26:PIN 10 =  A6 ;
  27:PIN 11 =  A7 ;        /* Address bit 7 - MSB of I/O window */
  28:/*  12 =  GND         /* Ground connection */
- 29:/*  13 =  NC          /* Connected to ground */
+ 29:/*  13 =  NC          /* Connected to ground, else outputs tristated */
  30:
  31:PIN 23 = !ROMdis ;    /* ROM disable */
  32:PIN 22 = !SPDsel ;    /* Speed select */
@@ -48,23 +48,23 @@ Created Sat Nov 15 21:52:42 2025
  41:
  42:REGBASE  = !A7 & !A6 & !A5 & A4 & IORQ & E ;
  43:
- 44:TBD1     = REGBASE & !A3 &  A2 &  A1 & !A0 ;       /* $FF16 */
- 45:TBD2     = REGBASE & !A3 &  A2 &  A1 &  A0 ;       /* $FF17 */
- 46:ROMdis   = REGBASE &  A3 & !A2 & !A1 & !A0 & !RW ; /* $FF18 */
- 47:SPDsel   = REGBASE &  A3 & !A2 & !A1 &  A0 ;       /* $FF19 */
- 48:IRQvec   = REGBASE &  A3 & !A2 &  A1 & !A0 ;       /* $FF1A */
- 49:FIRQvec  = REGBASE &  A3 & !A2 &  A1 &  A0 ;       /* $FF1B */
- 50:STAT1reg = REGBASE &  A3 &  A2 & !A1 & !A0 & RW ;  /* $FF1C */
- 51:STAT2reg = REGBASE &  A3 &  A2 & !A1 &  A0 & RW ;  /* $FF1D */
- 52:PHY1reg  = REGBASE &  A3 &  A2 &  A1 & !A0 ;       /* $FF1E */
- 53:PHY2reg  = REGBASE &  A3 &  A2 &  A1 &  A0 ;       /* $FF1F */
+ 44:ROMdis   = REGBASE & !A3 &  A2 &  A1 & !A0 & !RW ; /* $FF16 (Write only) */
+ 45:SPDsel   = REGBASE & !A3 &  A2 &  A1 &  A0 ;       /* $FF17 */
+ 46:IRQvec   = REGBASE &  A3 & !A2 & !A1 & !A0 ;       /* $FF18 */
+ 47:FIRQvec  = REGBASE &  A3 & !A2 & !A1 &  A0 ;       /* $FF19 */
+ 48:STAT1reg = REGBASE &  A3 & !A2 &  A1 & !A0 &  RW ; /* $FF1A (Read only) */
+ 49:STAT2reg = REGBASE &  A3 & !A2 &  A1 &  A0 &  RW ; /* $FF1B (Read only) */
+ 50:PHY1reg  = REGBASE &  A3 &  A2 & !A1 & !A0 ;       /* $FF1C */
+ 51:PHY2reg  = REGBASE &  A3 &  A2 & !A1 &  A0 ;       /* $FF1D */
+ 52:TBD1     = REGBASE &  A3 &  A2 &  A1 & !A0 ;       /* $FF1E */
+ 53:TBD2     = REGBASE &  A3 &  A2 &  A1 &  A0 ;       /* $FF1F */
 
 LISTING FOR LOGIC DESCRIPTION FILE: REGdecode.pld                    Page 2
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Nov 15 21:52:42 2025
+Created Sun Nov 16 21:42:18 2025
 
  54:
  55:
@@ -72,4 +72,4 @@ Created Sat Nov 15 21:52:42 2025
 
 
 Jedec Fuse Checksum       (6e38)
-Jedec Transmit Checksum   (a145)
+Jedec Transmit Checksum   (a156)
