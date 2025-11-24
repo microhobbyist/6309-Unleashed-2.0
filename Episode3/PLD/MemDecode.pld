@@ -8,12 +8,6 @@ Assembly None ;
 Location None ;
 Device   g22v10 ;
 
-/* =========================================================
-   Compiler Options
-   ---------------------------------------------------------
-   cupl -m2lxfjanb -u C:\Wincupl\Shared\Atmel.DL %1.PLD
-   ========================================================= */
-
 /* -------- Inputs -------- */
 PIN 1  = E   ;  /* CPU E clock */
 PIN 2  = A4  ;
@@ -27,9 +21,8 @@ PIN 9  = A11 ;
 PIN 10 = A12 ;
 PIN 11 = A13 ;
 /*  12 = GND ;  /* Tie to Ground */
-/*  13 = GND ;  /* Tie to Groung */
-PIN 14 = A14 ;
-PIN 15 = A15 ;
+PIN 13 = A14 ;
+PIN 14 = A15 ;
 
 /* -------- Outputs (active-LOW) -------- */
 /*  24 =  VCC        /* Tie to +5V */
@@ -39,10 +32,10 @@ PIN 21 = !REG ;      /* Registers or future expansion ($FE00-$FEFF, 256B) */
 PIN 20 = !PAGE ;     /* MMU Page/Task registers ($FC00-$FDFF, 512B) */
 PIN 19 = !MREQ ;     /* All Memory area ($0000-$FBFF  63KB  */
                      /*             and  $FFF0-$FFFF  16B ) */
-PIN 18 = !EXP ;      /* Future Expansion */
-PIN 17 = !RAMaddr ;  /* Classical RAM Addressing (future option?) */
-PIN 16 = !ROMaddr ;  /* Classical ROM Addressing (future option?) */
-
+/*  18 =  NC ;       /* Future Expansion */
+/*  17 =  NC ;       /* Future Expansion */
+/*  16 =  NC ;       /* Future Expansion */
+/*  15 =  NC ;       /* Future Expansion */
 
 Fxxx = A15 & A14 & A13 & A12 ;
 xFxx = A11 & A10 & A9  & A8  ;
@@ -64,9 +57,6 @@ BlockPAGE =  Fxxx & A11 & A10 & !A9 ;
 /* $0000-$FBFF + $FFF0-$FFFF (63KB): General memory area) */
 BlockMEM = (!(Fxxx & A11 & A10)) # FFFx ;
 
-BlockRAM = (!A15) # (Fxxx & !A11) # FFFx ;
-
-BlockROM = A15 & !A12;
 
 /* Output Equations (active-HIGH internal) */
 CONST   = BlockCONST & E ;
@@ -74,5 +64,3 @@ IORQ    = BlockIORQ  & E ;
 REG     = BlockREG   & E ;
 PAGE    = BlockPAGE  & E ;
 MREQ    = BlockMEM   & E ;
-RAMaddr = BlockRAM   & E ;
-ROMaddr = BlockROM   & E ;

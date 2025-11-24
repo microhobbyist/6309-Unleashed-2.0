@@ -1,0 +1,29 @@
+Name     ShadowTEST ;
+PartNo   ATF750CL ;
+Date     2025/11/20 ;
+Revision 13 ;
+Designer Frederic Segard ;
+Company  MicroHobbyist ;
+Assembly None ;
+Location None ;
+Device   v750c ;
+
+PIN  2 =  E ;        /* CPU E (from 6309) */
+PIN  3 =  RW ;       /* 1=read, 0=write */
+PIN  4 = !RESET ;    /* Active-low reset */
+PIN  5 =  MREQ ;     /* Memory Request */
+PIN  6 = !ROMdis ;   /* External ROM disable */
+
+PIN 17 =  ROMcs ;
+PIN 16 =  RAMoe ;
+
+PINNODE 33 = ROMdisFF ;
+
+ROMdisFF.d  =  'b'1 ;
+ROMdisFF.ck =  ROMdis ;
+ROMdisFF.ar =  RESET ;
+ROMdisFF.sp =  'b'0 ;
+
+RD     = !(RW & E) ;
+ROMcs  =   MREQ #  ROMdisFF ;
+RAMoe  =   RD   # !ROMdisFF ;

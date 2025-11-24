@@ -1,88 +1,90 @@
 %SIGNAL
-PIN   4 =  A0 
-PIN   5 =  A1 
-PIN   6 =  A2 
-PIN   7 =  A3 
-PIN   8 =  A4 
-PIN   9 =  A5 
-PIN  10 =  A6 
-PIN  11 =  A7 
+PIN   2 =  A0 
+PIN   3 =  A1 
+PIN   4 =  A2 
+PIN   5 =  A3 
+PIN   6 =  A4 
+PIN   7 =  A5 
+PIN   8 =  A6 
+PIN   9 =  A7 
 PIN  21 = !ACIAcs 
-PIN  17 =  AnyCS 
+PIN  13 =  AnyCS 
 PIN  22 = !CFcs 
-PIN   1 =  E 
-PIN   2 = !IORQ 
-PIN  19 =  RTCas 
-PIN  20 = !RTCcs 
-PIN  18 =  RTCds 
+PIN  14 =  IOCS 
+PIN   1 = !IORQ 
+PIN  18 =  RTCas 
+PIN  19 = !RTCcs 
+PIN  17 =  RTCds 
+PIN  11 =  SPDG 
+PIN  10 =  SPDR 
 PIN  23 = !TIMERcs 
+PIN  20 = !USBcs 
 PIN  16 =  WS0 
 PIN  15 =  WS1 
-PIN  14 =  WS2 
-PIN   3 =  WSsel 
 %END
 
 %FIELD
-FIELD CS = !TIMERcs,!ACIAcs,!RTCcs,!CFcs,WSsel
-FIELD WS = WS2,WS1,WS0
+FIELD ADDR = A7,A6,A5,A4,A3,A2,A1,A0
+FIELD CS = TIMERcs,ACIAcs,RTCcs,CFcs,USBcs,SPDG,SPDR
+FIELD WS = WS1,WS0
 %END
 
 %EQUATION
 ACIAcs =>
-    !A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    !A2 & !A3 & A4 & !A5 & !A6 & !A7 & !IORQ
 
-AnyCS =>
+CFcs =>
+    A3 & !A4 & !A5 & !A6 & !A7 & !IORQ
+
+IOCS =>
     !ACIAcs
   # !CFcs
   # !RTCcs
   # !TIMERcs
-
-CFcs =>
-    A3 & !A4 & !A5 & !A6 & !A7 & E & !IORQ
-
-IOBASE =>
-    !A5 & !A6 & !A7 & E & IORQ
+  # !USBcs
 
 RTCas =>
-    !A0 & !A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    !A0 & A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & !IORQ
 
 RTCcs =>
-    !A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    RTCas
+  # RTCds
 
 RTCds =>
-    A0 & !A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    A0 & A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & !IORQ
 
 TIMERcs =>
-    !A3 & !A4 & !A5 & !A6 & !A7 & E & !IORQ
+    !A3 & !A4 & !A5 & !A6 & !A7 & !IORQ
+
+USBcs =>
+    !A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & !IORQ
 
 WS0 =>
-    !ACIAcs & !CFcs & !RTCcs & TIMERcs
-  # ACIAcs & !CFcs & !RTCcs & !TIMERcs & WSsel
-  # !ACIAcs & !CFcs & RTCcs & !TIMERcs & WSsel
+    ACIAcs & CFcs & RTCcs & SPDR & TIMERcs & !USBcs
+  # !ACIAcs & CFcs & RTCcs & SPDR & TIMERcs & USBcs
+  # ACIAcs & CFcs & RTCcs & SPDG & SPDR & !TIMERcs & USBcs
+  # ACIAcs & CFcs & !RTCcs & !SPDG & SPDR & TIMERcs & USBcs
+  # ACIAcs & !CFcs & RTCcs & !SPDG & SPDR & TIMERcs & USBcs
+  # ACIAcs & !CFcs & RTCcs & SPDG & !SPDR & TIMERcs & USBcs
 
 WS0.oe  =>
     AnyCS
 
 WS1 =>
-    !ACIAcs & !CFcs & !RTCcs & TIMERcs & WSsel
-  # !ACIAcs & CFcs & !RTCcs & !TIMERcs & !WSsel
+    ACIAcs & !CFcs & RTCcs & SPDR & TIMERcs & USBcs
+  # ACIAcs & CFcs & RTCcs & !SPDG & SPDR & TIMERcs & !USBcs
+  # ACIAcs & CFcs & RTCcs & !SPDG & SPDR & !TIMERcs & USBcs
 
 WS1.oe  =>
-    AnyCS
-
-WS2 =>
-    !ACIAcs & CFcs & !RTCcs & !TIMERcs & WSsel
-
-WS2.oe  =>
     AnyCS
 
 ACIAcs.oe  =>
     1 
 
-AnyCS.oe  =>
+CFcs.oe  =>
     1 
 
-CFcs.oe  =>
+IOCS.oe  =>
     1 
 
 RTCas.oe  =>
@@ -95,6 +97,9 @@ RTCds.oe  =>
     1 
 
 TIMERcs.oe  =>
+    1 
+
+USBcs.oe  =>
     1 
 
 %END

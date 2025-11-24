@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: MemDecode.pld                    Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sun Nov 16 21:42:18 2025
+Created Tue Nov 18 22:50:18 2025
 
   1:Name     MEMDecode ;
   2:PartNo   ATF22V10C ;
@@ -15,85 +15,73 @@ Created Sun Nov 16 21:42:18 2025
   8:Location None ;
   9:Device   g22v10 ;
  10:
- 11:/* =========================================================
- 12:   Compiler Options
- 13:   ---------------------------------------------------------
- 14:   cupl -m2lxfjanb -u C:\Wincupl\Shared\Atmel.DL %1.PLD
- 15:   ========================================================= */
- 16:
- 17:/* -------- Inputs -------- */
- 18:PIN 1  = E   ;  /* CPU E clock */
- 19:PIN 2  = A4  ;
- 20:PIN 3  = A5  ;
- 21:PIN 4  = A6  ;
- 22:PIN 5  = A7  ;
- 23:PIN 6  = A8  ;
- 24:PIN 7  = A9  ;
- 25:PIN 8  = A10 ;
- 26:PIN 9  = A11 ;
- 27:PIN 10 = A12 ;
- 28:PIN 11 = A13 ;
- 29:/*  12 = GND ;  /* Tie to Ground */
- 30:/*  13 = GND ;  /* Tie to Groung */
- 31:PIN 14 = A14 ;
- 32:PIN 15 = A15 ;
- 33:
- 34:/* -------- Outputs (active-LOW) -------- */
- 35:/*  24 =  VCC        /* Tie to +5V */
- 36:PIN 23 = !CONST ;    /* MMU Constant Region window ($F000-$FFFF, 4KB) */
- 37:PIN 22 = !IORQ ;     /* I/O mapped area ($FF00-$FFEF, 240B) */
- 38:PIN 21 = !REG ;      /* Registers or future expansion ($FE00-$FEFF, 256B) */
- 39:PIN 20 = !PAGE ;     /* MMU Page/Task registers ($FC00-$FDFF, 512B) */
- 40:PIN 19 = !MREQ ;     /* All Memory area ($0000-$FBFF  63KB  */
- 41:                     /*             and  $FFF0-$FFFF  16B ) */
- 42:PIN 18 = !EXP ;      /* Future Expansion */
- 43:PIN 17 = !RAMaddr ;  /* Classical RAM Addressing (future option?) */
- 44:PIN 16 = !ROMaddr ;  /* Classical ROM Addressing (future option?) */
- 45:
- 46:
- 47:Fxxx = A15 & A14 & A13 & A12 ;
- 48:xFxx = A11 & A10 & A9  & A8  ;
- 49:xxFx =  A7 & A6  & A5  & A4  ;
- 50:FFFx = Fxxx &  xFxx &  xxFx  ;
- 51:
- 52:/* $F000-$FFFF (4KB): I/O range */
- 53:BlockCONST =  Fxxx ;
+ 11:/* -------- Inputs -------- */
+ 12:PIN 1  = E   ;  /* CPU E clock */
+ 13:PIN 2  = A4  ;
+ 14:PIN 3  = A5  ;
+ 15:PIN 4  = A6  ;
+ 16:PIN 5  = A7  ;
+ 17:PIN 6  = A8  ;
+ 18:PIN 7  = A9  ;
+ 19:PIN 8  = A10 ;
+ 20:PIN 9  = A11 ;
+ 21:PIN 10 = A12 ;
+ 22:PIN 11 = A13 ;
+ 23:/*  12 = GND ;  /* Tie to Ground */
+ 24:PIN 13 = A14 ;
+ 25:PIN 14 = A15 ;
+ 26:
+ 27:/* -------- Outputs (active-LOW) -------- */
+ 28:/*  24 =  VCC        /* Tie to +5V */
+ 29:PIN 23 = !CONST ;    /* MMU Constant Region window ($F000-$FFFF, 4KB) */
+ 30:PIN 22 = !IORQ ;     /* I/O mapped area ($FF00-$FFEF, 240B) */
+ 31:PIN 21 = !REG ;      /* Registers or future expansion ($FE00-$FEFF, 256B) */
+ 32:PIN 20 = !PAGE ;     /* MMU Page/Task registers ($FC00-$FDFF, 512B) */
+ 33:PIN 19 = !MREQ ;     /* All Memory area ($0000-$FBFF  63KB  */
+ 34:                     /*             and  $FFF0-$FFFF  16B ) */
+ 35:/*  18 =  NC ;       /* Future Expansion */
+ 36:/*  17 =  NC ;       /* Future Expansion */
+ 37:/*  16 =  NC ;       /* Future Expansion */
+ 38:/*  15 =  NC ;       /* Future Expansion */
+ 39:
+ 40:Fxxx = A15 & A14 & A13 & A12 ;
+ 41:xFxx = A11 & A10 & A9  & A8  ;
+ 42:xxFx =  A7 & A6  & A5  & A4  ;
+ 43:FFFx = Fxxx &  xFxx &  xxFx  ;
+ 44:
+ 45:/* $F000-$FFFF (4KB): I/O range */
+ 46:BlockCONST =  Fxxx ;
+ 47:
+ 48:/* $FF00-$FFEF (240B) : I/O range */
+ 49:BlockIORQ =  Fxxx & xFxx & (!(A7 & A6 & A5 & A4)) ;
+ 50:
+ 51:/* $FE00-$FEFF (256B) : Register range, or future expansion */
+ 52:BlockREG =  Fxxx & (A11 & A10 & A9 & !A8) ;
+ 53:
 
 LISTING FOR LOGIC DESCRIPTION FILE: MemDecode.pld                    Page 2
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sun Nov 16 21:42:18 2025
+Created Tue Nov 18 22:50:18 2025
 
- 54:
- 55:/* $FF00-$FFEF (240B) : I/O range */
- 56:BlockIORQ =  Fxxx & xFxx & (!(A7 & A6 & A5 & A4)) ;
- 57:
- 58:/* $FE00-$FEFF (256B) : Register range, or future expansion */
- 59:BlockREG =  Fxxx & (A11 & A10 & A9 & !A8) ;
+ 54:/* $FC00-$FDFF (512B) : MMU Task/Page registers */
+ 55:BlockPAGE =  Fxxx & A11 & A10 & !A9 ;
+ 56:
+ 57:/* $0000-$FBFF + $FFF0-$FFFF (63KB): General memory area) */
+ 58:BlockMEM = (!(Fxxx & A11 & A10)) # FFFx ;
+ 59:
  60:
- 61:/* $FC00-$FDFF (512B) : MMU Task/Page registers */
- 62:BlockPAGE =  Fxxx & A11 & A10 & !A9 ;
- 63:
- 64:/* $0000-$FBFF + $FFF0-$FFFF (63KB): General memory area) */
- 65:BlockMEM = (!(Fxxx & A11 & A10)) # FFFx ;
- 66:
- 67:BlockRAM = (!A15) # (Fxxx & !A11) # FFFx ;
- 68:
- 69:BlockROM = A15 & !A12;
- 70:
- 71:/* Output Equations (active-HIGH internal) */
- 72:CONST   = BlockCONST & E ;
- 73:IORQ    = BlockIORQ  & E ;
- 74:REG     = BlockREG   & E ;
- 75:PAGE    = BlockPAGE  & E ;
- 76:MREQ    = BlockMEM   & E ;
- 77:RAMaddr = BlockRAM   & E ;
- 78:ROMaddr = BlockROM   & E ;
- 79:
+ 61:/* Output Equations (active-HIGH internal) */
+ 62:CONST   = BlockCONST & E ;
+ 63:IORQ    = BlockIORQ  & E ;
+ 64:REG     = BlockREG   & E ;
+ 65:PAGE    = BlockPAGE  & E ;
+ 66:MREQ    = BlockMEM   & E ;
+ 67:
 
 
 
-Jedec Fuse Checksum       (87ec)
-Jedec Transmit Checksum   (b7f7)
+Jedec Fuse Checksum       (6890)
+Jedec Transmit Checksum   (6a0a)

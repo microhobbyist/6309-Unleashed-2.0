@@ -1,0 +1,34 @@
+# Berkeley PLA format generated using
+#
+# CUPL(WM)        5.0a Serial# MW-10400000
+# Device          v750c  Library DLIB-h-40-2
+# Created         Fri Nov 21 09:59:04 2025
+# Name            ShadowTEST 
+# Partno          ATF750CL 
+# Revision        13 
+# Date            2025/11/20 
+# Designer        Frederic Segard 
+# Company         MicroHobbyist 
+# Assembly        None 
+# Location        None 
+#
+# Inputs  0 1 E MREQ 
+#         RAMoe !RESET ROMcs !ROMdis 
+#         ROMdisFF RW 
+# Outputs RAMoe ROMcs ROMdisFF.d ROMdisFF.ar 
+#         ROMdisFF.ck ROMdisFF.sp RAMoe.oe ROMcs.oe 
+.i 10
+.o 8
+.p 11
+--0------- 1~~~~~~~
+--------0- 1~~~~~~~
+---------0 1~~~~~~~
+---1------ ~1~~~~~~
+--------1- ~1~~~~~~
+-1-------- ~~1~~~~~
+-----1---- ~~~1~~~~
+-------1-- ~~~~1~~~
+1--------- ~~~~~1~~
+-1-------- ~~~~~~1~
+-1-------- ~~~~~~~1
+.end

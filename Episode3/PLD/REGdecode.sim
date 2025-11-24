@@ -13,51 +13,49 @@ PIN   2 = !IORQ
 PIN  21 = !IRQvec 
 PIN  17 = !PHY1reg 
 PIN  16 = !PHY2reg 
+PIN  15 = !RD 
 PIN  23 = !ROMdis 
 PIN   3 =  RW 
 PIN  22 = !SPDsel 
 PIN  19 = !STAT1reg 
 PIN  18 = !STAT2reg 
-PIN  15 = !TBD1 
-PIN  14 = !TBD2 
+PIN  14 = !WR 
 %END
 
 %FIELD
+FIELD ADDR = A7,A6,A5,A4,A3,A2,A1,A0
 %END
 
 %EQUATION
 FIRQvec =>
-    A0 & !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    A0 & A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & !IORQ
 
 IRQvec =>
-    !A0 & !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    !A0 & A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & !IORQ
 
 PHY1reg =>
-    !A0 & !A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    !A0 & A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & !IORQ
 
 PHY2reg =>
-    A0 & !A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    A0 & A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & !IORQ
 
-REGBASE =>
-    A4 & !A5 & !A6 & !A7 & E & IORQ
+RD =>
+    E & RW
 
 ROMdis =>
-    !A0 & A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & !RW
+    !A0 & !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & !IORQ & !WR
 
 SPDsel =>
-    A0 & A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    A0 & !A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & !IORQ
 
 STAT1reg =>
-    !A0 & A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & RW
+    !A0 & !A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & !IORQ & !RD
 
 STAT2reg =>
-    A0 & A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & RW
+    A0 & !A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & !IORQ & !RD
 
-TBD1 =>
-    !A0 & A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
-
-TBD2 =>
-    A0 & A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+WR =>
+    E & !RW
 
 FIRQvec.oe  =>
     1 
@@ -69,6 +67,9 @@ PHY1reg.oe  =>
     1 
 
 PHY2reg.oe  =>
+    1 
+
+RD.oe  =>
     1 
 
 ROMdis.oe  =>
@@ -83,10 +84,7 @@ STAT1reg.oe  =>
 STAT2reg.oe  =>
     1 
 
-TBD1.oe  =>
-    1 
-
-TBD2.oe  =>
+WR.oe  =>
     1 
 
 %END

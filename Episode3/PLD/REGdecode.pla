@@ -2,11 +2,11 @@
 #
 # CUPL(WM)        5.0a Serial# MW-10400000
 # Device          g22v10  Library DLIB-h-40-1
-# Created         Sun Nov 16 21:42:18 2025
+# Created         Tue Nov 18 07:48:07 2025
 # Name            REGdecode 
 # Partno          ATF22V10C 
-# Revision        1         
-# Date            2025/11/15 
+# Revision        5         
+# Date            2025/11/18 
 # Designer        Frederic Segard 
 # Company         MicroHobbyist 
 # Assembly        None 
@@ -15,27 +15,27 @@
 # Inputs  1 A0 A1 A2 
 #         A3 A4 A5 A6 
 #         A7 E !FIRQvec !IORQ 
-#         !IRQvec !PHY1reg !PHY2reg !ROMdis 
-#         RW !SPDsel !STAT1reg !STAT2reg 
-#         !TBD1 !TBD2 
+#         !IRQvec !PHY1reg !PHY2reg !RD 
+#         !ROMdis RW !SPDsel !STAT1reg 
+#         !STAT2reg !WR 
 # Outputs !FIRQvec !IRQvec !PHY1reg !PHY2reg 
-#         !ROMdis !SPDsel !STAT1reg !STAT2reg 
-#         !TBD1 !TBD2 FIRQvec.oe IRQvec.oe 
-#         PHY1reg.oe PHY2reg.oe ROMdis.oe SPDsel.oe 
-#         STAT1reg.oe STAT2reg.oe TBD1.oe TBD2.oe 
+#         !RD !ROMdis !SPDsel !STAT1reg 
+#         !STAT2reg !WR FIRQvec.oe IRQvec.oe 
+#         PHY1reg.oe PHY2reg.oe RD.oe ROMdis.oe 
+#         SPDsel.oe STAT1reg.oe STAT2reg.oe WR.oe 
 .i 22
 .o 20
 .p 20
--100110001-1---------- 1~~~~~~~~~~~~~~~~~~~
--000110001-1---------- ~1~~~~~~~~~~~~~~~~~~
--001110001-1---------- ~~1~~~~~~~~~~~~~~~~~
--101110001-1---------- ~~~1~~~~~~~~~~~~~~~~
--011010001-1----0----- ~~~~1~~~~~~~~~~~~~~~
--111010001-1---------- ~~~~~1~~~~~~~~~~~~~~
--010110001-1----1----- ~~~~~~1~~~~~~~~~~~~~
--110110001-1----1----- ~~~~~~~1~~~~~~~~~~~~
--011110001-1---------- ~~~~~~~~1~~~~~~~~~~~
--111110001-1---------- ~~~~~~~~~1~~~~~~~~~~
+-11011000--1---------- 1~~~~~~~~~~~~~~~~~~~
+-01011000--1---------- ~1~~~~~~~~~~~~~~~~~~
+-01111000--1---------- ~~1~~~~~~~~~~~~~~~~~
+-11111000--1---------- ~~~1~~~~~~~~~~~~~~~~
+---------1-------1---- ~~~~1~~~~~~~~~~~~~~~
+-00011000--1---------1 ~~~~~1~~~~~~~~~~~~~~
+-10011000--1---------- ~~~~~~1~~~~~~~~~~~~~
+-00111000--1---1------ ~~~~~~~1~~~~~~~~~~~~
+-10111000--1---1------ ~~~~~~~~1~~~~~~~~~~~
+---------1-------0---- ~~~~~~~~~1~~~~~~~~~~
 1--------------------- ~~~~~~~~~~1~~~~~~~~~
 1--------------------- ~~~~~~~~~~~1~~~~~~~~
 1--------------------- ~~~~~~~~~~~~1~~~~~~~

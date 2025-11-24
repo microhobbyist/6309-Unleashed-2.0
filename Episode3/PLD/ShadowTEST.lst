@@ -1,0 +1,43 @@
+LISTING FOR LOGIC DESCRIPTION FILE: ShadowTEST.pld                   Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Fri Nov 21 09:59:04 2025
+
+  1:Name     ShadowTEST ;
+  2:PartNo   ATF750CL ;
+  3:Date     2025/11/20 ;
+  4:Revision 13 ;
+  5:Designer Frederic Segard ;
+  6:Company  MicroHobbyist ;
+  7:Assembly None ;
+  8:Location None ;
+  9:Device   v750c ;
+ 10:
+ 11:PIN  2 =  E ;        /* CPU E (from 6309) */
+ 12:PIN  3 =  RW ;       /* 1=read, 0=write */
+ 13:PIN  4 = !RESET ;    /* Active-low reset */
+ 14:PIN  5 =  MREQ ;     /* Memory Request */
+ 15:PIN  6 = !ROMdis ;   /* External ROM disable */
+ 16:
+ 17:PIN 17 =  ROMcs ;
+ 18:PIN 16 =  RAMoe ;
+ 19:
+ 20:PINNODE 33 = ROMdisFF ;
+ 21:
+ 22:ROMdisFF.d  =  'b'1 ;
+ 23:ROMdisFF.ck =  ROMdis ;
+ 24:ROMdisFF.ar =  RESET ;
+ 25:ROMdisFF.sp =  'b'0 ;
+ 26:
+ 27:RD     = !(RW & E) ;
+ 28:ROMcs  =   MREQ #  ROMdisFF ;
+ 29:RAMoe  =   RD   # !ROMdisFF ;
+ 30:
+ 31:
+
+
+
+Jedec Fuse Checksum       (6a41)
+Jedec Transmit Checksum   (5733)

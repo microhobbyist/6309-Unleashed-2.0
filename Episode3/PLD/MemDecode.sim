@@ -9,17 +9,14 @@ PIN   8 =  A10
 PIN   9 =  A11 
 PIN  10 =  A12 
 PIN  11 =  A13 
-PIN  14 =  A14 
-PIN  15 =  A15 
+PIN  13 =  A14 
+PIN  14 =  A15 
 PIN  23 = !CONST 
 PIN   1 =  E 
-PIN  18 = !EXP 
 PIN  22 = !IORQ 
 PIN  19 = !MREQ 
 PIN  20 = !PAGE 
-PIN  17 = !RAMaddr 
 PIN  21 = !REG 
-PIN  16 = !ROMaddr 
 %END
 
 %FIELD
@@ -47,16 +44,8 @@ BlockMEM =>
 BlockPAGE =>
     !A9 & A10 & A11 & A12 & A13 & A14 & A15
 
-BlockRAM =>
-    !A15
-  # !A11 & A12 & A13 & A14 & A15
-  # A4 & A5 & A6 & A7 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
-
 BlockREG =>
     !A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
-
-BlockROM =>
-    !A12 & A15
 
 CONST =>
     A12 & A13 & A14 & A15 & E
@@ -85,25 +74,14 @@ MREQ =>
 PAGE =>
     !A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
 
-RAMaddr =>
-    !A15 & E
-  # !A11 & A12 & A13 & A14 & E
-  # A4 & A5 & A6 & A7 & A8 & A9 & A10 & A12 & A13 & A14 & E
-
 REG =>
     !A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
-
-ROMaddr =>
-    !A12 & A15 & E
 
 xFxx =>
     A8 & A9 & A10 & A11
 
 xxFx =>
     A4 & A5 & A6 & A7
-
-A14.oe  =>
-    0 
 
 A15.oe  =>
     0 
@@ -120,13 +98,7 @@ MREQ.oe  =>
 PAGE.oe  =>
     1 
 
-RAMaddr.oe  =>
-    1 
-
 REG.oe  =>
-    1 
-
-ROMaddr.oe  =>
     1 
 
 %END
