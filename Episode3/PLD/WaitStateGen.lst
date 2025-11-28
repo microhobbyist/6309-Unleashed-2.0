@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: WaitStateGen.pld                 Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Nov 28 09:45:24 2025
+Created Fri Nov 28 10:18:57 2025
 
   1:Name     WaitStateGen ;
   2:PartNo   ATF750CL ;
@@ -32,28 +32,28 @@ Created Fri Nov 28 09:45:24 2025
  25:PIN  2 =  E ;         /* CPU E */
  26:PIN  3 =  RW ;        /* CPU R/W */
  27:PIN  4 = !RESET ;     /* System reset, active low */
- 28:PIN  5 = !VDPWAIT ;   /* VDP wait, active low */
- 29:PIN  6 = !PSGDT ;     /* PSG dtack OR, active low */
- 30:PIN  7 = !WAIT1 ;     /* External wait 1 */
- 31:PIN  8 = !WAIT2 ;     /* External wait 2 */
- 32:PIN  9 = !WAIT3 ;     /* External wait 3 */
- 33:PIN 10 =  WS0 ;       /* Wait-state bit 0 */
- 34:PIN 11 =  WS1 ;       /* Wait-state bit 1 */
+ 28:PIN  5 = !MREQ ;      /* Memory Request */
+ 29:PIN  6 = !VDPWAIT ;   /* VDP wait, active low */
+ 30:PIN  7 = !PSGDT ;     /* PSG dtack OR, active low */
+ 31:PIN  8 = !WAIT1 ;     /* External wait 1 */
+ 32:PIN  9 = !WAIT2 ;     /* External wait 2 */
+ 33:PIN 10 = !WAIT3 ;     /* External wait 3 */
+ 34:PIN 11 =  WS0 ;       /* Wait-state bit 0 */
  35:/*  12 =  GND */
- 36:PIN 13 = !MREQ ;      /* Memory Request */
- 37:
- 38:/* ------------------------- OUTPUTS ------------------------ */
- 39:/*  24 =  VCC */
- 40:PIN 23 = !MRDY ;      /* MRDY to CPU, active low */
- 41:PIN 22 =  CNT0 ;      /* Counter bit 0 (debug) */
- 42:PIN 21 =  CNT1 ;      /* Counter bit 1 (debug) */
- 43:PIN 20 =  CNT2 ;      /* Counter bit 2 (debug) */
- 44:PIN 19 =  CNT3 ;      /* Counter bit 3 (debug) */
- 45:PIN 18 =  RUN ;       /* Stretch active (debug) */
- 46:PIN 17 =  SPARE1 ;
- 47:PIN 16 = !ROMcs ;
- 48:PIN 15 = !RAMoe ;
- 49:PIN 14 = !ROMdis ;
+ 36:PIN 13 =  WS1 ;       /* Wait-state bit 1 */
+ 37:PIN 14 = !ROMdis ;    /* ROM disable chip select */
+ 38:
+ 39:/* ------------------------- OUTPUTS ------------------------ */
+ 40:/*  24 =  VCC */
+ 41:PIN 23 = !MRDY ;      /* MRDY to CPU, active low */
+ 42:PIN 22 =  CNT0 ;      /* Counter bit 0 (debug) */
+ 43:PIN 21 =  CNT1 ;      /* Counter bit 1 (debug) */
+ 44:PIN 20 =  CNT2 ;      /* Counter bit 2 (debug) */
+ 45:PIN 19 =  CNT3 ;      /* Counter bit 3 (debug) */
+ 46:PIN 18 =  RUN ;       /* Stretch active (debug) */
+ 47:PIN 17 =  EXP3 ;      /* From MEMdecode */
+ 48:PIN 16 = !ROMcs ;
+ 49:PIN 15 = !RAMoe ;
  50:
  51:/* ----------------------- BURIED NODES --------------------- */
  52:
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: WaitStateGen.pld                 Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Nov 28 09:45:24 2025
+Created Fri Nov 28 10:18:57 2025
 
  54:PINNODE 26 = E_sync ;        /* Synchronized E */
  55:PINNODE 27 = WAIT_NZ_prev ;  /* Previous WAIT_NZ */
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: WaitStateGen.pld                 Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Nov 28 09:45:24 2025
+Created Fri Nov 28 10:18:57 2025
 
 108:WS_NUM1 = WS1 ;
 109:
@@ -188,7 +188,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: WaitStateGen.pld                 Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Nov 28 09:45:24 2025
+Created Fri Nov 28 10:18:57 2025
 
 162:
 163:/* =========================================================
@@ -211,5 +211,5 @@ Created Fri Nov 28 09:45:24 2025
 
 
 
-Jedec Fuse Checksum       (50af)
-Jedec Transmit Checksum   (bbeb)
+Jedec Fuse Checksum       (5157)
+Jedec Transmit Checksum   (bbcf)

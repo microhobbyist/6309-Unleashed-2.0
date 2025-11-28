@@ -25,15 +25,16 @@ PIN  1 =  CLK4x ;     /* 4x clock from CPU oscillator */
 PIN  2 =  E ;         /* CPU E */
 PIN  3 =  RW ;        /* CPU R/W */
 PIN  4 = !RESET ;     /* System reset, active low */
-PIN  5 = !VDPWAIT ;   /* VDP wait, active low */
-PIN  6 = !PSGDT ;     /* PSG dtack OR, active low */
-PIN  7 = !WAIT1 ;     /* External wait 1 */
-PIN  8 = !WAIT2 ;     /* External wait 2 */
-PIN  9 = !WAIT3 ;     /* External wait 3 */
-PIN 10 =  WS0 ;       /* Wait-state bit 0 */
-PIN 11 =  WS1 ;       /* Wait-state bit 1 */
+PIN  5 = !MREQ ;      /* Memory Request */
+PIN  6 = !VDPWAIT ;   /* VDP wait, active low */
+PIN  7 = !PSGDT ;     /* PSG dtack OR, active low */
+PIN  8 = !WAIT1 ;     /* External wait 1 */
+PIN  9 = !WAIT2 ;     /* External wait 2 */
+PIN 10 = !WAIT3 ;     /* External wait 3 */
+PIN 11 =  WS0 ;       /* Wait-state bit 0 */
 /*  12 =  GND */
-PIN 13 = !MREQ ;      /* Memory Request */
+PIN 13 =  WS1 ;       /* Wait-state bit 1 */
+PIN 14 = !ROMdis ;    /* ROM disable chip select */
 
 /* ------------------------- OUTPUTS ------------------------ */
 /*  24 =  VCC */
@@ -43,10 +44,9 @@ PIN 21 =  CNT1 ;      /* Counter bit 1 (debug) */
 PIN 20 =  CNT2 ;      /* Counter bit 2 (debug) */
 PIN 19 =  CNT3 ;      /* Counter bit 3 (debug) */
 PIN 18 =  RUN ;       /* Stretch active (debug) */
-PIN 17 =  SPARE1 ;
+PIN 17 =  EXP3 ;      /* From MEMdecode */
 PIN 16 = !ROMcs ;
 PIN 15 = !RAMoe ;
-PIN 14 = !ROMdis ;
 
 /* ----------------------- BURIED NODES --------------------- */
 

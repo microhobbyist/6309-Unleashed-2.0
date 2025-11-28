@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# MW-10400000
 Device          v750c  Library DLIB-h-40-2
-Created         Fri Nov 28 09:45:24 2025
+Created         Fri Nov 28 10:18:57 2025
 Name            WaitStateGen 
 Partno          ATF750CL 
 Revision        12 
@@ -279,42 +279,43 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
 
     CLK4x                       1        V        -       -       -     
     CNT0                        22       V        -       -       -     
-    CNT0                d       22       X        6       10      2     
+    CNT0                d       22       X        6       10      3     
     CNT0                ar      22       X        1       1       1     
     CNT0                ck      22       X        1       1       1     
     CNT0                sp      22       X        1       1       1     
     CNT1                        21       V        -       -       -     
-    CNT1                d       21       X        6       12      2     
+    CNT1                d       21       X        6       12      3     
     CNT1                ar      21       X        1       1       1     
     CNT1                ck      21       X        1       1       1     
     CNT1                sp      21       X        1       1       1     
     CNT2                        20       V        -       -       -     
-    CNT2                d       20       X        8       14      2     
+    CNT2                d       20       X        8       14      3     
     CNT2                ar      20       X        1       1       1     
     CNT2                ck      20       X        1       1       1     
     CNT2                sp      20       X        1       1       1     
     CNT3                        19       V        -       -       -     
-    CNT3                d       19       X        8       16      2     
+    CNT3                d       19       X        8       16      3     
     CNT3                ar      19       X        1       1       1     
     CNT3                ck      19       X        1       1       1     
     CNT3                sp      19       X        1       1       1     
     CNT_ZERO                    0        I        1       -       -     
     DEC                         0        I        4       -       -     
     E                           2        V        -       -       -     
+    EXP3                        17       V        -       -       -     
     EXT_WAIT                    0        I        5       -       -     
     E_prev                      25       N        -       -       -     
-    E_prev              d       25       M        1       4       2     
+    E_prev              d       25       M        1       4       3     
     E_prev              ar      25       M        1       1       1     
     E_prev              ck      25       M        1       1       1     
     E_prev              sp      25       M        1       1       1     
     E_rise                      0        I        1       -       -     
     E_sync                      26       N        -       -       -     
-    E_sync              d       26       M        1       5       2     
+    E_sync              d       26       M        1       5       3     
     E_sync              ar      26       M        1       1       1     
     E_sync              ck      26       M        1       1       1     
     E_sync              sp      26       M        1       1       1     
     HOLD                        29       N        -       -       -     
-    HOLD                d       29       M        3       8       2     
+    HOLD                d       29       M        3       8       3     
     HOLD                ar      29       M        1       1       1     
     HOLD                ck      29       M        1       1       1     
     HOLD                sp      29       M        1       1       1     
@@ -323,38 +324,37 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     LOAD1                       0        I        1       -       -     
     LOAD2                       0        I        1       -       -     
     LOAD3                       0        I        1       -       -     
- !  MRDY                        23       V        6       8       2     
- !  MREQ                        13       V        -       -       -     
- !  PSGDT                       6        V        -       -       -     
- !  RAMoe                       15       V        3       10      2     
+ !  MRDY                        23       V        6       8       3     
+ !  MREQ                        5        V        -       -       -     
+ !  PSGDT                       7        V        -       -       -     
+ !  RAMoe                       15       V        3       10      3     
  !  RESET                       4        V        -       -       -     
- !  ROMcs                       16       V        2       12      2     
+ !  ROMcs                       16       V        2       12      3     
  !  ROMdis                      14       V        -       -       -     
     ROMdisFF                    28       N        -       -       -     
-    ROMdisFF            d       28       M        1       7       2     
+    ROMdisFF            d       28       M        1       7       3     
     ROMdisFF            ar      28       M        1       1       1     
     ROMdisFF            ck      28       M        1       1       1     
     ROMdisFF            sp      28       M        1       1       1     
     RUN                         18       V        -       -       -     
-    RUN                 d       18       X        8       16      2     
+    RUN                 d       18       X        8       16      3     
     RUN                 ar      18       X        1       1       1     
     RUN                 ck      18       X        1       1       1     
     RUN                 sp      18       X        1       1       1     
     RW                          3        V        -       -       -     
-    SPARE1                      17       V        -       -       -     
- !  VDPWAIT                     5        V        -       -       -     
- !  WAIT1                       7        V        -       -       -     
- !  WAIT2                       8        V        -       -       -     
- !  WAIT3                       9        V        -       -       -     
+ !  VDPWAIT                     6        V        -       -       -     
+ !  WAIT1                       8        V        -       -       -     
+ !  WAIT2                       9        V        -       -       -     
+ !  WAIT3                       10       V        -       -       -     
     WAIT_NZ                     0        I        2       -       -     
     WAIT_NZ_prev                27       N        -       -       -     
-    WAIT_NZ_prev        d       27       M        2       6       2     
+    WAIT_NZ_prev        d       27       M        2       6       3     
     WAIT_NZ_prev        ar      27       M        1       1       1     
     WAIT_NZ_prev        ck      27       M        1       1       1     
     WAIT_NZ_prev        sp      27       M        1       1       1     
     WAIT_RISE                   0        I        2       -       -     
-    WS0                         10       V        -       -       -     
-    WS1                         11       V        -       -       -     
+    WS0                         11       V        -       -       -     
+    WS1                         13       V        -       -       -     
     WS_NUM0                     0        I        1       -       -     
     WS_NUM1                     0        I        1       -       -     
     CNT0                oe      22       D        1       1       0     
@@ -383,11 +383,11 @@ SP
 
 Pin #23 Node 34 ,44  14364 Mode  -xx  14395 xxxx 
  00000 ------------------------------------x----------------------------------------------- 
- 00084 ------------------------------------------x----------------------------------------- 
- 00168 --------------------------------------------------x--------------------------------- 
- 00252 ----------------------------------x------------------------------------------------- 
- 00336 --------------------------x--------------------------------------------------------- 
- 00420 ------------------x----------------------------------------------------------------- 
+ 00084 ----------------------------------x------------------------------------------------- 
+ 00168 ------------------------------------------x----------------------------------------- 
+ 00252 --------------------------x--------------------------------------------------------- 
+ 00336 ------------------x----------------------------------------------------------------- 
+ 00420 ----------x------------------------------------------------------------------------- 
  00504 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  00588 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  00672 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -401,7 +401,7 @@ Pin #22 Node 33 ,43  14367 Mode  xx-  14399 xxxx
  01260 --------------------------------------x-------x------------------------x------------ 
  01344 -------------x-------------------------x------------------------------x------------- 
  01428 ----x---------------x------------------x------------------------------x------------- 
- 01512 --x-------x----------------------------x------------------------------x------------- 
+ 01512 x-x------------------------------------x------------------------------x------------- 
  01596 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01680 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01764 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -417,7 +417,7 @@ Pin #21 Node 32 ,42  14370 Mode  xx-  14403 xxxx
  02520 --------------------------------------x---------------x--------x-------x------------ 
  02604 --------------------------------------x-------x----------------x-------x------------ 
  02688 ----x---------------x------------------x----------------------x--------------------- 
- 02772 --x-------x----------------------------x----------------------x--------------------- 
+ 02772 x-x------------------------------------x----------------------x--------------------- 
  02856 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  02940 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03024 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -433,10 +433,10 @@ Pin #20 Node 31 ,41  14373 Mode  xx-  14407 xxxx
  03780 --------------------------------------x---------------x---------------x------------- 
  03864 --------------------------------------x---------------x-------x--------------------- 
  03948 -------------x-------------------------x--------------x----------------------------- 
- 04032 --x------------------------------------x--------------x----------------------------- 
+ 04032 x--------------------------------------x--------------x----------------------------- 
  04116 ----x---------------x------------------x--------------x----------------------------- 
- 04200 -----x-----xx--------------------------x-------------------------------------------- 
- 04284 -----------xx--------x-----------------x-------------------------------------------- 
+ 04200 ---x-x------x--------------------------x-------------------------------------------- 
+ 04284 ---x--------x--------x-----------------x-------------------------------------------- 
  04368 --------------------------------------x-------x--------x-------x-------x------------ 
  04452 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  04536 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -454,10 +454,10 @@ Pin #19 Node 30 ,40  14376 Mode  xx-  14411 xxxx
  05460 --------------------------------------x-------x---------------x--------------------- 
  05544 --------------------------------------x-------x-------x----------------------------- 
  05628 -------------x-------------------------x------x------------------------------------- 
- 05712 ----------x----------------------------x------x------------------------------------- 
+ 05712 --x------------------------------------x------x------------------------------------- 
  05796 ----x---------------x------------------x------x------------------------------------- 
- 05880 ---x-x------x--------------------------x-------------------------------------------- 
- 05964 ---x--------x--------x-----------------x-------------------------------------------- 
+ 05880 -x---x------x--------------------------x-------------------------------------------- 
+ 05964 -x----------x--------x-----------------x-------------------------------------------- 
  06048 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  06132 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  06216 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -476,10 +476,10 @@ Pin #18 Node 29 ,39  14379 Mode  x--  14415 xxxx
  07224 --------------------------------------x-----------------------x--------------------- 
  07308 --------------------------------------x---------------x----------------------------- 
  07392 --------------------------------------x-------x------------------------------------- 
- 07476 -----x-----xx--------------------------x-------------------------------------------- 
- 07560 -----------xx--------x-----------------x-------------------------------------------- 
- 07644 ---x-x------x--------------------------x-------------------------------------------- 
- 07728 ---x--------x--------x-----------------x-------------------------------------------- 
+ 07476 ---x-x------x--------------------------x-------------------------------------------- 
+ 07560 ---x--------x--------x-----------------x-------------------------------------------- 
+ 07644 -x---x------x--------------------------x-------------------------------------------- 
+ 07728 -x----------x--------x-----------------x-------------------------------------------- 
  07812 --------------------------------------x--------------------------------------------- 
  07896 ----x-------------------------------x----------------------------------------------- 
  07980 -------------x----------------------x----------------------------------------------- 
@@ -514,14 +514,14 @@ Pin #17 Node 28 ,38  14382 Mode  x-x  14419 xxxx
  10332 ----------------------------------------------------------x------------------------- 
  10416 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
 Pin #16 Node 27 ,37  14385 Mode  --x  14423 xxxx 
- 10500 -x---------------------------------------------------------------------------------- 
+ 10500 ---------------------------------------------------x-------------------------------- 
  10584 ----------------------------x------------------------------------------------------- 
  10668 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  10752 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  10836 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  10920 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 11004 -----------x------------------------------------------------------------------------ 
- 11088 ---x-------------------------------------------------------------------------------- 
+ 11004 ---x-------------------------------------------------------------------------------- 
+ 11088 -x---------------------------------------------------------------------------------- 
  11172 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  11256 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  11340 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -576,13 +576,13 @@ LEGEND    X : fuse not blown
                         E x---|2           23|---x !MRDY                    
                        RW x---|3           22|---x CNT0                     
                    !RESET x---|4           21|---x CNT1                     
-                 !VDPWAIT x---|5           20|---x CNT2                     
-                   !PSGDT x---|6           19|---x CNT3                     
-                   !WAIT1 x---|7           18|---x RUN                      
-                   !WAIT2 x---|8           17|---x SPARE1                   
-                   !WAIT3 x---|9           16|---x !ROMcs                   
-                      WS0 x---|10          15|---x !RAMoe                   
-                      WS1 x---|11          14|---x !ROMdis                  
-                      GND x---|12          13|---x !MREQ                    
+                    !MREQ x---|5           20|---x CNT2                     
+                 !VDPWAIT x---|6           19|---x CNT3                     
+                   !PSGDT x---|7           18|---x RUN                      
+                   !WAIT1 x---|8           17|---x EXP3                     
+                   !WAIT2 x---|9           16|---x !ROMcs                   
+                   !WAIT3 x---|10          15|---x !RAMoe                   
+                      WS0 x---|11          14|---x !ROMdis                  
+                      GND x---|12          13|---x WS1                      
                               |______________|
 

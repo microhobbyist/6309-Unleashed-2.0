@@ -11,20 +11,19 @@ Device   g22v10 ;
 /* -------- Inputs -------- */
 PIN 1  = Q ;         /* CPU Q clock */
 PIN 2  = E ;         /* CPU E clock */
-PIN 3  = RW ;        /* Read/Write */
-PIN 4  = A4 ;
-PIN 5  = A5 ;
-PIN 6  = A6 ;
-PIN 7  = A7 ;
-PIN 8  = A8 ;
-PIN 9  = A9 ;
-PIN 10 = A10 ;
-PIN 11 = A11 ;
+PIN 3  = A4 ;
+PIN 4  = A5 ;
+PIN 5  = A6 ;
+PIN 6  = A7 ;
+PIN 7  = A8 ;
+PIN 8  = A9 ;
+PIN 9  = A10 ;
+PIN 10 = A11 ;
+PIN 11 = A12 ;
 /*  12 = GND ;       /* Tie to Ground */
-PIN 13 = A12 ;
-PIN 14 = A13 ;
-PIN 15 = A14 ;
-PIN 16 = A15 ;
+PIN 13 = A13 ;
+PIN 14 = A14 ;
+PIN 15 = A15 ;
 
 /* -------- Outputs (active-LOW) -------- */
 /*  24 =  VCC        /* Tie to +5V */
@@ -33,11 +32,10 @@ PIN 22 = !IORQ ;     /* I/O mapped area ($FF00-$FFEF) */
 PIN 21 = !REG ;      /* Registers or future expansion ($FE00-$FEFF) */
 PIN 20 = !PAGE ;     /* MMU Page/Task registers ($FC00-$FDFF) */
 PIN 19 = !MREQ ;     /* All Memory area ($0000-$FBFF and $FFF0-$FFFF) */
-PIN 18 = !RD ;       /* Read */
-PIN 17 = !WR ;       /* Write */
+PIN 18 =  EXP1 ;     /* Read */
+PIN 17 =  EXP2 ;     /* Write */
+PIN 16 =  EXP3 ;     /* To WaitStateGen */
 
-RD = RW & E ;
-WR = !RW & E ;
 
 Fxxx = A15 & A14 & A13 & A12 ;
 xFxx = A11 & A10 & A9  & A8 ;

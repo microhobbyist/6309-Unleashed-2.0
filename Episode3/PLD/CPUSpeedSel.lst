@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPUSpeedSel.pld                  Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Nov 28 09:00:33 2025
+Created Fri Nov 28 10:18:57 2025
 
   1:Name     CPUSpeedSel ;
   2:PartNo   ATF750CL ;
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPUSpeedSel.pld                  Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Nov 28 09:00:33 2025
+Created Fri Nov 28 10:18:57 2025
 
  54:CPUstp =  BA & BS ;  /* LED turns on whenever CPU is stopped */
  55:
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPUSpeedSel.pld                  Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Nov 28 09:00:33 2025
+Created Fri Nov 28 10:18:57 2025
 
 108:
 109:
@@ -188,7 +188,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPUSpeedSel.pld                  Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Nov 28 09:00:33 2025
+Created Fri Nov 28 10:18:57 2025
 
 162:CHANGE_S0 = (REG_WRITE &  D0 & !S0) # (REG_WRITE & !D0 &  S0) ;
 163:
@@ -250,7 +250,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPUSpeedSel.pld                  Page 5
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Nov 28 09:00:33 2025
+Created Fri Nov 28 10:18:57 2025
 
 216:LED_G.oe   = 'b'1 ;
 217:LED_R.oe   = 'b'1 ;
@@ -261,4 +261,4 @@ Created Fri Nov 28 09:00:33 2025
 
 
 Jedec Fuse Checksum       (1748)
-Jedec Transmit Checksum   (45a1)
+Jedec Transmit Checksum   (45a8)

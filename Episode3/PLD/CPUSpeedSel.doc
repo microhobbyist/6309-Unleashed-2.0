@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# MW-10400000
 Device          v750c  Library DLIB-h-40-2
-Created         Fri Nov 28 09:00:33 2025
+Created         Fri Nov 28 10:18:57 2025
 Name            CPUSpeedSel 
 Partno          ATF750CL 
 Revision        17 
@@ -297,67 +297,67 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     CHANGE_S0                   0        I        2       -       -     
     CHANGE_S1                   0        I        2       -       -     
     CLK4x                       1        V        -       -       -     
-    CPUclk                      19       V        13      16      2     
+    CPUclk                      19       V        13      16      3     
     CPUclk              oe      19       X        1       1       1     
-    CPUstp                      16       V        1       12      2     
+    CPUstp                      16       V        1       12      3     
     CPUstp              oe      16       X        1       1       1     
-    D0                          15       V        1       10      2     
+    D0                          15       V        1       10      3     
     D0                  oe      15       X        1       1       1     
-    D1                          14       V        1       8       2     
+    D1                          14       V        1       8       3     
     D1                  oe      14       X        1       1       1     
     DIV2                        25       N        -       -       -     
-    DIV2                d       25       M        1       4       2     
+    DIV2                d       25       M        1       4       3     
     DIV2                ar      25       M        1       1       1     
     DIV2                ck      25       M        1       1       1     
     DIV2                sp      25       M        1       1       1     
     DIV4                        26       N        -       -       -     
-    DIV4                d       26       M        2       5       2     
+    DIV4                d       26       M        2       5       3     
     DIV4                ar      26       M        1       1       1     
     DIV4                ck      26       M        1       1       1     
     DIV4                sp      26       M        1       1       1     
     DIV8                        27       N        -       -       -     
-    DIV8                d       27       M        3       6       2     
+    DIV8                d       27       M        3       6       3     
     DIV8                ar      27       M        1       1       1     
     DIV8                ck      27       M        1       1       1     
     DIV8                sp      27       M        1       1       1     
     E                           2        V        -       -       -     
     E_HIGH                      0        I        1       -       -     
     H0                          28       N        -       -       -     
-    H0                  d       28       M        4       7       2     
+    H0                  d       28       M        4       7       3     
     H0                  ar      28       M        1       1       1     
     H0                  ck      28       M        1       1       1     
     H0                  sp      28       M        1       1       1     
     H1                          29       N        -       -       -     
-    H1                  d       29       M        1       8       2     
+    H1                  d       29       M        1       8       3     
     H1                  ar      29       M        1       1       1     
     H1                  ck      29       M        1       1       1     
     H1                  sp      29       M        1       1       1     
     H2                          34       N        -       -       -     
-    H2                  d       34       M        1       4       2     
+    H2                  d       34       M        1       4       3     
     H2                  ar      34       M        1       1       1     
     H2                  ck      34       M        1       1       1     
     H2                  sp      34       M        1       1       1     
     HALT_ACTIVE                 0        I        4       -       -     
     HALT_SPEED_STRETCHED        0        I        7       -       -     
  !  HALTin                      8        V        -       -       -     
- !  HALTout                     20       V        9       14      2     
+ !  HALTout                     20       V        9       14      3     
     HALTout             oe      20       X        1       1       1     
-    LED_B                       21       V        1       12      2     
+    LED_B                       21       V        1       12      3     
     LED_B               oe      21       X        1       1       1     
-    LED_G                       22       V        2       10      2     
+    LED_G                       22       V        2       10      3     
     LED_G               oe      22       X        1       1       1     
-    LED_R                       23       V        1       8       2     
+    LED_R                       23       V        1       8       3     
     LED_R               oe      23       X        1       1       1     
     NEW_CLK                     0        I        4       -       -     
  !  PAUSEsw                     9        V        -       -       -     
- !  RD                          18       V        1       16      2     
+ !  RD                          18       V        1       16      3     
     RD                  oe      18       X        1       1       1     
     REG_READ                    0        I        1       -       -     
     REG_WRITE                   0        I        1       -       -     
  !  RESET                       4        V        -       -       -     
     RW                          3        V        -       -       -     
     S0                          33       N        -       -       -     
-    S0                  d       33       M        5       5       2     
+    S0                  d       33       M        5       5       3     
     S0                  ar      33       M        1       1       1     
     S0                  ck      33       M        1       1       1     
     S0                  sp      33       M        1       1       1     
@@ -365,7 +365,7 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     S0_next                     0        I        5       -       -     
     S0init                      10       V        -       -       -     
     S1                          32       N        -       -       -     
-    S1                  d       32       M        5       6       2     
+    S1                  d       32       M        5       6       3     
     S1                  ar      32       M        1       1       1     
     S1                  ck      32       M        1       1       1     
     S1                  sp      32       M        1       1       1     
@@ -378,7 +378,7 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     SPD_SLOW                    0        I        1       -       -     
     SPD_TURBO                   0        I        1       -       -     
  !  SPDsel                      5        V        -       -       -     
- !  WR                          17       V        1       14      2     
+ !  WR                          17       V        1       14      3     
     WR                  oe      17       X        1       1       1     
 
 

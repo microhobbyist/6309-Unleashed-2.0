@@ -1,26 +1,26 @@
 %SIGNAL
-PIN   4 =  A4 
-PIN   5 =  A5 
-PIN   6 =  A6 
-PIN   7 =  A7 
-PIN   8 =  A8 
-PIN   9 =  A9 
-PIN  10 =  A10 
-PIN  11 =  A11 
-PIN  13 =  A12 
-PIN  14 =  A13 
-PIN  15 =  A14 
-PIN  16 =  A15 
+PIN   3 =  A4 
+PIN   4 =  A5 
+PIN   5 =  A6 
+PIN   6 =  A7 
+PIN   7 =  A8 
+PIN   8 =  A9 
+PIN   9 =  A10 
+PIN  10 =  A11 
+PIN  11 =  A12 
+PIN  13 =  A13 
+PIN  14 =  A14 
+PIN  15 =  A15 
 PIN  23 = !CBLK 
 PIN   2 =  E 
+PIN  18 =  EXP1 
+PIN  17 =  EXP2 
+PIN  16 =  EXP3 
 PIN  22 = !IORQ 
 PIN  19 = !MREQ 
 PIN  20 = !PAGE 
 PIN   1 =  Q 
-PIN  18 = !RD 
 PIN  21 = !REG 
-PIN   3 =  RW 
-PIN  17 = !WR 
 %END
 
 %FIELD
@@ -91,9 +91,6 @@ PAGE =>
     !A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
   # !A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
 
-RD =>
-    E & RW
-
 REG =>
     !A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
   # !A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
@@ -102,17 +99,11 @@ VMA =>
     E
   # Q
 
-WR =>
-    E & !RW
-
 xFxx =>
     A8 & A9 & A10 & A11
 
 xxFx =>
     A4 & A5 & A6 & A7
-
-A13.oe  =>
-    0 
 
 A14.oe  =>
     0 
@@ -129,13 +120,7 @@ MREQ.oe  =>
 PAGE.oe  =>
     1 
 
-RD.oe  =>
-    1 
-
 REG.oe  =>
-    1 
-
-WR.oe  =>
     1 
 
 %END

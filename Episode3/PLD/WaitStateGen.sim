@@ -5,12 +5,13 @@ PIN  21 =  CNT1
 PIN  20 =  CNT2 
 PIN  19 =  CNT3 
 PIN   2 =  E 
+PIN  17 =  EXP3 
 PIN  25 =  E_prev 
 PIN  26 =  E_sync 
 PIN  29 =  HOLD 
 PIN  23 = !MRDY 
-PIN  13 = !MREQ 
-PIN   6 = !PSGDT 
+PIN   5 = !MREQ 
+PIN   7 = !PSGDT 
 PIN  15 = !RAMoe 
 PIN   4 = !RESET 
 PIN  16 = !ROMcs 
@@ -18,14 +19,13 @@ PIN  14 = !ROMdis
 PIN  28 =  ROMdisFF 
 PIN  18 =  RUN 
 PIN   3 =  RW 
-PIN  17 =  SPARE1 
-PIN   5 = !VDPWAIT 
-PIN   7 = !WAIT1 
-PIN   8 = !WAIT2 
-PIN   9 = !WAIT3 
+PIN   6 = !VDPWAIT 
+PIN   8 = !WAIT1 
+PIN   9 = !WAIT2 
+PIN  10 = !WAIT3 
 PIN  27 =  WAIT_NZ_prev 
-PIN  10 =  WS0 
-PIN  11 =  WS1 
+PIN  11 =  WS0 
+PIN  13 =  WS1 
 %END
 
 %FIELD
