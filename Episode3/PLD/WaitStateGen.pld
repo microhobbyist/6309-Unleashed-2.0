@@ -1,7 +1,7 @@
 Name     WaitStateGen ;
-PartNo   ATF750C ;
-Date     2025/11/22 ;
-Revision 8 ;
+PartNo   ATF750CL ;
+Date     2025/11/28 ;
+Revision 12 ;
 Designer Frederic Segard ;
 Company  MicroHobbyist ;
 Assembly None ;
@@ -11,45 +11,62 @@ Device   v750c ;
 /* =========================================================
    6309 WAIT-STATE STRETCHER (ATF750C VERSION)
    ---------------------------------------------------------
-   Supports true 0..7 wait states (WS2..WS0).
+   Supports true 0..3 wait states (WS1..WS0).
    Quarter-cycle timing using CLK4x.
    1 wait state = 4 quarter cycles.
-   Preload = WS * 4 = 0..28.
-   5-bit down counter (CNT4..CNT0) handles 0..31.
+   Preload = WS * 4 = 0,4,8,12.
+   4-bit down counter CNT3..CNT0 (0..15 range).
    MRDY held low while counter > 0.
+   External wait requests OR-in as before.
    ========================================================= */
 
 /* ------------------------- INPUTS ------------------------- */
-PIN  1 =  CLK4x ;    /* 4x EXTAL clock input */
-PIN  2 =  E ;        /* CPU E */
-PIN  3 =  RW ;       /* CPU R W */
-PIN  4 = !RESET ;    /* System reset, active low */
-PIN  5 = !VDPWAIT ;  /* VDP wait, active low */
-PIN  6 = !PSGDT ;    /* PSG dtack OR, active low */
-PIN  7 = !WAIT1 ;    /* External wait 1 */
-PIN  8 = !WAIT2 ;    /* External wait 2 */
-PIN  9 = !WAIT3 ;    /* External wait 3 */
-PIN 10 =  WS0 ;      /* Wait state bit 0 */
-PIN 11 =  WS1 ;      /* Wait state bit 1 */
-/*  12 =  GND ;      /* Connected to ground */
-PIN 13 =  WS2 ;      /* Wait state bit 2 */
+PIN  1 =  CLK4x ;     /* 4x clock from CPU oscillator */
+PIN  2 =  E ;         /* CPU E */
+PIN  3 =  RW ;        /* CPU R/W */
+PIN  4 = !RESET ;     /* System reset, active low */
+PIN  5 = !VDPWAIT ;   /* VDP wait, active low */
+PIN  6 = !PSGDT ;     /* PSG dtack OR, active low */
+PIN  7 = !WAIT1 ;     /* External wait 1 */
+PIN  8 = !WAIT2 ;     /* External wait 2 */
+PIN  9 = !WAIT3 ;     /* External wait 3 */
+PIN 10 =  WS0 ;       /* Wait-state bit 0 */
+PIN 11 =  WS1 ;       /* Wait-state bit 1 */
+/*  12 =  GND */
+PIN 13 = !MREQ ;      /* Memory Request */
 
 /* ------------------------- OUTPUTS ------------------------ */
-/*  24 =  VCC ;      /* Connected to +5V */
-PIN 23 = !MRDY ;     /* MRDY to CPU, active low */
-PIN 17 =  RUN ;      /* Stretch active (Not enough PT on buried nodes) */
-PIN 22 =  CNT0 ;     /* Counter bit 0 (Not enough PT on buried nodes) */
-PIN 20 =  CNT1 ;     /* Counter bit 1 (Not enough PT on buried nodes) */
-PIN 19 =  CNT2 ;     /* Counter bit 2 (Not enough PT on buried nodes) */
-PIN 18 =  CNT3 ;     /* Counter bit 3 (Not enough PT on buried nodes) */
-PIN 21  = CNT4 ;     /* Counter bit 4 (Not enough PT on buried nodes) */
+/*  24 =  VCC */
+PIN 23 = !MRDY ;      /* MRDY to CPU, active low */
+PIN 22 =  CNT0 ;      /* Counter bit 0 (debug) */
+PIN 21 =  CNT1 ;      /* Counter bit 1 (debug) */
+PIN 20 =  CNT2 ;      /* Counter bit 2 (debug) */
+PIN 19 =  CNT3 ;      /* Counter bit 3 (debug) */
+PIN 18 =  RUN ;       /* Stretch active (debug) */
+PIN 17 =  SPARE1 ;
+PIN 16 = !ROMcs ;
+PIN 15 = !RAMoe ;
+PIN 14 = !ROMdis ;
 
 /* ----------------------- BURIED NODES --------------------- */
 
-PINNODE 25 =  E_prev ;  /* Previous E (synced) */
-PINNODE 26 =  E_sync ;  /* Synchronized E */
-PINNODE 27 =  WAIT_NZ_prev ;
-PINNODE 31 =  HOLD ;
+PINNODE 25 = E_prev ;        /* Previous E (synced) */
+PINNODE 26 = E_sync ;        /* Synchronized E */
+PINNODE 27 = WAIT_NZ_prev ;  /* Previous WAIT_NZ */
+PINNODE 28 = ROMdisFF ;      /* ROM disable */
+PINNODE 29 = HOLD ;          /* Hold latch */
+
+/* =========================================================
+                 SHADOW ROM LOGIC
+   ========================================================= */
+
+ROMdisFF.d  = 'b'1 ;
+ROMdisFF.ck = ROMdis ;
+ROMdisFF.ar = RESET ;
+ROMdisFF.sp = 'b'0 ;
+
+ROMcs  =  !MREQ #  ROMdisFF ;
+RAMoe  =  !(RW & E) # !ROMdisFF ;
 
 /* =========================================================
    E SYNCHRONIZERS (CLK4X DOMAIN)
@@ -65,61 +82,63 @@ E_prev.ck = CLK4x ;
 E_prev.ar = RESET ;
 E_prev.sp = 'b'0 ;
 
-/* Rising-edge detect */
+/* E rising-edge detect */
 E_rise = E_sync & !E_prev ;
 
+/* Track WAIT_NZ changes */
 WAIT_NZ_prev.d  = WAIT_NZ ;
 WAIT_NZ_prev.ck = CLK4x ;
 WAIT_NZ_prev.ar = RESET ;
 WAIT_NZ_prev.sp = 'b'0 ;
 
+/* Detect when WS value changes during E high */
 WAIT_RISE = WAIT_NZ & !WAIT_NZ_prev ;
 
 /* =========================================================
    EXTERNAL WAIT SOURCES
    ========================================================= */
 
-/* These inputs are active low at the pin. Internal EXT_WAIT is active high. */
 EXT_WAIT = VDPWAIT # PSGDT # WAIT1 # WAIT2 # WAIT3 ;
 
 /* =========================================================
-   WAIT-STATE VALUE (0..7) AND PRELOAD (WS * 4)
+   WAIT-STATE VALUE (0..3) AND PRELOAD (WS * 4)
    ========================================================= */
 
-/* Raw WS bits */
 WS_NUM0 = WS0 ;
 WS_NUM1 = WS1 ;
-WS_NUM2 = WS2 ;
 
-/* Non-zero WS request */
-WAIT_NZ = WS_NUM0 # WS_NUM1 # WS_NUM2 ;
+/* Non-zero WS */
+WAIT_NZ = WS_NUM0 # WS_NUM1 ;
 
-/* Preload = WS * 4 (shift left by two) */
+/* Preload = WS * 4 (shift left 2 bits) */
 LOAD0 = 'b'0 ;
 LOAD1 = 'b'0 ;
 LOAD2 = WS_NUM0 ;
 LOAD3 = WS_NUM1 ;
-LOAD4 = WS_NUM2 ;
 
 /* =========================================================
-   RUN CONTROL AND DOWN COUNTER (5 BITS)
+   RUN CONTROL AND DOWN COUNTER (4 BITS)
    ========================================================= */
 
-CNT_ZERO = !CNT4 & !CNT3 & !CNT2 & !CNT1 & !CNT0 ;
+CNT_ZERO = !CNT3 & !CNT2 & !CNT1 & !CNT0 ;
 
-LOAD = (E_rise  & WAIT_NZ & !RUN) #
-       (E_sync  & WAIT_RISE & !RUN) ;
+/* Load when:
+   - E rises and WS != 0
+   - OR WS becomes nonzero while E is high
+*/
+LOAD = (E_rise & WAIT_NZ & !RUN) #
+       (E_sync & WAIT_RISE & !RUN) ;
 
-/* RUN stays active while counter not zero */
+/* RUN while counter not zero */
 RUN.d  = LOAD # (RUN & !CNT_ZERO) ;
 RUN.ck = CLK4x ;
 RUN.ar = RESET ;
 RUN.sp = 'b'0 ;
 
-/* Decrement when RUN is active */
+/* Decrement enable */
 DEC = RUN & !CNT_ZERO ;
 
-/* ---------------- 5-bit down counter ---------------------- */
+/* --------------- 4-bit DOWN COUNTER (CNT3..CNT0) --------------- */
 
 CNT0.d = (LOAD & LOAD0) # (!LOAD & (DEC $ CNT0)) ;
 CNT0.ck = CLK4x ;
@@ -141,13 +160,8 @@ CNT3.ck = CLK4x ;
 CNT3.ar = RESET ;
 CNT3.sp = 'b'0 ;
 
-CNT4.d  =(LOAD & LOAD4) # (!LOAD & ((DEC & !CNT3 & !CNT2 & !CNT1 & !CNT0) $ CNT4)) ;
-CNT4.ck = CLK4x ;
-CNT4.ar = RESET ;
-CNT4.sp = 'b'0 ;
-
 /* =========================================================
-   HOLD LATCH TO EXTEND MRDY THROUGH END OF CYCLE
+   HOLD LATCH - EXTEND MRDY UNTIL END OF E CYCLE
    ========================================================= */
 
 HOLD.d  = RUN # (HOLD & !E_rise) ;
@@ -156,9 +170,8 @@ HOLD.ar = RESET ;
 HOLD.sp = 'b'0 ;
 
 /* =========================================================
-   OUTPUTS
+   OUTPUT
    ========================================================= */
 
-/* Internal busy=1 -> pin !MRDY low when busy. */
 MRDY = HOLD # EXT_WAIT ;
 

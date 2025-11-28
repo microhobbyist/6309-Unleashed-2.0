@@ -1,19 +1,24 @@
 %SIGNAL
 PIN   1 =  CLK4x 
 PIN  22 =  CNT0 
-PIN  20 =  CNT1 
-PIN  19 =  CNT2 
-PIN  18 =  CNT3 
-PIN  21 =  CNT4 
+PIN  21 =  CNT1 
+PIN  20 =  CNT2 
+PIN  19 =  CNT3 
 PIN   2 =  E 
 PIN  25 =  E_prev 
 PIN  26 =  E_sync 
-PIN  31 =  HOLD 
+PIN  29 =  HOLD 
 PIN  23 = !MRDY 
+PIN  13 = !MREQ 
 PIN   6 = !PSGDT 
+PIN  15 = !RAMoe 
 PIN   4 = !RESET 
-PIN  17 =  RUN 
+PIN  16 = !ROMcs 
+PIN  14 = !ROMdis 
+PIN  28 =  ROMdisFF 
+PIN  18 =  RUN 
 PIN   3 =  RW 
+PIN  17 =  SPARE1 
 PIN   5 = !VDPWAIT 
 PIN   7 = !WAIT1 
 PIN   8 = !WAIT2 
@@ -21,7 +26,6 @@ PIN   9 = !WAIT3
 PIN  27 =  WAIT_NZ_prev 
 PIN  10 =  WS0 
 PIN  11 =  WS1 
-PIN  13 =  WS2 
 %END
 
 %FIELD
@@ -32,10 +36,9 @@ CNT0.d  =>
     !CNT0 & CNT1 & RUN
   # !CNT0 & CNT2 & RUN
   # !CNT0 & CNT3 & RUN
-  # !CNT0 & CNT4 & RUN
   # CNT0 & !E_sync & !RUN
   # CNT0 & E_prev & !RUN & WAIT_NZ_prev
-  # CNT0 & !RUN & !WS0 & !WS1 & !WS2
+  # CNT0 & !RUN & !WS0 & !WS1
 
 CNT0.ar  =>
     !RESET
@@ -43,7 +46,7 @@ CNT0.ar  =>
 CNT0.ck  =>
     CLK4x
 
-CNT0.sp CNT1.sp CNT2.sp CNT3.sp CNT4.sp E_prev.sp E_sync.sp HOLD.sp RUN.sp WAIT_NZ_prev.sp  =>
+CNT0.sp CNT1.sp CNT2.sp CNT3.sp E_prev.sp E_sync.sp HOLD.sp ROMdisFF.sp RUN.sp WAIT_NZ_prev.sp  =>
     0 
 
 CNT1.d  =>
@@ -51,9 +54,8 @@ CNT1.d  =>
   # CNT1 & !E_sync & !RUN
   # !CNT0 & !CNT1 & CNT2 & RUN
   # !CNT0 & !CNT1 & CNT3 & RUN
-  # !CNT0 & !CNT1 & CNT4 & RUN
   # CNT1 & E_prev & !RUN & WAIT_NZ_prev
-  # CNT1 & !RUN & !WS0 & !WS1 & !WS2
+  # CNT1 & !RUN & !WS0 & !WS1
 
 CNT1.ar  =>
     !RESET
@@ -67,12 +69,11 @@ CNT2.d  =>
     CNT0 & CNT2 & RUN
   # CNT1 & CNT2 & RUN
   # CNT2 & !E_sync & !RUN
+  # CNT2 & !RUN & !WS1
   # CNT2 & E_prev & !RUN & WAIT_NZ_prev
   # !E_prev & E_sync & !RUN & WS0
   # E_sync & !RUN & !WAIT_NZ_prev & WS0
-  # CNT2 & !RUN & !WS1 & !WS2
   # !CNT0 & !CNT1 & !CNT2 & CNT3 & RUN
-  # !CNT0 & !CNT1 & !CNT2 & CNT4 & RUN
 
 CNT2.ar  =>
     !RESET
@@ -87,11 +88,10 @@ CNT3.d  =>
   # CNT1 & CNT3 & RUN
   # CNT2 & CNT3 & RUN
   # CNT3 & !E_sync & !RUN
+  # CNT3 & !RUN & !WS0
   # CNT3 & E_prev & !RUN & WAIT_NZ_prev
   # !E_prev & E_sync & !RUN & WS1
   # E_sync & !RUN & !WAIT_NZ_prev & WS1
-  # CNT3 & !RUN & !WS0 & !WS2
-  # !CNT0 & !CNT1 & !CNT2 & !CNT3 & CNT4 & RUN
 
 CNT3.ar  =>
     !RESET
@@ -101,31 +101,11 @@ CNT3.ck  =>
 
 CNT3.sp  =>
     
-CNT4.d  =>
-    CNT0 & CNT4 & RUN
-  # CNT1 & CNT4 & RUN
-  # CNT2 & CNT4 & RUN
-  # CNT3 & CNT4 & RUN
-  # CNT4 & !E_sync & !RUN
-  # CNT4 & E_prev & !RUN & WAIT_NZ_prev
-  # CNT4 & !RUN & !WS0 & !WS1
-  # !E_prev & E_sync & !RUN & WS2
-  # E_sync & !RUN & !WAIT_NZ_prev & WS2
-
-CNT4.ar  =>
-    !RESET
-
-CNT4.ck  =>
-    CLK4x
-
-CNT4.sp  =>
-    
 CNT_ZERO =>
-    !CNT0 & !CNT1 & !CNT2 & !CNT3 & !CNT4
+    !CNT0 & !CNT1 & !CNT2 & !CNT3
 
 DEC =>
-    CNT4 & RUN
-  # CNT3 & RUN
+    CNT3 & RUN
   # CNT2 & RUN
   # CNT1 & RUN
   # CNT0 & RUN
@@ -176,12 +156,10 @@ HOLD.ck  =>
 HOLD.sp  =>
     
 LOAD =>
-    !E_prev & E_sync & !RUN & WS0
-  # !E_prev & E_sync & !RUN & WS2
-  # !E_prev & E_sync & !RUN & WS1
+    !E_prev & E_sync & !RUN & WS1
+  # !E_prev & E_sync & !RUN & WS0
   # E_sync & !RUN & !WAIT_NZ_prev & WS0
   # E_sync & !RUN & !WAIT_NZ_prev & WS1
-  # E_sync & !RUN & !WAIT_NZ_prev & WS2
 
 LOAD0 =>
     0 
@@ -195,9 +173,6 @@ LOAD2 =>
 LOAD3 =>
     WS1
 
-LOAD4 =>
-    WS2
-
 MRDY =>
     HOLD
   # !PSGDT
@@ -206,18 +181,35 @@ MRDY =>
   # !WAIT2
   # !WAIT3
 
+RAMoe =>
+    !E
+  # !ROMdisFF
+  # !RW
+
+ROMcs =>
+    MREQ
+  # ROMdisFF
+
+ROMdisFF.d  =>
+    1 
+
+ROMdisFF.ar  =>
+    !RESET
+
+ROMdisFF.ck  =>
+    !ROMdis
+
+ROMdisFF.sp  =>
+    
 RUN.d  =>
     CNT0 & RUN
   # CNT1 & RUN
   # CNT2 & RUN
   # CNT3 & RUN
-  # CNT4 & RUN
   # !E_prev & E_sync & !RUN & WS0
   # E_sync & !RUN & !WAIT_NZ_prev & WS0
   # !E_prev & E_sync & !RUN & WS1
   # E_sync & !RUN & !WAIT_NZ_prev & WS1
-  # !E_prev & E_sync & !RUN & WS2
-  # E_sync & !RUN & !WAIT_NZ_prev & WS2
 
 RUN.ar  =>
     !RESET
@@ -230,12 +222,10 @@ RUN.sp  =>
 WAIT_NZ =>
     WS0
   # WS1
-  # WS2
 
 WAIT_NZ_prev.d  =>
     WS0
   # WS1
-  # WS2
 
 WAIT_NZ_prev.ar  =>
     !RESET
@@ -248,16 +238,12 @@ WAIT_NZ_prev.sp  =>
 WAIT_RISE =>
     !WAIT_NZ_prev & WS0
   # !WAIT_NZ_prev & WS1
-  # !WAIT_NZ_prev & WS2
 
 WS_NUM0 =>
     WS0
 
 WS_NUM1 =>
     WS1
-
-WS_NUM2 =>
-    WS2
 
 CNT0.oe  =>
     1 
@@ -271,11 +257,17 @@ CNT2.oe  =>
 CNT3.oe  =>
     1 
 
-CNT4.oe  =>
-    1 
-
 MRDY.oe  =>
     1 
+
+RAMoe.oe  =>
+    1 
+
+ROMcs.oe  =>
+    1 
+
+ROMdis.oe  =>
+    0 
 
 RUN.oe  =>
     1 

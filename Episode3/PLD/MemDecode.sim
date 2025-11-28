@@ -1,22 +1,26 @@
 %SIGNAL
-PIN   2 =  A4 
-PIN   3 =  A5 
-PIN   4 =  A6 
-PIN   5 =  A7 
-PIN   6 =  A8 
-PIN   7 =  A9 
-PIN   8 =  A10 
-PIN   9 =  A11 
-PIN  10 =  A12 
-PIN  11 =  A13 
-PIN  13 =  A14 
-PIN  14 =  A15 
-PIN  23 = !CONST 
-PIN   1 =  E 
+PIN   4 =  A4 
+PIN   5 =  A5 
+PIN   6 =  A6 
+PIN   7 =  A7 
+PIN   8 =  A8 
+PIN   9 =  A9 
+PIN  10 =  A10 
+PIN  11 =  A11 
+PIN  13 =  A12 
+PIN  14 =  A13 
+PIN  15 =  A14 
+PIN  16 =  A15 
+PIN  23 = !CBLK 
+PIN   2 =  E 
 PIN  22 = !IORQ 
 PIN  19 = !MREQ 
 PIN  20 = !PAGE 
+PIN   1 =  Q 
+PIN  18 = !RD 
 PIN  21 = !REG 
+PIN   3 =  RW 
+PIN  17 = !WR 
 %END
 
 %FIELD
@@ -49,6 +53,7 @@ BlockREG =>
 
 CONST =>
     A12 & A13 & A14 & A15 & E
+  # A12 & A13 & A14 & A15 & Q
 
 FFFx =>
     A4 & A5 & A6 & A7 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
@@ -61,6 +66,10 @@ IORQ =>
   # !A5 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
   # !A6 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
   # !A7 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
+  # !A4 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
+  # !A5 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
+  # !A6 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
+  # !A7 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
 
 MREQ =>
     !A10 & E
@@ -69,13 +78,32 @@ MREQ =>
   # !A13 & E
   # !A14 & E
   # !A15 & E
+  # !A10 & Q
+  # !A11 & Q
+  # !A12 & Q
+  # !A13 & Q
+  # !A14 & Q
+  # !A15 & Q
   # A4 & A5 & A6 & A7 & A8 & A9 & E
+  # A4 & A5 & A6 & A7 & A8 & A9 & Q
 
 PAGE =>
     !A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
+  # !A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
+
+RD =>
+    E & RW
 
 REG =>
     !A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
+  # !A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
+
+VMA =>
+    E
+  # Q
+
+WR =>
+    E & !RW
 
 xFxx =>
     A8 & A9 & A10 & A11
@@ -83,11 +111,14 @@ xFxx =>
 xxFx =>
     A4 & A5 & A6 & A7
 
-A15.oe  =>
+A13.oe  =>
     0 
 
-CONST.oe  =>
-    1 
+A14.oe  =>
+    0 
+
+A15.oe  =>
+    0 
 
 IORQ.oe  =>
     1 
@@ -98,7 +129,13 @@ MREQ.oe  =>
 PAGE.oe  =>
     1 
 
+RD.oe  =>
+    1 
+
 REG.oe  =>
+    1 
+
+WR.oe  =>
     1 
 
 %END

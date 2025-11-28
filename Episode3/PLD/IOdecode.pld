@@ -1,87 +1,92 @@
 Name     IODecode ;
-PartNo   ATF22V10C ;
+PartNo   ATF750CL ;
 Date     2025/11/17 ;
 Revision 8 ;
 Designer Frederic Segard ;
 Company  MicroHobbyist ;
 Assembly None ;
 Location None ;
-Device   g22v10 ;
+Device   v750c ;
 
-PIN 1  = !IORQ ;     /* I/O Request, Active-low during I/O cycle */
-PIN 2  =  A0 ;       /* Address bit 0 - LSB */
-PIN 3  =  A1 ;
-PIN 4  =  A2 ;
-PIN 5  =  A3 ;
-PIN 6  =  A4 ;
-PIN 7  =  A5 ;
-PIN 8  =  A6 ;
-PIN 9  =  A7 ;       /* Address bit 7 - MSB of I/O window */
-PIN 10 =  SPDR ;     /* The red LED indicates turbo speed (yellow is fast) */
-PIN 11 =  SPDG ;     /* The green LED indicates normal speed (yellow is fast) */
+/* -------- Inputs -------- */
+PIN 1  =  E ;        /* E clock phase, used to qualify chip selects with IORQ */
+PIN 2  = !IORQ ;     /* I/O Request, Active-low during I/O cycle */
+PIN 3  =  RW ;       /* Read/Write */
+PIN 4  =  A0 ;       /* Address bit 0 - LSB */
+PIN 5  =  A1 ;
+PIN 6  =  A2 ;
+PIN 7  =  A3 ;
+PIN 8  =  A4 ;
+PIN 9  =  A5 ;
+PIN 10 =  A6 ;
+PIN 11 =  A7 ;       /* Address bit 7 - MSB of I/O window */
 /*  12 =  GND ;      /* Ground connection */
-PIN 13 =  AnyCS ;    /* Pin 14 controls the output enable pin. It's wasteful, but
-                        it's the only way I could tristate the WS bus to work. */
+PIN 13 =  SPDr ;     /* The red LED indicates turbo speed (yellow is fast) */
+PIN 14 =  SPDg ;     /* The green LED indicates normal speed (yellow is fast) */
 
+/* -------- Outputs -------- */
 /*  24 =  VCC ;      /* +5V connection */
-PIN 23 = !TIMERcs ;  /* $FF00-07, Timer (HD63B40) */
-PIN 22 = !CFcs ;     /* $FF08-0F, Compact Flash card */
-PIN 21 = !ACIAcs ;   /* $FF10-13, ACIA (R65C51R4) */
-PIN 20 = !USBcs ;    /* $FF14-15  CH376S SD card and USB thumb-drive */
-PIN 19 = !RTCcs ;    /* $FF16-17, Realtime clock (DS12C887A) */
-PIN 18 =  RTCas ;    /* $FF16,    RTCs Address Strobe */
-PIN 17 =  RTCds ;    /* $FF17,    RTCs Data Strobe */
+PIN 23 = !TIMERcs ;  /* Timer (HD63B40) */
+PIN 22 = !CFcs ;     /* Compact Flash card */
+PIN 21 = !ACIA1cs ;  /* ACIA (R65C51R4) */
+PIN 20 = !POSTcs ;   /* Power-On-Self-Test (MC14495) */
+PIN 19 = !INTvec ;   /* Priority Interrupt Controller */
+PIN 18 = !ROMdis ;   /* ROM disable */
+PIN 17 = !SPDsel ;   /* Speed select */
 PIN 16 =  WS0 ;      /* Waitstate LSB bus(Tristate, pulled low) */
 PIN 15 =  WS1 ;      /* Waitstate MSB bus(Tristate, pulled low) */
-PIN 14 =  IOCS ;     /* Wired to pin 13 (pulled high) */
 
-FIELD ADDR = [A7..A0];
-TIMERcs = ADDR:[00..07] & IORQ ;
-CFcs    = ADDR:[08..0F] & IORQ ;
-ACIAcs  = ADDR:[10..13] & IORQ ;
-USBcs   = ADDR:[14..15] & IORQ ;
-RTCas   = ADDR:[16]     & IORQ ;
-RTCds   = ADDR:[17]     & IORQ ;
-RTCcs   = RTCas # RTCds ;
+PINNODE 30 = WS_EN ;
 
-IOCS = TIMERcs # ACIAcs # RTCcs # CFcs # USBcs ;
+VIA = IORQ & E ;    /* Valid I/O Address */
+FIELD ADDR = [A7..A0] ;
+
+TIMERcs = ADDR:[00..07]   & VIA ;
+CFcs    = ADDR:[08..0F]   & VIA ;
+ACIA1cs = ADDR:[10..13]   & VIA ;
+POSTcs  = ADDR:[14]       & VIA ;
+INTvec  = ADDR:[15] &  RW & VIA ;
+ROMdis  = ADDR:[16] & !RW & VIA ;
+SPDsel  = ADDR:[17]       & VIA ;
 
 /* =========================================================
-   WAIT-STATE LOGICgo
-   cd plsgo
+   WAIT-STATE LOGIC
    ========================================================= */
-FIELD CS = [TIMERcs, ACIAcs, RTCcs, CFcs, USBcs, SPDG, SPDR] ;
+FIELD CS = [TIMERcs, CFcs, ACIA1cs, POSTcs, SPDg, SPDr] ;
 FIELD WS = [WS1,WS0] ;
 TABLE CS => WS {
 /* Slow mode (speed=00) - OFF .75MHz Max */
-'b'0000000 => 'b'00 ;
-'b'1000000 => 'b'00 ;
-'b'0100000 => 'b'00 ;
-'b'0010000 => 'b'00 ;
-'b'0001000 => 'b'00 ;
-'b'0000100 => 'b'00 ;
+'b'000000 => 'b'00 ;    /* Nothing */
+'b'100000 => 'b'00 ;    /* TIMERcs */
+'b'010000 => 'b'00 ;    /* CFcs */
+'b'001000 => 'b'00 ;    /* ACIA1cs */
+'b'000100 => 'b'00 ;    /* POSTcs */
 /* Normal mode (speed=10) - GREEN 1.5MHz Max */
-'b'0000010 => 'b'00 ;
-'b'1000010 => 'b'00 ;
-'b'0100010 => 'b'00 ;
-'b'0010010 => 'b'00 ;
-'b'0001010 => 'b'01 ;
-'b'0000110 => 'b'00 ;
+'b'000010 => 'b'00 ;    /* Nothing */
+'b'100010 => 'b'00 ;    /* TIMERcs */
+'b'010010 => 'b'01 ;    /* CFcs */
+'b'001010 => 'b'00 ;    /* ACIA1cs */
+'b'000110 => 'b'01 ;    /* POSTcs */
 /* Fast mode (speed=11) - YELLOW 3MHz Max */
-'b'0000011 => 'b'00 ;
-'b'1000011 => 'b'01 ;
-'b'0100011 => 'b'01 ;
-'b'0010011 => 'b'00 ;
-'b'0001011 => 'b'10 ;
-'b'0000111 => 'b'01 ;
+'b'000011 => 'b'00 ;    /* Nothing */
+'b'100011 => 'b'01 ;    /* TIMERcs */
+'b'010011 => 'b'10 ;    /* CFcs */
+'b'001011 => 'b'00 ;    /* ACIA1cs */
+'b'000111 => 'b'10 ;    /* POSTcs */
 /* Turbo mode (speed=01) - RED 6MHz Max */
-'b'0000001 => 'b'00 ;
-'b'1000001 => 'b'10 ;
-'b'0100001 => 'b'01 ;
-'b'0010001 => 'b'01 ;
-'b'0001001 => 'b'11 ;
-'b'0000101 => 'b'11 ;
+'b'000001 => 'b'00 ;    /* Nothing */
+'b'100001 => 'b'10 ;    /* TIMERcs */
+'b'010001 => 'b'11 ;    /* CFcs */
+'b'001001 => 'b'01 ;    /* ACIA1cs */
+'b'000101 => 'b'11 ;    /* POSTcs */
 }
 
-WS0.oe = AnyCS ;
-WS1.oe = AnyCS ;
+/* Force WS_EN to be a valid output macrocell */
+WS_EN.d  = WS0 # WS1 ;   /* WS non-zero = enable */
+WS_EN.ck = E ;           /* Pseudo force combinational behavior */
+WS_EN.sp = 'b'0 ;
+WS_EN.ar = 'b'0 ;
+
+/* OE controls */
+WS0.oe = WS_EN ;
+WS1.oe = WS_EN ;

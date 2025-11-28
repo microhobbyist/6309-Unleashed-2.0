@@ -1,6 +1,9 @@
 %SIGNAL
+PIN   6 =  BA 
+PIN   7 =  BS 
 PIN   1 =  CLK4x 
-PIN  23 =  CPUclk 
+PIN  19 =  CPUclk 
+PIN  16 =  CPUstp 
 PIN  15 =  D0 
 PIN  14 =  D1 
 PIN  25 =  DIV2 
@@ -9,39 +12,28 @@ PIN  27 =  DIV8
 PIN   2 =  E 
 PIN  28 =  H0 
 PIN  29 =  H1 
-PIN  30 =  H2 
-PIN  34 =  H3 
+PIN  34 =  H2 
 PIN   8 = !HALTin 
-PIN  22 = !HALTout 
-PIN  19 =  LED_B 
-PIN  20 =  LED_G 
-PIN  21 =  LED_R 
-PIN   5 =  MREQ 
+PIN  20 = !HALTout 
+PIN  21 =  LED_B 
+PIN  22 =  LED_G 
+PIN  23 =  LED_R 
 PIN   9 = !PAUSEsw 
-PIN  11 =  RAMaddr 
-PIN  18 =  RAMcs 
-PIN  16 =  RAMoe 
+PIN  18 = !RD 
 PIN   4 = !RESET 
-PIN  10 = !ROMaddr 
-PIN  17 =  ROMcs 
-PIN   6 = !ROMdis 
-PIN  33 =  ROMdisFF 
 PIN   3 =  RW 
-PIN  31 =  S0 
+PIN  33 =  S0 
+PIN  10 =  S0init 
 PIN  32 =  S1 
-PIN   7 = !SPDsel 
+PIN  11 =  S1init 
+PIN   5 = !SPDsel 
+PIN  17 = !WR 
 %END
 
 %FIELD
 %END
 
 %EQUATION
-CHANGE =>
-    D1 & !RW & !S1 & SPDsel
-  # !D1 & !RW & S1 & SPDsel
-  # D0 & !RW & !S0 & SPDsel
-  # !D0 & !RW & S0 & SPDsel
-
 CHANGE_S0 =>
     D0 & !RW & !S0 & SPDsel
   # !D0 & !RW & S0 & SPDsel
@@ -51,10 +43,28 @@ CHANGE_S1 =>
   # !D1 & !RW & S1 & SPDsel
 
 CPUclk =>
-    CLK4x & S0 & S1
-  # DIV2 & !S0 & S1
-  # DIV4 & S0 & !S1
-  # DIV8 & !S0 & !S1
+    BA & BS & CPUclk & !HALTout
+  # !BA & CLK4x & S0 & S1
+  # !BS & CLK4x & S0 & S1
+  # CLK4x & HALTout & S0 & S1
+  # !BA & DIV2 & !S0 & S1
+  # !BS & DIV2 & !S0 & S1
+  # DIV2 & HALTout & !S0 & S1
+  # !BA & DIV4 & S0 & !S1
+  # !BS & DIV4 & S0 & !S1
+  # DIV4 & HALTout & S0 & !S1
+  # !BA & DIV8 & !S0 & !S1
+  # !BS & DIV8 & !S0 & !S1
+  # DIV8 & HALTout & !S0 & !S1
+
+CPUclk.oe  =>
+    1 
+
+CPUstp =>
+    BA & BS
+
+CPUstp.oe  =>
+    1 
 
 D0 =>
     RW & S0 & !SPDsel
@@ -77,7 +87,7 @@ DIV2.ar  =>
 DIV2.ck  =>
     CLK4x
 
-DIV2.sp DIV4.sp DIV8.sp H0.sp H1.sp H2.sp H3.sp ROMdisFF.sp S0.sp S1.sp  =>
+DIV2.sp DIV4.sp DIV8.sp H0.sp H1.sp H2.sp S0.sp S1.sp  =>
     0 
 
 DIV4.d  =>
@@ -105,6 +115,9 @@ DIV8.ck  =>
 
 DIV8.sp  =>
     
+E_HIGH =>
+    E
+
 H0.d  =>
     !D0 & !RW & S0 & !SPDsel
   # D0 & !RW & !S0 & !SPDsel
@@ -141,38 +154,25 @@ H2.ck  =>
 
 H2.sp  =>
     
-H3.d  =>
-    H2
-
-H3.ar  =>
-    !RESET
-
-H3.ck  =>
-    CLK4x
-
-H3.sp  =>
-    
 HALT_ACTIVE =>
-    !D0 & !RW & S0 & SPDsel
-  # D0 & !RW & !S0 & SPDsel
+    D1 & !RW & !S1 & SPDsel
   # !D1 & !RW & S1 & SPDsel
-  # D1 & !RW & !S1 & SPDsel
+  # D0 & !RW & !S0 & SPDsel
+  # !D0 & !RW & S0 & SPDsel
 
 HALT_SPEED_STRETCHED =>
-    !D0 & !RW & S0 & SPDsel
-  # D0 & !RW & !S0 & SPDsel
+    D1 & !RW & !S1 & SPDsel
   # !D1 & !RW & S1 & SPDsel
-  # D1 & !RW & !S1 & SPDsel
+  # D0 & !RW & !S0 & SPDsel
+  # !D0 & !RW & S0 & SPDsel
   # H0
   # H1
   # H2
-  # H3
 
 HALTout =>
     H0
   # H1
   # H2
-  # H3
   # !HALTin
   # !PAUSEsw
   # !D0 & !RW & S0 & !SPDsel
@@ -180,24 +180,39 @@ HALTout =>
   # !D1 & !RW & S1 & !SPDsel
   # D1 & !RW & !S1 & !SPDsel
 
+HALTout.oe  =>
+    1 
+
 LED_B =>
     !S0 & !S1
+
+LED_B.oe  =>
+    1 
 
 LED_G =>
     !S0 & S1
   # S0 & !S1
 
+LED_G.oe  =>
+    1 
+
 LED_R =>
     S1
 
-RAMoe =>
-    !E
-  # !ROMdisFF
-  # !RW
+LED_R.oe  =>
+    1 
+
+NEW_CLK =>
+    CLK4x & S0 & S1
+  # DIV2 & !S0 & S1
+  # DIV4 & S0 & !S1
+  # DIV8 & !S0 & !S1
 
 RD =>
-    !RW
-  # !E
+    E & RW
+
+RD.oe  =>
+    1 
 
 REG_READ =>
     RW & SPDsel
@@ -205,47 +220,59 @@ REG_READ =>
 REG_WRITE =>
     !RW & SPDsel
 
-ROMcs =>
-    MREQ
-  # ROMdisFF
-
-ROMdisFF.d  =>
-    1 
-
-ROMdisFF.ar  =>
-    !RESET
-
-ROMdisFF.ck  =>
-    !ROMdis
-
-ROMdisFF.sp  =>
-    
 S0.d  =>
-    RW & S0
-  # S0 & SPDsel
-  # D0 & !RW & !SPDsel
+    !RESET & S0init
+  # !E & RESET & S0
+  # RESET & RW & S0
+  # RESET & S0 & SPDsel
+  # D0 & E & RESET & !RW & !SPDsel
 
 S0.ar  =>
-    !RESET
+    0 
 
 S0.ck  =>
-    E
+    CLK4x
 
 S0.sp  =>
     
+S0_default =>
+    S0init
+
+S0_next =>
+    RESET & S0init
+  # D0 & E & !RESET & !RW & SPDsel
+  # E & !RESET & S0 & !SPDsel
+  # E & !RESET & RW & S0
+  # !E & !RESET & S0
+
 S1.d  =>
-    RW & S1
-  # S1 & SPDsel
-  # D1 & !RW & !SPDsel
+    !RESET & S1init
+  # !E & RESET & S1
+  # RESET & RW & S1
+  # RESET & S1 & SPDsel
+  # D1 & E & RESET & !RW & !SPDsel
 
 S1.ar  =>
-    !RESET
+    0 
 
 S1.ck  =>
-    E
+    CLK4x
 
 S1.sp  =>
     
+S1_default =>
+    S1init
+
+S1_next =>
+    RESET & S1init
+  # D1 & E & !RESET & !RW & SPDsel
+  # E & !RESET & S1 & !SPDsel
+  # E & !RESET & RW & S1
+  # !E & !RESET & S1
+
+SAFE =>
+    BA & BS & HALTout
+
 SPD_FAST =>
     !S0 & S1
 
@@ -258,25 +285,10 @@ SPD_SLOW =>
 SPD_TURBO =>
     S0 & S1
 
-CPUclk.oe  =>
-    1 
+WR =>
+    E & !RW
 
-HALTout.oe  =>
-    1 
-
-LED_B.oe  =>
-    1 
-
-LED_G.oe  =>
-    1 
-
-LED_R.oe  =>
-    1 
-
-RAMoe.oe  =>
-    1 
-
-ROMcs.oe  =>
+WR.oe  =>
     1 
 
 %END
