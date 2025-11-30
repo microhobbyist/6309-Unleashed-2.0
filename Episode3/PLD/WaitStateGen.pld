@@ -12,16 +12,15 @@ Device   v750c ;
    6309 WAIT-STATE STRETCHER (ATF750C VERSION)
    ---------------------------------------------------------
    Supports true 0..3 wait states (WS1..WS0).
-   Quarter-cycle timing using CLK4x.
+   Quarter-cycle timing using CPUclk.
    1 wait state = 4 quarter cycles.
-   Preload = WS * 4 = 0,4,8,12.
    4-bit down counter CNT3..CNT0 (0..15 range).
    MRDY held low while counter > 0.
-   External wait requests OR-in as before.
+   External wait requests OR-in.
    ========================================================= */
 
 /* ------------------------- INPUTS ------------------------- */
-PIN  1 =  CLK4x ;     /* 4x clock from CPU oscillator */
+PIN  1 =  CPUclk ;    /* 4x clock from CPU Speed Selector PLD */
 PIN  2 =  E ;         /* CPU E */
 PIN  3 =  RW ;        /* CPU R/W */
 PIN  4 = !RESET ;     /* System reset, active low */
@@ -39,14 +38,14 @@ PIN 14 = !ROMdis ;    /* ROM disable chip select */
 /* ------------------------- OUTPUTS ------------------------ */
 /*  24 =  VCC */
 PIN 23 = !MRDY ;      /* MRDY to CPU, active low */
-PIN 22 =  CNT0 ;      /* Counter bit 0 (debug) */
-PIN 21 =  CNT1 ;      /* Counter bit 1 (debug) */
-PIN 20 =  CNT2 ;      /* Counter bit 2 (debug) */
-PIN 19 =  CNT3 ;      /* Counter bit 3 (debug) */
-PIN 18 =  RUN ;       /* Stretch active (debug) */
-PIN 17 =  EXP3 ;      /* From MEMdecode */
-PIN 16 = !ROMcs ;
-PIN 15 = !RAMoe ;
+PIN 22 =  CNT0 ;      /* NC - Counter bit 0 (debug) */
+PIN 21 =  CNT1 ;      /* NC - Counter bit 1 (debug) */
+PIN 20 =  CNT2 ;      /* NC - Counter bit 2 (debug) */
+PIN 19 =  CNT3 ;      /* NC - Counter bit 3 (debug) */
+PIN 18 =  RUN ;       /* NC - Stretch active (debug) */
+/*  17 =  NC ;        /* Not connected */
+PIN 16 = !ROMcs ;     /* ROM chip select, valid until !ROMdis */
+PIN 15 = !RAMoe ;     /* RAM output enable, valid when !ROMdis */
 
 /* ----------------------- BURIED NODES --------------------- */
 
@@ -69,16 +68,16 @@ ROMcs  =  !MREQ #  ROMdisFF ;
 RAMoe  =  !(RW & E) # !ROMdisFF ;
 
 /* =========================================================
-   E SYNCHRONIZERS (CLK4X DOMAIN)
+   E SYNCHRONIZERS (CPUclk DOMAIN)
    ========================================================= */
 
 E_sync.d  = E ;
-E_sync.ck = CLK4x ;
+E_sync.ck = CPUclk ;
 E_sync.ar = RESET ;
 E_sync.sp = 'b'0 ;
 
 E_prev.d  = E_sync ;
-E_prev.ck = CLK4x ;
+E_prev.ck = CPUclk ;
 E_prev.ar = RESET ;
 E_prev.sp = 'b'0 ;
 
@@ -87,7 +86,7 @@ E_rise = E_sync & !E_prev ;
 
 /* Track WAIT_NZ changes */
 WAIT_NZ_prev.d  = WAIT_NZ ;
-WAIT_NZ_prev.ck = CLK4x ;
+WAIT_NZ_prev.ck = CPUclk ;
 WAIT_NZ_prev.ar = RESET ;
 WAIT_NZ_prev.sp = 'b'0 ;
 
@@ -131,7 +130,7 @@ LOAD = (E_rise & WAIT_NZ & !RUN) #
 
 /* RUN while counter not zero */
 RUN.d  = LOAD # (RUN & !CNT_ZERO) ;
-RUN.ck = CLK4x ;
+RUN.ck = CPUclk ;
 RUN.ar = RESET ;
 RUN.sp = 'b'0 ;
 
@@ -141,22 +140,22 @@ DEC = RUN & !CNT_ZERO ;
 /* --------------- 4-bit DOWN COUNTER (CNT3..CNT0) --------------- */
 
 CNT0.d = (LOAD & LOAD0) # (!LOAD & (DEC $ CNT0)) ;
-CNT0.ck = CLK4x ;
+CNT0.ck = CPUclk ;
 CNT0.ar = RESET ;
 CNT0.sp = 'b'0 ;
 
 CNT1.d = (LOAD & LOAD1) # (!LOAD & ((DEC & !CNT0) $ CNT1)) ;
-CNT1.ck = CLK4x ;
+CNT1.ck = CPUclk ;
 CNT1.ar = RESET ;
 CNT1.sp = 'b'0 ;
 
 CNT2.d = (LOAD & LOAD2) # (!LOAD & ((DEC & !CNT1 & !CNT0) $ CNT2)) ;
-CNT2.ck = CLK4x ;
+CNT2.ck = CPUclk ;
 CNT2.ar = RESET ;
 CNT2.sp = 'b'0 ;
 
 CNT3.d = (LOAD & LOAD3) # (!LOAD & ((DEC & !CNT2 & !CNT1 & !CNT0) $ CNT3)) ;
-CNT3.ck = CLK4x ;
+CNT3.ck = CPUclk ;
 CNT3.ar = RESET ;
 CNT3.sp = 'b'0 ;
 
@@ -165,7 +164,7 @@ CNT3.sp = 'b'0 ;
    ========================================================= */
 
 HOLD.d  = RUN # (HOLD & !E_rise) ;
-HOLD.ck = CLK4x ;
+HOLD.ck = CPUclk ;
 HOLD.ar = RESET ;
 HOLD.sp = 'b'0 ;
 

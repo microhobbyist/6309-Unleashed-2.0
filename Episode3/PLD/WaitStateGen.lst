@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: WaitStateGen.pld                 Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Nov 28 10:18:57 2025
+Created Sat Nov 29 19:39:23 2025
 
   1:Name     WaitStateGen ;
   2:PartNo   ATF750CL ;
@@ -19,197 +19,196 @@ Created Fri Nov 28 10:18:57 2025
  12:   6309 WAIT-STATE STRETCHER (ATF750C VERSION)
  13:   ---------------------------------------------------------
  14:   Supports true 0..3 wait states (WS1..WS0).
- 15:   Quarter-cycle timing using CLK4x.
+ 15:   Quarter-cycle timing using CPUclk.
  16:   1 wait state = 4 quarter cycles.
- 17:   Preload = WS * 4 = 0,4,8,12.
- 18:   4-bit down counter CNT3..CNT0 (0..15 range).
- 19:   MRDY held low while counter > 0.
- 20:   External wait requests OR-in as before.
- 21:   ========================================================= */
- 22:
- 23:/* ------------------------- INPUTS ------------------------- */
- 24:PIN  1 =  CLK4x ;     /* 4x clock from CPU oscillator */
- 25:PIN  2 =  E ;         /* CPU E */
- 26:PIN  3 =  RW ;        /* CPU R/W */
- 27:PIN  4 = !RESET ;     /* System reset, active low */
- 28:PIN  5 = !MREQ ;      /* Memory Request */
- 29:PIN  6 = !VDPWAIT ;   /* VDP wait, active low */
- 30:PIN  7 = !PSGDT ;     /* PSG dtack OR, active low */
- 31:PIN  8 = !WAIT1 ;     /* External wait 1 */
- 32:PIN  9 = !WAIT2 ;     /* External wait 2 */
- 33:PIN 10 = !WAIT3 ;     /* External wait 3 */
- 34:PIN 11 =  WS0 ;       /* Wait-state bit 0 */
- 35:/*  12 =  GND */
- 36:PIN 13 =  WS1 ;       /* Wait-state bit 1 */
- 37:PIN 14 = !ROMdis ;    /* ROM disable chip select */
- 38:
- 39:/* ------------------------- OUTPUTS ------------------------ */
- 40:/*  24 =  VCC */
- 41:PIN 23 = !MRDY ;      /* MRDY to CPU, active low */
- 42:PIN 22 =  CNT0 ;      /* Counter bit 0 (debug) */
- 43:PIN 21 =  CNT1 ;      /* Counter bit 1 (debug) */
- 44:PIN 20 =  CNT2 ;      /* Counter bit 2 (debug) */
- 45:PIN 19 =  CNT3 ;      /* Counter bit 3 (debug) */
- 46:PIN 18 =  RUN ;       /* Stretch active (debug) */
- 47:PIN 17 =  EXP3 ;      /* From MEMdecode */
- 48:PIN 16 = !ROMcs ;
- 49:PIN 15 = !RAMoe ;
- 50:
- 51:/* ----------------------- BURIED NODES --------------------- */
- 52:
- 53:PINNODE 25 = E_prev ;        /* Previous E (synced) */
+ 17:   4-bit down counter CNT3..CNT0 (0..15 range).
+ 18:   MRDY held low while counter > 0.
+ 19:   External wait requests OR-in.
+ 20:   ========================================================= */
+ 21:
+ 22:/* ------------------------- INPUTS ------------------------- */
+ 23:PIN  1 =  CPUclk ;    /* 4x clock from CPU Speed Selector PLD */
+ 24:PIN  2 =  E ;         /* CPU E */
+ 25:PIN  3 =  RW ;        /* CPU R/W */
+ 26:PIN  4 = !RESET ;     /* System reset, active low */
+ 27:PIN  5 = !MREQ ;      /* Memory Request */
+ 28:PIN  6 = !VDPWAIT ;   /* VDP wait, active low */
+ 29:PIN  7 = !PSGDT ;     /* PSG dtack OR, active low */
+ 30:PIN  8 = !WAIT1 ;     /* External wait 1 */
+ 31:PIN  9 = !WAIT2 ;     /* External wait 2 */
+ 32:PIN 10 = !WAIT3 ;     /* External wait 3 */
+ 33:PIN 11 =  WS0 ;       /* Wait-state bit 0 */
+ 34:/*  12 =  GND */
+ 35:PIN 13 =  WS1 ;       /* Wait-state bit 1 */
+ 36:PIN 14 = !ROMdis ;    /* ROM disable chip select */
+ 37:
+ 38:/* ------------------------- OUTPUTS ------------------------ */
+ 39:/*  24 =  VCC */
+ 40:PIN 23 = !MRDY ;      /* MRDY to CPU, active low */
+ 41:PIN 22 =  CNT0 ;      /* NC - Counter bit 0 (debug) */
+ 42:PIN 21 =  CNT1 ;      /* NC - Counter bit 1 (debug) */
+ 43:PIN 20 =  CNT2 ;      /* NC - Counter bit 2 (debug) */
+ 44:PIN 19 =  CNT3 ;      /* NC - Counter bit 3 (debug) */
+ 45:PIN 18 =  RUN ;       /* NC - Stretch active (debug) */
+ 46:/*  17 =  NC ;        /* Not connected */
+ 47:PIN 16 = !ROMcs ;     /* ROM chip select, valid until !ROMdis */
+ 48:PIN 15 = !RAMoe ;     /* RAM output enable, valid when !ROMdis */
+ 49:
+ 50:/* ----------------------- BURIED NODES --------------------- */
+ 51:
+ 52:PINNODE 25 = E_prev ;        /* Previous E (synced) */
+ 53:PINNODE 26 = E_sync ;        /* Synchronized E */
 
 LISTING FOR LOGIC DESCRIPTION FILE: WaitStateGen.pld                 Page 2
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Nov 28 10:18:57 2025
+Created Sat Nov 29 19:39:23 2025
 
- 54:PINNODE 26 = E_sync ;        /* Synchronized E */
- 55:PINNODE 27 = WAIT_NZ_prev ;  /* Previous WAIT_NZ */
- 56:PINNODE 28 = ROMdisFF ;      /* ROM disable */
- 57:PINNODE 29 = HOLD ;          /* Hold latch */
- 58:
- 59:/* =========================================================
- 60:                 SHADOW ROM LOGIC
- 61:   ========================================================= */
- 62:
- 63:ROMdisFF.d  = 'b'1 ;
- 64:ROMdisFF.ck = ROMdis ;
- 65:ROMdisFF.ar = RESET ;
- 66:ROMdisFF.sp = 'b'0 ;
- 67:
- 68:ROMcs  =  !MREQ #  ROMdisFF ;
- 69:RAMoe  =  !(RW & E) # !ROMdisFF ;
- 70:
- 71:/* =========================================================
- 72:   E SYNCHRONIZERS (CLK4X DOMAIN)
- 73:   ========================================================= */
- 74:
- 75:E_sync.d  = E ;
- 76:E_sync.ck = CLK4x ;
- 77:E_sync.ar = RESET ;
- 78:E_sync.sp = 'b'0 ;
- 79:
- 80:E_prev.d  = E_sync ;
- 81:E_prev.ck = CLK4x ;
- 82:E_prev.ar = RESET ;
- 83:E_prev.sp = 'b'0 ;
- 84:
- 85:/* E rising-edge detect */
- 86:E_rise = E_sync & !E_prev ;
- 87:
- 88:/* Track WAIT_NZ changes */
- 89:WAIT_NZ_prev.d  = WAIT_NZ ;
- 90:WAIT_NZ_prev.ck = CLK4x ;
- 91:WAIT_NZ_prev.ar = RESET ;
- 92:WAIT_NZ_prev.sp = 'b'0 ;
- 93:
- 94:/* Detect when WS value changes during E high */
- 95:WAIT_RISE = WAIT_NZ & !WAIT_NZ_prev ;
- 96:
- 97:/* =========================================================
- 98:   EXTERNAL WAIT SOURCES
- 99:   ========================================================= */
-100:
-101:EXT_WAIT = VDPWAIT # PSGDT # WAIT1 # WAIT2 # WAIT3 ;
-102:
-103:/* =========================================================
-104:   WAIT-STATE VALUE (0..3) AND PRELOAD (WS * 4)
-105:   ========================================================= */
-106:
-107:WS_NUM0 = WS0 ;
+ 54:PINNODE 27 = WAIT_NZ_prev ;  /* Previous WAIT_NZ */
+ 55:PINNODE 28 = ROMdisFF ;      /* ROM disable */
+ 56:PINNODE 29 = HOLD ;          /* Hold latch */
+ 57:
+ 58:/* =========================================================
+ 59:                 SHADOW ROM LOGIC
+ 60:   ========================================================= */
+ 61:
+ 62:ROMdisFF.d  = 'b'1 ;
+ 63:ROMdisFF.ck = ROMdis ;
+ 64:ROMdisFF.ar = RESET ;
+ 65:ROMdisFF.sp = 'b'0 ;
+ 66:
+ 67:ROMcs  =  !MREQ #  ROMdisFF ;
+ 68:RAMoe  =  !(RW & E) # !ROMdisFF ;
+ 69:
+ 70:/* =========================================================
+ 71:   E SYNCHRONIZERS (CPUclk DOMAIN)
+ 72:   ========================================================= */
+ 73:
+ 74:E_sync.d  = E ;
+ 75:E_sync.ck = CPUclk ;
+ 76:E_sync.ar = RESET ;
+ 77:E_sync.sp = 'b'0 ;
+ 78:
+ 79:E_prev.d  = E_sync ;
+ 80:E_prev.ck = CPUclk ;
+ 81:E_prev.ar = RESET ;
+ 82:E_prev.sp = 'b'0 ;
+ 83:
+ 84:/* E rising-edge detect */
+ 85:E_rise = E_sync & !E_prev ;
+ 86:
+ 87:/* Track WAIT_NZ changes */
+ 88:WAIT_NZ_prev.d  = WAIT_NZ ;
+ 89:WAIT_NZ_prev.ck = CPUclk ;
+ 90:WAIT_NZ_prev.ar = RESET ;
+ 91:WAIT_NZ_prev.sp = 'b'0 ;
+ 92:
+ 93:/* Detect when WS value changes during E high */
+ 94:WAIT_RISE = WAIT_NZ & !WAIT_NZ_prev ;
+ 95:
+ 96:/* =========================================================
+ 97:   EXTERNAL WAIT SOURCES
+ 98:   ========================================================= */
+ 99:
+100:EXT_WAIT = VDPWAIT # PSGDT # WAIT1 # WAIT2 # WAIT3 ;
+101:
+102:/* =========================================================
+103:   WAIT-STATE VALUE (0..3) AND PRELOAD (WS * 4)
+104:   ========================================================= */
+105:
+106:WS_NUM0 = WS0 ;
+107:WS_NUM1 = WS1 ;
 
 LISTING FOR LOGIC DESCRIPTION FILE: WaitStateGen.pld                 Page 3
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Nov 28 10:18:57 2025
+Created Sat Nov 29 19:39:23 2025
 
-108:WS_NUM1 = WS1 ;
-109:
-110:/* Non-zero WS */
-111:WAIT_NZ = WS_NUM0 # WS_NUM1 ;
-112:
-113:/* Preload = WS * 4 (shift left 2 bits) */
-114:LOAD0 = 'b'0 ;
-115:LOAD1 = 'b'0 ;
-116:LOAD2 = WS_NUM0 ;
-117:LOAD3 = WS_NUM1 ;
-118:
-119:/* =========================================================
-120:   RUN CONTROL AND DOWN COUNTER (4 BITS)
-121:   ========================================================= */
-122:
-123:CNT_ZERO = !CNT3 & !CNT2 & !CNT1 & !CNT0 ;
-124:
-125:/* Load when:
-126:   - E rises and WS != 0
-127:   - OR WS becomes nonzero while E is high
-128:*/
-129:LOAD = (E_rise & WAIT_NZ & !RUN) #
-130:       (E_sync & WAIT_RISE & !RUN) ;
-131:
-132:/* RUN while counter not zero */
-133:RUN.d  = LOAD # (RUN & !CNT_ZERO) ;
-134:RUN.ck = CLK4x ;
-135:RUN.ar = RESET ;
-136:RUN.sp = 'b'0 ;
-137:
-138:/* Decrement enable */
-139:DEC = RUN & !CNT_ZERO ;
-140:
-141:/* --------------- 4-bit DOWN COUNTER (CNT3..CNT0) --------------- */
-142:
-143:CNT0.d = (LOAD & LOAD0) # (!LOAD & (DEC $ CNT0)) ;
-144:CNT0.ck = CLK4x ;
-145:CNT0.ar = RESET ;
-146:CNT0.sp = 'b'0 ;
-147:
-148:CNT1.d = (LOAD & LOAD1) # (!LOAD & ((DEC & !CNT0) $ CNT1)) ;
-149:CNT1.ck = CLK4x ;
-150:CNT1.ar = RESET ;
-151:CNT1.sp = 'b'0 ;
-152:
-153:CNT2.d = (LOAD & LOAD2) # (!LOAD & ((DEC & !CNT1 & !CNT0) $ CNT2)) ;
-154:CNT2.ck = CLK4x ;
-155:CNT2.ar = RESET ;
-156:CNT2.sp = 'b'0 ;
-157:
-158:CNT3.d = (LOAD & LOAD3) # (!LOAD & ((DEC & !CNT2 & !CNT1 & !CNT0) $ CNT3)) ;
-159:CNT3.ck = CLK4x ;
-160:CNT3.ar = RESET ;
-161:CNT3.sp = 'b'0 ;
+108:
+109:/* Non-zero WS */
+110:WAIT_NZ = WS_NUM0 # WS_NUM1 ;
+111:
+112:/* Preload = WS * 4 (shift left 2 bits) */
+113:LOAD0 = 'b'0 ;
+114:LOAD1 = 'b'0 ;
+115:LOAD2 = WS_NUM0 ;
+116:LOAD3 = WS_NUM1 ;
+117:
+118:/* =========================================================
+119:   RUN CONTROL AND DOWN COUNTER (4 BITS)
+120:   ========================================================= */
+121:
+122:CNT_ZERO = !CNT3 & !CNT2 & !CNT1 & !CNT0 ;
+123:
+124:/* Load when:
+125:   - E rises and WS != 0
+126:   - OR WS becomes nonzero while E is high
+127:*/
+128:LOAD = (E_rise & WAIT_NZ & !RUN) #
+129:       (E_sync & WAIT_RISE & !RUN) ;
+130:
+131:/* RUN while counter not zero */
+132:RUN.d  = LOAD # (RUN & !CNT_ZERO) ;
+133:RUN.ck = CPUclk ;
+134:RUN.ar = RESET ;
+135:RUN.sp = 'b'0 ;
+136:
+137:/* Decrement enable */
+138:DEC = RUN & !CNT_ZERO ;
+139:
+140:/* --------------- 4-bit DOWN COUNTER (CNT3..CNT0) --------------- */
+141:
+142:CNT0.d = (LOAD & LOAD0) # (!LOAD & (DEC $ CNT0)) ;
+143:CNT0.ck = CPUclk ;
+144:CNT0.ar = RESET ;
+145:CNT0.sp = 'b'0 ;
+146:
+147:CNT1.d = (LOAD & LOAD1) # (!LOAD & ((DEC & !CNT0) $ CNT1)) ;
+148:CNT1.ck = CPUclk ;
+149:CNT1.ar = RESET ;
+150:CNT1.sp = 'b'0 ;
+151:
+152:CNT2.d = (LOAD & LOAD2) # (!LOAD & ((DEC & !CNT1 & !CNT0) $ CNT2)) ;
+153:CNT2.ck = CPUclk ;
+154:CNT2.ar = RESET ;
+155:CNT2.sp = 'b'0 ;
+156:
+157:CNT3.d = (LOAD & LOAD3) # (!LOAD & ((DEC & !CNT2 & !CNT1 & !CNT0) $ CNT3)) ;
+158:CNT3.ck = CPUclk ;
+159:CNT3.ar = RESET ;
+160:CNT3.sp = 'b'0 ;
+161:
 
 LISTING FOR LOGIC DESCRIPTION FILE: WaitStateGen.pld                 Page 4
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Nov 28 10:18:57 2025
+Created Sat Nov 29 19:39:23 2025
 
-162:
-163:/* =========================================================
-164:   HOLD LATCH - EXTEND MRDY UNTIL END OF E CYCLE
-165:   ========================================================= */
-166:
-167:HOLD.d  = RUN # (HOLD & !E_rise) ;
-168:HOLD.ck = CLK4x ;
-169:HOLD.ar = RESET ;
-170:HOLD.sp = 'b'0 ;
-171:
-172:/* =========================================================
-173:   OUTPUT
-174:   ========================================================= */
-175:
-176:MRDY = HOLD # EXT_WAIT ;
+162:/* =========================================================
+163:   HOLD LATCH - EXTEND MRDY UNTIL END OF E CYCLE
+164:   ========================================================= */
+165:
+166:HOLD.d  = RUN # (HOLD & !E_rise) ;
+167:HOLD.ck = CPUclk ;
+168:HOLD.ar = RESET ;
+169:HOLD.sp = 'b'0 ;
+170:
+171:/* =========================================================
+172:   OUTPUT
+173:   ========================================================= */
+174:
+175:MRDY = HOLD # EXT_WAIT ;
+176:
 177:
 178:
-179:
 
 
 
 Jedec Fuse Checksum       (5157)
-Jedec Transmit Checksum   (bbcf)
+Jedec Transmit Checksum   (bbdc)

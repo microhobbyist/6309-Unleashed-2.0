@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# MW-10400000
 Device          v750c  Library DLIB-h-40-2
-Created         Fri Nov 28 10:18:57 2025
+Created         Sat Nov 29 19:39:23 2025
 Name            WaitStateGen 
 Partno          ATF750CL 
 Revision        12 
@@ -31,7 +31,7 @@ CNT0.ar  =>
     RESET
 
 CNT0.ck  =>
-    CLK4x
+    CPUclk
 
 CNT0.sp  =>
     0 
@@ -48,7 +48,7 @@ CNT1.ar  =>
     RESET
 
 CNT1.ck  =>
-    CLK4x
+    CPUclk
 
 CNT1.sp  =>
     0 
@@ -67,7 +67,7 @@ CNT2.ar  =>
     RESET
 
 CNT2.ck  =>
-    CLK4x
+    CPUclk
 
 CNT2.sp  =>
     0 
@@ -86,7 +86,7 @@ CNT3.ar  =>
     RESET
 
 CNT3.ck  =>
-    CLK4x
+    CPUclk
 
 CNT3.sp  =>
     0 
@@ -114,7 +114,7 @@ E_prev.ar  =>
     RESET
 
 E_prev.ck  =>
-    CLK4x
+    CPUclk
 
 E_prev.sp  =>
     0 
@@ -129,7 +129,7 @@ E_sync.ar  =>
     RESET
 
 E_sync.ck  =>
-    CLK4x
+    CPUclk
 
 E_sync.sp  =>
     0 
@@ -143,7 +143,7 @@ HOLD.ar  =>
     RESET
 
 HOLD.ck  =>
-    CLK4x
+    CPUclk
 
 HOLD.sp  =>
     0 
@@ -209,7 +209,7 @@ RUN.ar  =>
     RESET
 
 RUN.ck  =>
-    CLK4x
+    CPUclk
 
 RUN.sp  =>
     0 
@@ -226,7 +226,7 @@ WAIT_NZ_prev.ar  =>
     RESET
 
 WAIT_NZ_prev.ck  =>
-    CLK4x
+    CPUclk
 
 WAIT_NZ_prev.sp  =>
     0 
@@ -277,7 +277,6 @@ Pin Variable                                    Pterms   Max     Min
 Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
 --- --------            ---     ---     ----    ------  ------  -----   
 
-    CLK4x                       1        V        -       -       -     
     CNT0                        22       V        -       -       -     
     CNT0                d       22       X        6       10      3     
     CNT0                ar      22       X        1       1       1     
@@ -299,9 +298,9 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     CNT3                ck      19       X        1       1       1     
     CNT3                sp      19       X        1       1       1     
     CNT_ZERO                    0        I        1       -       -     
+    CPUclk                      1        V        -       -       -     
     DEC                         0        I        4       -       -     
     E                           2        V        -       -       -     
-    EXP3                        17       V        -       -       -     
     EXT_WAIT                    0        I        5       -       -     
     E_prev                      25       N        -       -       -     
     E_prev              d       25       M        1       4       3     
@@ -572,14 +571,14 @@ LEGEND    X : fuse not blown
 
                                ______________
                               | WaitStateGen |
-                    CLK4x x---|1           24|---x Vcc                      
+                   CPUclk x---|1           24|---x Vcc                      
                         E x---|2           23|---x !MRDY                    
                        RW x---|3           22|---x CNT0                     
                    !RESET x---|4           21|---x CNT1                     
                     !MREQ x---|5           20|---x CNT2                     
                  !VDPWAIT x---|6           19|---x CNT3                     
                    !PSGDT x---|7           18|---x RUN                      
-                   !WAIT1 x---|8           17|---x EXP3                     
+                   !WAIT1 x---|8           17|---x                          
                    !WAIT2 x---|9           16|---x !ROMcs                   
                    !WAIT3 x---|10          15|---x !RAMoe                   
                       WS0 x---|11          14|---x !ROMdis                  

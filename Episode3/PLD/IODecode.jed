@@ -1,11 +1,11 @@
 
 CUPL(WM)        5.0a  Serial# MW-10400000
 Device          v750c  Library DLIB-h-40-2
-Created         Fri Nov 28 10:18:57 2025
+Created         Sat Nov 29 19:39:23 2025
 Name            IODecode 
 Partno          ATF750CL 
-Revision        8 
-Date            2025/11/17 
+Revision        11 
+Date            2025/11/29 
 Designer        Frederic Segard 
 Company         MicroHobbyist 
 Assembly        None 
@@ -103,4 +103,4 @@ Location        None
 *L14464 11100110101001100000100001101001
 *L14496 10000000
 *C1A4C
-*01C3
+*01FD

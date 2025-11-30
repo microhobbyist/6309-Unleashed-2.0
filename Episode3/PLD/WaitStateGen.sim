@@ -1,11 +1,10 @@
 %SIGNAL
-PIN   1 =  CLK4x 
 PIN  22 =  CNT0 
 PIN  21 =  CNT1 
 PIN  20 =  CNT2 
 PIN  19 =  CNT3 
+PIN   1 =  CPUclk 
 PIN   2 =  E 
-PIN  17 =  EXP3 
 PIN  25 =  E_prev 
 PIN  26 =  E_sync 
 PIN  29 =  HOLD 
@@ -44,7 +43,7 @@ CNT0.ar  =>
     !RESET
 
 CNT0.ck  =>
-    CLK4x
+    CPUclk
 
 CNT0.sp CNT1.sp CNT2.sp CNT3.sp E_prev.sp E_sync.sp HOLD.sp ROMdisFF.sp RUN.sp WAIT_NZ_prev.sp  =>
     0 
@@ -61,7 +60,7 @@ CNT1.ar  =>
     !RESET
 
 CNT1.ck  =>
-    CLK4x
+    CPUclk
 
 CNT1.sp  =>
     
@@ -79,7 +78,7 @@ CNT2.ar  =>
     !RESET
 
 CNT2.ck  =>
-    CLK4x
+    CPUclk
 
 CNT2.sp  =>
     
@@ -97,7 +96,7 @@ CNT3.ar  =>
     !RESET
 
 CNT3.ck  =>
-    CLK4x
+    CPUclk
 
 CNT3.sp  =>
     
@@ -124,7 +123,7 @@ E_prev.ar  =>
     !RESET
 
 E_prev.ck  =>
-    CLK4x
+    CPUclk
 
 E_prev.sp  =>
     
@@ -138,7 +137,7 @@ E_sync.ar  =>
     !RESET
 
 E_sync.ck  =>
-    CLK4x
+    CPUclk
 
 E_sync.sp  =>
     
@@ -151,7 +150,7 @@ HOLD.ar  =>
     !RESET
 
 HOLD.ck  =>
-    CLK4x
+    CPUclk
 
 HOLD.sp  =>
     
@@ -215,7 +214,7 @@ RUN.ar  =>
     !RESET
 
 RUN.ck  =>
-    CLK4x
+    CPUclk
 
 RUN.sp  =>
     
@@ -231,7 +230,7 @@ WAIT_NZ_prev.ar  =>
     !RESET
 
 WAIT_NZ_prev.ck  =>
-    CLK4x
+    CPUclk
 
 WAIT_NZ_prev.sp  =>
     

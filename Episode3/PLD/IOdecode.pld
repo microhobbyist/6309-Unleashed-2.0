@@ -1,7 +1,7 @@
 Name     IODecode ;
 PartNo   ATF750CL ;
-Date     2025/11/17 ;
-Revision 8 ;
+Date     2025/11/29 ;
+Revision 11 ;
 Designer Frederic Segard ;
 Company  MicroHobbyist ;
 Assembly None ;
@@ -90,3 +90,11 @@ WS_EN.ar = 'b'0 ;
 /* OE controls */
 WS0.oe = WS_EN ;
 WS1.oe = WS_EN ;
+
+TIMERcs.oe = 'b'1 ;
+CFcs.oe    = 'b'1 ;
+ACIA1cs.oe = 'b'1 ;
+POSTcs.oe  = 'b'1 ;
+INTvec.oe  = 'b'1 ;
+ROMdis.oe  = 'b'1 ;
+SPDsel.oe  = 'b'1 ;

@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# MW-10400000
 Device          v750c  Library DLIB-h-40-2
-Created         Fri Nov 28 10:18:57 2025
+Created         Sat Nov 29 19:39:23 2025
 Name            CPUSpeedSel 
 Partno          ATF750CL 
 Revision        17 
@@ -102,9 +102,6 @@ DIV8.ck  =>
 DIV8.sp  =>
     0 
 
-E_HIGH =>
-    E
-
 H0.d  =>
     !D0 & !RW & S0 & SPDsel
   # D0 & !RW & !S0 & SPDsel
@@ -142,6 +139,18 @@ H2.ck  =>
     CLK4x
 
 H2.sp  =>
+    0 
+
+H3.d  =>
+    H2
+
+H3.ar  =>
+    RESET
+
+H3.ck  =>
+    CLK4x
+
+H3.sp  =>
     0 
 
 HALT_ACTIVE =>
@@ -198,12 +207,6 @@ NEW_CLK =>
   # DIV4 & S0 & !S1
   # DIV8 & !S0 & !S1
 
-RD =>
-    E & RW
-
-RD.oe  =>
-    1 
-
 REG_READ =>
     RW & SPDsel
 
@@ -225,9 +228,6 @@ S0.ck  =>
 
 S0.sp  =>
     0 
-
-S0_default =>
-    S0init
 
 S0_next =>
     RESET & S0init
@@ -252,9 +252,6 @@ S1.ck  =>
 S1.sp  =>
     0 
 
-S1_default =>
-    S1init
-
 S1_next =>
     RESET & S1init
   # D1 & E & !RESET & !RW & SPDsel
@@ -277,10 +274,7 @@ SPD_SLOW =>
 SPD_TURBO =>
     S0 & S1
 
-WR =>
-    E & !RW
-
-WR.oe  =>
+H3.oe  =>
     1 
 
 
@@ -321,7 +315,6 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     DIV8                ck      27       M        1       1       1     
     DIV8                sp      27       M        1       1       1     
     E                           2        V        -       -       -     
-    E_HIGH                      0        I        1       -       -     
     H0                          28       N        -       -       -     
     H0                  d       28       M        4       7       3     
     H0                  ar      28       M        1       1       1     
@@ -337,6 +330,11 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     H2                  ar      34       M        1       1       1     
     H2                  ck      34       M        1       1       1     
     H2                  sp      34       M        1       1       1     
+    H3                          18       V        -       -       -     
+    H3                  d       18       X        1       16      3     
+    H3                  ar      18       X        1       1       1     
+    H3                  ck      18       X        1       1       1     
+    H3                  sp      18       X        1       1       1     
     HALT_ACTIVE                 0        I        4       -       -     
     HALT_SPEED_STRETCHED        0        I        7       -       -     
  !  HALTin                      8        V        -       -       -     
@@ -350,8 +348,6 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     LED_R               oe      23       X        1       1       1     
     NEW_CLK                     0        I        4       -       -     
  !  PAUSEsw                     9        V        -       -       -     
- !  RD                          18       V        1       16      3     
-    RD                  oe      18       X        1       1       1     
     REG_READ                    0        I        1       -       -     
     REG_WRITE                   0        I        1       -       -     
  !  RESET                       4        V        -       -       -     
@@ -361,7 +357,6 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     S0                  ar      33       M        1       1       1     
     S0                  ck      33       M        1       1       1     
     S0                  sp      33       M        1       1       1     
-    S0_default                  0        I        1       -       -     
     S0_next                     0        I        5       -       -     
     S0init                      10       V        -       -       -     
     S1                          32       N        -       -       -     
@@ -369,7 +364,6 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     S1                  ar      32       M        1       1       1     
     S1                  ck      32       M        1       1       1     
     S1                  sp      32       M        1       1       1     
-    S1_default                  0        I        1       -       -     
     S1_next                     0        I        5       -       -     
     S1init                      11       V        -       -       -     
     SAFE                        0        I        1       -       -     
@@ -378,8 +372,7 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     SPD_SLOW                    0        I        1       -       -     
     SPD_TURBO                   0        I        1       -       -     
  !  SPDsel                      5        V        -       -       -     
- !  WR                          17       V        1       14      3     
-    WR                  oe      17       X        1       1       1     
+    H3                  oe      18       D        1       1       0     
 
 
 LEGEND    D : default variable         F : field      G : group
@@ -485,8 +478,8 @@ Pin #19 Node 30 ,40  14376 Mode  -x-  14411 xxxx
  06888 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  06972 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  07056 ------------------------------------------------------------------------------------ 
-Pin #18 Node 29 ,39  14379 Mode  --x  14415 xxxx 
- 07140 -------------------------------------------------------------------x-------x-------- 
+Pin #18 Node 29 ,39  14379 Mode  x--  14415 xxxx 
+ 07140 ----------------------------------------------------------------------------x------- 
  07224 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  07308 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  07392 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -502,13 +495,13 @@ Pin #18 Node 29 ,39  14379 Mode  --x  14415 xxxx
  08232 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08316 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08400 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 08484 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 08568 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 08484 ----------------------------------------------------------x------------------------- 
+ 08568 -----------------------------------------------------------------------------------x 
  08652 -----------------------------------------------------------------------------------x 
  08736 ----------------------------------------------------------x------------------------- 
  08820 ------------------------------------------------------------------------------------ 
-Pin #17 Node 28 ,38  14382 Mode  --x  14419 xxxx 
- 08904 ------------------------------------------------------------------x--------x-------- 
+Pin #17 Node 28 ,38  14382 Mode  x-x  14419 xxxx 
+ 08904 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08988 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09072 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09156 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -526,7 +519,7 @@ Pin #17 Node 28 ,38  14382 Mode  --x  14419 xxxx
  10164 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  10248 -----------------------------------------------------------------------------------x 
  10332 ----------------------------------------------------------x------------------------- 
- 10416 ------------------------------------------------------------------------------------ 
+ 10416 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
 Pin #16 Node 27 ,37  14385 Mode  ---  14423 xxxx 
  10500 -----------------------------------x-------x---------------------------------------- 
  10584 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -592,8 +585,8 @@ LEGEND    X : fuse not blown
                    !RESET x---|4           21|---x LED_B                    
                   !SPDsel x---|5           20|---x !HALTout                 
                        BA x---|6           19|---x CPUclk                   
-                       BS x---|7           18|---x !RD                      
-                  !HALTin x---|8           17|---x !WR                      
+                       BS x---|7           18|---x H3                       
+                  !HALTin x---|8           17|---x                          
                  !PAUSEsw x---|9           16|---x CPUstp                   
                    S0init x---|10          15|---x D0                       
                    S1init x---|11          14|---x D1                       

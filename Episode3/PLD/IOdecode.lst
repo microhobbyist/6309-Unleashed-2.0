@@ -3,12 +3,12 @@ LISTING FOR LOGIC DESCRIPTION FILE: IOdecode.pld                     Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Nov 28 10:18:57 2025
+Created Sat Nov 29 19:39:23 2025
 
   1:Name     IODecode ;
   2:PartNo   ATF750CL ;
-  3:Date     2025/11/17 ;
-  4:Revision 8 ;
+  3:Date     2025/11/29 ;
+  4:Revision 11 ;
   5:Designer Frederic Segard ;
   6:Company  MicroHobbyist ;
   7:Assembly None ;
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: IOdecode.pld                     Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Nov 28 10:18:57 2025
+Created Sat Nov 29 19:39:23 2025
 
  54:   ========================================================= */
  55:FIELD CS = [TIMERcs, CFcs, ACIA1cs, POSTcs, SPDg, SPDr] ;
@@ -106,8 +106,16 @@ Created Fri Nov 28 10:18:57 2025
  91:WS0.oe = WS_EN ;
  92:WS1.oe = WS_EN ;
  93:
+ 94:TIMERcs.oe = 'b'1 ;
+ 95:CFcs.oe    = 'b'1 ;
+ 96:ACIA1cs.oe = 'b'1 ;
+ 97:POSTcs.oe  = 'b'1 ;
+ 98:INTvec.oe  = 'b'1 ;
+ 99:ROMdis.oe  = 'b'1 ;
+100:SPDsel.oe  = 'b'1 ;
+101:
 
 
 
 Jedec Fuse Checksum       (1a4c)
-Jedec Transmit Checksum   (01c3)
+Jedec Transmit Checksum   (01fd)

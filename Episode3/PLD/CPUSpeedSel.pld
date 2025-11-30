@@ -1,12 +1,12 @@
-Name     CPUSpeedSel ;
-PartNo   ATF750CL ;
-Date     2025/11/28 ;
-Revision 17 ;
-Designer Frederic Segard ;
-Company  MicroHobbyist ;
-Assembly None ;
-Location None ;
-Device   v750c ;
+Name      CPUSpeedSel ;
+PartNo    ATF750CL ;
+Date      2025/11/28 ;
+Revision  17 ;
+Designer  Frederic Segard ;
+Company   MicroHobbyist ;
+Assembly  None ;
+Location  None ;
+Device    v750c ;
 
 /* INPUTS */
 PIN  1 =  CLK4x ;    /* 16 MHz system oscillator */
@@ -30,13 +30,13 @@ PIN 22 =  LED_G ;
 PIN 21 =  LED_B ;
 PIN 20 = !HALTout ;  /* Halt request to CPU */
 PIN 19 =  CPUclk ;   /* Chosen CPU clock speed (pin 38) */
-PIN 18 = !RD ;       /* Read signal */
-PIN 17 = !WR ;       /* Write signal */
+PIN 18 =  H3 ;       /* No connect (debug) */
+/*  17 =  NC ;       /* No connect */
 PIN 16 =  CPUstp ;   /* CPU is halted or bus granted - BA/BS = 1 */
 
 /* BIDIRECTIONAL (Data Bus) */
-PIN 15 = D0 ;
-PIN 14 = D1 ;
+PIN 15 =  D0 ;
+PIN 14 =  D1 ;
 
 /* BURIED NODES */
 PINNODE 25 = DIV2 ;
@@ -48,10 +48,7 @@ PINNODE 28 = H0 ;
 PINNODE 29 = H1 ;
 PINNODE 34 = H2 ;
 
-/* Misc combinatorial logic */
-RD     =  RW & E ;
-WR     = !RW & E ;
-CPUstp =  BA & BS ;  /* LED turns on whenever CPU is stopped */
+CPUstp = BA & BS ;   /* LED turns on whenever CPU is stopped */
 
 /* =========================================================
                    SPEED REGISTER (DIP + E-qualified)
@@ -66,29 +63,18 @@ CPUstp =  BA & BS ;  /* LED turns on whenever CPU is stopped */
 
 REG_WRITE = SPDsel & !RW ;
 
-/* ---------------------------
-   QUALIFIERS
----------------------------- */
-
-/* Detect when E=1 (sample window) */
-E_HIGH = E ;
-
-/* Default values after reset */
-S0_default = S0init ;
-S1_default = S1init ;
-
 /* Next-state equations using clock-enable logic */
 S0_next =
-    (RESET & S0_default) #                   /* Preload from DIP during reset */
-    (!RESET & E_HIGH & REG_WRITE & D0) #     /* Write new bit */
-    (!RESET & E_HIGH & !REG_WRITE & S0) #    /* Hold on read cycle while E=1 */
-    (!RESET & !E_HIGH & S0);                 /* Hold when E=0 */
+    (RESET & S0init) #                   /* Preload from DIP during reset */
+    (!RESET & E & REG_WRITE & D0) #     /* Write new bit */
+    (!RESET & E & !REG_WRITE & S0) #    /* Hold on read cycle while E=1 */
+    (!RESET & !E & S0);                 /* Hold when E=0 */
 
 S1_next =
-    (RESET & S1_default) #                   /* Preload from DIP during reset */
-    (!RESET & E_HIGH & REG_WRITE & D1) #     /* Write new bit */
-    (!RESET & E_HIGH & !REG_WRITE & S1) #    /* Hold on read cycle while E=1 */
-    (!RESET & !E_HIGH & S1);                 /* Hold when E=0 */
+    (RESET & S1init) #                   /* Preload from DIP during reset */
+    (!RESET & E & REG_WRITE & D1) #     /* Write new bit */
+    (!RESET & E & !REG_WRITE & S1) #    /* Hold on read cycle while E=1 */
+    (!RESET & !E & S1);                 /* Hold when E=0 */
 
 /* ---------------------------
    FLIP-FLOPS
@@ -112,8 +98,8 @@ S1.sp = 'b'0 ;
 ========================================================= */
 
 DIV2.d  = !DIV2 ;
-DIV4.d  = DIV4 $ DIV2 ;
-DIV8.d  = DIV8 $ (DIV2 & DIV4) ;
+DIV4.d  =  DIV4 $ DIV2 ;
+DIV8.d  =  DIV8 $ (DIV2 & DIV4) ;
 
 DIV2.ck = CLK4x ;
 DIV4.ck = CLK4x ;
@@ -131,9 +117,9 @@ DIV8.sp = 'b'0 ;
                    SPEED STATES
 ========================================================= */
 
-SPD_TURBO  = S1 &  S0 ;
-SPD_FAST   = S1 & !S0 ;
-SPD_NORMAL = !S1 & S0 ;
+SPD_TURBO  =  S1 &  S0 ;
+SPD_FAST   =  S1 & !S0 ;
+SPD_NORMAL = !S1 &  S0 ;
 SPD_SLOW   = !S1 & !S0 ;
 
 /* =========================================================
@@ -150,7 +136,7 @@ NEW_CLK =
                       RGB LED OUTPUTS
 ========================================================= */
 
-LED_R = SPD_TURBO # SPD_FAST ;
+LED_R = SPD_TURBO  # SPD_FAST ;
 LED_G = SPD_NORMAL # SPD_FAST ;
 LED_B = SPD_SLOW ;
 
@@ -168,20 +154,24 @@ HALT_ACTIVE = CHANGE_S1 # CHANGE_S0 ;
 H0.d = HALT_ACTIVE ;
 H1.d = H0 ;
 H2.d = H1 ;
+H3.d = H2 ;
 
 H0.ck = CLK4x ;
 H1.ck = CLK4x ;
 H2.ck = CLK4x ;
+H3.ck = CLK4x ;
 
 H0.ar = RESET ;
 H1.ar = RESET ;
 H2.ar = RESET ;
+H3.ar = RESET ;
 
 H0.sp = 'b'0 ;
 H1.sp = 'b'0 ;
 H2.sp = 'b'0 ;
+H3.sp = 'b'0 ;
 
-HALT_SPEED_STRETCHED = HALT_ACTIVE # H0 # H1 # H2 ;
+HALT_SPEED_STRETCHED = HALT_ACTIVE # H0 # H1 # H2 # H3 ;
 
 HALTout = HALTin # PAUSEsw # HALT_SPEED_STRETCHED ;
 
@@ -215,5 +205,3 @@ HALTout.oe = 'b'1 ;
 LED_B.oe   = 'b'1 ;
 LED_G.oe   = 'b'1 ;
 LED_R.oe   = 'b'1 ;
-RD.oe      = 'b'1 ;
-WR.oe      = 'b'1 ;

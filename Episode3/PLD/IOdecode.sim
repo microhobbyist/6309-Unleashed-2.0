@@ -34,23 +34,44 @@ FIELD WS = WS1,WS0
 ACIA1cs =>
     !A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
 
+ACIA1cs.oe  =>
+    1 
+
 CFcs =>
     A3 & !A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+CFcs.oe  =>
+    1 
 
 INTvec =>
     A0 & !A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & RW
 
+INTvec.oe  =>
+    1 
+
 POSTcs =>
     !A0 & !A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+POSTcs.oe  =>
+    1 
 
 ROMdis =>
     !A0 & A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & !RW
 
+ROMdis.oe  =>
+    1 
+
 SPDsel =>
     A0 & A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
 
+SPDsel.oe  =>
+    1 
+
 TIMERcs =>
     !A3 & !A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+TIMERcs.oe  =>
+    1 
 
 VIA =>
     E & IORQ
@@ -87,28 +108,7 @@ WS_EN.ck  =>
 WS_EN.sp  =>
     0 
 
-ACIA1cs.oe  =>
-    1 
-
-CFcs.oe  =>
-    1 
-
-INTvec.oe  =>
-    1 
-
-POSTcs.oe  =>
-    1 
-
-ROMdis.oe  =>
-    1 
-
 SPDg.oe  =>
     0 
-
-SPDsel.oe  =>
-    1 
-
-TIMERcs.oe  =>
-    1 
 
 %END

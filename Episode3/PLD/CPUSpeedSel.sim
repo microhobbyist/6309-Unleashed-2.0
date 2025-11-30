@@ -13,13 +13,13 @@ PIN   2 =  E
 PIN  28 =  H0 
 PIN  29 =  H1 
 PIN  34 =  H2 
+PIN  18 =  H3 
 PIN   8 = !HALTin 
 PIN  20 = !HALTout 
 PIN  21 =  LED_B 
 PIN  22 =  LED_G 
 PIN  23 =  LED_R 
 PIN   9 = !PAUSEsw 
-PIN  18 = !RD 
 PIN   4 = !RESET 
 PIN   3 =  RW 
 PIN  33 =  S0 
@@ -27,7 +27,6 @@ PIN  10 =  S0init
 PIN  32 =  S1 
 PIN  11 =  S1init 
 PIN   5 = !SPDsel 
-PIN  17 = !WR 
 %END
 
 %FIELD
@@ -87,7 +86,7 @@ DIV2.ar  =>
 DIV2.ck  =>
     CLK4x
 
-DIV2.sp DIV4.sp DIV8.sp H0.sp H1.sp H2.sp S0.sp S1.sp  =>
+DIV2.sp DIV4.sp DIV8.sp H0.sp H1.sp H2.sp H3.sp S0.sp S1.sp  =>
     0 
 
 DIV4.d  =>
@@ -115,9 +114,6 @@ DIV8.ck  =>
 
 DIV8.sp  =>
     
-E_HIGH =>
-    E
-
 H0.d  =>
     !D0 & !RW & S0 & !SPDsel
   # D0 & !RW & !S0 & !SPDsel
@@ -153,6 +149,17 @@ H2.ck  =>
     CLK4x
 
 H2.sp  =>
+    
+H3.d  =>
+    H2
+
+H3.ar  =>
+    !RESET
+
+H3.ck  =>
+    CLK4x
+
+H3.sp  =>
     
 HALT_ACTIVE =>
     D1 & !RW & !S1 & SPDsel
@@ -208,12 +215,6 @@ NEW_CLK =>
   # DIV4 & S0 & !S1
   # DIV8 & !S0 & !S1
 
-RD =>
-    E & RW
-
-RD.oe  =>
-    1 
-
 REG_READ =>
     RW & SPDsel
 
@@ -235,9 +236,6 @@ S0.ck  =>
 
 S0.sp  =>
     
-S0_default =>
-    S0init
-
 S0_next =>
     RESET & S0init
   # D0 & E & !RESET & !RW & SPDsel
@@ -260,9 +258,6 @@ S1.ck  =>
 
 S1.sp  =>
     
-S1_default =>
-    S1init
-
 S1_next =>
     RESET & S1init
   # D1 & E & !RESET & !RW & SPDsel
@@ -285,10 +280,7 @@ SPD_SLOW =>
 SPD_TURBO =>
     S0 & S1
 
-WR =>
-    E & !RW
-
-WR.oe  =>
+H3.oe  =>
     1 
 
 %END
