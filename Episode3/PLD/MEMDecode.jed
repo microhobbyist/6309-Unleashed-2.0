@@ -1,7 +1,7 @@
 
 CUPL(WM)        5.0a  Serial# MW-10400000
 Device          g22v10  Library DLIB-h-40-1
-Created         Sat Nov 29 19:39:23 2025
+Created         Tue Dec 02 06:53:23 2025
 Name            MEMDecode 
 Partno          ATF22V10C 
 Revision        14 
@@ -70,4 +70,4 @@ Location        None
 *L05824 01010100000101010100010001100011
 *L05856 00100011001001010110001100010011
 *CB5F9
-*0642
+*0610

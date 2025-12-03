@@ -36,10 +36,13 @@ PIN 19 = !MREQ ;     /* All Memory area ($0000-$FBFF and $FFF0-$FFFF) */
 PIN 18 = !RD ;       /* Read */
 PIN 17 = !WR ;       /* Write */
 
+/* Equations */
 
 RD  =  RW & E ;      /* RW qualified with E = !RD */
 WR  = !RW & E ;      /* !RW qualified with E = !WR */
-VMA =  Q # E ;       /* Valid Memory Address, Address valid at Q */
+VMA =  Q # E ;       /* Valid Memory Address, Address valid at rising of Q */
+
+/* Intermediate product terms */
 
 Fxxx = A15 & A14 & A13 & A12 ;
 xFxx = A11 & A10 & A9  & A8 ;

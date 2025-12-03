@@ -3881,6 +3881,16 @@
 	)
 	(wire
 		(pts
+			(xy 53.34 119.38) (xy 53.34 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "023c6090-6070-4e6f-a3e0-01eb1273bccd")
+	)
+	(wire
+		(pts
 			(xy 151.13 160.02) (xy 151.13 165.1)
 		)
 		(stroke
@@ -4288,16 +4298,6 @@
 			(type default)
 		)
 		(uuid "29a1d1b2-2cdd-45ba-b688-8752c9c66650")
-	)
-	(wire
-		(pts
-			(xy 50.8 134.62) (xy 59.69 134.62)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "29baf2a6-2e2e-4e7f-8801-6b32ec154daa")
 	)
 	(wire
 		(pts
@@ -5121,6 +5121,16 @@
 	)
 	(wire
 		(pts
+			(xy 53.34 134.62) (xy 59.69 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "75606f65-8921-425e-beb9-f5b288555e62")
+	)
+	(wire
+		(pts
 			(xy 128.27 46.99) (xy 128.27 116.84)
 		)
 		(stroke
@@ -5441,7 +5451,7 @@
 	)
 	(wire
 		(pts
-			(xy 50.8 111.76) (xy 50.8 134.62)
+			(xy 50.8 111.76) (xy 50.8 132.08)
 		)
 		(stroke
 			(width 0)
@@ -5911,7 +5921,7 @@
 	)
 	(wire
 		(pts
-			(xy 53.34 132.08) (xy 59.69 132.08)
+			(xy 50.8 132.08) (xy 59.69 132.08)
 		)
 		(stroke
 			(width 0)
@@ -6308,16 +6318,6 @@
 			(type default)
 		)
 		(uuid "f65b4572-fcaf-4018-8e25-3c3870837828")
-	)
-	(wire
-		(pts
-			(xy 53.34 119.38) (xy 53.34 132.08)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f7b97bb3-2619-47ab-98ce-01dbe3e3c5d8")
 	)
 	(wire
 		(pts
@@ -7726,7 +7726,7 @@
 		)
 		(uuid "c411a3f4-f795-4184-8511-6788fccea1e7")
 	)
-	(label "~{HALT_{in}}"
+	(label "~{HALT_{ext}}"
 		(at 152.4 59.69 0)
 		(effects
 			(font
@@ -7787,7 +7787,7 @@
 		(uuid "d7df01c2-fc28-426d-a942-3876fdaf68da")
 	)
 	(label "~{IORQ}"
-		(at 54.61 132.08 0)
+		(at 54.61 134.62 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7837,7 +7837,7 @@
 		(uuid "e7eefe64-aa19-482f-aa05-7a28a3640122")
 	)
 	(label "E"
-		(at 54.61 134.62 0)
+		(at 54.61 132.08 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8223,7 +8223,7 @@
 		)
 		(uuid "c627a28f-4e33-457c-a63f-264a8468304c")
 	)
-	(hierarchical_label "~{HALT_{in}}"
+	(hierarchical_label "~{HALT_{ext}}"
 		(shape input)
 		(at 38.1 93.98 180)
 		(effects

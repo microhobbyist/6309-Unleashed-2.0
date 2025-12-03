@@ -1,0 +1,8 @@
+7:19:05 PM: Invalid zero-sized pad pinned to 1µm in
+file: S:/GitHub/6309-Unleashed-2.0/Library/ATX_PSU_CONN.kicad_mod
+line: 29
+offset: 89
+7:19:05 PM: Invalid zero-sized pad pinned to 1µm in
+file: S:/GitHub/6309-Unleashed-2.0/Library/ATX_PSU_CONN.kicad_mod
+line: 29
+offset: 89

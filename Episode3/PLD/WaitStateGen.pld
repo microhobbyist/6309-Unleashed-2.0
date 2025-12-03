@@ -24,7 +24,7 @@ PIN  1 =  CPUclk ;    /* 4x clock from CPU Speed Selector PLD */
 PIN  2 =  E ;         /* CPU E */
 PIN  3 =  RW ;        /* CPU R/W */
 PIN  4 = !RESET ;     /* System reset, active low */
-PIN  5 = !MREQ ;      /* Memory Request */
+PIN  5 = !MREQ ;      /* Memory Request (only there for Shadow ROM) */
 PIN  6 = !VDPWAIT ;   /* VDP wait, active low */
 PIN  7 = !PSGDT ;     /* PSG dtack OR, active low */
 PIN  8 = !WAIT1 ;     /* External wait 1 */
@@ -103,17 +103,14 @@ EXT_WAIT = VDPWAIT # PSGDT # WAIT1 # WAIT2 # WAIT3 ;
    WAIT-STATE VALUE (0..3) AND PRELOAD (WS * 4)
    ========================================================= */
 
-WS_NUM0 = WS0 ;
-WS_NUM1 = WS1 ;
-
 /* Non-zero WS */
-WAIT_NZ = WS_NUM0 # WS_NUM1 ;
+WAIT_NZ = WS0 # WS1 ;
 
 /* Preload = WS * 4 (shift left 2 bits) */
 LOAD0 = 'b'0 ;
 LOAD1 = 'b'0 ;
-LOAD2 = WS_NUM0 ;
-LOAD3 = WS_NUM1 ;
+LOAD2 = WS0 ;
+LOAD3 = WS1 ;
 
 /* =========================================================
    RUN CONTROL AND DOWN COUNTER (4 BITS)
@@ -160,17 +157,8 @@ CNT3.ar = RESET ;
 CNT3.sp = 'b'0 ;
 
 /* =========================================================
-   HOLD LATCH - EXTEND MRDY UNTIL END OF E CYCLE
-   ========================================================= */
-
-HOLD.d  = RUN # (HOLD & !E_rise) ;
-HOLD.ck = CPUclk ;
-HOLD.ar = RESET ;
-HOLD.sp = 'b'0 ;
-
-/* =========================================================
    OUTPUT
    ========================================================= */
 
-MRDY = HOLD # EXT_WAIT ;
+MRDY = RUN # EXT_WAIT ;
 

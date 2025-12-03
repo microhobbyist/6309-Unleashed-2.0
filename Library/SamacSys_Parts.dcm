@@ -1,0 +1,15 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP NE555DR
+D Single Precision Timer
+K
+F http://www.ti.com/lit/ds/symlink/ne555.pdf
+$ENDCMP
+#
+$CMP 5530843-8
+D Body Features: Primary Product Color Black | Configuration Features: Number of Dual Positions 36 | PCB Mount Orientation Vertical | Number of Positions 72 | Number of Signal Positions 0 | Number of Power Positions 72 | Keying & Polarized Position Locations 0 | Contact Features: Contact Underplating Material Nickel | Contact Mating Area Plating Material Thickness 30 MICIN | PCB Contact Termination Area Plating Material Tin | Contact Mating Area Plating Material Gold | PCB Contact Termination Area Plating Mat
+K
+F https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=1773096_SEC03_CARD_EDGE&DocType=Catalog%20Section&DocLang=English&PartCntxt=5530843-8&DocFormat=pdf
+$ENDCMP
+#
+#End Doc Library

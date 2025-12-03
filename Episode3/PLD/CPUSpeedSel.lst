@@ -3,17 +3,17 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPUSpeedSel.pld                  Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Nov 29 19:39:23 2025
+Created Tue Dec 02 06:53:23 2025
 
-  1:Name     CPUSpeedSel ;
-  2:PartNo   ATF750CL ;
-  3:Date     2025/11/28 ;
-  4:Revision 17 ;
-  5:Designer Frederic Segard ;
-  6:Company  MicroHobbyist ;
-  7:Assembly None ;
-  8:Location None ;
-  9:Device   v750c ;
+  1:Name      CPUSpeedSel ;
+  2:PartNo    ATF750CL ;
+  3:Date      2025/11/28 ;
+  4:Revision  17 ;
+  5:Designer  Frederic Segard ;
+  6:Company   MicroHobbyist ;
+  7:Assembly  None ;
+  8:Location  None ;
+  9:Device    v750c ;
  10:
  11:/* INPUTS */
  12:PIN  1 =  CLK4x ;    /* 16 MHz system oscillator */
@@ -42,8 +42,8 @@ Created Sat Nov 29 19:39:23 2025
  35:PIN 16 =  CPUstp ;   /* CPU is halted or bus granted - BA/BS = 1 */
  36:
  37:/* BIDIRECTIONAL (Data Bus) */
- 38:PIN 15 = D0 ;
- 39:PIN 14 = D1 ;
+ 38:PIN 15 =  D0 ;
+ 39:PIN 14 =  D1 ;
  40:
  41:/* BURIED NODES */
  42:PINNODE 25 = DIV2 ;
@@ -55,7 +55,7 @@ Created Sat Nov 29 19:39:23 2025
  48:PINNODE 29 = H1 ;
  49:PINNODE 34 = H2 ;
  50:
- 51:CPUstp =  BA & BS ;  /* LED turns on whenever CPU is stopped */
+ 51:CPUstp = BA & BS ;   /* LED turns on whenever CPU is stopped */
  52:
  53:/* =========================================================
 
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPUSpeedSel.pld                  Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Nov 29 19:39:23 2025
+Created Tue Dec 02 06:53:23 2025
 
  54:                   SPEED REGISTER (DIP + E-qualified)
  55:   ---------------------------------------------------------
@@ -113,8 +113,8 @@ Created Sat Nov 29 19:39:23 2025
  98:========================================================= */
  99:
 100:DIV2.d  = !DIV2 ;
-101:DIV4.d  = DIV4 $ DIV2 ;
-102:DIV8.d  = DIV8 $ (DIV2 & DIV4) ;
+101:DIV4.d  =  DIV4 $ DIV2 ;
+102:DIV8.d  =  DIV8 $ (DIV2 & DIV4) ;
 103:
 104:DIV2.ck = CLK4x ;
 105:DIV4.ck = CLK4x ;
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPUSpeedSel.pld                  Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Nov 29 19:39:23 2025
+Created Tue Dec 02 06:53:23 2025
 
 108:DIV2.ar = RESET ;
 109:DIV4.ar = RESET ;
@@ -140,9 +140,9 @@ Created Sat Nov 29 19:39:23 2025
 117:                   SPEED STATES
 118:========================================================= */
 119:
-120:SPD_TURBO  = S1 &  S0 ;
-121:SPD_FAST   = S1 & !S0 ;
-122:SPD_NORMAL = !S1 & S0 ;
+120:SPD_TURBO  =  S1 &  S0 ;
+121:SPD_FAST   =  S1 & !S0 ;
+122:SPD_NORMAL = !S1 &  S0 ;
 123:SPD_SLOW   = !S1 & !S0 ;
 124:
 125:/* =========================================================
@@ -159,7 +159,7 @@ Created Sat Nov 29 19:39:23 2025
 136:                      RGB LED OUTPUTS
 137:========================================================= */
 138:
-139:LED_R = SPD_TURBO # SPD_FAST ;
+139:LED_R = SPD_TURBO  # SPD_FAST ;
 140:LED_G = SPD_NORMAL # SPD_FAST ;
 141:LED_B = SPD_SLOW ;
 142:
@@ -188,7 +188,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPUSpeedSel.pld                  Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Nov 29 19:39:23 2025
+Created Tue Dec 02 06:53:23 2025
 
 162:H3.ck = CLK4x ;
 163:
@@ -202,7 +202,7 @@ Created Sat Nov 29 19:39:23 2025
 171:H2.sp = 'b'0 ;
 172:H3.sp = 'b'0 ;
 173:
-174:HALT_SPEED_STRETCHED = HALT_ACTIVE # H0 # H1 # H2 ;
+174:HALT_SPEED_STRETCHED = HALT_ACTIVE # H0 # H1 # H2 # H3 ;
 175:
 176:HALTout = HALTin # PAUSEsw # HALT_SPEED_STRETCHED ;
 177:
@@ -241,5 +241,5 @@ Created Sat Nov 29 19:39:23 2025
 
 
 
-Jedec Fuse Checksum       (18c4)
-Jedec Transmit Checksum   (4d7c)
+Jedec Fuse Checksum       (2289)
+Jedec Transmit Checksum   (64a2)

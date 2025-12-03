@@ -175,11 +175,13 @@ HALT_SPEED_STRETCHED =>
   # H0
   # H1
   # H2
+  # H3
 
 HALTout =>
     H0
   # H1
   # H2
+  # H3
   # !HALTin
   # !PAUSEsw
   # !D0 & !RW & S0 & !SPDsel

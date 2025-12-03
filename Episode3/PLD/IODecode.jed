@@ -1,7 +1,7 @@
 
 CUPL(WM)        5.0a  Serial# MW-10400000
 Device          v750c  Library DLIB-h-40-2
-Created         Sat Nov 29 19:39:23 2025
+Created         Tue Dec 02 06:53:23 2025
 Name            IODecode 
 Partno          ATF750CL 
 Revision        11 
@@ -103,4 +103,4 @@ Location        None
 *L14464 11100110101001100000100001101001
 *L14496 10000000
 *C1A4C
-*01FD
+*01CB

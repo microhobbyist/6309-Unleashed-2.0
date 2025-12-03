@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# MW-10400000
 Device          v750c  Library DLIB-h-40-2
-Created         Sat Nov 29 19:39:23 2025
+Created         Tue Dec 02 06:53:23 2025
 Name            WaitStateGen 
 Partno          ATF750CL 
 Revision        12 
@@ -134,20 +134,6 @@ E_sync.ck  =>
 E_sync.sp  =>
     0 
 
-HOLD.d  =>
-    RUN
-  # E_prev & HOLD
-  # !E_sync & HOLD
-
-HOLD.ar  =>
-    RESET
-
-HOLD.ck  =>
-    CPUclk
-
-HOLD.sp  =>
-    0 
-
 LOAD =>
     !E_prev & E_sync & !RUN & WS1
   # !E_prev & E_sync & !RUN & WS0
@@ -167,8 +153,8 @@ LOAD3 =>
     WS1
 
 MRDY =>
-    HOLD
-  # PSGDT
+    PSGDT
+  # RUN
   # VDPWAIT
   # WAIT1
   # WAIT2
@@ -234,12 +220,6 @@ WAIT_NZ_prev.sp  =>
 WAIT_RISE =>
     !WAIT_NZ_prev & WS0
   # !WAIT_NZ_prev & WS1
-
-WS_NUM0 =>
-    WS0
-
-WS_NUM1 =>
-    WS1
 
 CNT0.oe  =>
     1 
@@ -314,10 +294,6 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     E_sync              ck      26       M        1       1       1     
     E_sync              sp      26       M        1       1       1     
     HOLD                        29       N        -       -       -     
-    HOLD                d       29       M        3       8       3     
-    HOLD                ar      29       M        1       1       1     
-    HOLD                ck      29       M        1       1       1     
-    HOLD                sp      29       M        1       1       1     
     LOAD                        0        I        4       -       -     
     LOAD0                       0        I        1       -       -     
     LOAD1                       0        I        1       -       -     
@@ -354,8 +330,6 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     WAIT_RISE                   0        I        2       -       -     
     WS0                         11       V        -       -       -     
     WS1                         13       V        -       -       -     
-    WS_NUM0                     0        I        1       -       -     
-    WS_NUM1                     0        I        1       -       -     
     CNT0                oe      22       D        1       1       0     
     CNT1                oe      21       D        1       1       0     
     CNT2                oe      20       D        1       1       0     
@@ -381,8 +355,8 @@ SP
  14280 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
 
 Pin #23 Node 34 ,44  14364 Mode  -xx  14395 xxxx 
- 00000 ------------------------------------x----------------------------------------------- 
- 00084 ----------------------------------x------------------------------------------------- 
+ 00000 ----------------------------------x------------------------------------------------- 
+ 00084 --------------------------------------x--------------------------------------------- 
  00168 ------------------------------------------x----------------------------------------- 
  00252 --------------------------x--------------------------------------------------------- 
  00336 ------------------x----------------------------------------------------------------- 
@@ -470,7 +444,7 @@ Pin #19 Node 30 ,40  14376 Mode  xx-  14411 xxxx
  06888 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  06972 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  07056 ------------------------------------------------------------------------------------ 
-Pin #18 Node 29 ,39  14379 Mode  x--  14415 xxxx 
+Pin #18 Node 29 ,39  14379 Mode  xx-  14415 xxxx 
  07140 --------------------------------------x-------------------------------x------------- 
  07224 --------------------------------------x-----------------------x--------------------- 
  07308 --------------------------------------x---------------x----------------------------- 
@@ -479,9 +453,9 @@ Pin #18 Node 29 ,39  14379 Mode  x--  14415 xxxx
  07560 ---x--------x--------x-----------------x-------------------------------------------- 
  07644 -x---x------x--------------------------x-------------------------------------------- 
  07728 -x----------x--------x-----------------x-------------------------------------------- 
- 07812 --------------------------------------x--------------------------------------------- 
- 07896 ----x-------------------------------x----------------------------------------------- 
- 07980 -------------x----------------------x----------------------------------------------- 
+ 07812 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 07896 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 07980 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08064 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08148 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08232 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -489,8 +463,8 @@ Pin #18 Node 29 ,39  14379 Mode  x--  14415 xxxx
  08400 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08484 ----------------------------------------------------------x------------------------- 
  08568 -----------------------------------------------------------------------------------x 
- 08652 -----------------------------------------------------------------------------------x 
- 08736 ----------------------------------------------------------x------------------------- 
+ 08652 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 08736 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08820 ------------------------------------------------------------------------------------ 
 Pin #17 Node 28 ,38  14382 Mode  x-x  14419 xxxx 
  08904 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
