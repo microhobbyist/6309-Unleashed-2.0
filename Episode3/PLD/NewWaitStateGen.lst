@@ -1,0 +1,299 @@
+LISTING FOR LOGIC DESCRIPTION FILE: NewWaitStateGen.pld              Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Dec 10 11:57:42 2025
+
+  1:Name     NewWaitStateGen ;
+  2:PartNo   ATF750CL ;
+  3:Date     2025/12/04 ;
+  4:Revision 1 ;
+  5:Designer Frederic Segard ;
+  6:Company  MicroHobbyist ;
+  7:Assembly None ;
+  8:Location None ;
+  9:Device   v750c ;
+ 10:
+ 11:/* =========================================================
+ 12:   6309 WAIT-STATE STRETCHER (ATF750C VERSION)
+ 13:   ---------------------------------------------------------
+ 14:   - Supports true 0..3 wait states from TWO sources:
+ 15:       * WS[1:0] from I/O decoder PLDs (shared bus).
+ 16:       * D[1:0] from speed register (CPU call).
+ 17:     Effective wait = max(WS_IO or WS_SPD).
+ 18:
+ 19:   - Quarter-cycle timing using CLK4x (4x E).
+ 20:   - 1 wait state = 4 quarter cycles (CNT3..0).
+ 21:   - /MRDY held LOW while counter > 0 OR external waits.
+ 22:   - External waits (WAIT1, WAIT3..3, WAIT2) can hold
+ 23:     /MRDY as long as they remain active.
+ 24:   - Speed register is read/write via SPDsel & D1:D0.
+ 25:   ========================================================= */
+ 26:
+ 27:/* ------------------------- INPUTS ------------------------- */
+ 28:PIN  1 =  CLK4x ;     /* 4x clock */
+ 29:PIN  2 =  E ;         /* CPU E */
+ 30:PIN  3 =  RW ;        /* Read/Write line */
+ 31:PIN  4 = !RESET ;     /* System reset, active low */
+ 32:PIN  5 = !WAIT1 ;     /* External wait 1, active low at pin */
+ 33:PIN  6 = !WAIT2 ;     /* External wait 2, active low at pin */
+ 34:PIN  7 = !WAIT3 ;     /* External wait 3, active low at pin */
+ 35:PIN  8 = !WAIT4 ;     /* External wait 4, active low at pin */
+ 36:PIN  9 = !WAIT5 ;     /* External wait 5, active low at pin */
+ 37:PIN 10 = !SPDsel ;    /* Speed register chip select, active LOW at pin */
+ 38:PIN 11 =  WS0 ;       /* I/O bus wait-state bit 0 (pulled low) */
+ 39:/*  12 =  GND ;       /* Ground */
+ 40:PIN 13 =  WS1 ;       /* I/O bus wait-state bit 1 (pulled low) */
+ 41:
+ 42:/* ------------------------- OUTPUTS ------------------------ */
+ 43:/*  24 =  VCC ;       /* +5V */
+ 44:PIN 23 = !MRDY ;      /* MRDY to CPU, active LOW */
+ 45:PIN 22 =  CNT0 ;      /* NC - Counter bit 0 (debug) */
+ 46:PIN 21 =  CNT1 ;      /* NC - Counter bit 1 (debug) */
+ 47:PIN 20 =  CNT2 ;      /* NC - Counter bit 2 (debug) */
+ 48:PIN 19 =  CNT3 ;      /* NC - Counter bit 3 (debug) */
+ 49:PIN 18 =  RUN ;       /* NC - Stretch active (debug) */
+ 50:PIN 17 =  S0 ;        /* Speed register bit 0 (latched) + BiColor LED */
+ 51:PIN 16 =  S1 ;        /* Speed register bit 1 (latched) + BiColor LED */
+ 52:
+ 53:/* ------------------------- BIDIRECTIONAL ------------------ */
+
+LISTING FOR LOGIC DESCRIPTION FILE: NewWaitStateGen.pld              Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Dec 10 11:57:42 2025
+
+ 54:PIN 15 =  D0 ;        /* Data bus bit 0 (bidirectional) */
+ 55:PIN 14 =  D1 ;        /* Data bus bit 1 (bidirectional) */
+ 56:
+ 57:/* ----------------------- BURIED NODES --------------------- */
+ 58:
+ 59:PINNODE 25 = E_prev ;        /* Previous E (synced) */
+ 60:PINNODE 26 = E_sync ;        /* Synchronized E */
+ 61:PINNODE 27 = WAIT_NZ_prev ;  /* Previous WAIT_NZ (effective WS) */
+ 62:PINNODE 28 = HOLD ;          /* Hold latch */
+ 63:
+ 64:/* =========================================================
+ 65:   SPEED REGISTER (GLOBAL "SLOWDOWN" IN WS UNITS)
+ 66:   ---------------------------------------------------------
+ 67:   - 2-bit register S1:S0 written at SPDsel address.
+ 68:   - REG_WRITE when SPDsel is asserted and R/W=0.
+ 69:   - Register is clocked by CLK4x (single global clock),
+ 70:     using simple "hold or write" logic.
+ 71:   - On reset, S1 and S0 clear to 0 (no extra WS).
+ 72:   ========================================================= */
+ 73:
+ 74:REG_WRITE = SPDsel & !RW ;   /* SPDsel=1 internally when pin is low */
+ 75:REG_READ  = SPDsel &  RW ;   /* Readback of S1:S0 onto D1:D0 */
+ 76:
+ 77:/* S0: speed bit 0 */
+ 78:S0.d  = (REG_WRITE & D0) # (!REG_WRITE & S0) ;
+ 79:S0.ck = CLK4x ;
+ 80:S0.ar = RESET ;    /* Clear to 0 on reset */
+ 81:S0.sp = 'b'0 ;
+ 82:
+ 83:/* S1: speed bit 1 */
+ 84:S1.d  = (REG_WRITE & D1) # (!REG_WRITE & S1) ;
+ 85:S1.ck = CLK4x ;
+ 86:S1.ar = RESET ;    /* Clear to 0 on reset */
+ 87:S1.sp = 'b'0 ;
+ 88:
+ 89:/* =========================================================
+ 90:   E SYNCHRONIZERS (CLK4x DOMAIN)
+ 91:   ========================================================= */
+ 92:
+ 93:E_sync.d  = E ;
+ 94:E_sync.ck = CLK4x ;
+ 95:E_sync.ar = RESET ;
+ 96:E_sync.sp = 'b'0 ;
+ 97:
+ 98:E_prev.d  = E_sync ;
+ 99:E_prev.ck = CLK4x ;
+100:E_prev.ar = RESET ;
+101:E_prev.sp = 'b'0 ;
+102:
+103:/* E rising-edge detect */
+104:E_rise = E_sync & !E_prev ;
+105:
+106:/* =========================================================
+107:   EXTERNAL WAIT SOURCES
+
+LISTING FOR LOGIC DESCRIPTION FILE: NewWaitStateGen.pld              Page 3
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Dec 10 11:57:42 2025
+
+108:   ---------------------------------------------------------
+109:   Inputs are active LOW at the pin. Internally they are
+110:   active HIGH when a wait is requested.
+111:   ========================================================= */
+112:
+113:EXT_WAIT = WAIT1 # WAIT2 # WAIT3 # WAIT4 # WAIT5 ;
+114:
+115:/* =========================================================
+116:   EFFECTIVE WAIT-STATE VALUE (0..3) AND PRELOAD (WS * 4)
+117:   ---------------------------------------------------------
+118:   WS_IO[1:0] comes from I/O decoders on the shared bus.
+119:   WS_SPD[1:0] comes from local speed register S1:S0.
+120:
+121:   We compute:
+122:     WS_EFF = max(WS_IO, WS_SPD)
+123:
+124:   Truth table for max(2-bit, 2-bit):
+125:
+126:   WS_SPD WS_IO | WS_EFF
+127:   00     00    | 00
+128:   00     01    | 01
+129:   00     10    | 10
+130:   00     11    | 11
+131:   01     00    | 01
+132:   01     01    | 01
+133:   01     10    | 10
+134:   01     11    | 11
+135:   10     00    | 10
+136:   10     01    | 10
+137:   10     10    | 10
+138:   10     11    | 11
+139:   11     00    | 11
+140:   11     01    | 11
+141:   11     10    | 11
+142:   11     11    | 11
+143:   ========================================================= */
+144:
+145:/* MSB of effective wait = OR of MSBs */
+146:WS_eff1 = WS1 # S1 ;
+147:
+148:/* LSB of effective wait = max function */
+149:WS_eff0 =
+150:     (WS0 & WS1)     /* IO = 3 */
+151:   # (S0 & S1)       /* SPD = 3 */
+152:   # (WS0 & !S1)     /* IO >= 1 and SPD < 2 */
+153:   # (S0 & !WS1) ;   /* SPD >= 1 and IO < 2 */
+154:
+155:/* Non-zero effective WS */
+156:WAIT_NZ = WS_eff0 # WS_eff1 ;
+157:
+158:/* Track WAIT_NZ changes (based on effective WS) */
+159:WAIT_NZ_prev.d  = WAIT_NZ ;
+160:WAIT_NZ_prev.ck = CLK4x ;
+161:WAIT_NZ_prev.ar = RESET ;
+
+LISTING FOR LOGIC DESCRIPTION FILE: NewWaitStateGen.pld              Page 4
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Dec 10 11:57:42 2025
+
+162:WAIT_NZ_prev.sp = 'b'0 ;
+163:
+164:/* Detect when WS_EFF becomes non-zero while E is high */
+165:WAIT_RISE = WAIT_NZ & !WAIT_NZ_prev ;
+166:
+167:/* Preload = WS_EFF * 4 (shift left 2 bits)
+168:   WS_EFF[1:0] -> {CNT3..0} = {WS1, WS0, 0, 0}
+169:   so 1WS => 0100, 2WS => 1000, 3WS => 1100.
+170:*/
+171:LOAD0 = 'b'0 ;
+172:LOAD1 = 'b'0 ;
+173:LOAD2 = WS_eff0 ;
+174:LOAD3 = WS_eff1 ;
+175:
+176:/* =========================================================
+177:   RUN CONTROL AND DOWN COUNTER (4 BITS)
+178:   ========================================================= */
+179:
+180:CNT_ZERO = !CNT3 & !CNT2 & !CNT1 & !CNT0 ;
+181:
+182:/* Load when:
+183:   - E rises and WS_EFF != 0, OR
+184:   - WS_EFF becomes non-zero while E is high.
+185:*/
+186:LOAD = (E_rise & WAIT_NZ & !RUN) #
+187:       (E_sync & WAIT_RISE & !RUN) ;
+188:
+189:/* RUN while counter not zero */
+190:RUN.d  = LOAD # (RUN & !CNT_ZERO) ;
+191:RUN.ck = CLK4x ;
+192:RUN.ar = RESET ;
+193:RUN.sp = 'b'0 ;
+194:
+195:/* Decrement enable */
+196:DEC = RUN & !CNT_ZERO ;
+197:
+198:/* --------------- 4-bit DOWN COUNTER (CNT3..CNT0) --------------- */
+199:
+200:CNT0.d = (LOAD & LOAD0) # (!LOAD & (DEC $ CNT0)) ;
+201:CNT0.ck = CLK4x ;
+202:CNT0.ar = RESET ;
+203:CNT0.sp = 'b'0 ;
+204:
+205:CNT1.d = (LOAD & LOAD1) # (!LOAD & ((DEC & !CNT0) $ CNT1)) ;
+206:CNT1.ck = CLK4x ;
+207:CNT1.ar = RESET ;
+208:CNT1.sp = 'b'0 ;
+209:
+210:CNT2.d = (LOAD & LOAD2) # (!LOAD & ((DEC & !CNT1 & !CNT0) $ CNT2)) ;
+211:CNT2.ck = CLK4x ;
+212:CNT2.ar = RESET ;
+213:CNT2.sp = 'b'0 ;
+214:
+215:CNT3.d = (LOAD & LOAD3) # (!LOAD & ((DEC & !CNT2 & !CNT1 & !CNT0) $ CNT3)) ;
+
+LISTING FOR LOGIC DESCRIPTION FILE: NewWaitStateGen.pld              Page 5
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Dec 10 11:57:42 2025
+
+216:CNT3.ck = CLK4x ;
+217:CNT3.ar = RESET ;
+218:CNT3.sp = 'b'0 ;
+219:
+220:/* =========================================================
+221:   HOLD LATCH - KEEP /MRDY LOW UNTIL END OF E CYCLE
+222:   ========================================================= */
+223:
+224:HOLD.d  = RUN # (HOLD & !E_rise) ;
+225:HOLD.ck = CLK4x ;
+226:HOLD.ar = RESET ;
+227:HOLD.sp = 'b'0 ;
+228:
+229:/* =========================================================
+230:   DATA BUS READBACK (SPEED REGISTER)
+231:   ========================================================= */
+232:
+233:D0    = REG_READ & S0 ;
+234:D0.oe = REG_READ ;
+235:
+236:D1    = REG_READ & S1 ;
+237:D1.oe = REG_READ ;
+238:
+239:MRDY.oe = 'b'1 ;
+240:S0.oe   = 'b'1 ;
+241:S1.oe   = 'b'1 ;
+242:
+243:/* =========================================================
+244:   OUTPUT
+245:   ========================================================= */
+246:
+247:/* Internal "busy" is:
+248:   - Any effective programmed wait in progress (HOLD=1), OR
+249:   - Any external wait signal active (EXT_WAIT=1).
+250:
+251:   Internal MRDY=1 => pin !MRDY is LOW when busy.
+252:*/
+253:MRDY = HOLD # EXT_WAIT ;
+254:
+255:
+
+
+
+Jedec Fuse Checksum       (15b4)
+Jedec Transmit Checksum   (4a74)

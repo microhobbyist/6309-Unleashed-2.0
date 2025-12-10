@@ -1,0 +1,93 @@
+LISTING FOR LOGIC DESCRIPTION FILE: MemDecode.pld                    Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue Dec 02 06:53:23 2025
+
+  1:Name     MEMDecode ;
+  2:PartNo   ATF22V10C ;
+  3:Date     2025/11/29 ;
+  4:Revision 14 ;
+  5:Designer Frederic Segard ;
+  6:Company  MicroHobbyist ;
+  7:Assembly None ;
+  8:Location None ;
+  9:Device   g22v10 ;
+ 10:
+ 11:/* -------- Inputs -------- */
+ 12:PIN 1  = Q ;         /* CPU Q clock */
+ 13:PIN 2  = E ;         /* CPU E clock */
+ 14:PIN 3  = RW ;        /* Read/Write */
+ 15:PIN 4  = A4 ;
+ 16:PIN 5  = A5 ;
+ 17:PIN 6  = A6 ;
+ 18:PIN 7  = A7 ;
+ 19:PIN 8  = A8 ;
+ 20:PIN 9  = A9 ;
+ 21:PIN 10 = A10 ;
+ 22:PIN 11 = A11 ;
+ 23:/*  12 = GND ;       /* Tie to Ground */
+ 24:PIN 13 = A12 ;
+ 25:PIN 14 = A13 ;
+ 26:PIN 15 = A14 ;
+ 27:PIN 16 = A15 ;
+ 28:
+ 29:/* -------- Outputs (active-LOW) -------- */
+ 30:/*  24 =  VCC        /* Tie to +5V */
+ 31:PIN 23 = !CBLK ;     /* MMU Constant Block Region window ($F000-$FFFF) */
+ 32:PIN 22 = !IORQ ;     /* I/O mapped area ($FF00-$FFEF) */
+ 33:PIN 21 = !REG ;      /* Registers or future expansion ($FE00-$FEFF) */
+ 34:PIN 20 = !PAGE ;     /* MMU Page/Task registers ($FC00-$FDFF) */
+ 35:PIN 19 = !MREQ ;     /* All Memory area ($0000-$FBFF and $FFF0-$FFFF) */
+ 36:PIN 18 = !RD ;       /* Read */
+ 37:PIN 17 = !WR ;       /* Write */
+ 38:
+ 39:/* Equations */
+ 40:
+ 41:RD  =  RW & E ;      /* RW qualified with E = !RD */
+ 42:WR  = !RW & E ;      /* !RW qualified with E = !WR */
+ 43:VMA =  Q # E ;       /* Valid Memory Address, Address valid at rising of Q */
+ 44:
+ 45:/* Intermediate product terms */
+ 46:
+ 47:Fxxx = A15 & A14 & A13 & A12 ;
+ 48:xFxx = A11 & A10 & A9  & A8 ;
+ 49:xxFx =  A7 & A6  & A5  & A4 ;
+ 50:FFFx = Fxxx & xFxx & xxFx ;
+ 51:
+ 52:/* $F000-$FFFF (4KB): I/O range */
+ 53:BlockCONST =  Fxxx ;
+
+LISTING FOR LOGIC DESCRIPTION FILE: MemDecode.pld                    Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue Dec 02 06:53:23 2025
+
+ 54:
+ 55:/* $FF00-$FFEF (240B) : I/O range */
+ 56:BlockIORQ =  Fxxx & xFxx & (!(A7 & A6 & A5 & A4)) ;
+ 57:
+ 58:/* $FE00-$FEFF (256B) : Register range, or future expansion */
+ 59:BlockREG =  Fxxx & (A11 & A10 & A9 & !A8) ;
+ 60:
+ 61:/* $FC00-$FDFF (512B) : MMU Task/Page registers */
+ 62:BlockPAGE =  Fxxx & A11 & A10 & !A9 ;
+ 63:
+ 64:/* $0000-$FBFF + $FFF0-$FFFF (63KB): General memory area) */
+ 65:BlockMEM = (!(Fxxx & A11 & A10)) # FFFx ;
+ 66:
+ 67:/* Output Equations (active-HIGH internal) */
+ 68:CONST   = BlockCONST & VMA ;
+ 69:IORQ    = BlockIORQ  & VMA ;
+ 70:REG     = BlockREG   & VMA ;
+ 71:PAGE    = BlockPAGE  & VMA ;
+ 72:MREQ    = BlockMEM   & VMA ;
+ 73:
+
+
+
+Jedec Fuse Checksum       (b5f9)
+Jedec Transmit Checksum   (0610)

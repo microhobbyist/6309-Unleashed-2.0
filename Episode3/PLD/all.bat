@@ -1,9 +1,9 @@
 @echo off
 
 echo.
-echo Compiling: CPUSpeedSel.pld
+echo Compiling: MemDecode.pld
 echo ======================================
-cupl -m3lxudfjab -u C:\Wincupl\Shared\Atmel.DL CPUSpeedSel.pld
+cupl -m3lxudfjab -u C:\Wincupl\Shared\Atmel.DL MemDecode.pld
 if %ERRORLEVEL% EQU 0 (
     echo Passed!
 ) else (
@@ -21,9 +21,9 @@ if %ERRORLEVEL% EQU 0 (
 )
 
 echo.
-echo Compiling: MemDecode.pld
+echo Compiling: WaitStateGen.pld
 echo ======================================
-cupl -m3lxudfjab -u C:\Wincupl\Shared\Atmel.DL MemDecode.pld
+cupl -m3lxudfjab -u C:\Wincupl\Shared\Atmel.DL NewWaitStateGen.pld
 if %ERRORLEVEL% EQU 0 (
     echo Passed!
 ) else (
@@ -31,9 +31,9 @@ if %ERRORLEVEL% EQU 0 (
 )
 
 echo.
-echo Compiling: WaitStateGen.pld
+echo Compiling: ShadowPlus.pld
 echo ======================================
-cupl -m3lxudfjab -u C:\Wincupl\Shared\Atmel.DL WaitStateGen.pld
+cupl -m3lxudfjab -u C:\Wincupl\Shared\Atmel.DL ShadowPlus.pld
 if %ERRORLEVEL% EQU 0 (
     echo Passed!
 ) else (

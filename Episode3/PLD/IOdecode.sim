@@ -9,15 +9,15 @@ PIN  10 =  A6
 PIN  11 =  A7 
 PIN  21 = !ACIA1cs 
 PIN  22 = !CFcs 
-PIN   1 =  E 
-PIN  19 = !INTvec 
+PIN   1 =  CLK4x 
 PIN   2 = !IORQ 
-PIN  20 = !POSTcs 
-PIN  18 = !ROMdis 
+PIN  17 = !POSTcs 
+PIN  19 =  RTCas 
+PIN  20 = !RTCcs 
+PIN  18 =  RTCds 
 PIN   3 =  RW 
-PIN  14 =  SPDg 
-PIN  13 =  SPDr 
-PIN  17 = !SPDsel 
+PIN  13 =  S0 
+PIN  14 =  S1 
 PIN  23 = !TIMERcs 
 PIN  16 =  WS0 
 PIN  15 =  WS1 
@@ -26,71 +26,60 @@ PIN  30 =  WS_EN
 
 %FIELD
 FIELD ADDR = A7,A6,A5,A4,A3,A2,A1,A0
-FIELD CS = TIMERcs,CFcs,ACIA1cs,POSTcs,SPDg,SPDr
+FIELD CS = TIMERcs,CFcs,ACIA1cs,RTCcs,POSTcs,S1,S0
 FIELD WS = WS1,WS0
 %END
 
 %EQUATION
 ACIA1cs =>
-    !A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    !A3 & !A4 & A5 & A6 & !A7 & !IORQ
 
 ACIA1cs.oe  =>
     1 
 
 CFcs =>
-    A3 & !A4 & !A5 & !A6 & !A7 & E & !IORQ
+    A3 & !A4 & !A5 & !A6 & !A7 & !IORQ
 
 CFcs.oe  =>
     1 
 
-INTvec =>
-    A0 & !A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & RW
-
-INTvec.oe  =>
-    1 
-
 POSTcs =>
-    !A0 & !A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+    !A0 & !A1 & A2 & !A3 & !A4 & !A5 & !A6 & !A7 & !IORQ
 
 POSTcs.oe  =>
     1 
 
-ROMdis =>
-    !A0 & A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & !RW
+RTCas =>
+    !A0 & A1 & A2 & !A3 & !A4 & A5 & !A6 & !A7 & !IORQ
 
-ROMdis.oe  =>
+RTCcs =>
+    A1 & A2 & !A3 & !A4 & A5 & !A6 & !A7 & !IORQ
+
+RTCcs.oe  =>
     1 
 
-SPDsel =>
-    A0 & A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
-
-SPDsel.oe  =>
-    1 
+RTCds =>
+    A0 & A1 & A2 & !A3 & !A4 & A5 & !A6 & !A7 & !IORQ
 
 TIMERcs =>
-    !A3 & !A4 & !A5 & !A6 & !A7 & E & !IORQ
+    A3 & !A4 & A5 & !A6 & !A7 & !IORQ
 
 TIMERcs.oe  =>
     1 
 
-VIA =>
-    E & IORQ
-
 WS0 =>
-    ACIA1cs & CFcs & POSTcs & SPDg & SPDr & !TIMERcs
-  # ACIA1cs & CFcs & !POSTcs & !SPDg & SPDr & TIMERcs
-  # ACIA1cs & !CFcs & POSTcs & !SPDg & SPDr & TIMERcs
-  # !ACIA1cs & CFcs & POSTcs & !SPDg & SPDr & TIMERcs
-  # ACIA1cs & CFcs & !POSTcs & SPDg & !SPDr & TIMERcs
-  # ACIA1cs & !CFcs & POSTcs & SPDg & !SPDr & TIMERcs
+    ACIA1cs & CFcs & POSTcs & RTCcs & !S0 & S1 & !TIMERcs
+  # ACIA1cs & CFcs & POSTcs & !RTCcs & S0 & S1 & TIMERcs
+  # ACIA1cs & CFcs & !POSTcs & RTCcs & S0 & S1 & TIMERcs
+  # !ACIA1cs & CFcs & POSTcs & RTCcs & S0 & S1 & TIMERcs
+  # ACIA1cs & !CFcs & POSTcs & RTCcs & !S0 & S1 & TIMERcs
 
 WS0.oe  =>
     WS_EN
 
 WS1 =>
-    ACIA1cs & CFcs & !POSTcs & SPDr & TIMERcs
-  # ACIA1cs & !CFcs & POSTcs & SPDr & TIMERcs
-  # ACIA1cs & CFcs & POSTcs & !SPDg & SPDr & !TIMERcs
+    ACIA1cs & CFcs & POSTcs & RTCcs & S0 & S1 & !TIMERcs
+  # ACIA1cs & !CFcs & POSTcs & RTCcs & S0 & S1 & TIMERcs
 
 WS1.oe  =>
     WS_EN
@@ -103,12 +92,18 @@ WS_EN.ar  =>
     0 
 
 WS_EN.ck  =>
-    E
+    CLK4x
 
 WS_EN.sp  =>
     0 
 
-SPDg.oe  =>
+RTCas.oe  =>
+    1 
+
+RTCds.oe  =>
+    1 
+
+S1.oe  =>
     0 
 
 %END

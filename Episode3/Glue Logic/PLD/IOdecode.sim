@@ -1,0 +1,114 @@
+%SIGNAL
+PIN   4 =  A0 
+PIN   5 =  A1 
+PIN   6 =  A2 
+PIN   7 =  A3 
+PIN   8 =  A4 
+PIN   9 =  A5 
+PIN  10 =  A6 
+PIN  11 =  A7 
+PIN  21 = !ACIA1cs 
+PIN  22 = !CFcs 
+PIN   1 =  E 
+PIN  19 = !INTvec 
+PIN   2 = !IORQ 
+PIN  20 = !POSTcs 
+PIN  18 = !ROMdis 
+PIN   3 =  RW 
+PIN  14 =  SPDg 
+PIN  13 =  SPDr 
+PIN  17 = !SPDsel 
+PIN  23 = !TIMERcs 
+PIN  16 =  WS0 
+PIN  15 =  WS1 
+PIN  30 =  WS_EN 
+%END
+
+%FIELD
+FIELD ADDR = A7,A6,A5,A4,A3,A2,A1,A0
+FIELD CS = TIMERcs,CFcs,ACIA1cs,POSTcs,SPDg,SPDr
+FIELD WS = WS1,WS0
+%END
+
+%EQUATION
+ACIA1cs =>
+    !A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+ACIA1cs.oe  =>
+    1 
+
+CFcs =>
+    A3 & !A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+CFcs.oe  =>
+    1 
+
+INTvec =>
+    A0 & !A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & RW
+
+INTvec.oe  =>
+    1 
+
+POSTcs =>
+    !A0 & !A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+POSTcs.oe  =>
+    1 
+
+ROMdis =>
+    !A0 & A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ & !RW
+
+ROMdis.oe  =>
+    1 
+
+SPDsel =>
+    A0 & A1 & A2 & !A3 & A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+SPDsel.oe  =>
+    1 
+
+TIMERcs =>
+    !A3 & !A4 & !A5 & !A6 & !A7 & E & !IORQ
+
+TIMERcs.oe  =>
+    1 
+
+VIA =>
+    E & IORQ
+
+WS0 =>
+    ACIA1cs & CFcs & POSTcs & SPDg & SPDr & !TIMERcs
+  # ACIA1cs & CFcs & !POSTcs & !SPDg & SPDr & TIMERcs
+  # ACIA1cs & !CFcs & POSTcs & !SPDg & SPDr & TIMERcs
+  # !ACIA1cs & CFcs & POSTcs & !SPDg & SPDr & TIMERcs
+  # ACIA1cs & CFcs & !POSTcs & SPDg & !SPDr & TIMERcs
+  # ACIA1cs & !CFcs & POSTcs & SPDg & !SPDr & TIMERcs
+
+WS0.oe  =>
+    WS_EN
+
+WS1 =>
+    ACIA1cs & CFcs & !POSTcs & SPDr & TIMERcs
+  # ACIA1cs & !CFcs & POSTcs & SPDr & TIMERcs
+  # ACIA1cs & CFcs & POSTcs & !SPDg & SPDr & !TIMERcs
+
+WS1.oe  =>
+    WS_EN
+
+WS_EN.d  =>
+    WS0
+  # WS1
+
+WS_EN.ar  =>
+    0 
+
+WS_EN.ck  =>
+    E
+
+WS_EN.sp  =>
+    0 
+
+SPDg.oe  =>
+    0 
+
+%END

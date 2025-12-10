@@ -1,0 +1,68 @@
+Name     ShadowPlus ;
+PartNo   ATF22V10C ;
+Date     2025/12/10 ;
+Revision 2 ;
+Designer Frederic Segard ;
+Company  MicroHobbyist ;
+Assembly None ;
+Location None ;
+Device   g22v10 ;
+
+/* -------- Inputs -------- */
+PIN 1  =  ROMdis ;   /* ROM disable CS */
+PIN 2  =  E ;        /* E clock */
+PIN 3  =  RW ;       /* Read-Write line */
+PIN 4  = !RESET ;    /* Reset */
+PIN 5  = !MREQ ;     /* Memory Request, Active-low during memory cycle */
+/*  6  =  NC         /* Unused input tied to ground */
+/*  7  =  NC         /* Unused input tied to ground */
+/*  8  =  NC         /* Unused input tied to ground */
+/*  9  =  NC         /* Unused input tied to ground */
+/*  10 =  NC         /* Unused input tied to ground */
+PIN 11 =  S0 ;       /* Address bit 7 - MSB of I/O window */
+/*  12 =  GND ;      /* Ground connection */
+PIN 13 =  S1 ;       /* Current speed of CPU */
+
+/* -------- Outputs -------- */
+/*  24 =  VCC ;      /* +5V connection */
+PIN 23 = !RD ;       /* Read line */
+PIN 22 = !WR ;       /* Write line */
+PIN 21 = !ROMcs ;    /* ROM chip select */
+PIN 20 = !RAMoe ;    /* RAM output enable */
+PIN 19 =  ROMdisFF ; /* Flip-Flop used for ROM disable (NC) */
+/*  18 =  NC ;       /* Not connected */
+/*  17 =  NC ;       /* Not connected */
+PIN 16 =  RedLED ;   /* Red component of RGB LED*/
+PIN 15 =  GreenLED ; /* Green component of RGB LED*/
+PIN 14 =  BlueLED ;  /* Blue component of RGB LED*/
+
+/* =========================================================
+                 READ & WRITE LOGIC
+   ========================================================= */
+
+RD =  RW & E ;
+WR = !RW & E ;
+
+/* =========================================================
+                 SHADOW ROM LOGIC
+   ========================================================= */
+
+ROMdisFF.d  = 'b'1 ;
+ROMdisFF.ar = RESET ;
+ROMdisFF.sp = 'b'0 ;
+
+ROMcs = !MREQ #  ROMdisFF ;
+RAMoe = !RD   # !ROMdisFF ;
+
+/* =========================================================
+                 SPEED LED COLOR
+   ========================================================= */
+
+FIELD SPEED = [S1, S0] ;
+FIELD RGB   = [RedLED,GreenLED,BlueLED] ;
+TABLE SPEED => RGB {
+'b'00 => 'b'001 ;  /* Blue */
+'b'01 => 'b'010 ;  /* Green */
+'b'10 => 'b'110 ;  /* Yellow */
+'b'11 => 'b'100 ;  /* Red */
+}

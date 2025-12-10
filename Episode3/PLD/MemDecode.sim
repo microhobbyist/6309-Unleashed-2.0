@@ -1,4 +1,6 @@
 %SIGNAL
+PIN   2 =  A2 
+PIN   3 =  A3 
 PIN   4 =  A4 
 PIN   5 =  A5 
 PIN   6 =  A6 
@@ -12,25 +14,24 @@ PIN  14 =  A13
 PIN  15 =  A14 
 PIN  16 =  A15 
 PIN  23 = !CBLK 
-PIN   2 =  E 
+PIN   1 =  E 
+PIN  17 = !FIRQvec 
 PIN  22 = !IORQ 
-PIN  19 = !MREQ 
-PIN  20 = !PAGE 
-PIN   1 =  Q 
-PIN  18 = !RD 
-PIN  21 = !REG 
-PIN   3 =  RW 
-PIN  17 = !WR 
+PIN  18 = !IRQvec 
+PIN  21 = !MREQ 
+PIN  20 =  ROMdis 
+PIN  19 = !SPDsel 
 %END
 
 %FIELD
+FIELD ADDR = A7,A6,A5,A4,A3,A2
 %END
 
 %EQUATION
 BlockCONST =>
-    A12 & A13 & A14 & A15
+    A9 & A10 & A11 & A12 & A13 & A14 & A15
 
-BlockIORQ =>
+BlockIO =>
     !A7 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
   # !A6 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
   # !A4 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
@@ -41,22 +42,19 @@ BlockMEM =>
   # !A14
   # !A13
   # !A12
-  # !A11
-  # !A10
+  # !A11 & A12 & A13 & A14 & A15
+  # !A10 & A12 & A13 & A14 & A15
+  # !A9 & A12 & A13 & A14 & A15
   # A4 & A5 & A6 & A7 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
 
-BlockPAGE =>
-    !A9 & A10 & A11 & A12 & A13 & A14 & A15
-
-BlockREG =>
-    !A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
-
-CONST =>
-    A12 & A13 & A14 & A15 & Q
-  # A12 & A13 & A14 & A15 & E
+CBLK =>
+    A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
 
 FFFx =>
     A4 & A5 & A6 & A7 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
+
+FIRQvec =>
+    A2 & A3 & !A4 & A5 & A6 & A7 & !IORQ
 
 Fxxx =>
     A12 & A13 & A14 & A15
@@ -66,44 +64,25 @@ IORQ =>
   # !A5 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
   # !A6 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
   # !A7 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
-  # !A4 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
-  # !A5 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
-  # !A6 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
-  # !A7 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
+
+IRQvec =>
+    !A2 & A3 & !A4 & A5 & A6 & A7 & !IORQ
 
 MREQ =>
-    !A10 & E
+    !A9 & E
+  # !A10 & E
   # !A11 & E
   # !A12 & E
   # !A13 & E
   # !A14 & E
   # !A15 & E
-  # !A10 & Q
-  # !A11 & Q
-  # !A12 & Q
-  # !A13 & Q
-  # !A14 & Q
-  # !A15 & Q
-  # A4 & A5 & A6 & A7 & A8 & A9 & E
-  # A4 & A5 & A6 & A7 & A8 & A9 & Q
+  # A4 & A5 & A6 & A7 & A8 & E
 
-PAGE =>
-    !A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
-  # !A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
+ROMdis =>
+    !A2 & !A3 & !A4 & A5 & A6 & A7 & !IORQ
 
-RD =>
-    E & RW
-
-REG =>
-    !A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & E
-  # !A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15 & Q
-
-VMA =>
-    Q
-  # E
-
-WR =>
-    E & !RW
+SPDsel =>
+    A2 & !A3 & !A4 & A5 & A6 & A7 & !IORQ
 
 xFxx =>
     A8 & A9 & A10 & A11
@@ -120,22 +99,25 @@ A14.oe  =>
 A15.oe  =>
     0 
 
+CBLK.oe  =>
+    1 
+
+FIRQvec.oe  =>
+    1 
+
 IORQ.oe  =>
+    1 
+
+IRQvec.oe  =>
     1 
 
 MREQ.oe  =>
     1 
 
-PAGE.oe  =>
+ROMdis.oe  =>
     1 
 
-RD.oe  =>
-    1 
-
-REG.oe  =>
-    1 
-
-WR.oe  =>
+SPDsel.oe  =>
     1 
 
 %END

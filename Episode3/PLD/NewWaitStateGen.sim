@@ -1,0 +1,325 @@
+%SIGNAL
+PIN   1 =  CLK4x 
+PIN  22 =  CNT0 
+PIN  21 =  CNT1 
+PIN  20 =  CNT2 
+PIN  19 =  CNT3 
+PIN  15 =  D0 
+PIN  14 =  D1 
+PIN   2 =  E 
+PIN  25 =  E_prev 
+PIN  26 =  E_sync 
+PIN  28 =  HOLD 
+PIN  23 = !MRDY 
+PIN   4 = !RESET 
+PIN  18 =  RUN 
+PIN   3 =  RW 
+PIN  17 =  S0 
+PIN  16 =  S1 
+PIN  10 = !SPDsel 
+PIN   5 = !WAIT1 
+PIN   6 = !WAIT2 
+PIN   7 = !WAIT3 
+PIN   8 = !WAIT4 
+PIN   9 = !WAIT5 
+PIN  27 =  WAIT_NZ_prev 
+PIN  11 =  WS0 
+PIN  13 =  WS1 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+CNT0.d  =>
+    !CNT0 & CNT1 & RUN
+  # !CNT0 & CNT2 & RUN
+  # !CNT0 & CNT3 & RUN
+  # CNT0 & !E_sync & !RUN
+  # CNT0 & E_prev & !RUN & WAIT_NZ_prev
+  # CNT0 & !RUN & !S0 & !S1 & !WS0 & !WS1
+
+CNT0.ar  =>
+    !RESET
+
+CNT0.ck  =>
+    CLK4x
+
+CNT0.sp CNT1.sp CNT2.sp CNT3.sp E_prev.sp E_sync.sp HOLD.sp RUN.sp S0.sp S1.sp WAIT_NZ_prev.sp  =>
+    0 
+
+CNT1.d  =>
+    CNT0 & CNT1 & RUN
+  # CNT1 & !E_sync & !RUN
+  # !CNT0 & !CNT1 & CNT2 & RUN
+  # !CNT0 & !CNT1 & CNT3 & RUN
+  # CNT1 & E_prev & !RUN & WAIT_NZ_prev
+  # CNT1 & !RUN & !S0 & !S1 & !WS0 & !WS1
+
+CNT1.ar  =>
+    !RESET
+
+CNT1.ck  =>
+    CLK4x
+
+CNT1.sp  =>
+    
+CNT2.d  =>
+    CNT0 & CNT2 & RUN
+  # CNT1 & CNT2 & RUN
+  # CNT2 & !E_sync & !RUN
+  # CNT2 & E_prev & !RUN & WAIT_NZ_prev
+  # CNT2 & !RUN & !S1 & !WS1
+  # !CNT0 & !CNT1 & !CNT2 & CNT3 & RUN
+  # !E_prev & E_sync & !RUN & S0 & S1
+  # E_sync & !RUN & S0 & S1 & !WAIT_NZ_prev
+  # !E_prev & E_sync & !RUN & !S1 & WS0
+  # E_sync & !RUN & !S1 & !WAIT_NZ_prev & WS0
+  # !E_prev & E_sync & !RUN & WS0 & WS1
+  # E_sync & !RUN & !WAIT_NZ_prev & WS0 & WS1
+  # !E_prev & E_sync & !RUN & S0 & !WS1
+  # E_sync & !RUN & S0 & !WAIT_NZ_prev & !WS1
+
+CNT2.ar  =>
+    !RESET
+
+CNT2.ck  =>
+    CLK4x
+
+CNT2.sp  =>
+    
+CNT3.d  =>
+    CNT0 & CNT3 & RUN
+  # CNT1 & CNT3 & RUN
+  # CNT2 & CNT3 & RUN
+  # CNT3 & !E_sync & !RUN
+  # !E_prev & E_sync & !RUN & S1
+  # CNT3 & E_prev & !RUN & WAIT_NZ_prev
+  # E_sync & !RUN & S1 & !WAIT_NZ_prev
+  # CNT3 & !RUN & !S0 & !WS0
+  # !E_prev & E_sync & !RUN & WS1
+  # E_sync & !RUN & !WAIT_NZ_prev & WS1
+
+CNT3.ar  =>
+    !RESET
+
+CNT3.ck  =>
+    CLK4x
+
+CNT3.sp  =>
+    
+CNT_ZERO =>
+    !CNT0 & !CNT1 & !CNT2 & !CNT3
+
+D0 =>
+    RW & S0 & !SPDsel
+
+D0.oe  =>
+    RW & !SPDsel
+
+D1 =>
+    RW & S1 & !SPDsel
+
+D1.oe  =>
+    RW & !SPDsel
+
+DEC =>
+    CNT3 & RUN
+  # CNT2 & RUN
+  # CNT1 & RUN
+  # CNT0 & RUN
+
+EXT_WAIT =>
+    WAIT1
+  # WAIT2
+  # WAIT3
+  # WAIT4
+  # WAIT5
+
+E_prev.d  =>
+    E_sync
+
+E_prev.ar  =>
+    !RESET
+
+E_prev.ck  =>
+    CLK4x
+
+E_prev.sp  =>
+    
+E_rise =>
+    !E_prev & E_sync
+
+E_sync.d  =>
+    E
+
+E_sync.ar  =>
+    !RESET
+
+E_sync.ck  =>
+    CLK4x
+
+E_sync.sp  =>
+    
+HOLD.d  =>
+    RUN
+  # E_prev & HOLD
+  # !E_sync & HOLD
+
+HOLD.ar  =>
+    !RESET
+
+HOLD.ck  =>
+    CLK4x
+
+HOLD.sp  =>
+    
+LOAD =>
+    !E_prev & E_sync & !RUN & WS1
+  # !E_prev & E_sync & !RUN & S1
+  # !E_prev & E_sync & !RUN & !S1 & WS0
+  # !E_prev & E_sync & !RUN & S0 & !WS1
+  # E_sync & !RUN & !WAIT_NZ_prev & WS1
+  # E_sync & !RUN & S1 & !WAIT_NZ_prev
+  # E_sync & !RUN & S0 & !WAIT_NZ_prev & !WS1
+  # E_sync & !RUN & !S1 & !WAIT_NZ_prev & WS0
+
+LOAD0 =>
+    0 
+
+LOAD1 =>
+    0 
+
+LOAD2 =>
+    WS0 & WS1
+  # S0 & S1
+  # !S1 & WS0
+  # S0 & !WS1
+
+LOAD3 =>
+    WS1
+  # S1
+
+MRDY =>
+    HOLD
+  # !WAIT1
+  # !WAIT2
+  # !WAIT3
+  # !WAIT4
+  # !WAIT5
+
+MRDY.oe  =>
+    1 
+
+REG_READ =>
+    RW & SPDsel
+
+REG_WRITE =>
+    !RW & SPDsel
+
+RUN.d  =>
+    CNT0 & RUN
+  # CNT1 & RUN
+  # CNT2 & RUN
+  # CNT3 & RUN
+  # !E_prev & E_sync & !RUN & S0
+  # !E_prev & E_sync & !RUN & S1
+  # E_sync & !RUN & S0 & !WAIT_NZ_prev
+  # E_sync & !RUN & S1 & !WAIT_NZ_prev
+  # !E_prev & E_sync & !RUN & WS0
+  # E_sync & !RUN & !WAIT_NZ_prev & WS0
+  # !E_prev & E_sync & !RUN & WS1
+  # E_sync & !RUN & !WAIT_NZ_prev & WS1
+
+RUN.ar  =>
+    !RESET
+
+RUN.ck  =>
+    CLK4x
+
+RUN.sp  =>
+    
+S0.d  =>
+    RW & S0
+  # S0 & SPDsel
+  # D0 & !RW & !SPDsel
+
+S0.ar  =>
+    !RESET
+
+S0.ck  =>
+    CLK4x
+
+S0.oe  =>
+    1 
+
+S0.sp  =>
+    
+S1.d  =>
+    RW & S1
+  # S1 & SPDsel
+  # D1 & !RW & !SPDsel
+
+S1.ar  =>
+    !RESET
+
+S1.ck  =>
+    CLK4x
+
+S1.oe  =>
+    1 
+
+S1.sp  =>
+    
+WAIT_NZ =>
+    WS1
+  # S1
+  # !S1 & WS0
+  # S0 & !WS1
+
+WAIT_NZ_prev.d  =>
+    S0
+  # S1
+  # WS0
+  # WS1
+
+WAIT_NZ_prev.ar  =>
+    !RESET
+
+WAIT_NZ_prev.ck  =>
+    CLK4x
+
+WAIT_NZ_prev.sp  =>
+    
+WAIT_RISE =>
+    !WAIT_NZ_prev & WS1
+  # S1 & !WAIT_NZ_prev
+  # S0 & !WAIT_NZ_prev & !WS1
+  # !S1 & !WAIT_NZ_prev & WS0
+
+WS_eff0 =>
+    WS0 & WS1
+  # S0 & S1
+  # !S1 & WS0
+  # S0 & !WS1
+
+WS_eff1 =>
+    WS1
+  # S1
+
+CNT0.oe  =>
+    1 
+
+CNT1.oe  =>
+    1 
+
+CNT2.oe  =>
+    1 
+
+CNT3.oe  =>
+    1 
+
+RUN.oe  =>
+    1 
+
+%END

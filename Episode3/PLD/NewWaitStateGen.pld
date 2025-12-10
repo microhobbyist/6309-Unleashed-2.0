@@ -1,0 +1,253 @@
+Name     NewWaitStateGen ;
+PartNo   ATF750CL ;
+Date     2025/12/04 ;
+Revision 1 ;
+Designer Frederic Segard ;
+Company  MicroHobbyist ;
+Assembly None ;
+Location None ;
+Device   v750c ;
+
+/* =========================================================
+   6309 WAIT-STATE STRETCHER (ATF750C VERSION)
+   ---------------------------------------------------------
+   - Supports true 0..3 wait states from TWO sources:
+       * WS[1:0] from I/O decoder PLDs (shared bus).
+       * D[1:0] from speed register (CPU call).
+     Effective wait = max(WS_IO or WS_SPD).
+
+   - Quarter-cycle timing using CLK4x (4x E).
+   - 1 wait state = 4 quarter cycles (CNT3..0).
+   - /MRDY held LOW while counter > 0 OR external waits.
+   - External waits (WAIT1, WAIT3..3, WAIT2) can hold
+     /MRDY as long as they remain active.
+   - Speed register is read/write via SPDsel & D1:D0.
+   ========================================================= */
+
+/* ------------------------- INPUTS ------------------------- */
+PIN  1 =  CLK4x ;     /* 4x clock */
+PIN  2 =  E ;         /* CPU E */
+PIN  3 =  RW ;        /* Read/Write line */
+PIN  4 = !RESET ;     /* System reset, active low */
+PIN  5 = !WAIT1 ;     /* External wait 1, active low at pin */
+PIN  6 = !WAIT2 ;     /* External wait 2, active low at pin */
+PIN  7 = !WAIT3 ;     /* External wait 3, active low at pin */
+PIN  8 = !WAIT4 ;     /* External wait 4, active low at pin */
+PIN  9 = !WAIT5 ;     /* External wait 5, active low at pin */
+PIN 10 = !SPDsel ;    /* Speed register chip select, active LOW at pin */
+PIN 11 =  WS0 ;       /* I/O bus wait-state bit 0 (pulled low) */
+/*  12 =  GND ;       /* Ground */
+PIN 13 =  WS1 ;       /* I/O bus wait-state bit 1 (pulled low) */
+
+/* ------------------------- OUTPUTS ------------------------ */
+/*  24 =  VCC ;       /* +5V */
+PIN 23 = !MRDY ;      /* MRDY to CPU, active LOW */
+PIN 22 =  CNT0 ;      /* NC - Counter bit 0 (debug) */
+PIN 21 =  CNT1 ;      /* NC - Counter bit 1 (debug) */
+PIN 20 =  CNT2 ;      /* NC - Counter bit 2 (debug) */
+PIN 19 =  CNT3 ;      /* NC - Counter bit 3 (debug) */
+PIN 18 =  RUN ;       /* NC - Stretch active (debug) */
+PIN 17 =  S0 ;        /* Speed register bit 0 (latched) + BiColor LED */
+PIN 16 =  S1 ;        /* Speed register bit 1 (latched) + BiColor LED */
+
+/* ------------------------- BIDIRECTIONAL ------------------ */
+PIN 15 =  D0 ;        /* Data bus bit 0 (bidirectional) */
+PIN 14 =  D1 ;        /* Data bus bit 1 (bidirectional) */
+
+/* ----------------------- BURIED NODES --------------------- */
+
+PINNODE 25 = E_prev ;        /* Previous E (synced) */
+PINNODE 26 = E_sync ;        /* Synchronized E */
+PINNODE 27 = WAIT_NZ_prev ;  /* Previous WAIT_NZ (effective WS) */
+PINNODE 28 = HOLD ;          /* Hold latch */
+
+/* =========================================================
+   SPEED REGISTER (GLOBAL "SLOWDOWN" IN WS UNITS)
+   ---------------------------------------------------------
+   - 2-bit register S1:S0 written at SPDsel address.
+   - REG_WRITE when SPDsel is asserted and R/W=0.
+   - Register is clocked by CLK4x (single global clock),
+     using simple "hold or write" logic.
+   - On reset, S1 and S0 clear to 0 (no extra WS).
+   ========================================================= */
+
+REG_WRITE = SPDsel & !RW ;   /* SPDsel=1 internally when pin is low */
+REG_READ  = SPDsel &  RW ;   /* Readback of S1:S0 onto D1:D0 */
+
+/* S0: speed bit 0 */
+S0.d  = (REG_WRITE & D0) # (!REG_WRITE & S0) ;
+S0.ck = CLK4x ;
+S0.ar = RESET ;    /* Clear to 0 on reset */
+S0.sp = 'b'0 ;
+
+/* S1: speed bit 1 */
+S1.d  = (REG_WRITE & D1) # (!REG_WRITE & S1) ;
+S1.ck = CLK4x ;
+S1.ar = RESET ;    /* Clear to 0 on reset */
+S1.sp = 'b'0 ;
+
+/* =========================================================
+   E SYNCHRONIZERS (CLK4x DOMAIN)
+   ========================================================= */
+
+E_sync.d  = E ;
+E_sync.ck = CLK4x ;
+E_sync.ar = RESET ;
+E_sync.sp = 'b'0 ;
+
+E_prev.d  = E_sync ;
+E_prev.ck = CLK4x ;
+E_prev.ar = RESET ;
+E_prev.sp = 'b'0 ;
+
+/* E rising-edge detect */
+E_rise = E_sync & !E_prev ;
+
+/* =========================================================
+   EXTERNAL WAIT SOURCES
+   ---------------------------------------------------------
+   Inputs are active LOW at the pin. Internally they are
+   active HIGH when a wait is requested.
+   ========================================================= */
+
+EXT_WAIT = WAIT1 # WAIT2 # WAIT3 # WAIT4 # WAIT5 ;
+
+/* =========================================================
+   EFFECTIVE WAIT-STATE VALUE (0..3) AND PRELOAD (WS * 4)
+   ---------------------------------------------------------
+   WS_IO[1:0] comes from I/O decoders on the shared bus.
+   WS_SPD[1:0] comes from local speed register S1:S0.
+
+   We compute:
+     WS_EFF = max(WS_IO, WS_SPD)
+
+   Truth table for max(2-bit, 2-bit):
+
+   WS_SPD WS_IO | WS_EFF
+   00     00    | 00
+   00     01    | 01
+   00     10    | 10
+   00     11    | 11
+   01     00    | 01
+   01     01    | 01
+   01     10    | 10
+   01     11    | 11
+   10     00    | 10
+   10     01    | 10
+   10     10    | 10
+   10     11    | 11
+   11     00    | 11
+   11     01    | 11
+   11     10    | 11
+   11     11    | 11
+   ========================================================= */
+
+/* MSB of effective wait = OR of MSBs */
+WS_eff1 = WS1 # S1 ;
+
+/* LSB of effective wait = max function */
+WS_eff0 =
+     (WS0 & WS1)     /* IO = 3 */
+   # (S0 & S1)       /* SPD = 3 */
+   # (WS0 & !S1)     /* IO >= 1 and SPD < 2 */
+   # (S0 & !WS1) ;   /* SPD >= 1 and IO < 2 */
+
+/* Non-zero effective WS */
+WAIT_NZ = WS_eff0 # WS_eff1 ;
+
+/* Track WAIT_NZ changes (based on effective WS) */
+WAIT_NZ_prev.d  = WAIT_NZ ;
+WAIT_NZ_prev.ck = CLK4x ;
+WAIT_NZ_prev.ar = RESET ;
+WAIT_NZ_prev.sp = 'b'0 ;
+
+/* Detect when WS_EFF becomes non-zero while E is high */
+WAIT_RISE = WAIT_NZ & !WAIT_NZ_prev ;
+
+/* Preload = WS_EFF * 4 (shift left 2 bits)
+   WS_EFF[1:0] -> {CNT3..0} = {WS1, WS0, 0, 0}
+   so 1WS => 0100, 2WS => 1000, 3WS => 1100.
+*/
+LOAD0 = 'b'0 ;
+LOAD1 = 'b'0 ;
+LOAD2 = WS_eff0 ;
+LOAD3 = WS_eff1 ;
+
+/* =========================================================
+   RUN CONTROL AND DOWN COUNTER (4 BITS)
+   ========================================================= */
+
+CNT_ZERO = !CNT3 & !CNT2 & !CNT1 & !CNT0 ;
+
+/* Load when:
+   - E rises and WS_EFF != 0, OR
+   - WS_EFF becomes non-zero while E is high.
+*/
+LOAD = (E_rise & WAIT_NZ & !RUN) #
+       (E_sync & WAIT_RISE & !RUN) ;
+
+/* RUN while counter not zero */
+RUN.d  = LOAD # (RUN & !CNT_ZERO) ;
+RUN.ck = CLK4x ;
+RUN.ar = RESET ;
+RUN.sp = 'b'0 ;
+
+/* Decrement enable */
+DEC = RUN & !CNT_ZERO ;
+
+/* --------------- 4-bit DOWN COUNTER (CNT3..CNT0) --------------- */
+
+CNT0.d = (LOAD & LOAD0) # (!LOAD & (DEC $ CNT0)) ;
+CNT0.ck = CLK4x ;
+CNT0.ar = RESET ;
+CNT0.sp = 'b'0 ;
+
+CNT1.d = (LOAD & LOAD1) # (!LOAD & ((DEC & !CNT0) $ CNT1)) ;
+CNT1.ck = CLK4x ;
+CNT1.ar = RESET ;
+CNT1.sp = 'b'0 ;
+
+CNT2.d = (LOAD & LOAD2) # (!LOAD & ((DEC & !CNT1 & !CNT0) $ CNT2)) ;
+CNT2.ck = CLK4x ;
+CNT2.ar = RESET ;
+CNT2.sp = 'b'0 ;
+
+CNT3.d = (LOAD & LOAD3) # (!LOAD & ((DEC & !CNT2 & !CNT1 & !CNT0) $ CNT3)) ;
+CNT3.ck = CLK4x ;
+CNT3.ar = RESET ;
+CNT3.sp = 'b'0 ;
+
+/* =========================================================
+   HOLD LATCH - KEEP /MRDY LOW UNTIL END OF E CYCLE
+   ========================================================= */
+
+HOLD.d  = RUN # (HOLD & !E_rise) ;
+HOLD.ck = CLK4x ;
+HOLD.ar = RESET ;
+HOLD.sp = 'b'0 ;
+
+/* =========================================================
+   DATA BUS READBACK (SPEED REGISTER)
+   ========================================================= */
+
+D0    = REG_READ & S0 ;
+D0.oe = REG_READ ;
+
+D1    = REG_READ & S1 ;
+D1.oe = REG_READ ;
+
+MRDY.oe = 'b'1 ;
+S0.oe   = 'b'1 ;
+S1.oe   = 'b'1 ;
+
+/* =========================================================
+   OUTPUT
+   ========================================================= */
+
+/* Internal "busy" is:
+   - Any effective programmed wait in progress (HOLD=1), OR
+   - Any external wait signal active (EXT_WAIT=1).
+
+   Internal MRDY=1 => pin !MRDY is LOW when busy.
+*/
+MRDY = HOLD # EXT_WAIT ;

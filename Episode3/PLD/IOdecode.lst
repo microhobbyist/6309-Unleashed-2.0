@@ -3,11 +3,11 @@ LISTING FOR LOGIC DESCRIPTION FILE: IOdecode.pld                     Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Tue Dec 02 06:53:23 2025
+Created Wed Dec 10 11:57:42 2025
 
   1:Name     IODecode ;
   2:PartNo   ATF750CL ;
-  3:Date     2025/11/29 ;
+  3:Date     2025/12/10 ;
   4:Revision 11 ;
   5:Designer Frederic Segard ;
   6:Company  MicroHobbyist ;
@@ -16,9 +16,9 @@ Created Tue Dec 02 06:53:23 2025
   9:Device   v750c ;
  10:
  11:/* -------- Inputs -------- */
- 12:PIN 1  =  E ;        /* E clock phase, used to qualify chip selects with IORQ */
+ 12:PIN 1  =  CLK4x ;    /* To trigger WS OE */
  13:PIN 2  = !IORQ ;     /* I/O Request, Active-low during I/O cycle */
- 14:PIN 3  =  RW ;       /* Read/Write */
+ 14:PIN 3  =  RW ;       /* Read-Write line */
  15:PIN 4  =  A0 ;       /* Address bit 0 - LSB */
  16:PIN 5  =  A1 ;
  17:PIN 6  =  A2 ;
@@ -28,94 +28,181 @@ Created Tue Dec 02 06:53:23 2025
  21:PIN 10 =  A6 ;
  22:PIN 11 =  A7 ;       /* Address bit 7 - MSB of I/O window */
  23:/*  12 =  GND ;      /* Ground connection */
- 24:PIN 13 =  SPDr ;     /* The red LED indicates turbo speed (yellow is fast) */
- 25:PIN 14 =  SPDg ;     /* The green LED indicates normal speed (yellow is fast) */
+ 24:PIN 13 =  S0 ;       /* Current speed of CPU */
+ 25:PIN 14 =  S1 ;       /* Current speed of CPU */
  26:
  27:/* -------- Outputs -------- */
  28:/*  24 =  VCC ;      /* +5V connection */
  29:PIN 23 = !TIMERcs ;  /* Timer (HD63B40) */
- 30:PIN 22 = !CFcs ;     /* Compact Flash card */
- 31:PIN 21 = !ACIA1cs ;  /* ACIA (R65C51R4) */
- 32:PIN 20 = !POSTcs ;   /* Power-On-Self-Test (MC14495) */
- 33:PIN 19 = !INTvec ;   /* Priority Interrupt Controller */
- 34:PIN 18 = !ROMdis ;   /* ROM disable */
- 35:PIN 17 = !SPDsel ;   /* Speed select */
+ 30:PIN 22 = !CFcs ;     /* Compact Flash card (Recommend speed) */
+ 31:PIN 21 = !ACIA1cs ;  /* ACIA (R65C52P3) */
+ 32:PIN 20 = !RTCcs ;    /* Real-Time-Clock (DS12C887A) */
+ 33:PIN 19 =  RTCas ;    /* Real-Time-Clock address strobe */
+ 34:PIN 18 =  RTCds ;    /* Real-Time-Clock data strobe */
+ 35:PIN 17 = !POSTcs ;   /* Power-On-Self-Test (MC14495) */           /*  */
  36:PIN 16 =  WS0 ;      /* Waitstate LSB bus(Tristate, pulled low) */
  37:PIN 15 =  WS1 ;      /* Waitstate MSB bus(Tristate, pulled low) */
  38:
  39:PINNODE 30 = WS_EN ;
  40:
- 41:VIA = IORQ & E ;    /* Valid I/O Address */
- 42:FIELD ADDR = [A7..A0] ;
- 43:
- 44:TIMERcs = ADDR:[00..07]   & VIA ;
- 45:CFcs    = ADDR:[08..0F]   & VIA ;
- 46:ACIA1cs = ADDR:[10..13]   & VIA ;
- 47:POSTcs  = ADDR:[14]       & VIA ;
- 48:INTvec  = ADDR:[15] &  RW & VIA ;
- 49:ROMdis  = ADDR:[16] & !RW & VIA ;
- 50:SPDsel  = ADDR:[17]       & VIA ;
- 51:
- 52:/* =========================================================
- 53:   WAIT-STATE LOGIC
+ 41:FIELD ADDR = [A7..A0] ;
+ 42:
+ 43:TIMERcs = ADDR:[28..2F] & IORQ ;  /* HD63B40 Programmable Timer */
+ 44:CFcs    = ADDR:[08..0F] & IORQ ;  /* Compact Flash card */
+ 45:ACIA1cs = ADDR:[60..67] & IORQ ;  /* Dual ACIA R65C52P3 */
+ 46:RTCcs   = ADDR:[26..27] & IORQ ;  /* DS12C887A Real-Time Clock */
+ 47:RTCas   = ADDR:[26]     & IORQ ;  /* RTC Address Strobe */
+ 48:RTCds   = ADDR:[27]     & IORQ ;  /* RTC Data Strobe */
+ 49:POSTcs  = ADDR:[04]     & IORQ ;  /* MC14495 Hex display POST */
+ 50:
+ 51:/* =========================================================
+ 52:   WAIT-STATE LOGIC (20MHz osc, max E = 5MHz)
+ 53:   ---------------------------------------------------------
 
 LISTING FOR LOGIC DESCRIPTION FILE: IOdecode.pld                     Page 2
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Tue Dec 02 06:53:23 2025
+Created Wed Dec 10 11:57:42 2025
 
- 54:   ========================================================= */
- 55:FIELD CS = [TIMERcs, CFcs, ACIA1cs, POSTcs, SPDg, SPDr] ;
- 56:FIELD WS = [WS1,WS0] ;
- 57:TABLE CS => WS {
- 58:/* Slow mode (speed=00) - OFF .75MHz Max */
- 59:'b'000000 => 'b'00 ;    /* Nothing */
- 60:'b'100000 => 'b'00 ;    /* TIMERcs */
- 61:'b'010000 => 'b'00 ;    /* CFcs */
- 62:'b'001000 => 'b'00 ;    /* ACIA1cs */
- 63:'b'000100 => 'b'00 ;    /* POSTcs */
- 64:/* Normal mode (speed=10) - GREEN 1.5MHz Max */
- 65:'b'000010 => 'b'00 ;    /* Nothing */
- 66:'b'100010 => 'b'00 ;    /* TIMERcs */
- 67:'b'010010 => 'b'01 ;    /* CFcs */
- 68:'b'001010 => 'b'00 ;    /* ACIA1cs */
- 69:'b'000110 => 'b'01 ;    /* POSTcs */
- 70:/* Fast mode (speed=11) - YELLOW 3MHz Max */
- 71:'b'000011 => 'b'00 ;    /* Nothing */
- 72:'b'100011 => 'b'01 ;    /* TIMERcs */
- 73:'b'010011 => 'b'10 ;    /* CFcs */
- 74:'b'001011 => 'b'00 ;    /* ACIA1cs */
- 75:'b'000111 => 'b'10 ;    /* POSTcs */
- 76:/* Turbo mode (speed=01) - RED 6MHz Max */
- 77:'b'000001 => 'b'00 ;    /* Nothing */
- 78:'b'100001 => 'b'10 ;    /* TIMERcs */
- 79:'b'010001 => 'b'11 ;    /* CFcs */
- 80:'b'001001 => 'b'01 ;    /* ACIA1cs */
- 81:'b'000101 => 'b'11 ;    /* POSTcs */
- 82:}
- 83:
- 84:/* Force WS_EN to be a valid output macrocell */
- 85:WS_EN.d  = WS0 # WS1 ;   /* WS non-zero = enable */
- 86:WS_EN.ck = E ;           /* Pseudo force combinational behavior */
- 87:WS_EN.sp = 'b'0 ;
- 88:WS_EN.ar = 'b'0 ;
- 89:
- 90:/* OE controls */
- 91:WS0.oe = WS_EN ;
- 92:WS1.oe = WS_EN ;
- 93:
- 94:TIMERcs.oe = 'b'1 ;
- 95:CFcs.oe    = 'b'1 ;
- 96:ACIA1cs.oe = 'b'1 ;
- 97:POSTcs.oe  = 'b'1 ;
- 98:INTvec.oe  = 'b'1 ;
- 99:ROMdis.oe  = 'b'1 ;
-100:SPDsel.oe  = 'b'1 ;
-101:
+ 54:   Model: t_bus ~ (1 + WS) * T_E
+ 55:
+ 56:   For E clock:
+ 57:     Turtle: S1:S0=00, E=0.625MHz  - T_E = 1600ns
+ 58:     Slow:   S1:S0=01, E=1.25MHz   - T_E = 800ns
+ 59:     Fast:   S1:S0=10, E=2.5MHz    - T_E = 400ns
+ 60:     Turbo:  S1:S0=11, E=5MHz      - T_E = 200ns
+ 61:
+ 62:   Device "needs" (approx worst-case):
+ 63:     TIMER (HD63B40)       : tACC ~ 500ns
+ 64:     CF (PIO Mode 0)       : t_cycle >= 600ns
+ 65:     ACIA (R65C52P3)       : t_bus < 300ns
+ 66:     RTC (DS12C887A)       : t_bus < 200ns
+ 67:     POST (MC14495)        : t_bus < 300ns
+ 68:   ========================================================= */
+ 69:FIELD CS = [TIMERcs, CFcs, ACIA1cs, RTCcs, POSTcs, S1, S0] ;
+ 70:FIELD WS = [WS1,WS0] ;
+ 71:TABLE CS => WS {
+ 72:
+ 73:/* ---------------------------------------------------------
+ 74:   Turtle mode: S1:S0 = 00
+ 75:   E = 0.625MHz, T_E = 1600ns
+ 76:   WS=0 -> t_bus = 1*1600ns, which >> all requirements.
+ 77:   --------------------------------------------------------- */
+ 78:'b'0000000 => 'b'00 ;    /* Idle:   WS=0 - 1600ns, no device */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+ 79:'b'1000000 => 'b'00 ;    /* TIMER:  WS=0 - 500ns (HD63B40) */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+ 80:'b'0100000 => 'b'00 ;    /* CF:     WS=0 - 600ns (PIO0) */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+ 81:'b'0010000 => 'b'00 ;    /* ACIA:   WS=0 - 300ns (R65C52P3) */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+ 82:'b'0001000 => 'b'00 ;    /* RTC:    WS=0 - 200ns (DS12C887A) */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+ 83:'b'0000100 => 'b'00 ;    /* POST:   WS=0 - 300ns (MC14495) */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+ 84:
+ 85:/* ---------------------------------------------------------
+ 86:   Slow mode: S1:S0 = 01
+ 87:   E = 1.25MHz, T_E = 800ns
+ 88:   WS=0 -> t_bus = 1*800ns, still >= all device needs.
+ 89:   --------------------------------------------------------- */
+ 90:'b'0000001 => 'b'00 ;    /* Idle:   WS=0 - 800ns, no device */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+ 91:'b'1000001 => 'b'00 ;    /* TIMER:  WS=0 - 500ns */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+ 92:'b'0100001 => 'b'00 ;    /* CF:     WS=0 - 600ns */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+ 93:'b'0010001 => 'b'00 ;    /* ACIA:   WS=0 - 300ns */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+ 94:'b'0001001 => 'b'00 ;    /* RTC:    WS=0 - 200ns */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+ 95:'b'0000101 => 'b'00 ;    /* POST:   WS=0 - 300ns */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+ 96:
+ 97:/* ---------------------------------------------------------
+ 98:   Fast mode: S1:S0 = 10
+ 99:   E = 2.5MHz, T_E = 400ns
+100:   WS=0 -> t_bus = 1*400ns:
+101:     TIMER/CF need > 400ns, so give them 1 WS.
+102:   --------------------------------------------------------- */
+103:'b'0000010 => 'b'00 ;    /* Idle:   WS=0 - 400ns, no device */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+104:'b'1000010 => 'b'01 ;    /* TIMER:  WS=1 - 500ns */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+105:'b'0100010 => 'b'01 ;    /* CF:     WS=1 - 600ns */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+106:'b'0010010 => 'b'00 ;    /* ACIA:   WS=0 - 300ns */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+107:'b'0001010 => 'b'00 ;    /* RTC:    WS=0 - 200ns */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+108:'b'0000110 => 'b'00 ;    /* POST:   WS=0 - 300ns */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+109:
+110:/* ---------------------------------------------------------
+111:   Turbo mode: S1:S0 = 11
+112:   E = 5MHz, T_E = 200ns
+113:   WS=0 -> t_bus = 1*200ns.
+114:   We size WS so (1+WS)*200ns meets each device's need.
+115:   --------------------------------------------------------- */
+116:'b'0000011 => 'b'00 ;    /* Idle:   WS=0 - 200ns, no device */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+117:'b'1000011 => 'b'10 ;    /* TIMER:  WS=2 - 500ns */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+118:'b'0100011 => 'b'10 ;    /* CF:     WS=2 - 600ns */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+119:'b'0010011 => 'b'01 ;    /* ACIA:   WS=1 - 300ns */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+120:'b'0001011 => 'b'01 ;    /* RTC:   *WS=1 - ~200ns */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+121:'b'0000111 => 'b'01 ;    /* POST:   WS=1 - 300ns */
+                        ^
+[0019ca] Please note: indexed and non-indexed vars in range or match expression
+122:}
+123:
+124:/* Force WS_EN to be a valid output macrocell */
+125:WS_EN.d  = WS0 # WS1 ;   /* WS non-zero = enable */
+126:WS_EN.ck = CLK4x ;       /* Pseudo force combinational behavior */
+127:WS_EN.sp = 'b'0 ;
+128:WS_EN.ar = 'b'0 ;
+129:
+130:/* OE controls */
+131:WS0.oe = WS_EN ;
+132:WS1.oe = WS_EN ;
+133:
+134:TIMERcs.oe = 'b'1 ;
+135:CFcs.oe    = 'b'1 ;
+136:ACIA1cs.oe = 'b'1 ;
+137:RTCcs.oe   = 'b'1 ;
+138:POSTcs.oe  = 'b'1 ;
+139:
+140:
 
 
 
-Jedec Fuse Checksum       (1a4c)
-Jedec Transmit Checksum   (01cb)
+Jedec Fuse Checksum       (077c)
+Jedec Transmit Checksum   (dab0)
