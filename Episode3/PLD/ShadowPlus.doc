@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# MW-10400000
 Device          g22v10  Library DLIB-h-40-1
-Created         Wed Dec 10 11:57:42 2025
+Created         Fri Feb 06 11:16:07 2026
 Name            ShadowPlus 
 Partno          ATF22V10C 
 Revision        2 
@@ -20,11 +20,11 @@ Location        None
 ===============================================================================
 
 BlueLED =>
-    !S0 & !S1
+    S0 & S1
 
 GreenLED =>
-    !S0 & S1
-  # S0 & !S1
+    S0
+  # S1
 
 RAMoe =>
     !RD
@@ -37,7 +37,7 @@ RGB =>
     RedLED , GreenLED , BlueLED
 
 ROMcs =>
-    !MREQ
+    MREQ
   # ROMdisFF
 
 ROMdisFF.d  =>
@@ -50,7 +50,7 @@ ROMdisFF.sp  =>
     0 
 
 RedLED =>
-    S1
+    !S1
 
 SPEED =>
     S1 , S0
@@ -91,26 +91,26 @@ Pin Variable                                    Pterms   Max     Min
 Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
 --- --------            ---     ---     ----    ------  ------  -----   
 
-    BlueLED                     14       V        1       8       3     
+    BlueLED                     14       V        1       8       2     
     E                           2        V        -       -       -     
-    GreenLED                    15       V        2       10      3     
- !  MREQ                        5        V        -       -       -     
- !  RAMoe                       20       V        2       14      3     
- !  RD                          23       V        1       8       3     
+    GreenLED                    15       V        2       10      2     
+    MREQ                        5        V        -       -       -     
+    RAMoe                       20       V        2       14      2     
+ !  RD                          23       V        1       8       2     
  !  RESET                       4        V        -       -       -     
     RGB                         0        F        -       -       -     
- !  ROMcs                       21       V        2       12      3     
-    ROMdis                      1        V        -       -       -     
+    ROMcs                       21       V        2       12      2     
+ !  ROMdis                      1        V        -       -       -     
     ROMdisFF                    19       V        -       -       -     
-    ROMdisFF            d       19       X        1       16      3     
+    ROMdisFF            d       19       X        1       16      2     
     ROMdisFF            ar      19       X        1       1       1     
     ROMdisFF            sp      19       X        1       1       1     
     RW                          3        V        -       -       -     
-    RedLED                      16       V        1       12      3     
+    RedLED                      16       V        1       12      2     
     S0                          11       V        -       -       -     
     S1                          13       V        -       -       -     
     SPEED                       0        F        -       -       -     
- !  WR                          22       V        1       10      3     
+ !  WR                          22       V        1       10      2     
     BlueLED             oe      14       D        1       1       0     
     GreenLED            oe      15       D        1       1       0     
     RAMoe               oe      20       D        1       1       0     
@@ -159,7 +159,7 @@ Pin #22  05810 Mode  x-
  00792 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  00836 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  00880 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
-Pin #21  05812 Mode  x- 
+Pin #21  05812 Mode  -- 
  00924 -------------------------------------------- 
  00968 ----------------x--------------------------- 
  01012 -------------------x------------------------ 
@@ -173,7 +173,7 @@ Pin #21  05812 Mode  x-
  01364 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01408 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01452 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
-Pin #20  05814 Mode  x- 
+Pin #20  05814 Mode  -- 
  01496 -------------------------------------------- 
  01540 --x----------------------------------------- 
  01584 ------------------x------------------------- 
@@ -243,7 +243,7 @@ Pin #17  05820 Mode  xx
  04268 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
 Pin #16  05822 Mode  -- 
  04312 -------------------------------------------- 
- 04356 ------------------------------------------x- 
+ 04356 -------------------------------------------x 
  04400 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  04444 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  04488 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -257,8 +257,8 @@ Pin #16  05822 Mode  --
  04840 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
 Pin #15  05824 Mode  -- 
  04884 -------------------------------------------- 
- 04928 -----------------------------------------xx- 
- 04972 ----------------------------------------x--x 
+ 04928 ----------------------------------------x--- 
+ 04972 ------------------------------------------x- 
  05016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05060 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05104 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -269,7 +269,7 @@ Pin #15  05824 Mode  --
  05324 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
 Pin #14  05826 Mode  -- 
  05368 -------------------------------------------- 
- 05412 -----------------------------------------x-x 
+ 05412 ----------------------------------------x-x- 
  05456 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05500 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05544 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -288,11 +288,11 @@ LEGEND    X : fuse not blown
 
                                ______________
                               |  ShadowPlus  |
-                   ROMdis x---|1           24|---x Vcc                      
+                  !ROMdis x---|1           24|---x Vcc                      
                         E x---|2           23|---x !RD                      
                        RW x---|3           22|---x !WR                      
-                   !RESET x---|4           21|---x !ROMcs                   
-                    !MREQ x---|5           20|---x !RAMoe                   
+                   !RESET x---|4           21|---x ROMcs                    
+                     MREQ x---|5           20|---x RAMoe                    
                           x---|6           19|---x ROMdisFF                 
                           x---|7           18|---x                          
                           x---|8           17|---x                          

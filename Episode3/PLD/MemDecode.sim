@@ -19,7 +19,7 @@ PIN  17 = !FIRQvec
 PIN  22 = !IORQ 
 PIN  18 = !IRQvec 
 PIN  21 = !MREQ 
-PIN  20 =  ROMdis 
+PIN  20 = !ROMdis 
 PIN  19 = !SPDsel 
 %END
 
@@ -42,9 +42,10 @@ BlockMEM =>
   # !A14
   # !A13
   # !A12
-  # !A11 & A12 & A13 & A14 & A15
-  # !A10 & A12 & A13 & A14 & A15
-  # !A9 & A12 & A13 & A14 & A15
+  # !A11
+  # !A10
+  # !A9
+  # !A8
   # A4 & A5 & A6 & A7 & A8 & A9 & A10 & A11 & A12 & A13 & A14 & A15
 
 CBLK =>
@@ -69,14 +70,15 @@ IRQvec =>
     !A2 & A3 & !A4 & A5 & A6 & A7 & !IORQ
 
 MREQ =>
-    !A9 & E
+    !A8 & E
+  # !A9 & E
   # !A10 & E
   # !A11 & E
   # !A12 & E
   # !A13 & E
   # !A14 & E
   # !A15 & E
-  # A4 & A5 & A6 & A7 & A8 & E
+  # A4 & A5 & A6 & A7 & E
 
 ROMdis =>
     !A2 & !A3 & !A4 & A5 & A6 & A7 & !IORQ

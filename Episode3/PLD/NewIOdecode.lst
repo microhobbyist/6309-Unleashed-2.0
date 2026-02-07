@@ -1,0 +1,262 @@
+LISTING FOR LOGIC DESCRIPTION FILE: NewIOdecode.pld                  Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Fri Feb 06 11:11:59 2026
+
+  1:Name     IODecode ;
+  2:PartNo   ATF750CL ;
+  3:Date     2026/02/06 ;
+  4:Revision 12 ;
+  5:Designer Frederic Segard ;
+  6:Company  MicroHobbyist ;
+  7:Assembly None ;
+  8:Location None ;
+  9:Device   v750c ;
+ 10:
+ 11:/* =========================================================
+ 12:   I/O ADDRESS DECODER + WAIT-STATE OUTPUT (ATF750C)
+ 13:   ---------------------------------------------------------
+ 14:   PURPOSE
+ 15:   - Decodes an 8-bit I/O address window (A7..A0) into chip
+ 16:     selects for several peripherals.
+ 17:   - Generates a 2-bit wait-state value on a shared WS bus:
+ 18:       WS_out = max(0, WS_need - RELIEF)
+ 19:     where:
+ 20:       WS_need is per-device (fixed baseline requirement),
+ 21:       RELIEF is derived from CPU speed bits S1:S0.
+ 22:   - Tri-states the WS bus when WS_out = 0, so external pull
+ 23:     resistors define an idle value (pulled low in your system).
+ 24:
+ 25:   IMPORTANT SIGNAL POLARITIES
+ 26:   - Pin 2 is declared as !IORQ. This means:
+ 27:       * The physical pin is active-low during an I/O cycle.
+ 28:       * The internal signal name IORQ is active-high when the
+ 29:         pin is low (i.e., during an I/O cycle).
+ 30:   - Many chip select pins are declared as !XXXXcs (active-low
+ 31:     at the pin). Internally, we compute XXXXcs as active-high.
+ 32:     The PLD automatically inverts at the pin because of "!".
+ 33:
+ 34:   SPEED / RELIEF MODEL
+ 35:   - S1:S0 is treated as "RELIEF" (how much slower the CPU is).
+ 36:     As RELIEF increases, required wait states decrease.
+ 37:     This is the same behavior as your original table.
+ 38:
+ 39:       S1:S0  RELIEF  Meaning (effective slowdown)
+ 40:       00     0       Fastest (most wait states needed)
+ 41:       01     1
+ 42:       10     2
+ 43:       11     3       Slowest (least waits needed)
+ 44:
+ 45:   WAIT-STATE OUTPUT ENCODING (WS1:WS0)
+ 46:   - 00 -> no wait states (and bus is tri-stated)
+ 47:   - 01 -> 1 wait state
+ 48:   - 10 -> 2 wait states
+ 49:   - 11 -> unused here
+ 50:
+ 51:   BUS BEHAVIOR
+ 52:   - WS0 and WS1 are tri-stated when WS_out=0.
+ 53:   - Your board pulls WS lines low, so tri-state reads as 0.
+
+LISTING FOR LOGIC DESCRIPTION FILE: NewIOdecode.pld                  Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Fri Feb 06 11:11:59 2026
+
+ 54:   - When WS_out is non-zero, this PLD actively drives WS bits.
+ 55:
+ 56:   ASCII NOTE
+ 57:   - This file uses only 7-bit ASCII characters.
+ 58:   ========================================================= */
+ 59:
+ 60:/* -------- Inputs -------- */
+ 61:PIN 1  =  CLK4x ;    /* 4x E reference clock (not used in equations below) */
+ 62:PIN 2  = !IORQ ;     /* I/O request, active-low at pin, active-high internal */
+ 63:PIN 3  =  RW ;       /* R/W line (not used for now) */
+ 64:PIN 4  =  A0 ;       /* Address bit 0 */
+ 65:PIN 5  =  A1 ;       /* Address bit 1 */
+ 66:PIN 6  =  A2 ;       /* Address bit 2 */
+ 67:PIN 7  =  A3 ;       /* Address bit 3 */
+ 68:PIN 8  =  A4 ;       /* Address bit 4 */
+ 69:PIN 9  =  A5 ;       /* Address bit 5 */
+ 70:PIN 10 =  A6 ;       /* Address bit 6 */
+ 71:PIN 11 =  A7 ;       /* Address bit 7 */
+ 72:PIN 13 =  S0 ;       /* Speed bit 0 (RELIEF LSB) */
+ 73:PIN 14 =  S1 ;       /* Speed bit 1 (RELIEF MSB) */
+ 74:
+ 75:/* -------- Outputs -------- */
+ 76:PIN 23 = !TIMERcs ;  /* Timer chip select (active-low at pin) */
+ 77:PIN 22 = !CFcs ;     /* CompactFlash select (active-low at pin) */
+ 78:PIN 21 = !ACIA1cs ;  /* ACIA select (active-low at pin) */
+ 79:PIN 20 = !RTCcs ;    /* RTC select (active-low at pin) */
+ 80:PIN 19 =  RTCas ;    /* RTC address strobe (active-high) */
+ 81:PIN 18 =  RTCds ;    /* RTC data strobe (active-high) */
+ 82:PIN 17 = !POSTcs ;   /* POST display select (active-low at pin) */
+ 83:PIN 16 =  WS0 ;      /* Wait-state bus bit 0 (tri-stated when WS_out=0) */
+ 84:PIN 15 =  WS1 ;      /* Wait-state bus bit 1 (tri-stated when WS_out=0) */
+ 85:
+ 86:PINNODE 30 = WS_EN ;
+ 87:
+ 88:/* =========================================================
+ 89:   ADDRESS FIELD
+ 90:   ---------------------------------------------------------
+ 91:   FIELD ADDR groups A7..A0 so we can use range syntax:
+ 92:     ADDR:[xx..yy] matches an inclusive hex range.
+ 93:   Example:
+ 94:     ADDR:[28..2F] matches $28,$29,...,$2F.
+ 95:   ========================================================= */
+ 96:FIELD ADDR = [A7..A0] ;
+ 97:
+ 98:/* =========================================================
+ 99:   CHIP SELECT DECODE (INTERNAL ACTIVE-HIGH)
+100:   ---------------------------------------------------------
+101:   All device selects are qualified by IORQ so they only assert
+102:   during an I/O cycle (IORQ internal is active-high).
+103:
+104:   NOTE ABOUT ACTIVE-LOW OUTPUT PINS
+105:   - Pins are declared as !TIMERcs, !CFcs, etc.
+106:   - Internally we compute TIMERcs, CFcs, ...
+107:   - When internal TIMERcs = 1, the physical pin !TIMERcs = 0,
+
+LISTING FOR LOGIC DESCRIPTION FILE: NewIOdecode.pld                  Page 3
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Fri Feb 06 11:11:59 2026
+
+108:     which is the desired active-low select on the bus.
+109:   ========================================================= */
+110:
+111:TIMERcs = (ADDR:[28..2F]) & IORQ ;      /* Timer: HD63B40 at addresses $28-$2F */
+112:CFcs    = (ADDR:[08..0F]) & IORQ ;      /* CompactFlash: addresses $08-$0F */
+113:ACIA1cs = (ADDR:[60..67]) & IORQ ;      /* ACIA: addresses $60-$67 */
+114:RTCas   = (ADDR:[26]) & IORQ ;          /* RTC address strobe: $26 */
+115:RTCds   = (ADDR:[27]) & IORQ ;          /* RTC address strobe: $27 */
+116:RTCcs   = (RTCas # RTCds) ;                     /* RTC chip select: asserted for either strobe */
+117:POSTcs  = (ADDR:[04]) & IORQ ;          /* POST display: $04 */
+118:
+119:/* =========================================================
+120:   WAIT-STATE REQUIREMENTS (WS_need)
+121:   ---------------------------------------------------------
+122:   Baseline wait requirements at RELIEF=0 (fastest CPU):
+123:     TIMER : 2
+124:     CF    : 2
+125:     ACIA  : 1
+126:     RTC   : 1
+127:     POST  : 1
+128:
+129:   RELIEF is derived from S1:S0, and reduces wait demand:
+130:     WS_out = max(0, WS_need - RELIEF)
+131:
+132:   For devices with WS_need = 2:
+133:     RELIEF 0 -> WS_out 2
+134:     RELIEF 1 -> WS_out 1
+135:     RELIEF 2 -> WS_out 0
+136:     RELIEF 3 -> WS_out 0
+137:
+138:   For devices with WS_need = 1:
+139:     RELIEF 0 -> WS_out 1
+140:     RELIEF 1 -> WS_out 0
+141:     RELIEF 2 -> WS_out 0
+142:     RELIEF 3 -> WS_out 0
+143:   ========================================================= */
+144:
+145:/* =========================================================
+146:   RELIEF DECODE (S1:S0)
+147:   ---------------------------------------------------------
+148:   REL0..REL3 are one-hot decodes of the 2-bit speed code.
+149:   ========================================================= */
+150:REL0 = !S1 & !S0 ;   /* 00 -> relief 0 (fastest) */
+151:REL1 = !S1 &  S0 ;   /* 01 -> relief 1 */
+152:REL2 =  S1 & !S0 ;   /* 10 -> relief 2 */
+153:REL3 =  S1 &  S0 ;   /* 11 -> relief 3 (slowest) */
+154:
+155:/* =========================================================
+156:   WS_out COMBINATIONAL LOGIC
+157:   ---------------------------------------------------------
+158:   We generate two mutually exclusive conditions:
+159:     WS_is_2 -> output is 2 (binary 10)
+160:     WS_is_1 -> output is 1 (binary 01)
+161:
+
+LISTING FOR LOGIC DESCRIPTION FILE: NewIOdecode.pld                  Page 4
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Fri Feb 06 11:11:59 2026
+
+162:   WS_is_2 happens only when:
+163:     RELIEF=0 and a "need 2" device is selected (TIMER or CF).
+164:
+165:   WS_is_1 happens when:
+166:     - RELIEF=0 and a "need 1" device is selected (ACIA/RTC/POST)
+167:     - RELIEF=1 and a "need 2" device is selected (TIMER or CF)
+168:
+169:   For RELIEF>=2, both WS_is_1 and WS_is_2 are 0, so WS_out=0.
+170:   ========================================================= */
+171:
+172:/* WS_out = 2 (binary 10) */
+173:WS_is_2 = REL0 & (TIMERcs # CFcs) ;
+174:
+175:/* WS_out = 1 (binary 01) */
+176:WS_is_1 = (REL0 & (ACIA1cs # RTCcs # POSTcs)) #
+177:          (REL1 & (TIMERcs # CFcs)) ;
+178:
+179:/* Drive WS bits (active-high internal) */
+180:WS1 = WS_is_2 ;      /* MSB */
+181:WS0 = WS_is_1 ;      /* LSB */
+182:
+183:/* =========================================================
+184:   WS BUS TRI-STATE CONTROL
+185:   ---------------------------------------------------------
+186:   Requirement:
+187:   - If WS output is 0, the bus must be tri-stated so pull-downs
+188:     produce 00 on the shared bus.
+189:   - If WS output is 1 or 2, the bus must be driven.
+190:
+191:   Therefore:
+192:     WS output enable is effectively WS_is_1 OR WS_is_2
+193:   ========================================================= */
+194:
+195:/* Force WS_EN to be a valid output macrocell, as .oe is only 1 macrocell */
+196:WS_EN.d  = WS_is_2 # WS_is_1 ;  /* WS non-zero = enable */
+197:WS_EN.ck = CLK4x ;                              /* Pseudo force combinational behavior */
+198:WS_EN.sp = 'b'0  ;
+199:WS_EN.ar = 'b'0  ;
+200:
+201:/* OE controls */
+202:WS0.oe = WS_EN ;
+203:WS1.oe = WS_EN ;
+204:
+205:/* =========================================================
+206:   DEBUG / NOTES
+207:   ---------------------------------------------------------
+208:   - RW is currently unused.
+209:     It's kept as an input for future expansion.
+210:   - If you later decide wait states differ for reads vs writes,
+211:     you can incorporate RW into WS_is_1 and WS_is_2 conditions.
+212:   - If you later add more devices:
+213:       * Decide WS_need (1 or 2 or 3)
+214:       * Add the device select into WS_is_2 or WS_is_1 equations
+215:         according to the RELIEF table you want.
+
+LISTING FOR LOGIC DESCRIPTION FILE: NewIOdecode.pld                  Page 5
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Fri Feb 06 11:11:59 2026
+
+216:   ========================================================= */
+217:
+218:
+
+
+
+Jedec Fuse Checksum       (3537)
+Jedec Transmit Checksum   (308c)

@@ -5,11 +5,11 @@
 
 CUPL(WM)        5.0a Serial# MW-10400000
 Device          v750c  Library DLIB-h-40-2
-Created         Wed Dec 10 11:57:42 2025
+Created         Fri Feb 06 06:28:38 2026
 Name            NewWaitStateGen 
 Partno          ATF750CL 
-Revision        1 
-Date            2025/12/04 
+Revision        2 
+Date            2025/12/11 
 Designer        Frederic Segard 
 Company         MicroHobbyist 
 Assembly        None 
@@ -154,20 +154,6 @@ E_sync.ck  =>
 E_sync.sp  =>
     0 
 
-HOLD.d  =>
-    RUN
-  # E_prev & HOLD
-  # !E_sync & HOLD
-
-HOLD.ar  =>
-    RESET
-
-HOLD.ck  =>
-    CLK4x
-
-HOLD.sp  =>
-    0 
-
 LOAD =>
     !E_prev & E_sync & !RUN & WS1
   # !E_prev & E_sync & !RUN & S1
@@ -195,7 +181,7 @@ LOAD3 =>
   # S1
 
 MRDY =>
-    HOLD
+    RUN
   # WAIT1
   # WAIT2
   # WAIT3
@@ -370,10 +356,6 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     E_sync              ck      26       M        1       1       1     
     E_sync              sp      26       M        1       1       1     
     HOLD                        28       N        -       -       -     
-    HOLD                d       28       M        3       7       3     
-    HOLD                ar      28       M        1       1       1     
-    HOLD                ck      28       M        1       1       1     
-    HOLD                sp      28       M        1       1       1     
     LOAD                        0        I        8       -       -     
     LOAD0                       0        I        1       -       -     
     LOAD1                       0        I        1       -       -     
@@ -440,7 +422,7 @@ SP
  14280 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
 
 Pin #23 Node 34 ,44  14364 Mode  -xx  14395 xxxx 
- 00000 ----------------------------x------------------------------------------------------- 
+ 00000 --------------------------------------x--------------------------------------------- 
  00084 --------------------------------------------------x--------------------------------- 
  00168 ------------------------------------------x----------------------------------------- 
  00252 ----------------------------------x------------------------------------------------- 
@@ -551,7 +533,7 @@ Pin #18 Node 29 ,39  14379 Mode  xx-  14415 xxxx
  08652 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08736 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08820 ------------------------------------------------------------------------------------ 
-Pin #17 Node 28 ,38  14382 Mode  x--  14419 xxxx 
+Pin #17 Node 28 ,38  14382 Mode  xx-  14419 xxxx 
  08904 ------------------------------x------------------------------------x---------------- 
  08988 -----------x------------------x----------------------------------------------------- 
  09072 ----------x------x------------------------------------------------x----------------- 
@@ -559,17 +541,17 @@ Pin #17 Node 28 ,38  14382 Mode  x--  14419 xxxx
  09240 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09324 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09408 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 09492 --------------------------------------x--------------------------------------------- 
- 09576 ----x-----------------------x------------------------------------------------------- 
- 09660 -------------x--------------x------------------------------------------------------- 
+ 09492 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 09576 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 09660 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09744 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09828 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09912 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09996 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  10080 ----------------------------------------------------------x------------------------- 
  10164 -----------------------------------------------------------------------------------x 
- 10248 -----------------------------------------------------------------------------------x 
- 10332 ----------------------------------------------------------x------------------------- 
+ 10248 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 10332 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  10416 ------------------------------------------------------------------------------------ 
 Pin #16 Node 27 ,37  14385 Mode  x--  14423 xxxx 
  10500 ----------------------x--------------------------------------------x---------------- 

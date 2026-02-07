@@ -423,7 +423,7 @@
       "workbook_filename": ""
     },
     "page_layout_descr_file": "kicad-embed://MicroHobbyistSheetPrefs.kicad_wks",
-    "plot_directory": "",
+    "plot_directory": "../../../../Editing - 6309 2.0/Ep3/",
     "space_save_all_events": true,
     "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",

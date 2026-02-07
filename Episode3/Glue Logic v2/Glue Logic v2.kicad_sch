@@ -3302,7 +3302,7 @@
 				(justify right)
 			)
 		)
-		(pin "~{IRQ_{vec}}" output
+		(pin "~{IRQ_{reg}}" output
 			(at 151.13 104.14 0)
 			(uuid "cd77c766-b213-4d6f-b61a-41cceee1837d")
 			(effects
@@ -3312,7 +3312,7 @@
 				(justify right)
 			)
 		)
-		(pin "~{FIRQ_{vec}}" output
+		(pin "~{FIRQ_{reg}}" output
 			(at 151.13 106.68 0)
 			(uuid "42114a43-e5c9-41c4-8189-9a3d653359c5")
 			(effects

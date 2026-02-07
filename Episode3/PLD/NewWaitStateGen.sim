@@ -45,7 +45,7 @@ CNT0.ar  =>
 CNT0.ck  =>
     CLK4x
 
-CNT0.sp CNT1.sp CNT2.sp CNT3.sp E_prev.sp E_sync.sp HOLD.sp RUN.sp S0.sp S1.sp WAIT_NZ_prev.sp  =>
+CNT0.sp CNT1.sp CNT2.sp CNT3.sp E_prev.sp E_sync.sp RUN.sp S0.sp S1.sp WAIT_NZ_prev.sp  =>
     0 
 
 CNT1.d  =>
@@ -161,19 +161,6 @@ E_sync.ck  =>
 
 E_sync.sp  =>
     
-HOLD.d  =>
-    RUN
-  # E_prev & HOLD
-  # !E_sync & HOLD
-
-HOLD.ar  =>
-    !RESET
-
-HOLD.ck  =>
-    CLK4x
-
-HOLD.sp  =>
-    
 LOAD =>
     !E_prev & E_sync & !RUN & WS1
   # !E_prev & E_sync & !RUN & S1
@@ -201,7 +188,7 @@ LOAD3 =>
   # S1
 
 MRDY =>
-    HOLD
+    RUN
   # !WAIT1
   # !WAIT2
   # !WAIT3

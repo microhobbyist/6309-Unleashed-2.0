@@ -1,7 +1,7 @@
 Name     NewWaitStateGen ;
 PartNo   ATF750CL ;
-Date     2025/12/04 ;
-Revision 1 ;
+Date     2025/12/11 ;
+Revision 2 ;
 Designer Frederic Segard ;
 Company  MicroHobbyist ;
 Assembly None ;
@@ -85,6 +85,20 @@ S1.d  = (REG_WRITE & D1) # (!REG_WRITE & S1) ;
 S1.ck = CLK4x ;
 S1.ar = RESET ;    /* Clear to 0 on reset */
 S1.sp = 'b'0 ;
+
+/* If I want to start the PLD at a specific speed on RESET
+
+S0.d  = (RESET & 'b'0) # (!RESET & ((REG_WRITE & D0) # (!REG_WRITE & S0))) ;
+S0.ck = CLK4x ;
+S0.ar = 'b'0 ;
+S0.sp = 'b'0 ;
+
+S1.d  = (RESET & 'b'1) # (!RESET & ((REG_WRITE & D1) # (!REG_WRITE & S1))) ;
+S1.ck = CLK4x ;
+S1.ar = 'b'0 ;
+S1.sp = 'b'0 ;
+
+*/
 
 /* =========================================================
    E SYNCHRONIZERS (CLK4x DOMAIN)
@@ -218,15 +232,6 @@ CNT3.ar = RESET ;
 CNT3.sp = 'b'0 ;
 
 /* =========================================================
-   HOLD LATCH - KEEP /MRDY LOW UNTIL END OF E CYCLE
-   ========================================================= */
-
-HOLD.d  = RUN # (HOLD & !E_rise) ;
-HOLD.ck = CLK4x ;
-HOLD.ar = RESET ;
-HOLD.sp = 'b'0 ;
-
-/* =========================================================
    DATA BUS READBACK (SPEED REGISTER)
    ========================================================= */
 
@@ -241,13 +246,12 @@ S0.oe   = 'b'1 ;
 S1.oe   = 'b'1 ;
 
 /* =========================================================
-   OUTPUT
+   SIMPLIFIED MRDY OUTPUT
+   ---------------------------------------------------------
+   - MRDY is active while:
+       * internal wait counter is running (RUN = 1), OR
+       * any external wait source is active (EXT_WAIT = 1).
+   - No HOLD latch: avoids "stuck low" condition.
    ========================================================= */
 
-/* Internal "busy" is:
-   - Any effective programmed wait in progress (HOLD=1), OR
-   - Any external wait signal active (EXT_WAIT=1).
-
-   Internal MRDY=1 => pin !MRDY is LOW when busy.
-*/
-MRDY = HOLD # EXT_WAIT ;
+MRDY = RUN # EXT_WAIT ;

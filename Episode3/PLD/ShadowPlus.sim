@@ -2,12 +2,12 @@
 PIN  14 =  BlueLED 
 PIN   2 =  E 
 PIN  15 =  GreenLED 
-PIN   5 = !MREQ 
-PIN  20 = !RAMoe 
+PIN   5 =  MREQ 
+PIN  20 =  RAMoe 
 PIN  23 = !RD 
 PIN   4 = !RESET 
-PIN  21 = !ROMcs 
-PIN   1 =  ROMdis 
+PIN  21 =  ROMcs 
+PIN   1 = !ROMdis 
 PIN  19 =  ROMdisFF 
 PIN   3 =  RW 
 PIN  16 =  RedLED 
@@ -23,11 +23,11 @@ FIELD SPEED = S1,S0
 
 %EQUATION
 BlueLED =>
-    !S0 & !S1
+    S0 & S1
 
 GreenLED =>
-    !S0 & S1
-  # S0 & !S1
+    S0
+  # S1
 
 RAMoe =>
     RD
@@ -50,7 +50,7 @@ ROMdisFF.sp  =>
     0 
 
 RedLED =>
-    S1
+    !S1
 
 WR =>
     E & !RW

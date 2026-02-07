@@ -26,37 +26,36 @@ PIN  30 =  WS_EN
 
 %FIELD
 FIELD ADDR = A7,A6,A5,A4,A3,A2,A1,A0
-FIELD CS = TIMERcs,CFcs,ACIA1cs,RTCcs,POSTcs,S1,S0
-FIELD WS = WS1,WS0
 %END
 
 %EQUATION
 ACIA1cs =>
     !A3 & !A4 & A5 & A6 & !A7 & !IORQ
 
-ACIA1cs.oe  =>
-    1 
-
 CFcs =>
     A3 & !A4 & !A5 & !A6 & !A7 & !IORQ
-
-CFcs.oe  =>
-    1 
 
 POSTcs =>
     !A0 & !A1 & A2 & !A3 & !A4 & !A5 & !A6 & !A7 & !IORQ
 
-POSTcs.oe  =>
-    1 
+REL0 =>
+    !S0 & !S1
+
+REL1 =>
+    S0 & !S1
+
+REL2 =>
+    !S0 & S1
+
+REL3 =>
+    S0 & S1
 
 RTCas =>
     !A0 & A1 & A2 & !A3 & !A4 & A5 & !A6 & !A7 & !IORQ
 
 RTCcs =>
-    A1 & A2 & !A3 & !A4 & A5 & !A6 & !A7 & !IORQ
-
-RTCcs.oe  =>
-    1 
+    RTCas
+  # RTCds
 
 RTCds =>
     A0 & A1 & A2 & !A3 & !A4 & A5 & !A6 & !A7 & !IORQ
@@ -64,29 +63,29 @@ RTCds =>
 TIMERcs =>
     A3 & !A4 & A5 & !A6 & !A7 & !IORQ
 
-TIMERcs.oe  =>
-    1 
-
 WS0 =>
-    ACIA1cs & CFcs & POSTcs & RTCcs & !S0 & S1 & !TIMERcs
-  # ACIA1cs & CFcs & POSTcs & !RTCcs & S0 & S1 & TIMERcs
-  # ACIA1cs & CFcs & !POSTcs & RTCcs & S0 & S1 & TIMERcs
-  # !ACIA1cs & CFcs & POSTcs & RTCcs & S0 & S1 & TIMERcs
-  # ACIA1cs & !CFcs & POSTcs & RTCcs & !S0 & S1 & TIMERcs
+    !CFcs & S0 & !S1
+  # !ACIA1cs & !S0 & !S1
+  # !POSTcs & !S0 & !S1
+  # !RTCcs & !S0 & !S1
+  # S0 & !S1 & !TIMERcs
 
 WS0.oe  =>
     WS_EN
 
 WS1 =>
-    ACIA1cs & CFcs & POSTcs & RTCcs & S0 & S1 & !TIMERcs
-  # ACIA1cs & !CFcs & POSTcs & RTCcs & S0 & S1 & TIMERcs
+    !CFcs & !S0 & !S1
+  # !S0 & !S1 & !TIMERcs
 
 WS1.oe  =>
     WS_EN
 
 WS_EN.d  =>
-    WS0
-  # WS1
+    !CFcs & !S1
+  # !S1 & !TIMERcs
+  # !ACIA1cs & !S0 & !S1
+  # !POSTcs & !S0 & !S1
+  # !RTCcs & !S0 & !S1
 
 WS_EN.ar  =>
     0 
@@ -97,7 +96,30 @@ WS_EN.ck  =>
 WS_EN.sp  =>
     0 
 
+WS_is_1 =>
+    ACIA1cs & !S0 & !S1
+  # RTCcs & !S0 & !S1
+  # POSTcs & !S0 & !S1
+  # S0 & !S1 & TIMERcs
+  # CFcs & S0 & !S1
+
+WS_is_2 =>
+    !S0 & !S1 & TIMERcs
+  # CFcs & !S0 & !S1
+
+ACIA1cs.oe  =>
+    1 
+
+CFcs.oe  =>
+    1 
+
+POSTcs.oe  =>
+    1 
+
 RTCas.oe  =>
+    1 
+
+RTCcs.oe  =>
     1 
 
 RTCds.oe  =>
@@ -105,5 +127,8 @@ RTCds.oe  =>
 
 S1.oe  =>
     0 
+
+TIMERcs.oe  =>
+    1 
 
 %END

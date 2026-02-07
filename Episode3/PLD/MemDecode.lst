@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: MemDecode.pld                    Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Dec 10 11:57:42 2025
+Created Fri Feb 06 08:04:04 2026
 
   1:Name     MEMDecode ;
   2:PartNo   ATF22V10C ;
@@ -38,7 +38,7 @@ Created Wed Dec 10 11:57:42 2025
  31:PIN 23 = !CBLK ;     /* MMU Constant Block Region window ($FE00-$FFFF) */
  32:PIN 22 = !IORQ ;     /* I/O mapped area ($FF00-$FFEF) */
  33:PIN 21 = !MREQ ;     /* All Memory area ($0000-$FDFF and $FFF0-$FFFF) */
- 34:PIN 20 =  ROMdis ;   /* ROM disable ($FFE0) */
+ 34:PIN 20 = !ROMdis ;   /* ROM disable ($FFE0) */
  35:PIN 19 = !SPDsel ;   /* Speed select ($FFE4) */
  36:PIN 18 = !IRQvec ;   /* IRQ Priority Interrupt Controller */
  37:PIN 17 = !FIRQvec ;  /* FIRQ Priority Interrupt Controller */
@@ -55,8 +55,8 @@ Created Wed Dec 10 11:57:42 2025
  48:/* $FF00-$FFEF (240B) : I/O range */
  49:BlockIO = Fxxx & xFxx & (!(A7 & A6 & A5 & A4)) ;
  50:
- 51:/* $0000-$FDFF + $FFF0-$FFFF (63.5KB): General memory area) */
- 52:BlockMEM = (!Fxxx) # (Fxxx & !(A11 & A10 & A9)) # FFFx ;
+ 51:/* $0000-$FEFF + $FFF0-$FFFF : General memory area */
+ 52:BlockMEM = !(Fxxx & xFxx) # FFFx ;
  53:
 
 LISTING FOR LOGIC DESCRIPTION FILE: MemDecode.pld                    Page 2
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: MemDecode.pld                    Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Dec 10 11:57:42 2025
+Created Fri Feb 06 08:04:04 2026
 
  54:/* Output Equations (active-HIGH internal) */
  55:CBLK   = BlockCONST & E ;
@@ -77,8 +77,10 @@ Created Wed Dec 10 11:57:42 2025
  62:IRQvec  = ADDR:[E8] & IORQ ;
  63:FIRQvec = ADDR:[EC] & IORQ ;
  64:
+ 65:
+ 66:
 
 
 
-Jedec Fuse Checksum       (81d5)
-Jedec Transmit Checksum   (afd7)
+Jedec Fuse Checksum       (8805)
+Jedec Transmit Checksum   (b7a1)

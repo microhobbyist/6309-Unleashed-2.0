@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: ShadowPlus.pld                   Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Dec 10 11:57:42 2025
+Created Fri Feb 06 11:16:07 2026
 
   1:Name     ShadowPlus ;
   2:PartNo   ATF22V10C ;
@@ -16,11 +16,11 @@ Created Wed Dec 10 11:57:42 2025
   9:Device   g22v10 ;
  10:
  11:/* -------- Inputs -------- */
- 12:PIN 1  =  ROMdis ;   /* ROM disable CS */
+ 12:PIN 1  = !ROMdis ;   /* ROM disable CS */
  13:PIN 2  =  E ;        /* E clock */
  14:PIN 3  =  RW ;       /* Read-Write line */
  15:PIN 4  = !RESET ;    /* Reset */
- 16:PIN 5  = !MREQ ;     /* Memory Request, Active-low during memory cycle */
+ 16:PIN 5  =  MREQ ;     /* Memory Request, Active-low during memory cycle */
  17:/*  6  =  NC         /* Unused input tied to ground */
  18:/*  7  =  NC         /* Unused input tied to ground */
  19:/*  8  =  NC         /* Unused input tied to ground */
@@ -34,8 +34,8 @@ Created Wed Dec 10 11:57:42 2025
  27:/*  24 =  VCC ;      /* +5V connection */
  28:PIN 23 = !RD ;       /* Read line */
  29:PIN 22 = !WR ;       /* Write line */
- 30:PIN 21 = !ROMcs ;    /* ROM chip select */
- 31:PIN 20 = !RAMoe ;    /* RAM output enable */
+ 30:PIN 21 =  ROMcs ;    /* ROM chip select */
+ 31:PIN 20 =  RAMoe ;    /* RAM output enable */
  32:PIN 19 =  ROMdisFF ; /* Flip-Flop used for ROM disable (NC) */
  33:/*  18 =  NC ;       /* Not connected */
  34:/*  17 =  NC ;       /* Not connected */
@@ -64,10 +64,10 @@ LISTING FOR LOGIC DESCRIPTION FILE: ShadowPlus.pld                   Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# MW-10400000
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Dec 10 11:57:42 2025
+Created Fri Feb 06 11:16:07 2026
 
- 54:ROMcs = !MREQ #  ROMdisFF ;
- 55:RAMoe = !RD   # !ROMdisFF ;
+ 54:ROMcs =  MREQ #  ROMdisFF ;
+ 55:RAMoe =  !RD  # !ROMdisFF ;
  56:
  57:/* =========================================================
  58:                 SPEED LED COLOR
@@ -76,14 +76,14 @@ Created Wed Dec 10 11:57:42 2025
  61:FIELD SPEED = [S1, S0] ;
  62:FIELD RGB   = [RedLED,GreenLED,BlueLED] ;
  63:TABLE SPEED => RGB {
- 64:'b'00 => 'b'001 ;  /* Blue */
- 65:'b'01 => 'b'010 ;  /* Green */
- 66:'b'10 => 'b'110 ;  /* Yellow */
- 67:'b'11 => 'b'100 ;  /* Red */
+ 64:'b'00 => 'b'100 ;  /* Red for the highest speed */
+ 65:'b'01 => 'b'110 ;  /* Yellow for approximatively half speed */
+ 66:'b'10 => 'b'010 ;  /* Green for approximatively quarter */
+ 67:'b'11 => 'b'011 ;  /* Cyan for the slowest speed */
  68:}
  69:
 
 
 
-Jedec Fuse Checksum       (7125)
-Jedec Transmit Checksum   (89ec)
+Jedec Fuse Checksum       (71da)
+Jedec Transmit Checksum   (8a12)

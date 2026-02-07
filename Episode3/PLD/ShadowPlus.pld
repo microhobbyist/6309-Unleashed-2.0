@@ -9,11 +9,11 @@ Location None ;
 Device   g22v10 ;
 
 /* -------- Inputs -------- */
-PIN 1  =  ROMdis ;   /* ROM disable CS */
+PIN 1  = !ROMdis ;   /* ROM disable CS */
 PIN 2  =  E ;        /* E clock */
 PIN 3  =  RW ;       /* Read-Write line */
 PIN 4  = !RESET ;    /* Reset */
-PIN 5  = !MREQ ;     /* Memory Request, Active-low during memory cycle */
+PIN 5  =  MREQ ;     /* Memory Request, Active-low during memory cycle */
 /*  6  =  NC         /* Unused input tied to ground */
 /*  7  =  NC         /* Unused input tied to ground */
 /*  8  =  NC         /* Unused input tied to ground */
@@ -27,8 +27,8 @@ PIN 13 =  S1 ;       /* Current speed of CPU */
 /*  24 =  VCC ;      /* +5V connection */
 PIN 23 = !RD ;       /* Read line */
 PIN 22 = !WR ;       /* Write line */
-PIN 21 = !ROMcs ;    /* ROM chip select */
-PIN 20 = !RAMoe ;    /* RAM output enable */
+PIN 21 =  ROMcs ;    /* ROM chip select */
+PIN 20 =  RAMoe ;    /* RAM output enable */
 PIN 19 =  ROMdisFF ; /* Flip-Flop used for ROM disable (NC) */
 /*  18 =  NC ;       /* Not connected */
 /*  17 =  NC ;       /* Not connected */
@@ -51,8 +51,8 @@ ROMdisFF.d  = 'b'1 ;
 ROMdisFF.ar = RESET ;
 ROMdisFF.sp = 'b'0 ;
 
-ROMcs = !MREQ #  ROMdisFF ;
-RAMoe = !RD   # !ROMdisFF ;
+ROMcs =  MREQ #  ROMdisFF ;
+RAMoe =  !RD  # !ROMdisFF ;
 
 /* =========================================================
                  SPEED LED COLOR
@@ -61,8 +61,8 @@ RAMoe = !RD   # !ROMdisFF ;
 FIELD SPEED = [S1, S0] ;
 FIELD RGB   = [RedLED,GreenLED,BlueLED] ;
 TABLE SPEED => RGB {
-'b'00 => 'b'001 ;  /* Blue */
-'b'01 => 'b'010 ;  /* Green */
-'b'10 => 'b'110 ;  /* Yellow */
-'b'11 => 'b'100 ;  /* Red */
+'b'00 => 'b'100 ;  /* Red for the highest speed */
+'b'01 => 'b'110 ;  /* Yellow for approximatively half speed */
+'b'10 => 'b'010 ;  /* Green for approximatively quarter */
+'b'11 => 'b'011 ;  /* Cyan for the slowest speed */
 }
