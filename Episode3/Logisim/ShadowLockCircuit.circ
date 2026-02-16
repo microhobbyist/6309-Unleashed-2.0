@@ -6,9 +6,6 @@
     <tool name="Pin">
       <a name="appearance" val="classic"/>
     </tool>
-    <tool name="Power">
-      <a name="facing" val="west"/>
-    </tool>
     <tool name="Ground">
       <a name="facing" val="north"/>
     </tool>
@@ -81,69 +78,74 @@
     <a name="circuit" val="SHADOW"/>
     <a name="circuitnamedboxfixedsize" val="true"/>
     <a name="simulationFrequency" val="1.0"/>
-    <comp lib="0" loc="(200,130)" name="Power">
+    <comp lib="0" loc="(180,120)" name="Power">
       <a name="facing" val="west"/>
     </comp>
-    <comp lib="0" loc="(230,120)" name="Ground">
+    <comp lib="0" loc="(210,70)" name="Power"/>
+    <comp lib="1" loc="(150,160)" name="NOT Gate">
+      <a name="size" val="20"/>
+    </comp>
+    <comp lib="1" loc="(210,100)" name="NOT Gate">
+      <a name="facing" val="south"/>
+      <a name="size" val="20"/>
+    </comp>
+    <comp lib="1" loc="(210,180)" name="NOT Gate">
       <a name="facing" val="north"/>
-    </comp>
-    <comp lib="1" loc="(160,170)" name="NOT Gate">
       <a name="size" val="20"/>
     </comp>
-    <comp lib="1" loc="(160,210)" name="NOT Gate">
-      <a name="size" val="20"/>
-    </comp>
-    <comp lib="1" loc="(350,240)" name="OR Gate">
+    <comp lib="1" loc="(330,250)" name="OR Gate">
       <a name="negate0" val="true"/>
       <a name="size" val="30"/>
     </comp>
-    <comp lib="1" loc="(350,70)" name="OR Gate">
+    <comp lib="1" loc="(330,50)" name="OR Gate">
       <a name="size" val="30"/>
     </comp>
-    <comp lib="4" loc="(210,120)" name="D Flip-Flop">
+    <comp lib="4" loc="(190,110)" name="D Flip-Flop">
       <a name="appearance" val="logisim_evolution"/>
     </comp>
-    <comp lib="5" loc="(130,170)" name="Button">
+    <comp lib="5" loc="(110,160)" name="Button">
       <a name="label" val="ROMdis"/>
       <a name="press" val="passive"/>
     </comp>
-    <comp lib="5" loc="(130,210)" name="Button">
+    <comp lib="5" loc="(110,210)" name="Button">
       <a name="label" val="Reset"/>
       <a name="press" val="passive"/>
     </comp>
-    <comp lib="5" loc="(130,250)" name="Button">
+    <comp lib="5" loc="(110,260)" name="Button">
       <a name="label" val="RD"/>
       <a name="press" val="passive"/>
     </comp>
-    <comp lib="5" loc="(130,60)" name="Button">
+    <comp lib="5" loc="(110,40)" name="Button">
       <a name="label" val="MREQ"/>
       <a name="press" val="passive"/>
     </comp>
-    <comp lib="5" loc="(390,240)" name="LED">
+    <comp lib="5" loc="(370,250)" name="LED">
       <a name="color" val="#000000"/>
       <a name="label" val="RAMoe"/>
       <a name="labelloc" val="north"/>
       <a name="offcolor" val="#ff0000"/>
     </comp>
-    <comp lib="5" loc="(390,70)" name="LED">
+    <comp lib="5" loc="(370,50)" name="LED">
       <a name="color" val="#000000"/>
       <a name="label" val="ROMcs"/>
       <a name="labelloc" val="north"/>
       <a name="offcolor" val="#ff0000"/>
     </comp>
-    <wire from="(130,170)" to="(140,170)"/>
-    <wire from="(130,210)" to="(140,210)"/>
-    <wire from="(130,250)" to="(320,250)"/>
-    <wire from="(130,60)" to="(320,60)"/>
-    <wire from="(160,170)" to="(200,170)"/>
-    <wire from="(160,210)" to="(230,210)"/>
-    <wire from="(230,180)" to="(230,210)"/>
-    <wire from="(260,130)" to="(280,130)"/>
-    <wire from="(280,130)" to="(280,230)"/>
-    <wire from="(280,230)" to="(310,230)"/>
-    <wire from="(280,80)" to="(280,130)"/>
-    <wire from="(280,80)" to="(320,80)"/>
-    <wire from="(350,240)" to="(390,240)"/>
-    <wire from="(350,70)" to="(390,70)"/>
+    <wire from="(110,160)" to="(130,160)"/>
+    <wire from="(110,210)" to="(210,210)"/>
+    <wire from="(110,260)" to="(300,260)"/>
+    <wire from="(110,40)" to="(300,40)"/>
+    <wire from="(150,160)" to="(180,160)"/>
+    <wire from="(210,100)" to="(210,110)"/>
+    <wire from="(210,170)" to="(210,180)"/>
+    <wire from="(210,200)" to="(210,210)"/>
+    <wire from="(210,70)" to="(210,80)"/>
+    <wire from="(240,120)" to="(280,120)"/>
+    <wire from="(280,120)" to="(280,240)"/>
+    <wire from="(280,240)" to="(290,240)"/>
+    <wire from="(280,60)" to="(280,120)"/>
+    <wire from="(280,60)" to="(300,60)"/>
+    <wire from="(330,250)" to="(370,250)"/>
+    <wire from="(330,50)" to="(370,50)"/>
   </circuit>
 </project>
