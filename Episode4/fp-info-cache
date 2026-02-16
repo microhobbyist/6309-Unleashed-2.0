@@ -1,355 +1,61 @@
-27196900800828176
-0_Library
-8_Segment_Bar_graph
-
-Display
-0
-16
-16
-0_Library
-10_Segment_Bar_graph
-DC10SRWA
-Display
-0
-20
-20
-0_Library
-100x100 dev board with a 40-pin header.
-Standard 100mm² board size with a 2x32 integrated header
-
-0
-46
-46
-0_Library
-100x100 dev board with a 64-pin header.
-Standard 100mm² board size with a 2x32 integrated header
-
-0
-69
-65
-0_Library
-1458C4B_Hamnmond
-
-
-0
-4
-1
-0_Library
-1598ESGYPBK_Hammond
-
-
+27113976287876035
+6309 v2.0
+72-pin CE connector
+5530843-8-1
+Connector
 0
 72
-69
-0_Library
-18877_Housing
-ABS housing (Jameco #18877) (Manufacturer #203-115B)
-
-0
-0
-0
-0_Library
+72
+6309 v2.0
 ATX_Backplane
 ATX form factor with 8 bit - marked for ISA card edge slots
 
 0
 0
 0
-0_Library
+6309 v2.0
 ATX_PSU_CONN
 1-1775099-3
 Connector
 0
 24
 24
-0_Library
-Arduino_Mega2560_Shield
-https://store.arduino.cc/arduino-mega-2560-rev3
-
-0
-92
-91
-0_Library
-Arduino_Uno_Shield
-https://store.arduino.cc/arduino-uno-rev3
-
-0
-38
-37
-0_Library
-BAR_GRAPH_8
-8-Element Bar Graph Array
-8-Element Bar Graph Array
-0
-16
-16
-0_Library
-BUS_AT
-16-bits ISA Card Edge PCB Bus
-BUS ISA AT CARD EDGE 16-bit IBM PC AT
-0
-99
-99
-0_Library
+6309 v2.0
 BUS_AT v2
 16-bits ISA Card Edge PCB Bus
 BUS ISA AT CARD EDGE 16-bit IBM PC AT
 0
 98
 98
-0_Library
-BUS_XT
-8-bits ISA Card Edge PCB Bus
-BUS CARD EDGE 8-bit IBM PC XT
-0
-63
-63
-0_Library
+6309 v2.0
 BUS_XT v2
 8-bits ISA Card Edge PCB Bus
 BUS CARD EDGE 8-bit IBM PC XT
 0
 62
 62
-0_Library
-BUS_XT_Proto
-100mm² 8-bit ISA Bus Edge Connector
-BUS ISA XT Edge connector 62
-0
-62
-62
-0_Library
-Barrel_Jack_5.5mmODx2.1mmID_PJ-202A
-
-
-0
-3
-3
-0_Library
-DIP 64 1.778 pitch
-
-
-0
-64
-64
-0_Library
-DIP-8-4_W7.62mm_Oscillator_Socket
-4-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket for Oscillator
-THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket
-0
-4
-4
-0_Library
-Heatsink_TO220_Horizontal
-Heatsink TO-220 Horizontal
-Heatsink TO-220 Horizontal 
-0
-1
-1
-0_Library
+6309 v2.0
 ISA_Connector
 6-5530843-5-1
 Connector
 0
 62
 62
-0_Library
+6309 v2.0
 ISA_Connector_98
 5645169-3-2
 Connector
 0
 98
 98
-0_Library
-JLCPCB Logo
-
-
-0
-0
-0
-0_Library
-JLCPCB Logo 2
-
-
-0
-0
-0
-0_Library
-JLCPCB Logo 3
-
-
-0
-0
-0
-0_Library
-LED_D3.0mm_Horizontal_BiColor
-LED, diameter 3.0mm z-position of LED center 2.0mm, 2 pins
-LED diameter 3.0mm z-position of LED center 2.0mm 2 pins
-0
-3
-3
-0_Library
-MicroHobbyist
-
-
-0
-0
-0
-0_Library
-Microswitch_2.54mm_spacing
-
-
-0
-3
-3
-0_Library
-Microswitch_3mm_spacing
-
-
-0
-3
-3
-0_Library
-Microswitch_4.7mm_spacing
-
-
-0
-3
-3
-0_Library
-Mini-DIN_6p
-5749266-1-2 (PS/2 connector)
-PS2 PS/2 Connector
-0
-9
-7
-0_Library
-MountingHole_M3.96_Pad_Via_ATX
-Mounting Hole 4mm, M4
-mounting hole 4mm m4 3.96
-0
-9
-1
-0_Library
-NES_Connector
-
-
-0
-9
-7
-0_Library
-PinHeader_1x2_Vertical (Modified)
-Through hole straight pin header, 1x02, 2.54mm pitch, single row (Narrower pads)
-Through hole pin header THT 1x02 2.54mm single row
-0
-2
-2
-0_Library
-PinHeader_2x2_Vertical (Modified)
-Through hole straight pin header, 2x02, 2.54mm pitch, double rows (Narrower pads)
-Through hole pin header THT 2x02 2.54mm double row
-0
-4
-4
-0_Library
-PinHeader_3x05_P2.54mm_Vertical
-Through hole straight pin header, 3x05, 2.54mm pitch, triple rows
-Through hole pin header THT 3x05 2.54mm triple row
-0
-15
-15
-0_Library
-Polarity_C+_SilkScreen
-Polarity Logo, Center Positive
-Logo Polarity Center Positive
-0
-0
-0
-0_Library
-Polarity_SilkScreen
-Polarity Logo, Center Negative
-Logo Polarity Center Negative
-0
-0
-0
-0_Library
+6309 v2.0
 Pushbutton_12mm_LED
 Like a standard 12mm switch, but with integrated LED
 tact sw push 12mm LED
 0
 6
 4
-0_Library
-RCAJackCUI
-
-
-0
-2
-2
-0_Library
-SPDT_NKK_SWITCH_M2012S2A2W30
-M2012S2A2W30-1
-Switch
-0
-5
-5
-0_Library
-SW_Cherry_MX_1.00u_PCB
-Cherry MX keyswitch, 1.00u, PCB mount, http://cherryamericas.com/wp-content/uploads/2014/12/mx_cat.pdf
-Cherry MX keyswitch 1.00u PCB
-0
-2
-2
-0_Library
-SW_Cherry_MX_1.25u_PCB
-Cherry MX keyswitch, 1.25u, PCB mount, http://cherryamericas.com/wp-content/uploads/2014/12/mx_cat.pdf
-Cherry MX keyswitch 1.25u PCB
-0
-2
-2
-0_Library
-SW_Cherry_MX_1.50u_PCB
-Cherry MX keyswitch, 1.50u, PCB mount, http://cherryamericas.com/wp-content/uploads/2014/12/mx_cat.pdf
-Cherry MX keyswitch 1.50u PCB
-0
-2
-2
-0_Library
-SW_Cherry_MX_1.75u_PCB
-Cherry MX keyswitch, 1.75u, PCB mount, http://cherryamericas.com/wp-content/uploads/2014/12/mx_cat.pdf
-Cherry MX keyswitch 1.75u PCB
-0
-2
-2
-0_Library
-SW_Cherry_MX_2.00u_PCB
-Cherry MX keyswitch, 2.00u, PCB mount, http://cherryamericas.com/wp-content/uploads/2014/12/mx_cat.pdf
-Cherry MX keyswitch 2.00u PCB
-0
-2
-2
-0_Library
-SW_Cherry_MX_2.25u_PCB
-Cherry MX keyswitch, 2.25u, PCB mount, http://cherryamericas.com/wp-content/uploads/2014/12/mx_cat.pdf
-Cherry MX keyswitch 2.25u PCB
-0
-2
-2
-0_Library
-SW_Cherry_MX_2.75u_PCB
-Cherry MX keyswitch, 2.75u, PCB mount, http://cherryamericas.com/wp-content/uploads/2014/12/mx_cat.pdf
-Cherry MX keyswitch 2.75u PCB
-0
-2
-2
-0_Library
-SW_Cherry_MX_6.25u_PCB
-Cherry MX keyswitch, 6.25u, PCB mount, http://cherryamericas.com/wp-content/uploads/2014/12/mx_cat.pdf
-Cherry MX keyswitch 6.25u PCB
-0
-2
-2
-0_Library
+6309 v2.0
 ZIF_Socket-32
 3M_232-1285-00-0602J
 THT DIP DIL ZIF 15.24mm 600mil Socket
@@ -58471,13 +58177,6 @@ DCDC SMD TRACO TMR-1SM
 7
 7
 Converter_DCDC
-Converter_DCDC_TRACO_TMR-2xxxxWI_THT
-https://www.tracopower.com/products/tmr2wi.pdf
-DCDC-Converter TRACO TMRxxxxWI Single/Dual_output
-0
-7
-7
-Converter_DCDC
 Converter_DCDC_TRACO_TMR2-xxxxWI_THT
 DCDC-Converter, TRACO, TMR2-xxxxWI, 2W, Rev. October 7. 2025, https://www.tracopower.com/products/tmr2wi.pdf, generated with kicad-footprint-generator StandardBox_generator.py
 DCDC-Converter TRACO THT SIP-9 2W TMR2WI
@@ -63539,13 +63238,6 @@ inductor handsolder
 2
 2
 Inductor_SMD
-L_0805_2012Metric_Pad1.15x1.40mm_HandSolder
-Inductor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator
-inductor handsolder
-0
-2
-2
-Inductor_SMD
 L_01005_0402Metric
 Inductor SMD 01005 (0402 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: http://www.vishay.com/docs/20056/crcw01005e3.pdf), generated with kicad-footprint-generator
 inductor
@@ -63583,13 +63275,6 @@ inductor
 Inductor_SMD
 L_1206_3216Metric_Pad1.22x1.90mm_HandSolder
 Inductor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 80, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator
-inductor handsolder
-0
-2
-2
-Inductor_SMD
-L_1206_3216Metric_Pad1.42x1.75mm_HandSolder
-Inductor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
 inductor handsolder
 0
 2
@@ -68257,13 +67942,6 @@ wurth wuerth smd inductor
 2
 2
 Inductor_SMD
-L_Wuerth_WE-XHMI-8080
-Inductor, Wuerth, WE-XHMI 8080, 8.3mmx8.8mm, https://katalog.we-online.de/pbs/datasheet/74439358068.pdf, generated with kicad-footprint-generator StandardBox_generator.py
-Inductor Wuerth WE-XHMI 8080
-0
-2
-2
-Inductor_SMD
 L_Wuerth_XHMI-6060
 Inductor, Wuerth, XHMI-6060, 6.65x6.45x5.8mm, (https://www.we-online.com/components/products/datasheet/74439346068.pdf), generated with kicad-footprint-generator gen_inductor.py
 Würth SMT
@@ -71770,69 +71448,6 @@ Yellow 5381 Series LED
 0
 2
 2
-MicroHobbyist
-72-pin CE connector
-5530843-8-1
-Connector
-0
-72
-72
-MicroHobbyist
-ATX_Backplane
-ATX form factor with 8 bit - marked for ISA card edge slots
-
-0
-0
-0
-MicroHobbyist
-ATX_PSU_CONN
-1-1775099-3
-Connector
-0
-24
-24
-MicroHobbyist
-BUS_AT v2
-16-bits ISA Card Edge PCB Bus
-BUS ISA AT CARD EDGE 16-bit IBM PC AT
-0
-98
-98
-MicroHobbyist
-BUS_XT v2
-8-bits ISA Card Edge PCB Bus
-BUS CARD EDGE 8-bit IBM PC XT
-0
-62
-62
-MicroHobbyist
-ISA_Connector
-6-5530843-5-1
-Connector
-0
-62
-62
-MicroHobbyist
-ISA_Connector_98
-5645169-3-2
-Connector
-0
-98
-98
-MicroHobbyist
-Pushbutton_12mm_LED
-Like a standard 12mm switch, but with integrated LED
-tact sw push 12mm LED
-0
-6
-4
-MicroHobbyist
-ZIF_Socket-32
-3M_232-1285-00-0602J
-THT DIP DIL ZIF 15.24mm 600mil Socket
-0
-32
-32
 Module
 A20_OLINUXINO_LIME2
 A20 Olinuxino LIME2, 1.2GHz, 512-1024MB RAM, Micro-SD, NAND or eMMC, 1000Mbit Ethernet
@@ -79617,13 +79232,6 @@ DFN package size 1006 3 pins
 0
 3
 3
-Package_DFN_QFN
-Diodes_UDFN-10_1.0x2.5mm_P0.5mm
-U-DFN2510-10 package used by Diodes Incorporated (https://www.diodes.com/assets/Package-Files/U-DFN2510-10-Type-CJ.pdf)
-UDFN-10 U-DFN2510-10 Diodes
-0
-10
-10
 Package_DFN_QFN
 Diodes_UDFN-10_1x2.5mm_P0.5mm
 Diodes  UDFN, 10 Pin (https://www.diodes.com/assets/Package-Files/U-DFN2510-10-Type-CJ.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
@@ -87569,20 +87177,6 @@ Texas TQFP QFP Texas_PAP-(S-PQFP-G64) Texas_PowerPAD-64-pin-HTQFP
 0
 112
 65
-Package_QFP
-VQFP-128_14x14mm_P0.4mm
-VQFP, 128 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_gullwing_generator.py
-VQFP QFP
-0
-128
-128
-Package_QFP
-VQFP-176_20x20mm_P0.4mm
-VQFP, 176 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_gullwing_generator.py
-VQFP QFP
-0
-176
-176
 Package_SIP
 PowerIntegrations_eSIP-7C
 eSIP-7C Vertical Flat Package with Heatsink Tab, https://ac-dc.power.com/sites/default/files/product-docs/topswitch-jx_family_datasheet.pdf
@@ -91483,13 +91077,6 @@ SOT TO_SOT_SMD SC8
 8
 8
 Package_TO_SOT_SMD
-SC-70-8_Handsoldering
-SC70-8, Handsoldering
-SC70-8 Handsoldering
-0
-8
-8
-Package_TO_SOT_SMD
 SC-74-6_1.55x2.9mm_P0.95mm
 SC-74, 6 Pin (https://www.jeita.or.jp/japanese/standard/book/ED-7500B/#target/page_no=39), generated with kicad-footprint-generator ipc_gullwing_generator.py
 SC-74 TO_SOT_SMD
@@ -91714,23 +91301,9 @@ SOT TO_SOT_SMD SC-70 SOT-323
 3
 3
 Package_TO_SOT_SMD
-SOT-323_SC-70_Handsoldering
-SOT-323, SC-70 Handsoldering
-SOT-323 SC-70 Handsoldering
-0
-3
-3
-Package_TO_SOT_SMD
 SOT-343_SC-70-4
 SOT, 4 Pin (https://www.tme.eu/Document/ced3461ed31ea70a3c416fb648e0cde7/APE8865-3.pdf#page=9), generated with kicad-footprint-generator ipc_gullwing_generator.py
 SOT TO_SOT_SMD SOT-343 SC-70-4
-0
-4
-4
-Package_TO_SOT_SMD
-SOT-343_SC-70-4_Handsoldering
-SOT-343, SC-70-4, Handsoldering
-SOT-343 SC-70-4 Handsoldering
 0
 4
 4
@@ -91742,23 +91315,9 @@ SOT TO_SOT_SMD SC-88A SOT-353 SC-70-5
 5
 5
 Package_TO_SOT_SMD
-SOT-353_SC-70-5_Handsoldering
-SOT-353, SC-70-5, Handsoldering
-SOT-353 SC-70-5 Handsoldering
-0
-5
-5
-Package_TO_SOT_SMD
 SOT-363_SC-70-6
 SOT, 6 Pin (https://home.jeita.or.jp/tsc/std-pdf/ED-7500A.pdf#page=170, JEDEC MO-203, variant AB, https://www.jedec.org/document_search?search_api_views_fulltext=MO-203), generated with kicad-footprint-generator ipc_gullwing_generator.py
 SOT TO_SOT_SMD SC-88 SOT-363 SC-70-6 US6 UMT6 S-Mini6 TSSOP6
-0
-6
-6
-Package_TO_SOT_SMD
-SOT-363_SC-70-6_Handsoldering
-SOT-363, SC-70-6, SC-88, Handsoldering
-SOT-363 SC-70-6 SC-88 Handsoldering
 0
 6
 6
