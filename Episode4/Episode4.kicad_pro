@@ -560,7 +560,7 @@
       "svg": "",
       "vrml": ""
     },
-    "page_layout_descr_file": ""
+    "page_layout_descr_file": "kicad-embed://MicroHobbyistSheetPrefs.kicad_wks"
   },
   "schematic": {
     "annotate_start_num": 0,
@@ -707,6 +707,10 @@
     [
       "184965a6-7940-44d4-8637-f93e65786f3f",
       "Power"
+    ],
+    [
+      "51cee902-1601-4f65-a386-cacc4da37a47",
+      "Capacitors"
     ]
   ],
   "text_variables": {}
