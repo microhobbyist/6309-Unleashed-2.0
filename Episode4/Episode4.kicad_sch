@@ -22257,7 +22257,7 @@
 				)
 			)
 		)
-		(property "Value" "Conn_02x31_Top_Bottom"
+		(property "Value" "BB Con"
 			(at 209.5501 106.68 90)
 			(effects
 				(font
@@ -22267,7 +22267,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_2x31_P2.54mm_Vertical"
+		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_2x32_P2.54mm_Vertical"
 			(at 212.09 147.32 0)
 			(effects
 				(font
@@ -22276,7 +22276,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://multimedia.3m.com/mws/media/22500O/3m-tm-boardmount-skt-100-100-x-100-strt-sldr-tails-ts0815.pdf"
 			(at 212.09 147.32 0)
 			(effects
 				(font
@@ -22285,7 +22285,25 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Generic connector, double row, 02x31, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+		(property "Description" "Headers & Wire Housings 32P STRT BRD MNT SKT 2 ROW 10MICRO\" AU"
+			(at 212.09 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "3M Electronic Solutions Division"
+			(at 212.09 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "929852-01-16-RA"
 			(at 212.09 147.32 0)
 			(effects
 				(font
