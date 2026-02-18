@@ -361,6 +361,145 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:C"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "C"
+				(at 0.635 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0.9652 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Unpolarized capacitor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "C_0_1"
+				(polyline
+					(pts
+						(xy -2.032 0.762) (xy 2.032 0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "C_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:C_Polarized_US"
 			(pin_numbers
 				(hide yes)
@@ -665,6 +804,131 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "VCC_1"
+			(power)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "VCC"
+				(at 0 3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"VCC\""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "VCC_1_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "VCC_1_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "power:+3V3"
 			(power)
 			(pin_numbers
@@ -891,107 +1155,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "power:PWR_FLAG"
-			(power)
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "#FLG"
-				(at 0 1.905 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Value" "PWR_FLAG"
-				(at 0 3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Special symbol for telling ERC where power comes from"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "flag power"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "PWR_FLAG_0_0"
-				(pin power_out line
-					(at 0 0 90)
-					(length 0)
-					(name "pwr"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "PWR_FLAG_0_1"
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 	)
 	(text "BUS BULK CAPACITORS"
 		(exclude_from_sim no)
@@ -1034,6 +1197,17 @@
 			(justify left bottom)
 		)
 		(uuid "b5b6a667-34ae-45bc-b0b3-b142f9039267")
+	)
+	(text "Bypass Capacitors"
+		(exclude_from_sim no)
+		(at 242.57 165.1 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d5b15720-2bf5-4a2e-bd67-5c3aa52ee85d")
 	)
 	(text "BUS FILTER CAPACITORS"
 		(exclude_from_sim no)
@@ -1302,6 +1476,12 @@
 		(uuid "2548ef82-26d2-45d0-8168-83c166752904")
 	)
 	(junction
+		(at 240.03 176.53)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "25503ea1-28b5-40b3-bd0a-feccb84a6c0d")
+	)
+	(junction
 		(at 181.61 29.21)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1498,12 +1678,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3d30c0be-f56f-4019-a99e-609df222fc83")
-	)
-	(junction
-		(at 121.92 19.05)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "3d7b0ce8-67b6-42b0-bb87-28166ea26723")
 	)
 	(junction
 		(at 87.63 53.34)
@@ -2274,12 +2448,6 @@
 		(uuid "a86a4b52-92df-4cac-9d8b-a1691270c30e")
 	)
 	(junction
-		(at 78.74 19.05)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a8cee2d5-55c3-4c1e-8e7c-a0b8d14075bc")
-	)
-	(junction
 		(at 176.53 86.36)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2398,12 +2566,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b6872965-97b9-40ff-9972-c405f28f95c0")
-	)
-	(junction
-		(at 190.5 19.05)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b6d06038-67e0-41b9-9a2a-aea99db6a17a")
 	)
 	(junction
 		(at 60.96 143.51)
@@ -2718,6 +2880,12 @@
 		(uuid "df3fd48f-e092-4b76-bb04-8e968de817c5")
 	)
 	(junction
+		(at 240.03 166.37)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "dfc8e0ed-828f-464a-9b2a-27602e0d3f1a")
+	)
+	(junction
 		(at 25.4 86.36)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2836,12 +3004,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ec5e7e78-1da9-4e61-994a-afef9e6d8a88")
-	)
-	(junction
-		(at 156.21 19.05)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "eda97407-335e-48c5-9113-0ee5145461b3")
 	)
 	(junction
 		(at 92.71 29.21)
@@ -4837,6 +4999,16 @@
 	)
 	(wire
 		(pts
+			(xy 240.03 165.1) (xy 240.03 166.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3a7a83eb-bace-4431-99d3-90add53794bb")
+	)
+	(wire
+		(pts
 			(xy 203.2 110.49) (xy 212.09 110.49)
 		)
 		(stroke
@@ -6677,6 +6849,16 @@
 	)
 	(wire
 		(pts
+			(xy 240.03 166.37) (xy 240.03 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "76d6b78f-62fd-42e4-a7e2-89a61290a851")
+	)
+	(wire
+		(pts
 			(xy 105.41 125.73) (xy 105.41 127)
 		)
 		(stroke
@@ -6954,6 +7136,16 @@
 			(type default)
 		)
 		(uuid "7fadf6d0-1d09-4241-b915-052381e6b007")
+	)
+	(wire
+		(pts
+			(xy 251.46 167.64) (xy 251.46 166.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7fda6527-1bcf-4716-8fc7-a2f816bad96f")
 	)
 	(wire
 		(pts
@@ -7534,6 +7726,16 @@
 			(type default)
 		)
 		(uuid "938d9a08-8843-45eb-acad-a0857a5f6c6c")
+	)
+	(wire
+		(pts
+			(xy 240.03 175.26) (xy 240.03 176.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "94113b86-66b7-431e-a33f-2f321fb52a1c")
 	)
 	(wire
 		(pts
@@ -8827,6 +9029,16 @@
 	)
 	(wire
 		(pts
+			(xy 240.03 176.53) (xy 251.46 176.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c0575617-df71-4ad0-adda-4d03d7610ae0")
+	)
+	(wire
+		(pts
 			(xy 149.86 125.73) (xy 149.86 127)
 		)
 		(stroke
@@ -9064,6 +9276,16 @@
 			(type default)
 		)
 		(uuid "c9b5be28-1b5d-4a71-a491-0af3461f9f21")
+	)
+	(wire
+		(pts
+			(xy 251.46 175.26) (xy 251.46 176.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ca0e35eb-10ab-4d53-9d31-5264706001f0")
 	)
 	(wire
 		(pts
@@ -9544,6 +9766,16 @@
 			(type default)
 		)
 		(uuid "d8d785ac-cbb0-46a6-a287-502195c3ad97")
+	)
+	(wire
+		(pts
+			(xy 240.03 166.37) (xy 251.46 166.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d8f717d2-ac78-4265-9c69-de520b7bb836")
 	)
 	(wire
 		(pts
@@ -10317,6 +10549,16 @@
 	)
 	(wire
 		(pts
+			(xy 240.03 176.53) (xy 240.03 177.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f625da9c-d551-4628-95f4-4c227021a6ee")
+	)
+	(wire
+		(pts
 			(xy 134.62 72.39) (xy 144.78 72.39)
 		)
 		(stroke
@@ -10564,7 +10806,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "022f1698-d16e-4eb6-a4da-e804caeabbb3")
-		(property "Reference" "C31"
+		(property "Reference" "C29"
 			(at 110.49 46.99 0)
 			(effects
 				(font
@@ -10582,7 +10824,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 107.95 48.26 0)
 			(effects
 				(font
@@ -10600,7 +10842,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 107.95 48.26 0)
 			(effects
 				(font
@@ -10618,7 +10860,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 107.95 48.26 0)
 			(effects
 				(font
@@ -10636,7 +10878,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C31")
+					(reference "C29")
 					(unit 1)
 				)
 			)
@@ -10652,7 +10894,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "03c99b8f-a468-4749-8968-c9fa80d8a515")
-		(property "Reference" "C75"
+		(property "Reference" "C73"
 			(at 99.06 88.9062 0)
 			(effects
 				(font
@@ -10724,7 +10966,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C75")
+					(reference "C73")
 					(unit 1)
 				)
 			)
@@ -10740,7 +10982,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "052eb837-5ed7-4a9a-ad94-64cfd96ba5c0")
-		(property "Reference" "C73"
+		(property "Reference" "C71"
 			(at 81.28 88.9062 0)
 			(effects
 				(font
@@ -10812,7 +11054,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C73")
+					(reference "C71")
 					(unit 1)
 				)
 			)
@@ -10828,7 +11070,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0706132c-77ce-4e35-b283-47e84a6593bd")
-		(property "Reference" "C61"
+		(property "Reference" "C59"
 			(at 203.2 68.58 0)
 			(effects
 				(font
@@ -10846,7 +11088,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 200.66 67.31 0)
 			(effects
 				(font
@@ -10864,7 +11106,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 200.66 67.31 0)
 			(effects
 				(font
@@ -10882,7 +11124,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 200.66 67.31 0)
 			(effects
 				(font
@@ -10900,7 +11142,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C61")
+					(reference "C59")
 					(unit 1)
 				)
 			)
@@ -10916,7 +11158,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0721749a-8177-4fd9-8332-2f42ee753d45")
-		(property "Reference" "C17"
+		(property "Reference" "C15"
 			(at 149.86 22.8662 0)
 			(effects
 				(font
@@ -10988,7 +11230,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C17")
+					(reference "C15")
 					(unit 1)
 				)
 			)
@@ -11004,7 +11246,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "07339504-7b56-43a3-9312-6e13b3276ae8")
-		(property "Reference" "C122"
+		(property "Reference" "C120"
 			(at 134.62 121.9262 0)
 			(effects
 				(font
@@ -11076,7 +11318,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C122")
+					(reference "C120")
 					(unit 1)
 				)
 			)
@@ -11092,7 +11334,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "07669f53-e671-4a0f-a8da-2a47c28d7057")
-		(property "Reference" "C148"
+		(property "Reference" "C146"
 			(at 170.18 138.4362 0)
 			(effects
 				(font
@@ -11164,7 +11406,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C148")
+					(reference "C146")
 					(unit 1)
 				)
 			)
@@ -11179,7 +11421,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "07f4c46c-164c-4faa-b24d-241b792123c5")
-		(property "Reference" "C57"
+		(property "Reference" "C55"
 			(at 157.48 66.04 0)
 			(effects
 				(font
@@ -11197,7 +11439,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 154.94 67.31 0)
 			(effects
 				(font
@@ -11215,7 +11457,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 154.94 67.31 0)
 			(effects
 				(font
@@ -11233,7 +11475,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 154.94 67.31 0)
 			(effects
 				(font
@@ -11251,7 +11493,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C57")
+					(reference "C55")
 					(unit 1)
 				)
 			)
@@ -11267,7 +11509,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "080828b2-a775-4815-8c4f-864894caec27")
-		(property "Reference" "C103"
+		(property "Reference" "C101"
 			(at 161.29 105.4162 0)
 			(effects
 				(font
@@ -11339,7 +11581,94 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C103")
+					(reference "C101")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 240.03 171.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "08dfdc3f-cbc7-4a26-9f18-8fc76e032852")
+		(property "Reference" "C174"
+			(at 242.951 170.2816 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" ".1µF"
+			(at 242.951 172.593 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
+			(at 240.9952 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://weblib.samsungsem.com/mlcc/mlcc-ec-data-sheet.do?partNumber=CL21B104KBFNNN"
+			(at 240.03 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Multilayer Ceramic Capacitors MLCC - SMD/SMT 100nF+/-10% 50V X7R 0805"
+			(at 240.03 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Samsung Electro-Mechanics"
+			(at 240.03 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "CL21B104KBFNNNG"
+			(at 240.03 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d4f3fb8c-f6ba-4423-8fff-dde7a6a077db")
+		)
+		(pin "2"
+			(uuid "0b6667ac-e18c-4b8d-b9cf-36dc076273e7")
+		)
+		(instances
+			(project "Episode4"
+				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
+					(reference "C174")
 					(unit 1)
 				)
 			)
@@ -11355,7 +11684,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0921c6a9-9813-4038-8daa-25b4f60345d0")
-		(property "Reference" "C120"
+		(property "Reference" "C118"
 			(at 107.95 121.9262 0)
 			(effects
 				(font
@@ -11427,7 +11756,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C120")
+					(reference "C118")
 					(unit 1)
 				)
 			)
@@ -11443,7 +11772,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0955324d-921a-407c-bfef-29920b6d3a3f")
-		(property "Reference" "C70"
+		(property "Reference" "C68"
 			(at 54.61 88.9062 0)
 			(effects
 				(font
@@ -11515,7 +11844,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C70")
+					(reference "C68")
 					(unit 1)
 				)
 			)
@@ -11531,7 +11860,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0a254300-dc5c-4281-a4ea-c89390d4253e")
-		(property "Reference" "C150"
+		(property "Reference" "C148"
 			(at 187.96 138.4362 0)
 			(effects
 				(font
@@ -11603,7 +11932,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C150")
+					(reference "C148")
 					(unit 1)
 				)
 			)
@@ -11618,7 +11947,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0b965269-ce18-46da-90e2-69bc56b5dfef")
-		(property "Reference" "C52"
+		(property "Reference" "C50"
 			(at 100.33 66.04 0)
 			(effects
 				(font
@@ -11636,7 +11965,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 97.79 67.31 0)
 			(effects
 				(font
@@ -11654,7 +11983,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 97.79 67.31 0)
 			(effects
 				(font
@@ -11672,7 +12001,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 97.79 67.31 0)
 			(effects
 				(font
@@ -11690,7 +12019,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C52")
+					(reference "C50")
 					(unit 1)
 				)
 			)
@@ -11706,7 +12035,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0bb78791-b955-4292-9f1b-c570a0d6c153")
-		(property "Reference" "C161"
+		(property "Reference" "C159"
 			(at 81.28 154.9462 0)
 			(effects
 				(font
@@ -11778,7 +12107,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C161")
+					(reference "C159")
 					(unit 1)
 				)
 			)
@@ -11794,7 +12123,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0d25326f-aa67-4ac7-abee-1df947447824")
-		(property "Reference" "C95"
+		(property "Reference" "C93"
 			(at 81.28 105.4162 0)
 			(effects
 				(font
@@ -11866,7 +12195,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C95")
+					(reference "C93")
 					(unit 1)
 				)
 			)
@@ -11882,7 +12211,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0ecd65f9-9a6d-40f4-a902-94394aae46a4")
-		(property "Reference" "C9"
+		(property "Reference" "C7"
 			(at 63.5 22.8662 0)
 			(effects
 				(font
@@ -11954,7 +12283,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C9")
+					(reference "C7")
 					(unit 1)
 				)
 			)
@@ -11969,7 +12298,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0ef9dacd-6913-4a86-8d4c-6b324474f8bb")
-		(property "Reference" "C25"
+		(property "Reference" "C23"
 			(at 49.53 46.99 0)
 			(effects
 				(font
@@ -11987,7 +12316,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 46.99 48.26 0)
 			(effects
 				(font
@@ -12005,7 +12334,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 46.99 48.26 0)
 			(effects
 				(font
@@ -12023,7 +12352,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 46.99 48.26 0)
 			(effects
 				(font
@@ -12041,7 +12370,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C25")
+					(reference "C23")
 					(unit 1)
 				)
 			)
@@ -12065,7 +12394,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "470µF"
+		(property "Value" "100µF"
 			(at 19.05 180.34 0)
 			(effects
 				(font
@@ -12074,7 +12403,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_16x17.5"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
 			(at 16.51 179.07 0)
 			(effects
 				(font
@@ -12092,7 +12421,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 470UF 50V 20%"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 100UF 25V"
 			(at 16.51 179.07 0)
 			(effects
 				(font
@@ -12110,7 +12439,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H471MNJ1MS"
+		(property "Manufacturer_Part_Number" "UCD1E101MCL1GS"
 			(at 16.51 179.07 0)
 			(effects
 				(font
@@ -12144,7 +12473,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "11bbbf21-4b1c-44b8-ba09-0649d57d6654")
-		(property "Reference" "C119"
+		(property "Reference" "C117"
 			(at 99.06 121.9262 0)
 			(effects
 				(font
@@ -12216,7 +12545,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C119")
+					(reference "C117")
 					(unit 1)
 				)
 			)
@@ -12232,7 +12561,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1532b694-e130-47dd-8a71-04a64276eca9")
-		(property "Reference" "C132"
+		(property "Reference" "C130"
 			(at 19.05 138.4362 0)
 			(effects
 				(font
@@ -12304,7 +12633,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C132")
+					(reference "C130")
 					(unit 1)
 				)
 			)
@@ -12319,7 +12648,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "163ed69b-540c-4a7e-a731-7a465d0ba7ef")
-		(property "Reference" "C12"
+		(property "Reference" "C10"
 			(at 95.25 22.86 0)
 			(effects
 				(font
@@ -12328,7 +12657,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "470µF"
+		(property "Value" "100µF"
 			(at 95.25 25.4 0)
 			(effects
 				(font
@@ -12337,7 +12666,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_16x17.5"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
 			(at 92.71 24.13 0)
 			(effects
 				(font
@@ -12355,7 +12684,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 470UF 50V 20%"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 100UF 25V"
 			(at 92.71 24.13 0)
 			(effects
 				(font
@@ -12373,7 +12702,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H471MNJ1MS"
+		(property "Manufacturer_Part_Number" "UCD1E101MCL1GS"
 			(at 92.71 24.13 0)
 			(effects
 				(font
@@ -12391,7 +12720,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C12")
+					(reference "C10")
 					(unit 1)
 				)
 			)
@@ -12406,7 +12735,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "174cfc29-2801-4d33-b0f6-96774f0d6e55")
-		(property "Reference" "C23"
+		(property "Reference" "C21"
 			(at 29.21 46.99 0)
 			(effects
 				(font
@@ -12424,7 +12753,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 26.67 48.26 0)
 			(effects
 				(font
@@ -12442,7 +12771,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 26.67 48.26 0)
 			(effects
 				(font
@@ -12460,7 +12789,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 26.67 48.26 0)
 			(effects
 				(font
@@ -12478,7 +12807,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C23")
+					(reference "C21")
 					(unit 1)
 				)
 			)
@@ -12494,7 +12823,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "17afad22-fcae-441b-84da-5cba8c93fb33")
-		(property "Reference" "C78"
+		(property "Reference" "C76"
 			(at 134.62 88.9062 0)
 			(effects
 				(font
@@ -12566,7 +12895,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C78")
+					(reference "C76")
 					(unit 1)
 				)
 			)
@@ -12582,7 +12911,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1818b751-d69c-49b7-8cf8-ad839107c6be")
-		(property "Reference" "C142"
+		(property "Reference" "C140"
 			(at 107.95 138.4362 0)
 			(effects
 				(font
@@ -12654,7 +12983,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C142")
+					(reference "C140")
 					(unit 1)
 				)
 			)
@@ -12670,7 +12999,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "186a5a51-a65b-49aa-be9d-3afe01cdc9ad")
-		(property "Reference" "C168"
+		(property "Reference" "C166"
 			(at 152.4 154.9462 0)
 			(effects
 				(font
@@ -12742,7 +13071,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C168")
+					(reference "C166")
 					(unit 1)
 				)
 			)
@@ -12758,7 +13087,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "18821838-dac5-477c-a24e-95b34834b06a")
-		(property "Reference" "#PWR045"
+		(property "Reference" "#PWR039"
 			(at 16.51 21.59 0)
 			(effects
 				(font
@@ -12808,7 +13137,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR045")
+					(reference "#PWR039")
 					(unit 1)
 				)
 			)
@@ -12824,7 +13153,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "19064765-cbaa-46fa-a49c-965537e52f20")
-		(property "Reference" "C21"
+		(property "Reference" "C19"
 			(at 193.04 22.8662 0)
 			(effects
 				(font
@@ -12896,7 +13225,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C21")
+					(reference "C19")
 					(unit 1)
 				)
 			)
@@ -12911,7 +13240,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1933f344-2958-435b-88a3-03f1b76e43c0")
-		(property "Reference" "#PWR046"
+		(property "Reference" "#PWR040"
 			(at 92.71 21.59 0)
 			(effects
 				(font
@@ -12961,7 +13290,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR046")
+					(reference "#PWR040")
 					(unit 1)
 				)
 			)
@@ -12977,7 +13306,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "19a66f7d-a67a-41f3-8f95-f16c37ec09df")
-		(property "Reference" "#PWR079"
+		(property "Reference" "#PWR074"
 			(at 135.89 176.53 0)
 			(effects
 				(font
@@ -13027,7 +13356,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR079")
+					(reference "#PWR074")
 					(unit 1)
 				)
 			)
@@ -13043,7 +13372,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1c6165bb-86cc-4950-98d6-1b08ebaf729c")
-		(property "Reference" "C155"
+		(property "Reference" "C153"
 			(at 27.94 154.9462 0)
 			(effects
 				(font
@@ -13115,7 +13444,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C155")
+					(reference "C153")
 					(unit 1)
 				)
 			)
@@ -13131,7 +13460,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1c8172ce-c5d9-4e29-b43f-333aae31b621")
-		(property "Reference" "#PWR073"
+		(property "Reference" "#PWR067"
 			(at 25.4 154.94 0)
 			(effects
 				(font
@@ -13181,7 +13510,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR073")
+					(reference "#PWR067")
 					(unit 1)
 				)
 			)
@@ -13197,7 +13526,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1e59d7ae-bb43-4aee-b94f-45e23947e281")
-		(property "Reference" "C127"
+		(property "Reference" "C125"
 			(at 179.07 121.9262 0)
 			(effects
 				(font
@@ -13269,7 +13598,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C127")
+					(reference "C125")
 					(unit 1)
 				)
 			)
@@ -13285,7 +13614,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1e86c886-b77c-4707-ae59-dd6645624503")
-		(property "Reference" "C63"
+		(property "Reference" "C61"
 			(at 223.52 68.58 0)
 			(effects
 				(font
@@ -13303,7 +13632,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 220.98 67.31 0)
 			(effects
 				(font
@@ -13321,7 +13650,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 220.98 67.31 0)
 			(effects
 				(font
@@ -13339,7 +13668,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 220.98 67.31 0)
 			(effects
 				(font
@@ -13357,7 +13686,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C63")
+					(reference "C61")
 					(unit 1)
 				)
 			)
@@ -13373,7 +13702,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1ebd55fe-0f53-4bf1-aa52-a0ac8125c9bb")
-		(property "Reference" "C111"
+		(property "Reference" "C109"
 			(at 27.94 121.9262 0)
 			(effects
 				(font
@@ -13445,7 +13774,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C111")
+					(reference "C109")
 					(unit 1)
 				)
 			)
@@ -13460,7 +13789,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1f4b9d04-0192-4a18-a3d7-6d834b8b0f4c")
-		(property "Reference" "#PWR060"
+		(property "Reference" "#PWR054"
 			(at 200.66 80.01 0)
 			(effects
 				(font
@@ -13510,7 +13839,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR060")
+					(reference "#PWR054")
 					(unit 1)
 				)
 			)
@@ -13526,7 +13855,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1f7547a9-a2aa-49cd-a8af-6ee23d267b5a")
-		(property "Reference" "C124"
+		(property "Reference" "C122"
 			(at 152.4 121.9262 0)
 			(effects
 				(font
@@ -13598,7 +13927,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C124")
+					(reference "C122")
 					(unit 1)
 				)
 			)
@@ -13613,7 +13942,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1fe3c07d-4d73-40d7-9015-304644edb58b")
-		(property "Reference" "C55"
+		(property "Reference" "C53"
 			(at 137.16 66.04 0)
 			(effects
 				(font
@@ -13631,7 +13960,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 134.62 67.31 0)
 			(effects
 				(font
@@ -13649,7 +13978,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 134.62 67.31 0)
 			(effects
 				(font
@@ -13667,7 +13996,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 134.62 67.31 0)
 			(effects
 				(font
@@ -13685,7 +14014,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C55")
+					(reference "C53")
 					(unit 1)
 				)
 			)
@@ -13700,7 +14029,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "218cd590-a838-4902-a932-01d7f7eb3aff")
-		(property "Reference" "#PWR054"
+		(property "Reference" "#PWR048"
 			(at 16.51 60.96 0)
 			(effects
 				(font
@@ -13750,7 +14079,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR054")
+					(reference "#PWR048")
 					(unit 1)
 				)
 			)
@@ -13765,7 +14094,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "21fd8482-4609-46cc-a01e-b4cd53d4ca04")
-		(property "Reference" "C54"
+		(property "Reference" "C52"
 			(at 120.65 66.04 0)
 			(effects
 				(font
@@ -13783,7 +14112,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 118.11 67.31 0)
 			(effects
 				(font
@@ -13801,7 +14130,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 118.11 67.31 0)
 			(effects
 				(font
@@ -13819,7 +14148,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 118.11 67.31 0)
 			(effects
 				(font
@@ -13837,7 +14166,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C54")
+					(reference "C52")
 					(unit 1)
 				)
 			)
@@ -13940,7 +14269,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "24d7a25f-8682-4078-9588-8cc36c6173ee")
-		(property "Reference" "C40"
+		(property "Reference" "C38"
 			(at 201.93 46.99 0)
 			(effects
 				(font
@@ -13958,7 +14287,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 199.39 48.26 0)
 			(effects
 				(font
@@ -13976,7 +14305,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 199.39 48.26 0)
 			(effects
 				(font
@@ -13994,7 +14323,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 199.39 48.26 0)
 			(effects
 				(font
@@ -14012,7 +14341,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C40")
+					(reference "C38")
 					(unit 1)
 				)
 			)
@@ -14028,7 +14357,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "25a134c6-ccd9-4231-b780-0f8ba1c61b3b")
-		(property "Reference" "C157"
+		(property "Reference" "C155"
 			(at 45.72 154.9462 0)
 			(effects
 				(font
@@ -14100,7 +14429,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C157")
+					(reference "C155")
 					(unit 1)
 				)
 			)
@@ -14116,7 +14445,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "25c47d83-9e8e-4345-b1fb-ddd67c44c789")
-		(property "Reference" "C66"
+		(property "Reference" "C64"
 			(at 19.05 88.9062 0)
 			(effects
 				(font
@@ -14188,7 +14517,73 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C66")
+					(reference "C64")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_name "VCC_1")
+		(lib_id "power:VCC")
+		(at 240.03 165.1 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "26413f79-fa10-4737-b587-721cf0abf99a")
+		(property "Reference" "#PWR071"
+			(at 240.03 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VCC"
+			(at 240.03 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 240.03 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 240.03 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VCC\""
+			(at 240.03 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "203e517f-f18e-40bf-995a-d4820b8447a6")
+		)
+		(instances
+			(project "Episode4"
+				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
+					(reference "#PWR071")
 					(unit 1)
 				)
 			)
@@ -14204,7 +14599,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2672de67-7940-49cb-a1bf-f214d5f67cd4")
-		(property "Reference" "C165"
+		(property "Reference" "C163"
 			(at 125.73 154.9462 0)
 			(effects
 				(font
@@ -14276,7 +14671,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C165")
+					(reference "C163")
 					(unit 1)
 				)
 			)
@@ -14292,7 +14687,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "27e3dd75-036e-4161-9438-1fca7491230c")
-		(property "Reference" "C69"
+		(property "Reference" "C67"
 			(at 45.72 88.9062 0)
 			(effects
 				(font
@@ -14364,7 +14759,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C69")
+					(reference "C67")
 					(unit 1)
 				)
 			)
@@ -14380,7 +14775,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "28d70c4b-8fc3-4b68-85be-2257f081f54c")
-		(property "Reference" "C164"
+		(property "Reference" "C162"
 			(at 107.95 154.9462 0)
 			(effects
 				(font
@@ -14452,7 +14847,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C164")
+					(reference "C162")
 					(unit 1)
 				)
 			)
@@ -14467,7 +14862,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "294e80f1-d54d-41cd-bd93-2df68f26c876")
-		(property "Reference" "C48"
+		(property "Reference" "C46"
 			(at 59.69 66.04 0)
 			(effects
 				(font
@@ -14485,7 +14880,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 57.15 67.31 0)
 			(effects
 				(font
@@ -14503,7 +14898,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 57.15 67.31 0)
 			(effects
 				(font
@@ -14521,7 +14916,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 57.15 67.31 0)
 			(effects
 				(font
@@ -14539,7 +14934,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C48")
+					(reference "C46")
 					(unit 1)
 				)
 			)
@@ -14554,7 +14949,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2a93d31c-4c92-4987-bdcd-205561773972")
-		(property "Reference" "C77"
+		(property "Reference" "C75"
 			(at 125.73 88.9062 0)
 			(effects
 				(font
@@ -14626,7 +15021,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C77")
+					(reference "C75")
 					(unit 1)
 				)
 			)
@@ -14641,7 +15036,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2ae35498-aa72-40f0-861a-12682af1d11f")
-		(property "Reference" "C43"
+		(property "Reference" "C41"
 			(at 232.41 46.99 0)
 			(effects
 				(font
@@ -14659,7 +15054,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 229.87 48.26 0)
 			(effects
 				(font
@@ -14677,7 +15072,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 229.87 48.26 0)
 			(effects
 				(font
@@ -14695,7 +15090,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 229.87 48.26 0)
 			(effects
 				(font
@@ -14713,7 +15108,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C43")
+					(reference "C41")
 					(unit 1)
 				)
 			)
@@ -14729,7 +15124,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2c2e615e-f577-40c7-b716-0087f623764d")
-		(property "Reference" "C106"
+		(property "Reference" "C104"
 			(at 187.96 105.4162 0)
 			(effects
 				(font
@@ -14801,7 +15196,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C106")
+					(reference "C104")
 					(unit 1)
 				)
 			)
@@ -14817,7 +15212,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2d7a4afc-2ae3-410c-8519-6c481d313a32")
-		(property "Reference" "C76"
+		(property "Reference" "C74"
 			(at 107.95 88.9062 0)
 			(effects
 				(font
@@ -14889,7 +15284,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C76")
+					(reference "C74")
 					(unit 1)
 				)
 			)
@@ -14905,7 +15300,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2da64b65-c890-460e-9b09-05767ac5cf61")
-		(property "Reference" "C93"
+		(property "Reference" "C91"
 			(at 63.5 105.4162 0)
 			(effects
 				(font
@@ -14977,7 +15372,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C93")
+					(reference "C91")
 					(unit 1)
 				)
 			)
@@ -14992,7 +15387,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2dc1ab5c-0438-4bbe-95da-29c459644b4c")
-		(property "Reference" "C33"
+		(property "Reference" "C31"
 			(at 130.81 46.99 0)
 			(effects
 				(font
@@ -15010,7 +15405,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 128.27 48.26 0)
 			(effects
 				(font
@@ -15028,7 +15423,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 128.27 48.26 0)
 			(effects
 				(font
@@ -15046,7 +15441,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 128.27 48.26 0)
 			(effects
 				(font
@@ -15064,7 +15459,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C33")
+					(reference "C31")
 					(unit 1)
 				)
 			)
@@ -15080,7 +15475,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2fe194e9-d398-4c04-8432-54d84cc773e7")
-		(property "Reference" "#PWR067"
+		(property "Reference" "#PWR061"
 			(at 25.4 121.92 0)
 			(effects
 				(font
@@ -15130,7 +15525,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR067")
+					(reference "#PWR061")
 					(unit 1)
 				)
 			)
@@ -15146,7 +15541,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "31668462-92c8-47b5-a8ff-ab0021313726")
-		(property "Reference" "#PWR074"
+		(property "Reference" "#PWR068"
 			(at 132.08 154.94 0)
 			(effects
 				(font
@@ -15196,7 +15591,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR074")
+					(reference "#PWR068")
 					(unit 1)
 				)
 			)
@@ -15212,7 +15607,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "31d95ebe-7d41-4aa3-8ee9-f97696d91c57")
-		(property "Reference" "C83"
+		(property "Reference" "C81"
 			(at 179.07 88.9062 0)
 			(effects
 				(font
@@ -15284,7 +15679,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C83")
+					(reference "C81")
 					(unit 1)
 				)
 			)
@@ -15299,7 +15694,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "31f22ac0-8eae-40a9-8a76-06c9dda17ff2")
-		(property "Reference" "C58"
+		(property "Reference" "C56"
 			(at 167.64 66.04 0)
 			(effects
 				(font
@@ -15317,7 +15712,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 165.1 67.31 0)
 			(effects
 				(font
@@ -15335,7 +15730,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 165.1 67.31 0)
 			(effects
 				(font
@@ -15353,7 +15748,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 165.1 67.31 0)
 			(effects
 				(font
@@ -15371,7 +15766,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C58")
+					(reference "C56")
 					(unit 1)
 				)
 			)
@@ -15387,7 +15782,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "34a9778f-8b59-4584-b1fe-27424ad31c3a")
-		(property "Reference" "#PWR070"
+		(property "Reference" "#PWR064"
 			(at 123.19 138.43 0)
 			(effects
 				(font
@@ -15437,7 +15832,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR070")
+					(reference "#PWR064")
 					(unit 1)
 				)
 			)
@@ -15453,7 +15848,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "37ca0ebc-fd3d-4032-8862-564d0ec49fcd")
-		(property "Reference" "C129"
+		(property "Reference" "C127"
 			(at 196.85 121.9262 0)
 			(effects
 				(font
@@ -15525,7 +15920,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C129")
+					(reference "C127")
 					(unit 1)
 				)
 			)
@@ -15540,7 +15935,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "37e81629-878d-4159-9866-24b11b2ec90b")
-		(property "Reference" "#PWR081"
+		(property "Reference" "#PWR077"
 			(at 16.51 191.77 0)
 			(effects
 				(font
@@ -15590,7 +15985,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR081")
+					(reference "#PWR077")
 					(unit 1)
 				)
 			)
@@ -15693,7 +16088,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3a7a251a-0c38-4607-b1bf-89303209f7d8")
-		(property "Reference" "C5"
+		(property "Reference" "C3"
 			(at 19.05 22.86 0)
 			(effects
 				(font
@@ -15702,7 +16097,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1000µF"
+		(property "Value" "100µF"
 			(at 19.05 25.4 0)
 			(effects
 				(font
@@ -15711,7 +16106,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_16x17.5"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
 			(at 16.51 24.13 0)
 			(effects
 				(font
@@ -15729,7 +16124,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 1000UF 35V 20%"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 100UF 25V"
 			(at 16.51 24.13 0)
 			(effects
 				(font
@@ -15747,7 +16142,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1V102MNJ1MS"
+		(property "Manufacturer_Part_Number" "UCD1E101MCL1GS"
 			(at 16.51 24.13 0)
 			(effects
 				(font
@@ -15765,7 +16160,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C5")
+					(reference "C3")
 					(unit 1)
 				)
 			)
@@ -15781,7 +16176,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3ba92167-bb58-4564-a7c0-b4980192bfda")
-		(property "Reference" "C112"
+		(property "Reference" "C110"
 			(at 36.83 121.9262 0)
 			(effects
 				(font
@@ -15853,7 +16248,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C112")
+					(reference "C110")
 					(unit 1)
 				)
 			)
@@ -15868,7 +16263,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "42819250-3e1b-4fb3-9456-f7c0fe1efece")
-		(property "Reference" "#PWR082"
+		(property "Reference" "#PWR078"
 			(at 92.71 191.77 0)
 			(effects
 				(font
@@ -15918,73 +16313,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR082")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 121.92 19.05 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "435bed5c-9132-4b5e-a231-f02a2a4a8444")
-		(property "Reference" "#FLG04"
-			(at 121.92 17.145 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 121.92 13.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 121.92 19.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 121.92 19.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 121.92 19.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "aa11882a-5e62-432d-8098-fa1a61df1454")
-		)
-		(instances
-			(project "Episode4"
-				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#FLG04")
+					(reference "#PWR078")
 					(unit 1)
 				)
 			)
@@ -16000,7 +16329,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "43b9b88e-9120-421f-828f-5f01d204e7f6")
-		(property "Reference" "C154"
+		(property "Reference" "C152"
 			(at 19.05 154.9462 0)
 			(effects
 				(font
@@ -16072,73 +16401,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C154")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 156.21 19.05 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "444c224e-6d44-4900-8f06-abde25ad6ac7")
-		(property "Reference" "#FLG05"
-			(at 156.21 17.145 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 156.21 13.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 156.21 19.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 156.21 19.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 156.21 19.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "fa484f0f-a9eb-4e29-b876-632f4f4b6d28")
-		)
-		(instances
-			(project "Episode4"
-				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#FLG05")
+					(reference "C152")
 					(unit 1)
 				)
 			)
@@ -16330,7 +16593,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "474feb5b-a1e4-452e-80de-52b6bf31261b")
-		(property "Reference" "C94"
+		(property "Reference" "C92"
 			(at 72.39 105.4162 0)
 			(effects
 				(font
@@ -16402,7 +16665,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C94")
+					(reference "C92")
 					(unit 1)
 				)
 			)
@@ -16418,7 +16681,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "47b112f9-9d43-40d8-b329-6065193d1a33")
-		(property "Reference" "C11"
+		(property "Reference" "C9"
 			(at 81.28 22.8662 0)
 			(effects
 				(font
@@ -16490,7 +16753,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C11")
+					(reference "C9")
 					(unit 1)
 				)
 			)
@@ -16505,7 +16768,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "48349248-a00d-44cf-ad70-781364a488f4")
-		(property "Reference" "C37"
+		(property "Reference" "C35"
 			(at 171.45 46.99 0)
 			(effects
 				(font
@@ -16523,7 +16786,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 168.91 48.26 0)
 			(effects
 				(font
@@ -16541,7 +16804,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 168.91 48.26 0)
 			(effects
 				(font
@@ -16559,7 +16822,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 168.91 48.26 0)
 			(effects
 				(font
@@ -16577,7 +16840,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C37")
+					(reference "C35")
 					(unit 1)
 				)
 			)
@@ -16593,7 +16856,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4b1c6af0-c48c-4a1e-95d7-eb7a04630814")
-		(property "Reference" "C79"
+		(property "Reference" "C77"
 			(at 143.51 88.9062 0)
 			(effects
 				(font
@@ -16665,7 +16928,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C79")
+					(reference "C77")
 					(unit 1)
 				)
 			)
@@ -16681,7 +16944,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4bf3a02a-0378-4f69-a2b1-c59b1e45cc97")
-		(property "Reference" "C143"
+		(property "Reference" "C141"
 			(at 125.73 138.4362 0)
 			(effects
 				(font
@@ -16753,7 +17016,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C143")
+					(reference "C141")
 					(unit 1)
 				)
 			)
@@ -16768,7 +17031,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4c01731e-eb90-4bc6-9919-228adb8f831c")
-		(property "Reference" "C51"
+		(property "Reference" "C49"
 			(at 90.17 66.04 0)
 			(effects
 				(font
@@ -16786,7 +17049,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 87.63 67.31 0)
 			(effects
 				(font
@@ -16804,7 +17067,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 87.63 67.31 0)
 			(effects
 				(font
@@ -16822,7 +17085,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 87.63 67.31 0)
 			(effects
 				(font
@@ -16840,7 +17103,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C51")
+					(reference "C49")
 					(unit 1)
 				)
 			)
@@ -16855,7 +17118,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4c3385f3-5ea8-4af7-97bf-9c58f5201fa5")
-		(property "Reference" "C38"
+		(property "Reference" "C36"
 			(at 181.61 46.99 0)
 			(effects
 				(font
@@ -16873,7 +17136,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 179.07 48.26 0)
 			(effects
 				(font
@@ -16891,7 +17154,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 179.07 48.26 0)
 			(effects
 				(font
@@ -16909,7 +17172,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 179.07 48.26 0)
 			(effects
 				(font
@@ -16927,7 +17190,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C38")
+					(reference "C36")
 					(unit 1)
 				)
 			)
@@ -16942,7 +17205,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4deda6e6-f58e-4c19-9c12-08c719da4167")
-		(property "Reference" "#PWR068"
+		(property "Reference" "#PWR062"
 			(at 16.51 134.62 0)
 			(effects
 				(font
@@ -16992,7 +17255,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR068")
+					(reference "#PWR062")
 					(unit 1)
 				)
 			)
@@ -17008,7 +17271,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "534e78c1-7635-414a-8bd4-bc2c8a872a24")
-		(property "Reference" "C117"
+		(property "Reference" "C115"
 			(at 81.28 121.9262 0)
 			(effects
 				(font
@@ -17080,7 +17343,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C117")
+					(reference "C115")
 					(unit 1)
 				)
 			)
@@ -17096,7 +17359,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "544748df-4411-4d33-8a65-cf67f77dce82")
-		(property "Reference" "C169"
+		(property "Reference" "C167"
 			(at 161.29 154.9462 0)
 			(effects
 				(font
@@ -17168,7 +17431,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C169")
+					(reference "C167")
 					(unit 1)
 				)
 			)
@@ -17184,7 +17447,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5571b9f7-d4a2-4a0e-9910-85c10c229e0e")
-		(property "Reference" "C72"
+		(property "Reference" "C70"
 			(at 72.39 88.9062 0)
 			(effects
 				(font
@@ -17256,7 +17519,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C72")
+					(reference "C70")
 					(unit 1)
 				)
 			)
@@ -17271,7 +17534,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "56025c06-7d98-435f-8ab3-3ae1372c2636")
-		(property "Reference" "#PWR076"
+		(property "Reference" "#PWR070"
 			(at 123.19 167.64 0)
 			(effects
 				(font
@@ -17321,7 +17584,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR076")
+					(reference "#PWR070")
 					(unit 1)
 				)
 			)
@@ -17337,7 +17600,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5649a0e9-6673-4aa4-aafc-c181e7e1bd10")
-		(property "Reference" "C62"
+		(property "Reference" "C60"
 			(at 213.36 68.58 0)
 			(effects
 				(font
@@ -17355,7 +17618,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 210.82 67.31 0)
 			(effects
 				(font
@@ -17373,7 +17636,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 210.82 67.31 0)
 			(effects
 				(font
@@ -17391,7 +17654,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 210.82 67.31 0)
 			(effects
 				(font
@@ -17409,7 +17672,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C62")
+					(reference "C60")
 					(unit 1)
 				)
 			)
@@ -17425,7 +17688,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "579c2466-6933-4b26-9d04-a38959a2e666")
-		(property "Reference" "C133"
+		(property "Reference" "C131"
 			(at 27.94 138.4362 0)
 			(effects
 				(font
@@ -17497,7 +17760,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C133")
+					(reference "C131")
 					(unit 1)
 				)
 			)
@@ -17513,7 +17776,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "57d14495-7ee8-49a5-8bc9-5c27e40ea9cf")
-		(property "Reference" "C89"
+		(property "Reference" "C87"
 			(at 27.94 105.4162 0)
 			(effects
 				(font
@@ -17585,7 +17848,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C89")
+					(reference "C87")
 					(unit 1)
 				)
 			)
@@ -17601,7 +17864,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5ae9cce7-8812-48d0-aad5-66c98a8dea7a")
-		(property "Reference" "C105"
+		(property "Reference" "C103"
 			(at 179.07 105.4162 0)
 			(effects
 				(font
@@ -17673,7 +17936,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C105")
+					(reference "C103")
 					(unit 1)
 				)
 			)
@@ -17689,7 +17952,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5c32df34-8119-4a26-a9c2-086d3c04ae6f")
-		(property "Reference" "#PWR080"
+		(property "Reference" "#PWR075"
 			(at 170.18 176.53 0)
 			(effects
 				(font
@@ -17739,7 +18002,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR080")
+					(reference "#PWR075")
 					(unit 1)
 				)
 			)
@@ -17754,7 +18017,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5d6f53ae-fb3d-4128-85d1-f13828b88a9e")
-		(property "Reference" "C39"
+		(property "Reference" "C37"
 			(at 191.77 46.99 0)
 			(effects
 				(font
@@ -17772,7 +18035,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 189.23 48.26 0)
 			(effects
 				(font
@@ -17790,7 +18053,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 189.23 48.26 0)
 			(effects
 				(font
@@ -17808,7 +18071,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 189.23 48.26 0)
 			(effects
 				(font
@@ -17826,7 +18089,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C39")
+					(reference "C37")
 					(unit 1)
 				)
 			)
@@ -17842,7 +18105,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5e412ac9-2514-4e5c-8da6-aab3001ca743")
-		(property "Reference" "C153"
+		(property "Reference" "C151"
 			(at 214.63 138.4362 0)
 			(effects
 				(font
@@ -17914,7 +18177,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C153")
+					(reference "C151")
 					(unit 1)
 				)
 			)
@@ -17930,7 +18193,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "616d0504-22c8-45f8-b01f-97fe1f0fa42a")
-		(property "Reference" "C128"
+		(property "Reference" "C126"
 			(at 187.96 121.9262 0)
 			(effects
 				(font
@@ -18002,7 +18265,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C128")
+					(reference "C126")
 					(unit 1)
 				)
 			)
@@ -18018,7 +18281,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "62aa779f-b81e-4002-80c7-45a860890156")
-		(property "Reference" "C68"
+		(property "Reference" "C66"
 			(at 36.83 88.9062 0)
 			(effects
 				(font
@@ -18090,7 +18353,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C68")
+					(reference "C66")
 					(unit 1)
 				)
 			)
@@ -18106,7 +18369,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "630296c6-677d-4db3-96a1-38ec08762819")
-		(property "Reference" "C88"
+		(property "Reference" "C86"
 			(at 19.05 105.4162 0)
 			(effects
 				(font
@@ -18178,7 +18441,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C88")
+					(reference "C86")
 					(unit 1)
 				)
 			)
@@ -18193,7 +18456,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6496ea1f-3be0-4273-8dfb-6098ddc09acf")
-		(property "Reference" "C28"
+		(property "Reference" "C26"
 			(at 80.01 46.99 0)
 			(effects
 				(font
@@ -18211,7 +18474,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 77.47 48.26 0)
 			(effects
 				(font
@@ -18229,7 +18492,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 77.47 48.26 0)
 			(effects
 				(font
@@ -18247,7 +18510,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 77.47 48.26 0)
 			(effects
 				(font
@@ -18265,7 +18528,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C28")
+					(reference "C26")
 					(unit 1)
 				)
 			)
@@ -18280,7 +18543,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "65c9f812-93bc-4da3-9c93-2033aaeacf70")
-		(property "Reference" "#PWR052"
+		(property "Reference" "#PWR046"
 			(at 170.18 36.83 0)
 			(effects
 				(font
@@ -18330,7 +18593,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR052")
+					(reference "#PWR046")
 					(unit 1)
 				)
 			)
@@ -18346,7 +18609,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6654866a-8444-47ca-9270-d93c3811d02c")
-		(property "Reference" "C84"
+		(property "Reference" "C82"
 			(at 187.96 88.9062 0)
 			(effects
 				(font
@@ -18418,7 +18681,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C84")
+					(reference "C82")
 					(unit 1)
 				)
 			)
@@ -18452,7 +18715,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_10x7.7"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
 			(at 170.18 179.07 0)
 			(effects
 				(font
@@ -18470,7 +18733,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 100UF 50V 20%"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 100UF 25V"
 			(at 170.18 179.07 0)
 			(effects
 				(font
@@ -18488,7 +18751,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H101MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E101MCL1GS"
 			(at 170.18 179.07 0)
 			(effects
 				(font
@@ -18609,7 +18872,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "69be8c2d-cdfb-4ade-9b4d-28ac19d2903f")
-		(property "Reference" "#PWR072"
+		(property "Reference" "#PWR066"
 			(at 123.19 151.13 0)
 			(effects
 				(font
@@ -18659,7 +18922,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR072")
+					(reference "#PWR066")
 					(unit 1)
 				)
 			)
@@ -18675,7 +18938,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6cecffa7-d8c7-47b5-a200-8cb0be5c20cd")
-		(property "Reference" "C135"
+		(property "Reference" "C133"
 			(at 45.72 138.4362 0)
 			(effects
 				(font
@@ -18747,7 +19010,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C135")
+					(reference "C133")
 					(unit 1)
 				)
 			)
@@ -18763,7 +19026,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6d5883f6-70ce-42e7-b67c-bbef48e50f9c")
-		(property "Reference" "C149"
+		(property "Reference" "C147"
 			(at 179.07 138.4362 0)
 			(effects
 				(font
@@ -18835,7 +19098,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C149")
+					(reference "C147")
 					(unit 1)
 				)
 			)
@@ -18851,7 +19114,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6e88f332-c68a-44e6-9b31-854c46dfebb1")
-		(property "Reference" "C139"
+		(property "Reference" "C137"
 			(at 81.28 138.4362 0)
 			(effects
 				(font
@@ -18923,7 +19186,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C139")
+					(reference "C137")
 					(unit 1)
 				)
 			)
@@ -18938,7 +19201,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6f4be14d-07eb-4efe-bf8a-a778d9394528")
-		(property "Reference" "#PWR078"
+		(property "Reference" "#PWR073"
 			(at 92.71 176.53 0)
 			(effects
 				(font
@@ -18988,7 +19251,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR078")
+					(reference "#PWR073")
 					(unit 1)
 				)
 			)
@@ -19092,7 +19355,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "746e3c39-df63-4a84-b076-165693c7fdcc")
-		(property "Reference" "#PWR048"
+		(property "Reference" "#PWR042"
 			(at 170.18 21.59 0)
 			(effects
 				(font
@@ -19142,7 +19405,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR048")
+					(reference "#PWR042")
 					(unit 1)
 				)
 			)
@@ -19158,7 +19421,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "74846962-e0eb-4be5-8f19-95ba0c02395d")
-		(property "Reference" "C86"
+		(property "Reference" "C84"
 			(at 205.74 88.9062 0)
 			(effects
 				(font
@@ -19230,7 +19493,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C86")
+					(reference "C84")
 					(unit 1)
 				)
 			)
@@ -19246,7 +19509,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "74fb5747-432c-45a0-89e0-366dd5af2713")
-		(property "Reference" "C19"
+		(property "Reference" "C17"
 			(at 172.72 22.86 0)
 			(effects
 				(font
@@ -19264,7 +19527,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_10x7.7"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
 			(at 170.18 24.13 0)
 			(effects
 				(font
@@ -19282,7 +19545,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 100UF 50V 20%"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 100UF 25V"
 			(at 170.18 24.13 0)
 			(effects
 				(font
@@ -19300,7 +19563,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H101MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E101MCL1GS"
 			(at 170.18 24.13 0)
 			(effects
 				(font
@@ -19318,7 +19581,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C19")
+					(reference "C17")
 					(unit 1)
 				)
 			)
@@ -19334,7 +19597,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "751cbb10-4c6a-445a-9361-279f1e6c8586")
-		(property "Reference" "C170"
+		(property "Reference" "C168"
 			(at 170.18 154.9462 0)
 			(effects
 				(font
@@ -19406,7 +19669,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C170")
+					(reference "C168")
 					(unit 1)
 				)
 			)
@@ -19422,7 +19685,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "766acdc4-fd7c-48c2-8f37-d216515ec3c1")
-		(property "Reference" "C100"
+		(property "Reference" "C98"
 			(at 134.62 105.4162 0)
 			(effects
 				(font
@@ -19494,7 +19757,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C100")
+					(reference "C98")
 					(unit 1)
 				)
 			)
@@ -19509,7 +19772,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "76ecbba7-57f7-43ec-930b-abf3292cb932")
-		(property "Reference" "C24"
+		(property "Reference" "C22"
 			(at 39.37 46.99 0)
 			(effects
 				(font
@@ -19527,7 +19790,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 36.83 48.26 0)
 			(effects
 				(font
@@ -19545,7 +19808,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 36.83 48.26 0)
 			(effects
 				(font
@@ -19563,7 +19826,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 36.83 48.26 0)
 			(effects
 				(font
@@ -19581,7 +19844,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C24")
+					(reference "C22")
 					(unit 1)
 				)
 			)
@@ -19597,7 +19860,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7a195d9e-cbce-413f-a198-f548c0a5ba79")
-		(property "Reference" "C107"
+		(property "Reference" "C105"
 			(at 196.85 105.4162 0)
 			(effects
 				(font
@@ -19669,7 +19932,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C107")
+					(reference "C105")
 					(unit 1)
 				)
 			)
@@ -19685,7 +19948,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7b5f1cd8-ad8b-41f9-adfd-4c1594b5e7e0")
-		(property "Reference" "C13"
+		(property "Reference" "C11"
 			(at 106.68 22.8662 0)
 			(effects
 				(font
@@ -19757,7 +20020,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C13")
+					(reference "C11")
 					(unit 1)
 				)
 			)
@@ -19772,7 +20035,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7bc19568-7afe-4547-83e6-af2ea6b59963")
-		(property "Reference" "#PWR055"
+		(property "Reference" "#PWR049"
 			(at 26.67 64.77 0)
 			(effects
 				(font
@@ -19822,7 +20085,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR055")
+					(reference "#PWR049")
 					(unit 1)
 				)
 			)
@@ -19838,7 +20101,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7d8e6ef3-79e9-4d31-a1b6-355a61a15a69")
-		(property "Reference" "C141"
+		(property "Reference" "C139"
 			(at 99.06 138.4362 0)
 			(effects
 				(font
@@ -19910,7 +20173,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C141")
+					(reference "C139")
 					(unit 1)
 				)
 			)
@@ -20014,7 +20277,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7e740db6-7da2-43fb-a531-b3073296ce3e")
-		(property "Reference" "C92"
+		(property "Reference" "C90"
 			(at 54.61 105.4162 0)
 			(effects
 				(font
@@ -20086,7 +20349,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C92")
+					(reference "C90")
 					(unit 1)
 				)
 			)
@@ -20102,7 +20365,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7f1a987a-62e0-40a2-8a66-646a12a38bd6")
-		(property "Reference" "C166"
+		(property "Reference" "C164"
 			(at 134.62 154.9462 0)
 			(effects
 				(font
@@ -20174,7 +20437,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C166")
+					(reference "C164")
 					(unit 1)
 				)
 			)
@@ -20190,7 +20453,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7f52e570-3f3f-45b5-a2f5-ee07de81e8a9")
-		(property "Reference" "C20"
+		(property "Reference" "C18"
 			(at 184.15 22.8662 0)
 			(effects
 				(font
@@ -20262,7 +20525,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C20")
+					(reference "C18")
 					(unit 1)
 				)
 			)
@@ -20278,7 +20541,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "806d20e0-368b-47a9-b3e2-30466de43e4d")
-		(property "Reference" "C91"
+		(property "Reference" "C89"
 			(at 45.72 105.4162 0)
 			(effects
 				(font
@@ -20350,7 +20613,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C91")
+					(reference "C89")
 					(unit 1)
 				)
 			)
@@ -20366,7 +20629,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "813e4924-df7f-4e99-828f-fa6b354e3464")
-		(property "Reference" "#PWR069"
+		(property "Reference" "#PWR063"
 			(at 25.4 138.43 0)
 			(effects
 				(font
@@ -20416,7 +20679,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR069")
+					(reference "#PWR063")
 					(unit 1)
 				)
 			)
@@ -20432,7 +20695,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "819bc237-72bb-4588-8209-43abc7751a06")
-		(property "Reference" "C159"
+		(property "Reference" "C157"
 			(at 63.5 154.9462 0)
 			(effects
 				(font
@@ -20504,7 +20767,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C159")
+					(reference "C157")
 					(unit 1)
 				)
 			)
@@ -20519,7 +20782,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "832db84a-aead-41af-aca5-7783acf01e28")
-		(property "Reference" "#PWR065"
+		(property "Reference" "#PWR059"
 			(at 16.51 118.11 0)
 			(effects
 				(font
@@ -20569,7 +20832,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR065")
+					(reference "#PWR059")
 					(unit 1)
 				)
 			)
@@ -20672,7 +20935,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "851a81ab-a116-40ce-90a2-01e788b520bd")
-		(property "Reference" "#PWR062"
+		(property "Reference" "#PWR056"
 			(at 16.51 101.6 0)
 			(effects
 				(font
@@ -20722,7 +20985,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR062")
+					(reference "#PWR056")
 					(unit 1)
 				)
 			)
@@ -20738,7 +21001,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "85b8a34c-2b2b-462c-ae4c-454303469745")
-		(property "Reference" "C114"
+		(property "Reference" "C112"
 			(at 54.61 121.9262 0)
 			(effects
 				(font
@@ -20810,7 +21073,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C114")
+					(reference "C112")
 					(unit 1)
 				)
 			)
@@ -20825,7 +21088,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "86c37787-f831-4dc7-9674-c5c402d39956")
-		(property "Reference" "#PWR064"
+		(property "Reference" "#PWR058"
 			(at 132.08 105.41 0)
 			(effects
 				(font
@@ -20875,7 +21138,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR064")
+					(reference "#PWR058")
 					(unit 1)
 				)
 			)
@@ -20891,7 +21154,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8751b2d6-87db-4341-97c6-4b5a92f6c793")
-		(property "Reference" "C96"
+		(property "Reference" "C94"
 			(at 90.17 105.4162 0)
 			(effects
 				(font
@@ -20963,7 +21226,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C96")
+					(reference "C94")
 					(unit 1)
 				)
 			)
@@ -20978,7 +21241,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8aa51a66-3d3c-4a3b-997c-8e913fe1ad34")
-		(property "Reference" "C42"
+		(property "Reference" "C40"
 			(at 222.25 46.99 0)
 			(effects
 				(font
@@ -20996,7 +21259,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 219.71 48.26 0)
 			(effects
 				(font
@@ -21014,7 +21277,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 219.71 48.26 0)
 			(effects
 				(font
@@ -21032,7 +21295,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 219.71 48.26 0)
 			(effects
 				(font
@@ -21050,7 +21313,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C42")
+					(reference "C40")
 					(unit 1)
 				)
 			)
@@ -21065,7 +21328,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8bf0b2ed-cb20-42fb-a669-dc0ff03f63fa")
-		(property "Reference" "C32"
+		(property "Reference" "C30"
 			(at 120.65 46.99 0)
 			(effects
 				(font
@@ -21083,7 +21346,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 118.11 48.26 0)
 			(effects
 				(font
@@ -21101,7 +21364,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 118.11 48.26 0)
 			(effects
 				(font
@@ -21119,7 +21382,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 118.11 48.26 0)
 			(effects
 				(font
@@ -21137,7 +21400,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C32")
+					(reference "C30")
 					(unit 1)
 				)
 			)
@@ -21152,7 +21415,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8c1d567f-5463-4b4d-a0da-6fcbf90f7f9e")
-		(property "Reference" "#PWR075"
+		(property "Reference" "#PWR069"
 			(at 16.51 167.64 0)
 			(effects
 				(font
@@ -21202,7 +21465,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR075")
+					(reference "#PWR069")
 					(unit 1)
 				)
 			)
@@ -21226,7 +21489,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "470µF"
+		(property "Value" "100µF"
 			(at 33.02 180.34 0)
 			(effects
 				(font
@@ -21235,7 +21498,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_16x17.5"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
 			(at 30.48 179.07 0)
 			(effects
 				(font
@@ -21253,7 +21516,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 470UF 50V 20%"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 100UF 25V"
 			(at 30.48 179.07 0)
 			(effects
 				(font
@@ -21271,7 +21534,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H471MNJ1MS"
+		(property "Manufacturer_Part_Number" "UCD1E101MCL1GS"
 			(at 30.48 179.07 0)
 			(effects
 				(font
@@ -21305,7 +21568,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9049dff0-95a7-424a-abc7-0fd338c8d934")
-		(property "Reference" "C104"
+		(property "Reference" "C102"
 			(at 170.18 105.4162 0)
 			(effects
 				(font
@@ -21377,7 +21640,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C104")
+					(reference "C102")
 					(unit 1)
 				)
 			)
@@ -21393,7 +21656,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "90e1b219-262e-4f24-a146-0793fcd2c14b")
-		(property "Reference" "C98"
+		(property "Reference" "C96"
 			(at 107.95 105.4162 0)
 			(effects
 				(font
@@ -21465,7 +21728,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C98")
+					(reference "C96")
 					(unit 1)
 				)
 			)
@@ -21481,7 +21744,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "91c0b823-79a7-4189-99c2-6fb9ffed42ad")
-		(property "Reference" "C131"
+		(property "Reference" "C129"
 			(at 214.63 121.9262 0)
 			(effects
 				(font
@@ -21553,7 +21816,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C131")
+					(reference "C129")
 					(unit 1)
 				)
 			)
@@ -21569,7 +21832,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "923eaa98-03b0-4a76-bf86-739a2eea65a9")
-		(property "Reference" "#PWR053"
+		(property "Reference" "#PWR047"
 			(at 16.51 45.72 0)
 			(effects
 				(font
@@ -21619,7 +21882,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR053")
+					(reference "#PWR047")
 					(unit 1)
 				)
 			)
@@ -21635,7 +21898,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "944f8e6d-b1cb-4ec6-b0ce-ab018d60b3de")
-		(property "Reference" "#PWR056"
+		(property "Reference" "#PWR050"
 			(at 144.78 64.77 0)
 			(effects
 				(font
@@ -21685,7 +21948,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR056")
+					(reference "#PWR050")
 					(unit 1)
 				)
 			)
@@ -21701,7 +21964,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9639dc2e-e8be-4748-9f40-d63148e5a38f")
-		(property "Reference" "C125"
+		(property "Reference" "C123"
 			(at 161.29 121.9262 0)
 			(effects
 				(font
@@ -21773,7 +22036,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C125")
+					(reference "C123")
 					(unit 1)
 				)
 			)
@@ -21789,7 +22052,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "96477a6d-a39f-4ce2-8810-254dc9641b5d")
-		(property "Reference" "C152"
+		(property "Reference" "C150"
 			(at 205.74 138.4362 0)
 			(effects
 				(font
@@ -21861,7 +22124,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C152")
+					(reference "C150")
 					(unit 1)
 				)
 			)
@@ -21876,7 +22139,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9707cc3d-6bff-4533-a559-dfc4c211e609")
-		(property "Reference" "C22"
+		(property "Reference" "C20"
 			(at 19.05 46.99 0)
 			(effects
 				(font
@@ -21894,7 +22157,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 16.51 48.26 0)
 			(effects
 				(font
@@ -21912,7 +22175,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 16.51 48.26 0)
 			(effects
 				(font
@@ -21930,7 +22193,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 16.51 48.26 0)
 			(effects
 				(font
@@ -21948,7 +22211,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C22")
+					(reference "C20")
 					(unit 1)
 				)
 			)
@@ -21964,7 +22227,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "974fb42c-66d0-44d9-9603-71aae3df875e")
-		(property "Reference" "C163"
+		(property "Reference" "C161"
 			(at 99.06 154.9462 0)
 			(effects
 				(font
@@ -22036,7 +22299,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C163")
+					(reference "C161")
 					(unit 1)
 				)
 			)
@@ -22051,7 +22314,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "981d16c5-e20e-4341-af18-4ba7e96d02f0")
-		(property "Reference" "C46"
+		(property "Reference" "C44"
 			(at 39.37 66.04 0)
 			(effects
 				(font
@@ -22069,7 +22332,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 36.83 67.31 0)
 			(effects
 				(font
@@ -22087,7 +22350,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 36.83 67.31 0)
 			(effects
 				(font
@@ -22105,7 +22368,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 36.83 67.31 0)
 			(effects
 				(font
@@ -22123,7 +22386,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C46")
+					(reference "C44")
 					(unit 1)
 				)
 			)
@@ -22138,7 +22401,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "98adf4bf-36c6-4e0e-a283-1928b45c9559")
-		(property "Reference" "C56"
+		(property "Reference" "C54"
 			(at 147.32 66.04 0)
 			(effects
 				(font
@@ -22156,7 +22419,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 144.78 67.31 0)
 			(effects
 				(font
@@ -22174,7 +22437,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 144.78 67.31 0)
 			(effects
 				(font
@@ -22192,7 +22455,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 144.78 67.31 0)
 			(effects
 				(font
@@ -22210,7 +22473,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C56")
+					(reference "C54")
 					(unit 1)
 				)
 			)
@@ -22226,7 +22489,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "994d9c7d-08dd-406f-9e63-c01923537c82")
-		(property "Reference" "C8"
+		(property "Reference" "C6"
 			(at 54.61 22.8662 0)
 			(effects
 				(font
@@ -22298,7 +22561,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C8")
+					(reference "C6")
 					(unit 1)
 				)
 			)
@@ -22313,7 +22576,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "999dd273-c52b-4066-b8fc-6c9f5a57f94c")
-		(property "Reference" "C59"
+		(property "Reference" "C57"
 			(at 177.8 66.04 0)
 			(effects
 				(font
@@ -22331,7 +22594,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 175.26 67.31 0)
 			(effects
 				(font
@@ -22349,7 +22612,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 175.26 67.31 0)
 			(effects
 				(font
@@ -22367,7 +22630,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 175.26 67.31 0)
 			(effects
 				(font
@@ -22385,7 +22648,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C59")
+					(reference "C57")
 					(unit 1)
 				)
 			)
@@ -22401,7 +22664,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9c65e12c-2b2b-4cb3-a2d0-269b55fdda0f")
-		(property "Reference" "C175"
+		(property "Reference" "C173"
 			(at 214.63 154.9462 0)
 			(effects
 				(font
@@ -22473,7 +22736,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C175")
+					(reference "C173")
 					(unit 1)
 				)
 			)
@@ -22488,7 +22751,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9d6a83bc-8c08-4e84-8941-766b18d81c54")
-		(property "Reference" "#PWR084"
+		(property "Reference" "#PWR080"
 			(at 170.18 191.77 0)
 			(effects
 				(font
@@ -22538,7 +22801,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR084")
+					(reference "#PWR080")
 					(unit 1)
 				)
 			)
@@ -22553,7 +22816,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9eb3c9a0-8cc7-47a6-b533-f1a220f89895")
-		(property "Reference" "#PWR059"
+		(property "Reference" "#PWR053"
 			(at 134.62 80.01 0)
 			(effects
 				(font
@@ -22603,7 +22866,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR059")
+					(reference "#PWR053")
 					(unit 1)
 				)
 			)
@@ -22618,7 +22881,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a07f08eb-4303-4788-938b-4a3c486c9320")
-		(property "Reference" "#PWR066"
+		(property "Reference" "#PWR060"
 			(at 123.19 118.11 0)
 			(effects
 				(font
@@ -22668,7 +22931,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR066")
+					(reference "#PWR060")
 					(unit 1)
 				)
 			)
@@ -22684,7 +22947,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a081fa6c-4258-41b9-be32-85d86ca9458b")
-		(property "Reference" "C18"
+		(property "Reference" "C16"
 			(at 158.75 22.8662 0)
 			(effects
 				(font
@@ -22756,7 +23019,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C18")
+					(reference "C16")
 					(unit 1)
 				)
 			)
@@ -22772,7 +23035,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a2a5d6bb-a7e1-4690-93a5-71b90eab922b")
-		(property "Reference" "C116"
+		(property "Reference" "C114"
 			(at 72.39 121.9262 0)
 			(effects
 				(font
@@ -22844,7 +23107,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C116")
+					(reference "C114")
 					(unit 1)
 				)
 			)
@@ -22860,7 +23123,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a35c67be-a104-4003-8351-efa0523664c8")
-		(property "Reference" "C99"
+		(property "Reference" "C97"
 			(at 125.73 105.4162 0)
 			(effects
 				(font
@@ -22932,7 +23195,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C99")
+					(reference "C97")
 					(unit 1)
 				)
 			)
@@ -22948,7 +23211,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a5162a9b-06d3-4671-b873-d28f0b390a33")
-		(property "Reference" "C147"
+		(property "Reference" "C145"
 			(at 161.29 138.4362 0)
 			(effects
 				(font
@@ -23020,7 +23283,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C147")
+					(reference "C145")
 					(unit 1)
 				)
 			)
@@ -23036,7 +23299,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a64b9047-fb10-4f9b-be9f-66f8a99b3b26")
-		(property "Reference" "#PWR047"
+		(property "Reference" "#PWR041"
 			(at 135.89 21.59 0)
 			(effects
 				(font
@@ -23086,7 +23349,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR047")
+					(reference "#PWR041")
 					(unit 1)
 				)
 			)
@@ -23101,7 +23364,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a64f5c26-66b9-4db2-885a-2a0bcd6a963e")
-		(property "Reference" "C49"
+		(property "Reference" "C47"
 			(at 69.85 66.04 0)
 			(effects
 				(font
@@ -23119,7 +23382,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 67.31 67.31 0)
 			(effects
 				(font
@@ -23137,7 +23400,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 67.31 67.31 0)
 			(effects
 				(font
@@ -23155,7 +23418,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 67.31 67.31 0)
 			(effects
 				(font
@@ -23173,7 +23436,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C49")
+					(reference "C47")
 					(unit 1)
 				)
 			)
@@ -23189,7 +23452,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a675e656-84b0-4077-8666-85ee89e26a8d")
-		(property "Reference" "#PWR057"
+		(property "Reference" "#PWR051"
 			(at 210.82 64.77 0)
 			(effects
 				(font
@@ -23239,7 +23502,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR057")
+					(reference "#PWR051")
 					(unit 1)
 				)
 			)
@@ -23255,7 +23518,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a7ad6e4c-90d8-4b12-9d3e-6e0af5c8f8a2")
-		(property "Reference" "C101"
+		(property "Reference" "C99"
 			(at 143.51 105.4162 0)
 			(effects
 				(font
@@ -23327,7 +23590,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C101")
+					(reference "C99")
 					(unit 1)
 				)
 			)
@@ -23343,7 +23606,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a8fbbee2-e569-4f3b-896f-224442d52591")
-		(property "Reference" "C162"
+		(property "Reference" "C160"
 			(at 90.17 154.9462 0)
 			(effects
 				(font
@@ -23415,7 +23678,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C162")
+					(reference "C160")
 					(unit 1)
 				)
 			)
@@ -23431,7 +23694,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "abae37af-4bfb-48bd-bddc-eee48c5fed34")
-		(property "Reference" "C145"
+		(property "Reference" "C143"
 			(at 143.51 138.4362 0)
 			(effects
 				(font
@@ -23503,7 +23766,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C145")
+					(reference "C143")
 					(unit 1)
 				)
 			)
@@ -23518,7 +23781,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "abd1e0ce-e797-4ab0-9d39-c0b48718c388")
-		(property "Reference" "C34"
+		(property "Reference" "C32"
 			(at 140.97 46.99 0)
 			(effects
 				(font
@@ -23536,7 +23799,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 138.43 48.26 0)
 			(effects
 				(font
@@ -23554,7 +23817,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 138.43 48.26 0)
 			(effects
 				(font
@@ -23572,7 +23835,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 138.43 48.26 0)
 			(effects
 				(font
@@ -23590,7 +23853,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C34")
+					(reference "C32")
 					(unit 1)
 				)
 			)
@@ -23606,7 +23869,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "adb40e28-c363-4330-8c75-64156b528dde")
-		(property "Reference" "C65"
+		(property "Reference" "C63"
 			(at 243.84 68.58 0)
 			(effects
 				(font
@@ -23624,7 +23887,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 241.3 67.31 0)
 			(effects
 				(font
@@ -23642,7 +23905,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 241.3 67.31 0)
 			(effects
 				(font
@@ -23660,7 +23923,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 241.3 67.31 0)
 			(effects
 				(font
@@ -23678,7 +23941,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C65")
+					(reference "C63")
 					(unit 1)
 				)
 			)
@@ -23693,7 +23956,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "af7735d5-c5e7-4034-960e-b4d06983356a")
-		(property "Reference" "C16"
+		(property "Reference" "C14"
 			(at 138.43 22.86 0)
 			(effects
 				(font
@@ -23711,7 +23974,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_10x7.7"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
 			(at 135.89 24.13 0)
 			(effects
 				(font
@@ -23729,7 +23992,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 100UF 50V 20%"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 100UF 25V"
 			(at 135.89 24.13 0)
 			(effects
 				(font
@@ -23747,7 +24010,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H101MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E101MCL1GS"
 			(at 135.89 24.13 0)
 			(effects
 				(font
@@ -23765,7 +24028,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C16")
+					(reference "C14")
 					(unit 1)
 				)
 			)
@@ -23780,7 +24043,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b08ca313-7da0-4052-a91e-d2fac8da1914")
-		(property "Reference" "C30"
+		(property "Reference" "C28"
 			(at 100.33 46.99 0)
 			(effects
 				(font
@@ -23798,7 +24061,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 97.79 48.26 0)
 			(effects
 				(font
@@ -23816,7 +24079,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 97.79 48.26 0)
 			(effects
 				(font
@@ -23834,7 +24097,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 97.79 48.26 0)
 			(effects
 				(font
@@ -23852,7 +24115,94 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C30")
+					(reference "C28")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 251.46 171.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b24fb271-fe56-4369-b60d-f7d3a041a10a")
+		(property "Reference" "C175"
+			(at 254.381 170.2816 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" ".1µF"
+			(at 254.381 172.593 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
+			(at 252.4252 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://weblib.samsungsem.com/mlcc/mlcc-ec-data-sheet.do?partNumber=CL21B104KBFNNN"
+			(at 251.46 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Multilayer Ceramic Capacitors MLCC - SMD/SMT 100nF+/-10% 50V X7R 0805"
+			(at 251.46 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Samsung Electro-Mechanics"
+			(at 251.46 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "CL21B104KBFNNNG"
+			(at 251.46 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "864195bc-cd5f-45ab-a652-be52111acbb7")
+		)
+		(pin "2"
+			(uuid "87c49fb7-ea15-4d05-9d69-f4e722a8a94b")
+		)
+		(instances
+			(project "Episode4"
+				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
+					(reference "C175")
 					(unit 1)
 				)
 			)
@@ -23867,7 +24217,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b2f54d60-c537-484a-9ba3-d781d7fff03e")
-		(property "Reference" "C44"
+		(property "Reference" "C42"
 			(at 19.05 66.04 0)
 			(effects
 				(font
@@ -23885,7 +24235,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 16.51 67.31 0)
 			(effects
 				(font
@@ -23903,7 +24253,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 16.51 67.31 0)
 			(effects
 				(font
@@ -23921,7 +24271,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 16.51 67.31 0)
 			(effects
 				(font
@@ -23939,7 +24289,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C44")
+					(reference "C42")
 					(unit 1)
 				)
 			)
@@ -23954,7 +24304,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b311ad23-bfd1-42cf-9837-1d36e96558a8")
-		(property "Reference" "#PWR049"
+		(property "Reference" "#PWR043"
 			(at 16.51 36.83 0)
 			(effects
 				(font
@@ -24004,7 +24354,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR049")
+					(reference "#PWR043")
 					(unit 1)
 				)
 			)
@@ -24020,7 +24370,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b42ac8bc-1d33-423e-991d-10c66949beb8")
-		(property "Reference" "C108"
+		(property "Reference" "C106"
 			(at 205.74 105.4162 0)
 			(effects
 				(font
@@ -24092,7 +24442,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C108")
+					(reference "C106")
 					(unit 1)
 				)
 			)
@@ -24108,7 +24458,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b4373c90-1d54-4d29-899e-067b61fb5c98")
-		(property "Reference" "C67"
+		(property "Reference" "C65"
 			(at 27.94 88.9062 0)
 			(effects
 				(font
@@ -24180,7 +24530,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C67")
+					(reference "C65")
 					(unit 1)
 				)
 			)
@@ -24195,7 +24545,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b44b10b2-69ec-4848-915d-d52e4d72634e")
-		(property "Reference" "C60"
+		(property "Reference" "C58"
 			(at 187.96 66.04 0)
 			(effects
 				(font
@@ -24213,7 +24563,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 185.42 67.31 0)
 			(effects
 				(font
@@ -24231,7 +24581,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 185.42 67.31 0)
 			(effects
 				(font
@@ -24249,7 +24599,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 185.42 67.31 0)
 			(effects
 				(font
@@ -24267,73 +24617,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C60")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 190.5 19.05 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "b48623d4-0915-49ef-8fc3-1d465855a6d0")
-		(property "Reference" "#FLG06"
-			(at 190.5 17.145 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 190.5 13.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 190.5 19.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 190.5 19.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 190.5 19.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "4c397c3e-0a86-4a1f-be07-044f0156e447")
-		)
-		(instances
-			(project "Episode4"
-				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#FLG06")
+					(reference "C58")
 					(unit 1)
 				)
 			)
@@ -24349,7 +24633,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b5038ada-4cbd-401e-9f52-2a2c6d494cb5")
-		(property "Reference" "C137"
+		(property "Reference" "C135"
 			(at 63.5 138.4362 0)
 			(effects
 				(font
@@ -24421,7 +24705,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C137")
+					(reference "C135")
 					(unit 1)
 				)
 			)
@@ -24437,7 +24721,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b5a7d75b-112c-4d8f-8008-9241e5c2998e")
-		(property "Reference" "C10"
+		(property "Reference" "C8"
 			(at 72.39 22.8662 0)
 			(effects
 				(font
@@ -24509,7 +24793,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C10")
+					(reference "C8")
 					(unit 1)
 				)
 			)
@@ -24525,7 +24809,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b6e91017-1de0-4304-984e-8f70ad49ffd4")
-		(property "Reference" "C146"
+		(property "Reference" "C144"
 			(at 152.4 138.4362 0)
 			(effects
 				(font
@@ -24597,7 +24881,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C146")
+					(reference "C144")
 					(unit 1)
 				)
 			)
@@ -24612,7 +24896,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b6fdb170-360e-435f-a085-134a15db11c6")
-		(property "Reference" "C45"
+		(property "Reference" "C43"
 			(at 29.21 66.04 0)
 			(effects
 				(font
@@ -24630,7 +24914,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 26.67 67.31 0)
 			(effects
 				(font
@@ -24648,7 +24932,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 26.67 67.31 0)
 			(effects
 				(font
@@ -24666,7 +24950,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 26.67 67.31 0)
 			(effects
 				(font
@@ -24684,7 +24968,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C45")
+					(reference "C43")
 					(unit 1)
 				)
 			)
@@ -24699,7 +24983,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b9388f98-6f7e-4a42-9918-81908b76cda8")
-		(property "Reference" "C36"
+		(property "Reference" "C34"
 			(at 161.29 46.99 0)
 			(effects
 				(font
@@ -24717,7 +25001,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 158.75 48.26 0)
 			(effects
 				(font
@@ -24735,7 +25019,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 158.75 48.26 0)
 			(effects
 				(font
@@ -24753,7 +25037,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 158.75 48.26 0)
 			(effects
 				(font
@@ -24771,7 +25055,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C36")
+					(reference "C34")
 					(unit 1)
 				)
 			)
@@ -24787,7 +25071,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b953eae4-2647-42fc-9826-f54b2e0b3468")
-		(property "Reference" "C118"
+		(property "Reference" "C116"
 			(at 90.17 121.9262 0)
 			(effects
 				(font
@@ -24859,7 +25143,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C118")
+					(reference "C116")
 					(unit 1)
 				)
 			)
@@ -24874,7 +25158,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b99b833e-6135-4441-ac0b-e575e39bbbd9")
-		(property "Reference" "C50"
+		(property "Reference" "C48"
 			(at 80.01 66.04 0)
 			(effects
 				(font
@@ -24892,7 +25176,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 77.47 67.31 0)
 			(effects
 				(font
@@ -24910,7 +25194,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 77.47 67.31 0)
 			(effects
 				(font
@@ -24928,7 +25212,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 77.47 67.31 0)
 			(effects
 				(font
@@ -24946,7 +25230,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C50")
+					(reference "C48")
 					(unit 1)
 				)
 			)
@@ -24962,7 +25246,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ba913aca-ea48-4886-a97b-54596505bbc0")
-		(property "Reference" "C15"
+		(property "Reference" "C13"
 			(at 124.46 22.8662 0)
 			(effects
 				(font
@@ -25034,7 +25318,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C15")
+					(reference "C13")
 					(unit 1)
 				)
 			)
@@ -25050,7 +25334,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "baf199ac-0993-4ed3-81b7-e78449eae1bd")
-		(property "Reference" "C121"
+		(property "Reference" "C119"
 			(at 125.73 121.9262 0)
 			(effects
 				(font
@@ -25122,7 +25406,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C121")
+					(reference "C119")
 					(unit 1)
 				)
 			)
@@ -25138,7 +25422,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bb97c574-74dd-4530-92fc-e2abf9da74fc")
-		(property "Reference" "C158"
+		(property "Reference" "C156"
 			(at 54.61 154.9462 0)
 			(effects
 				(font
@@ -25210,7 +25494,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C158")
+					(reference "C156")
 					(unit 1)
 				)
 			)
@@ -25225,7 +25509,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "bc125a5d-cfe2-42c3-bd47-610440666ab2")
-		(property "Reference" "C26"
+		(property "Reference" "C24"
 			(at 59.69 46.99 0)
 			(effects
 				(font
@@ -25243,7 +25527,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 57.15 48.26 0)
 			(effects
 				(font
@@ -25261,7 +25545,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 57.15 48.26 0)
 			(effects
 				(font
@@ -25279,7 +25563,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 57.15 48.26 0)
 			(effects
 				(font
@@ -25297,7 +25581,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C26")
+					(reference "C24")
 					(unit 1)
 				)
 			)
@@ -25313,7 +25597,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bd2d611e-7865-422a-955e-fb2aa73ac165")
-		(property "Reference" "C144"
+		(property "Reference" "C142"
 			(at 134.62 138.4362 0)
 			(effects
 				(font
@@ -25385,24 +25669,24 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C144")
+					(reference "C142")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 78.74 19.05 0)
+		(lib_id "power:GND")
+		(at 240.03 177.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "bf2cd4ec-1479-46c7-ac3b-169b48cf1870")
-		(property "Reference" "#FLG03"
-			(at 78.74 17.145 0)
+		(uuid "c1f717c5-fd40-4521-a154-04c05c9ed36c")
+		(property "Reference" "#PWR076"
+			(at 240.03 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25410,17 +25694,16 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "PWR_FLAG"
-			(at 78.74 13.97 0)
+		(property "Value" "GND"
+			(at 240.03 182.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
 		(property "Footprint" ""
-			(at 78.74 19.05 0)
+			(at 240.03 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25428,8 +25711,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 78.74 19.05 0)
+		(property "Datasheet" ""
+			(at 240.03 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25437,21 +25720,22 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 78.74 19.05 0)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 240.03 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(pin "1"
-			(uuid "2a4f24f7-7f96-4d33-8857-8e862c92363e")
+			(uuid "b4ac6901-27b6-4681-b925-1c244d389b8e")
 		)
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#FLG03")
+					(reference "#PWR076")
 					(unit 1)
 				)
 			)
@@ -25467,7 +25751,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c2367e53-ce94-475d-a1c5-364cecb32c23")
-		(property "Reference" "C14"
+		(property "Reference" "C12"
 			(at 115.57 22.8662 0)
 			(effects
 				(font
@@ -25539,7 +25823,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C14")
+					(reference "C12")
 					(unit 1)
 				)
 			)
@@ -25555,7 +25839,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c27d5c40-f354-47d9-a448-ef9a48b4c40b")
-		(property "Reference" "C171"
+		(property "Reference" "C169"
 			(at 179.07 154.9462 0)
 			(effects
 				(font
@@ -25627,7 +25911,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C171")
+					(reference "C169")
 					(unit 1)
 				)
 			)
@@ -25643,7 +25927,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c339c096-37cc-4245-9b5c-fd0ad6259bb8")
-		(property "Reference" "C110"
+		(property "Reference" "C108"
 			(at 19.05 121.9262 0)
 			(effects
 				(font
@@ -25715,7 +25999,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C110")
+					(reference "C108")
 					(unit 1)
 				)
 			)
@@ -25731,7 +26015,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c4d0d66f-92c5-4419-8e9d-9b024549a04d")
-		(property "Reference" "C81"
+		(property "Reference" "C79"
 			(at 161.29 88.9062 0)
 			(effects
 				(font
@@ -25803,7 +26087,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C81")
+					(reference "C79")
 					(unit 1)
 				)
 			)
@@ -25819,7 +26103,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c68982b0-e85d-405f-b9c0-761532a76c48")
-		(property "Reference" "C172"
+		(property "Reference" "C170"
 			(at 187.96 154.9462 0)
 			(effects
 				(font
@@ -25891,7 +26175,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C172")
+					(reference "C170")
 					(unit 1)
 				)
 			)
@@ -25907,7 +26191,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c8c4f98c-d281-4203-ab2e-f7bea43fba14")
-		(property "Reference" "C80"
+		(property "Reference" "C78"
 			(at 152.4 88.9062 0)
 			(effects
 				(font
@@ -25979,7 +26263,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C80")
+					(reference "C78")
 					(unit 1)
 				)
 			)
@@ -25995,7 +26279,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cbfd2366-e1d5-4448-8f88-00ee6159b636")
-		(property "Reference" "C134"
+		(property "Reference" "C132"
 			(at 36.83 138.4362 0)
 			(effects
 				(font
@@ -26067,7 +26351,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C134")
+					(reference "C132")
 					(unit 1)
 				)
 			)
@@ -26083,7 +26367,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ce2669be-430e-4066-bc54-af0867a5438b")
-		(property "Reference" "C74"
+		(property "Reference" "C72"
 			(at 90.17 88.9062 0)
 			(effects
 				(font
@@ -26155,7 +26439,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C74")
+					(reference "C72")
 					(unit 1)
 				)
 			)
@@ -26171,7 +26455,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cf493428-eff9-468d-8874-accf24731f88")
-		(property "Reference" "C113"
+		(property "Reference" "C111"
 			(at 45.72 121.9262 0)
 			(effects
 				(font
@@ -26243,7 +26527,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C113")
+					(reference "C111")
 					(unit 1)
 				)
 			)
@@ -26259,7 +26543,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cfc2a600-94d4-4538-a162-81b130b672de")
-		(property "Reference" "C71"
+		(property "Reference" "C69"
 			(at 63.5 88.9062 0)
 			(effects
 				(font
@@ -26331,7 +26615,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C71")
+					(reference "C69")
 					(unit 1)
 				)
 			)
@@ -26347,7 +26631,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "cffac234-269f-4688-9a73-c1a20422ca70")
-		(property "Reference" "C64"
+		(property "Reference" "C62"
 			(at 233.68 68.58 0)
 			(effects
 				(font
@@ -26365,7 +26649,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 231.14 67.31 0)
 			(effects
 				(font
@@ -26383,7 +26667,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 231.14 67.31 0)
 			(effects
 				(font
@@ -26401,7 +26685,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 231.14 67.31 0)
 			(effects
 				(font
@@ -26419,7 +26703,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C64")
+					(reference "C62")
 					(unit 1)
 				)
 			)
@@ -26435,7 +26719,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d29aec70-5d32-468d-84bd-031739f1051e")
-		(property "Reference" "C85"
+		(property "Reference" "C83"
 			(at 196.85 88.9062 0)
 			(effects
 				(font
@@ -26507,7 +26791,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C85")
+					(reference "C83")
 					(unit 1)
 				)
 			)
@@ -26522,7 +26806,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d36b6b6c-16bc-4b69-83a3-7a75ba09ed8f")
-		(property "Reference" "C29"
+		(property "Reference" "C27"
 			(at 90.17 46.99 0)
 			(effects
 				(font
@@ -26540,7 +26824,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 87.63 48.26 0)
 			(effects
 				(font
@@ -26558,7 +26842,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 87.63 48.26 0)
 			(effects
 				(font
@@ -26576,7 +26860,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 87.63 48.26 0)
 			(effects
 				(font
@@ -26594,7 +26878,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C29")
+					(reference "C27")
 					(unit 1)
 				)
 			)
@@ -26697,7 +26981,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d757d9fa-5873-4364-a640-52aee9201530")
-		(property "Reference" "#PWR050"
+		(property "Reference" "#PWR044"
 			(at 92.71 36.83 0)
 			(effects
 				(font
@@ -26747,7 +27031,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR050")
+					(reference "#PWR044")
 					(unit 1)
 				)
 			)
@@ -26762,7 +27046,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d87e169e-46b5-4dce-a2bd-a6236b024411")
-		(property "Reference" "#PWR071"
+		(property "Reference" "#PWR065"
 			(at 16.51 151.13 0)
 			(effects
 				(font
@@ -26812,7 +27096,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR071")
+					(reference "#PWR065")
 					(unit 1)
 				)
 			)
@@ -26827,7 +27111,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d8d3d22c-1449-4184-abb5-217946f9d5e6")
-		(property "Reference" "#PWR063"
+		(property "Reference" "#PWR057"
 			(at 25.4 105.41 0)
 			(effects
 				(font
@@ -26877,7 +27161,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR063")
+					(reference "#PWR057")
 					(unit 1)
 				)
 			)
@@ -26892,7 +27176,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d92cfaba-8c1d-43f6-88cf-0e7d91377b4b")
-		(property "Reference" "#PWR083"
+		(property "Reference" "#PWR079"
 			(at 135.89 191.77 0)
 			(effects
 				(font
@@ -26942,7 +27226,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR083")
+					(reference "#PWR079")
 					(unit 1)
 				)
 			)
@@ -26958,7 +27242,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d9967e00-80ee-4fd5-a46c-5126cdea1d25")
-		(property "Reference" "C7"
+		(property "Reference" "C5"
 			(at 45.72 22.8662 0)
 			(effects
 				(font
@@ -27030,7 +27314,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C7")
+					(reference "C5")
 					(unit 1)
 				)
 			)
@@ -27046,7 +27330,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d9af8edb-8566-4b3e-8b96-85ab8290e18e")
-		(property "Reference" "C151"
+		(property "Reference" "C149"
 			(at 196.85 138.4362 0)
 			(effects
 				(font
@@ -27118,7 +27402,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C151")
+					(reference "C149")
 					(unit 1)
 				)
 			)
@@ -27134,7 +27418,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "da0ef455-aea3-4b19-a76a-9a13cca3f620")
-		(property "Reference" "C167"
+		(property "Reference" "C165"
 			(at 143.51 154.9462 0)
 			(effects
 				(font
@@ -27206,7 +27490,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C167")
+					(reference "C165")
 					(unit 1)
 				)
 			)
@@ -27309,7 +27593,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "df3ae86f-2f2c-4c9a-a6af-e83c40cf6c53")
-		(property "Reference" "C35"
+		(property "Reference" "C33"
 			(at 151.13 46.99 0)
 			(effects
 				(font
@@ -27327,7 +27611,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 148.59 48.26 0)
 			(effects
 				(font
@@ -27345,7 +27629,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 148.59 48.26 0)
 			(effects
 				(font
@@ -27363,7 +27647,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 148.59 48.26 0)
 			(effects
 				(font
@@ -27381,7 +27665,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C35")
+					(reference "C33")
 					(unit 1)
 				)
 			)
@@ -27397,7 +27681,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "df4608d9-7652-4b44-818b-1bb57656aa1e")
-		(property "Reference" "C109"
+		(property "Reference" "C107"
 			(at 214.63 105.4162 0)
 			(effects
 				(font
@@ -27469,7 +27753,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C109")
+					(reference "C107")
 					(unit 1)
 				)
 			)
@@ -27485,7 +27769,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "df9ddfda-3184-4f43-93a9-4facb493ac6d")
-		(property "Reference" "C156"
+		(property "Reference" "C154"
 			(at 36.83 154.9462 0)
 			(effects
 				(font
@@ -27557,7 +27841,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C156")
+					(reference "C154")
 					(unit 1)
 				)
 			)
@@ -27573,7 +27857,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "dff00484-a8aa-474a-a0ef-0cdcdfd3dce4")
-		(property "Reference" "C82"
+		(property "Reference" "C80"
 			(at 170.18 88.9062 0)
 			(effects
 				(font
@@ -27645,7 +27929,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C82")
+					(reference "C80")
 					(unit 1)
 				)
 			)
@@ -27660,7 +27944,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dffb34ec-e4c3-4c79-9666-966c5838495f")
-		(property "Reference" "C41"
+		(property "Reference" "C39"
 			(at 212.09 46.99 0)
 			(effects
 				(font
@@ -27678,7 +27962,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 209.55 48.26 0)
 			(effects
 				(font
@@ -27696,7 +27980,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 209.55 48.26 0)
 			(effects
 				(font
@@ -27714,7 +27998,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 209.55 48.26 0)
 			(effects
 				(font
@@ -27732,7 +28016,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C41")
+					(reference "C39")
 					(unit 1)
 				)
 			)
@@ -27748,7 +28032,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e0ed39ae-f0f3-4247-936e-880c99f05516")
-		(property "Reference" "C123"
+		(property "Reference" "C121"
 			(at 143.51 121.9262 0)
 			(effects
 				(font
@@ -27820,7 +28104,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C123")
+					(reference "C121")
 					(unit 1)
 				)
 			)
@@ -27835,7 +28119,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e2026c56-3b3a-4849-9863-6e55af24b1b6")
-		(property "Reference" "#PWR051"
+		(property "Reference" "#PWR045"
 			(at 135.89 36.83 0)
 			(effects
 				(font
@@ -27885,7 +28169,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR051")
+					(reference "#PWR045")
 					(unit 1)
 				)
 			)
@@ -27901,7 +28185,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e3ec868f-5404-4e85-8b14-30ea36f0d8c3")
-		(property "Reference" "C97"
+		(property "Reference" "C95"
 			(at 99.06 105.4162 0)
 			(effects
 				(font
@@ -27973,7 +28257,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C97")
+					(reference "C95")
 					(unit 1)
 				)
 			)
@@ -27989,7 +28273,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e5b1dce9-c918-40f6-9f5d-ac476ce976cc")
-		(property "Reference" "C130"
+		(property "Reference" "C128"
 			(at 205.74 121.9262 0)
 			(effects
 				(font
@@ -28061,7 +28345,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C130")
+					(reference "C128")
 					(unit 1)
 				)
 			)
@@ -28094,7 +28378,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_10x7.7"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
 			(at 135.89 179.07 0)
 			(effects
 				(font
@@ -28112,7 +28396,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 100UF 50V 20%"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 100UF 25V"
 			(at 135.89 179.07 0)
 			(effects
 				(font
@@ -28130,7 +28414,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H101MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E101MCL1GS"
 			(at 135.89 179.07 0)
 			(effects
 				(font
@@ -28164,7 +28448,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e9a85c15-822c-4c4a-9ae9-521b50efc456")
-		(property "Reference" "C173"
+		(property "Reference" "C171"
 			(at 196.85 154.9462 0)
 			(effects
 				(font
@@ -28236,7 +28520,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C173")
+					(reference "C171")
 					(unit 1)
 				)
 			)
@@ -28251,7 +28535,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "eab91a7a-523c-47fc-a333-c2ea3f09a4c0")
-		(property "Reference" "C47"
+		(property "Reference" "C45"
 			(at 49.53 66.04 0)
 			(effects
 				(font
@@ -28269,7 +28553,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 46.99 67.31 0)
 			(effects
 				(font
@@ -28287,7 +28571,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 46.99 67.31 0)
 			(effects
 				(font
@@ -28305,7 +28589,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 46.99 67.31 0)
 			(effects
 				(font
@@ -28323,7 +28607,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C47")
+					(reference "C45")
 					(unit 1)
 				)
 			)
@@ -28339,7 +28623,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ec52ddd8-40b1-44d0-bf64-f07d29f62e8d")
-		(property "Reference" "C102"
+		(property "Reference" "C100"
 			(at 152.4 105.4162 0)
 			(effects
 				(font
@@ -28411,7 +28695,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C102")
+					(reference "C100")
 					(unit 1)
 				)
 			)
@@ -28426,7 +28710,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ecd25b52-80f9-4938-ba15-a01d9775d308")
-		(property "Reference" "#PWR058"
+		(property "Reference" "#PWR052"
 			(at 16.51 80.01 0)
 			(effects
 				(font
@@ -28476,7 +28760,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR058")
+					(reference "#PWR052")
 					(unit 1)
 				)
 			)
@@ -28491,7 +28775,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ed572fb7-a33f-44ad-b624-77bf00c35be3")
-		(property "Reference" "C53"
+		(property "Reference" "C51"
 			(at 110.49 66.04 0)
 			(effects
 				(font
@@ -28509,7 +28793,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 107.95 67.31 0)
 			(effects
 				(font
@@ -28527,7 +28811,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 107.95 67.31 0)
 			(effects
 				(font
@@ -28545,7 +28829,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 107.95 67.31 0)
 			(effects
 				(font
@@ -28563,7 +28847,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C53")
+					(reference "C51")
 					(unit 1)
 				)
 			)
@@ -28578,7 +28862,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ed626703-4152-4665-9fa0-f7413c766114")
-		(property "Reference" "C27"
+		(property "Reference" "C25"
 			(at 69.85 46.99 0)
 			(effects
 				(font
@@ -28596,7 +28880,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.8"
 			(at 67.31 48.26 0)
 			(effects
 				(font
@@ -28614,7 +28898,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 50V 105c AEC-Q200"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 10uF 25V"
 			(at 67.31 48.26 0)
 			(effects
 				(font
@@ -28632,7 +28916,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H100MCL6GS"
+		(property "Manufacturer_Part_Number" "UCD1E100MCL1GS"
 			(at 67.31 48.26 0)
 			(effects
 				(font
@@ -28650,7 +28934,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C27")
+					(reference "C25")
 					(unit 1)
 				)
 			)
@@ -28666,7 +28950,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "eea37ec6-0b03-4d42-95c6-9d82ea6d678e")
-		(property "Reference" "C140"
+		(property "Reference" "C138"
 			(at 90.17 138.4362 0)
 			(effects
 				(font
@@ -28738,7 +29022,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C140")
+					(reference "C138")
 					(unit 1)
 				)
 			)
@@ -28754,7 +29038,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "eea76568-4242-4f66-82f9-df2bf2b21ee7")
-		(property "Reference" "C174"
+		(property "Reference" "C172"
 			(at 205.74 154.9462 0)
 			(effects
 				(font
@@ -28826,7 +29110,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C174")
+					(reference "C172")
 					(unit 1)
 				)
 			)
@@ -28842,7 +29126,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ef20406f-10ba-4ffd-bcea-168fcf2fd9b5")
-		(property "Reference" "C138"
+		(property "Reference" "C136"
 			(at 72.39 138.4362 0)
 			(effects
 				(font
@@ -28914,7 +29198,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C138")
+					(reference "C136")
 					(unit 1)
 				)
 			)
@@ -28930,7 +29214,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f02db731-b18d-4b07-9612-5f9922ac9e7e")
-		(property "Reference" "C136"
+		(property "Reference" "C134"
 			(at 54.61 138.4362 0)
 			(effects
 				(font
@@ -29002,7 +29286,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C136")
+					(reference "C134")
 					(unit 1)
 				)
 			)
@@ -29018,7 +29302,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f046ec2a-d8ac-4b91-b95d-bdc4d130fb55")
-		(property "Reference" "C126"
+		(property "Reference" "C124"
 			(at 170.18 121.9262 0)
 			(effects
 				(font
@@ -29090,7 +29374,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C126")
+					(reference "C124")
 					(unit 1)
 				)
 			)
@@ -29194,7 +29478,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f1b727fe-77d6-48b8-9858-83a6a9f71771")
-		(property "Reference" "C90"
+		(property "Reference" "C88"
 			(at 36.83 105.4162 0)
 			(effects
 				(font
@@ -29266,7 +29550,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C90")
+					(reference "C88")
 					(unit 1)
 				)
 			)
@@ -29282,7 +29566,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f53f1b73-632c-4180-be26-8686056bf9a6")
-		(property "Reference" "C160"
+		(property "Reference" "C158"
 			(at 72.39 154.9462 0)
 			(effects
 				(font
@@ -29354,7 +29638,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C160")
+					(reference "C158")
 					(unit 1)
 				)
 			)
@@ -29369,7 +29653,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f55532ed-0512-4c75-a265-2ddd9cb7c292")
-		(property "Reference" "C6"
+		(property "Reference" "C4"
 			(at 33.02 22.86 0)
 			(effects
 				(font
@@ -29378,7 +29662,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1000µF"
+		(property "Value" "100µF"
 			(at 33.02 25.4 0)
 			(effects
 				(font
@@ -29387,7 +29671,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_16x17.5"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
 			(at 30.48 24.13 0)
 			(effects
 				(font
@@ -29405,7 +29689,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 1000UF 35V 20%"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 100UF 25V"
 			(at 30.48 24.13 0)
 			(effects
 				(font
@@ -29423,7 +29707,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1V102MNJ1MS"
+		(property "Manufacturer_Part_Number" "UCD1E101MCL1GS"
 			(at 30.48 24.13 0)
 			(effects
 				(font
@@ -29441,7 +29725,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C6")
+					(reference "C4")
 					(unit 1)
 				)
 			)
@@ -29457,7 +29741,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f70c468f-8d05-4e07-be96-f6e3f0d396a0")
-		(property "Reference" "#PWR061"
+		(property "Reference" "#PWR055"
 			(at 16.51 88.9 0)
 			(effects
 				(font
@@ -29507,7 +29791,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR061")
+					(reference "#PWR055")
 					(unit 1)
 				)
 			)
@@ -29531,7 +29815,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "470µF"
+		(property "Value" "100µF"
 			(at 95.25 180.34 0)
 			(effects
 				(font
@@ -29540,7 +29824,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_16x17.5"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
 			(at 92.71 179.07 0)
 			(effects
 				(font
@@ -29558,7 +29842,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Aluminum Electrolytic Capacitors - SMD 470UF 50V 20%"
+		(property "Description" "Aluminum Electrolytic Capacitors - SMD 100UF 25V"
 			(at 92.71 179.07 0)
 			(effects
 				(font
@@ -29576,7 +29860,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "UCD1H471MNJ1MS"
+		(property "Manufacturer_Part_Number" "UCD1E101MCL1GS"
 			(at 92.71 179.07 0)
 			(effects
 				(font
@@ -29610,7 +29894,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f7cf8cc0-d5b1-40d5-b002-a07224cd06ea")
-		(property "Reference" "#PWR077"
+		(property "Reference" "#PWR072"
 			(at 16.51 176.53 0)
 			(effects
 				(font
@@ -29660,7 +29944,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "#PWR077")
+					(reference "#PWR072")
 					(unit 1)
 				)
 			)
@@ -29764,7 +30048,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "faf9954c-c2ea-496c-a872-e8a8b7372a62")
-		(property "Reference" "C87"
+		(property "Reference" "C85"
 			(at 214.63 88.9062 0)
 			(effects
 				(font
@@ -29836,7 +30120,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C87")
+					(reference "C85")
 					(unit 1)
 				)
 			)
@@ -29852,7 +30136,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "fbfe6c30-13f4-4a43-b7a5-b5596af33510")
-		(property "Reference" "C115"
+		(property "Reference" "C113"
 			(at 63.5 121.9262 0)
 			(effects
 				(font
@@ -29924,7 +30208,7 @@
 		(instances
 			(project "Episode4"
 				(path "/8a50abe0-5000-47f3-b1a5-f37ea7324f50/51cee902-1601-4f65-a386-cacc4da37a47"
-					(reference "C115")
+					(reference "C113")
 					(unit 1)
 				)
 			)

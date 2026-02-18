@@ -583,7 +583,7 @@
           "group_by": false,
           "label": "Reference",
           "name": "Reference",
-          "show": true
+          "show": false
         },
         {
           "group_by": true,
@@ -656,6 +656,18 @@
           "label": "Height",
           "name": "Height",
           "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Arrow Part Number",
+          "name": "Arrow Part Number",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Arrow Price/Stock",
+          "name": "Arrow Price/Stock",
+          "show": false
         }
       ],
       "filter_string": "",
@@ -709,10 +721,6 @@
     [
       "8a50abe0-5000-47f3-b1a5-f37ea7324f50",
       "Root"
-    ],
-    [
-      "184965a6-7940-44d4-8637-f93e65786f3f",
-      "Power"
     ],
     [
       "51cee902-1601-4f65-a386-cacc4da37a47",

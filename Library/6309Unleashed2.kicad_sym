@@ -937,6 +937,1429 @@
 		)
 		(embedded_fonts no)
 	)
+	(symbol "72-pin Card Edge (ISA style)"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "J"
+			(at 0 1.27 0)
+			(do_not_autoplace)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "Value" "CARD-72"
+			(at 0 -95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify top)
+			)
+		)
+		(property "Footprint" "MicroHobbyist:72-pin CE connector"
+			(at 0 -97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=5530843&DocType=Customer+Drawing&DocLang=English&PartCntxt=5530843-8&DocFormat=pdf"
+			(at 10.16 -197.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "Standard Card Edge Connectors CONN SEC II 72 POS 100C/L"
+			(at 0 3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Height" "15.494"
+			(at 10.16 -397.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "571-5530843-8"
+			(at 10.16 -497.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity/5530843-8?qs=HSGlLeu24BMPI5BzFZaRQQ%3D%3D"
+			(at 10.16 -597.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "TE Connectivity"
+			(at 10.16 -697.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "5530843-8"
+			(at 10.16 -797.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "ki_keywords" "5530843-8"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "72-pin Card Edge (ISA style)_1_1"
+			(rectangle
+				(start -3.81 0)
+				(end 3.81 -93.98)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(pin passive line
+				(at -8.89 -2.54 0)
+				(length 5.08)
+				(name "B1"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -5.08 0)
+				(length 5.08)
+				(name "B2"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -7.62 0)
+				(length 5.08)
+				(name "B3"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -10.16 0)
+				(length 5.08)
+				(name "B4"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -12.7 0)
+				(length 5.08)
+				(name "B5"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -15.24 0)
+				(length 5.08)
+				(name "B6"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -17.78 0)
+				(length 5.08)
+				(name "B7"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -20.32 0)
+				(length 5.08)
+				(name "B8"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -22.86 0)
+				(length 5.08)
+				(name "B9"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "18"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -25.4 0)
+				(length 5.08)
+				(name "B10"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "20"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -27.94 0)
+				(length 5.08)
+				(name "B11"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "22"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -30.48 0)
+				(length 5.08)
+				(name "B12"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "24"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -33.02 0)
+				(length 5.08)
+				(name "B13"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "26"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -35.56 0)
+				(length 5.08)
+				(name "B14"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "28"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -38.1 0)
+				(length 5.08)
+				(name "B15"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "30"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -40.64 0)
+				(length 5.08)
+				(name "B16"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "32"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -43.18 0)
+				(length 5.08)
+				(name "B17"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "34"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -45.72 0)
+				(length 5.08)
+				(name "B18"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "36"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -48.26 0)
+				(length 5.08)
+				(name "B19"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "38"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -50.8 0)
+				(length 5.08)
+				(name "B20"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "40"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -53.34 0)
+				(length 5.08)
+				(name "B21"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "42"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -55.88 0)
+				(length 5.08)
+				(name "B22"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "44"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -58.42 0)
+				(length 5.08)
+				(name "B23"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "46"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -60.96 0)
+				(length 5.08)
+				(name "B24"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "48"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -63.5 0)
+				(length 5.08)
+				(name "B25"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "50"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -66.04 0)
+				(length 5.08)
+				(name "B26"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "52"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -68.58 0)
+				(length 5.08)
+				(name "B27"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "54"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -71.12 0)
+				(length 5.08)
+				(name "B28"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "56"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -73.66 0)
+				(length 5.08)
+				(name "B29"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "58"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -76.2 0)
+				(length 5.08)
+				(name "B30"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "60"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -78.74 0)
+				(length 5.08)
+				(name "B31"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "62"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -81.28 0)
+				(length 5.08)
+				(name "B32"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "64"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -83.82 0)
+				(length 5.08)
+				(name "B33"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "66"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -86.36 0)
+				(length 5.08)
+				(name "B34"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "68"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -88.9 0)
+				(length 5.08)
+				(name "B35"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "70"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -8.89 -91.44 0)
+				(length 5.08)
+				(name "B36"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "72"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -2.54 180)
+				(length 5.08)
+				(name "A1"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -5.08 180)
+				(length 5.08)
+				(name "A2"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -7.62 180)
+				(length 5.08)
+				(name "A3"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -10.16 180)
+				(length 5.08)
+				(name "A4"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -12.7 180)
+				(length 5.08)
+				(name "A5"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -15.24 180)
+				(length 5.08)
+				(name "A6"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -17.78 180)
+				(length 5.08)
+				(name "A7"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -20.32 180)
+				(length 5.08)
+				(name "A8"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "15"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -22.86 180)
+				(length 5.08)
+				(name "A9"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "17"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -25.4 180)
+				(length 5.08)
+				(name "A10"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "19"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -27.94 180)
+				(length 5.08)
+				(name "A11"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "21"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -30.48 180)
+				(length 5.08)
+				(name "A12"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "23"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -33.02 180)
+				(length 5.08)
+				(name "A13"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "25"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -35.56 180)
+				(length 5.08)
+				(name "A14"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "27"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -38.1 180)
+				(length 5.08)
+				(name "A15"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "29"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -40.64 180)
+				(length 5.08)
+				(name "A16"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "31"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -43.18 180)
+				(length 5.08)
+				(name "A17"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "33"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -45.72 180)
+				(length 5.08)
+				(name "A18"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "35"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -48.26 180)
+				(length 5.08)
+				(name "A19"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "37"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -50.8 180)
+				(length 5.08)
+				(name "A20"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "39"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -53.34 180)
+				(length 5.08)
+				(name "A21"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "41"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -55.88 180)
+				(length 5.08)
+				(name "A22"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "43"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -58.42 180)
+				(length 5.08)
+				(name "A23"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "45"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -60.96 180)
+				(length 5.08)
+				(name "A24"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "47"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -63.5 180)
+				(length 5.08)
+				(name "A25"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "49"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -66.04 180)
+				(length 5.08)
+				(name "A26"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "51"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -68.58 180)
+				(length 5.08)
+				(name "A27"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "53"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -71.12 180)
+				(length 5.08)
+				(name "A28"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "55"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -73.66 180)
+				(length 5.08)
+				(name "A29"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "57"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -76.2 180)
+				(length 5.08)
+				(name "A30"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "59"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -78.74 180)
+				(length 5.08)
+				(name "A31"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "61"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -81.28 180)
+				(length 5.08)
+				(name "A32"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "63"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -83.82 180)
+				(length 5.08)
+				(name "A33"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "65"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -86.36 180)
+				(length 5.08)
+				(name "A34"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "67"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -88.9 180)
+				(length 5.08)
+				(name "A35"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "69"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 8.89 -91.44 180)
+				(length 5.08)
+				(name "A36"
+					(effects
+						(font
+							(size 0.8382 0.8382)
+						)
+					)
+				)
+				(number "71"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
 	(symbol "AS6C4008"
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5728,6 +7151,261 @@
 				)
 				(fill
 					(type background)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+	(symbol "LED Tack PushButton"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "SW"
+			(at 4.572 5.334 0)
+			(do_not_autoplace)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(property "Value" "LED Tack Switch"
+			(at 11.938 -6.604 0)
+			(do_not_autoplace)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(property "Footprint" "MicroHobbyist:TS2912121G300D"
+			(at 16.51 -89.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.sameskydevices.com/product/resource/TS29-1212-1-G-300-D.pdf"
+			(at 16.51 -189.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "TS29-1212-1-G-300-D - 12 x 7.3 mm, 6.3 mm Actuator Height, 300 gf, Through Hole, SPST, Green Illuminiated, Tactile Switch"
+			(at 1.524 -17.272 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Height" "7.5"
+			(at 16.51 -389.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Same Sky"
+			(at 16.51 -489.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "TS29-1212-1-G-300-D"
+			(at 16.51 -589.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "179-TS2912121G300D"
+			(at 16.51 -689.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/CUI-Devices/TS29-1212-1-G-300-D?qs=1Kr7Jg1SGW%252BkozbgDumX4g%3D%3D"
+			(at 16.51 -789.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 16.51 -889.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 16.51 -989.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "ki_keywords" "TS29-1212-1-G-300-D"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "LED Tack PushButton_1_1"
+			(rectangle
+				(start 6.35 2.54)
+				(end 13.97 -5.08)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(pin passive line
+				(at 2.54 0 0)
+				(length 3.81)
+				(name "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 2.54 -2.54 0)
+				(length 3.81)
+				(name "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 10.16 6.35 270)
+				(length 3.81)
+				(name "A"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 10.16 -8.89 90)
+				(length 3.81)
+				(name "K"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 17.78 0 180)
+				(length 3.81)
+				(name "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 17.78 -2.54 180)
+				(length 3.81)
+				(name "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
 				)
 			)
 		)
