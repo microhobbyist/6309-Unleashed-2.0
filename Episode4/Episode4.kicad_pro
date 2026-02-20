@@ -15,13 +15,13 @@
         "copper_text_upright": false,
         "courtyard_line_width": 0.05,
         "dimension_precision": 4,
-        "dimension_units": 3,
+        "dimension_units": 0,
         "dimensions": {
           "arrow_length": 1270000,
           "extension_offset": 500000,
           "keep_text_aligned": true,
-          "suppress_zeroes": false,
-          "text_position": 0,
+          "suppress_zeroes": true,
+          "text_position": 1,
           "units_format": 1
         },
         "fab_line_width": 0.1,
@@ -194,7 +194,8 @@
         0.75,
         1.0,
         1.5,
-        2.0
+        2.0,
+        375.0
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -501,7 +502,6 @@
         "bus_width": 12,
         "clearance": 0.2,
         "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
         "line_style": 0,
         "microvia_diameter": 0.3,
