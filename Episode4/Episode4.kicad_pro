@@ -190,12 +190,12 @@
       "track_widths": [
         0.0,
         0.25,
+        0.375,
+        0.4,
         0.5,
         0.75,
         1.0,
-        1.5,
-        2.0,
-        375.0
+        1.5
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -227,6 +227,14 @@
         {
           "diameter": 0.0,
           "drill": 0.0
+        },
+        {
+          "diameter": 0.8,
+          "drill": 0.4
+        },
+        {
+          "diameter": 1.5,
+          "drill": 0.5
         }
       ],
       "zones_allow_external_fillets": false
@@ -502,16 +510,16 @@
         "bus_width": 12,
         "clearance": 0.2,
         "diff_pair_gap": 0.25,
-        "diff_pair_width": 0.2,
+        "diff_pair_width": 0.375,
         "line_style": 0,
-        "microvia_diameter": 0.3,
+        "microvia_diameter": 0.5,
         "microvia_drill": 0.1,
         "name": "Power",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 0,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.5,
-        "via_diameter": 1.0,
+        "via_diameter": 1.5,
         "via_drill": 0.5,
         "wire_width": 6
       }
@@ -522,10 +530,6 @@
     "net_colors": null,
     "netclass_assignments": null,
     "netclass_patterns": [
-      {
-        "netclass": "Power",
-        "pattern": "VCC"
-      },
       {
         "netclass": "Power",
         "pattern": "+5V"
