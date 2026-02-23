@@ -389,13 +389,13 @@
 	(embedded_fonts no)
 	(model "TS29-1212-1-G-300-D.stp"
 		(offset
-			(xyz 0 0 0)
+			(xyz -6.25 2.5 0)
 		)
 		(scale
 			(xyz 1 1 1)
 		)
 		(rotate
-			(xyz 0 0 0)
+			(xyz -90 -0 -90)
 		)
 	)
 )
