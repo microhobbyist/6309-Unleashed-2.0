@@ -30319,24 +30319,6 @@
 				(hide yes)
 			)
 		)
-		(property "Function" "OSC"
-			(at 369.57 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Function_2" ""
-			(at 369.57 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "Sim.Device" ""
 			(at 369.57 86.36 0)
 			(effects
@@ -30939,24 +30921,6 @@
 				(hide yes)
 			)
 		)
-		(property "Function" "OSC"
-			(at 203.2 243.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Function_2" ""
-			(at 203.2 243.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "Sim.Device" ""
 			(at 203.2 243.84 0)
 			(effects
@@ -31433,24 +31397,6 @@
 				(hide yes)
 			)
 		)
-		(property "Function" "OSC"
-			(at 364.49 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Function_2" ""
-			(at 364.49 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "Sim.Device" ""
 			(at 364.49 115.57 0)
 			(effects
@@ -31573,24 +31519,6 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "CD74HCT14M96"
-			(at 163.83 255.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Function" "OSC"
-			(at 163.83 255.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Function_2" ""
 			(at 163.83 255.27 0)
 			(effects
 				(font
@@ -32277,23 +32205,6 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "CD74HCT14M96"
-			(at 163.83 234.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Function" "OSC"
-			(at 172.72 236.855 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Function_2" ""
 			(at 163.83 234.95 0)
 			(effects
 				(font
@@ -33453,24 +33364,6 @@
 				(hide yes)
 			)
 		)
-		(property "Function" "DIV2"
-			(at 195.58 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Function_2" ""
-			(at 185.42 245.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "Sim.Device" ""
 			(at 185.42 245.11 0)
 			(effects
@@ -34299,23 +34192,6 @@
 				(hide yes)
 			)
 		)
-		(property "Function" "DIV2"
-			(at 382.27 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Function_2" ""
-			(at 382.27 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "Sim.Device" ""
 			(at 382.27 115.57 0)
 			(effects
@@ -34723,23 +34599,6 @@
 				(hide yes)
 			)
 		)
-		(property "Function" "DIV2"
-			(at 214.63 243.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Function_2" ""
-			(at 214.63 243.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "Sim.Device" ""
 			(at 214.63 243.84 0)
 			(effects
@@ -34978,24 +34837,6 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "CD74HCT14M96"
-			(at 341.63 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Function" "OSC"
-			(at 341.63 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Function_2" ""
 			(at 341.63 86.36 0)
 			(effects
 				(font
@@ -36242,24 +36083,6 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "CD74HCT14M96"
-			(at 163.83 245.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Function" "OSC"
-			(at 163.83 245.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Function_2" ""
 			(at 163.83 245.11 0)
 			(effects
 				(font
