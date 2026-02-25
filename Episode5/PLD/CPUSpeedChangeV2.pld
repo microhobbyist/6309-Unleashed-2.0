@@ -1,0 +1,223 @@
+Name     CPUSpeedChangeV2 ;
+PartNo   ATF750C ;
+Date     2026-02-24 ;
+Revision 6.1 ;
+Designer Frederic Segard ;
+Company  MicroHobbyist ;
+Assembly None ;
+Location None ;
+Device   v750c ;
+
+/* -------------------------------------------------------------------- */
+/* Glitchless 2-Speed CPU Clock Control (internal MUX) */
+/* -------------------------------------------------------------------- */
+/* -------------------------------------------------------------------- */
+/* INPUTS (INPUT-ONLY PINS) */
+/* -------------------------------------------------------------------- */
+PIN 1 = E ;         /* E strobe (may pause during MRDY) */
+PIN 2 = SLOWclk ;   /* Slow oscillator (8MHz for 2MHz E) */
+PIN 3 = FASTclk ;   /* Fast oscillator (unrelated, e.g. 20MHz for 5MHz E) */
+PIN 4 = R_W ;       /* 1=read, 0=write */
+PIN 5 = !SPEEDcs ;  /* Chip Select for $FF01 (active low) */
+PIN 6 = RESET ;     /* Reset (active low) */
+
+/* -------------------------------------------------------------------- */
+/* I/O PINS (OUTPUTS + BIDIR) */
+/* -------------------------------------------------------------------- */
+PIN 14 = D0 ;        /* Data bus D0 (bidirectional) */
+PIN 15 = CPU_CLK ;   /* Muxed clock output to 6809 EXTAL */
+PIN 16 = SPEEDcurr ; /* Mirrors ACTUAL selected speed */
+PIN 17 = !HALTout ;  /* Active-low HALT output (to ext OC buffer) */
+PIN 18 = !MRDYout ;  /* Active-low MRDY output (to ext OC buffer) */
+/* State pins (guaranteed macrocells) */
+PIN 19 = cnt0 ;      /* 2-bit delay counter */
+PIN 20 = cnt1 ;      /* 2-bit delay counter */
+PIN 21 = s0 ;        /* FSM state bit 0 */
+PIN 22 = s1 ;        /* FSM state bit 1 */
+PIN 23 = s2 ;        /* FSM state bit 2 */
+
+/* -------------------------------------------------------------------- */
+/* BURIED REGISTERED NODES */
+/* -------------------------------------------------------------------- */
+NODE desired_speed ; /* requested speed bit (0 slow, 1 fast) */
+NODE actual_desired ; /* gated desired for mux trigger */
+NODE desired_ff1, desired_ff2 ; /* double sync to slow domain */
+NODE slow_ff1, slow_ff2 ; /* slow enable chain */
+NODE fast_ff1, fast_ff2 ; /* fast enable chain */
+NODE fast_en_sync1, fast_en_sync2 ; /* double sync fast_en to slow */
+
+/* -------------------------------------------------------------------- */
+/* CPU REGISTER ACCESS (E is the clock) */
+/* -------------------------------------------------------------------- */
+speed_wr = (!SPEEDcs & !R_W) ;
+speed_rd = (!SPEEDcs & R_W) ;
+
+/* -------------------------------------------------------------------- */
+/* desired_speed REGISTER (CLOCKED BY !E - falling edge) */
+/* -------------------------------------------------------------------- */
+desired_speed.D =
+    ( speed_wr & D0 )
+  # ( !speed_wr & desired_speed ) ;
+desired_speed.CK = !E ;
+desired_speed.AR = !RESET ;
+desired_speed.SP = 'b'0 ;
+
+/* -------------------------------------------------------------------- */
+/* DOUBLE SYNC desired_speed TO SLOWclk DOMAIN */
+/* -------------------------------------------------------------------- */
+desired_ff1.D = desired_speed ;
+desired_ff1.CK = SLOWclk ;
+desired_ff1.AR = !RESET ;
+desired_ff1.SP = 'b'0 ;
+
+desired_ff2.D = desired_ff1 ;
+desired_ff2.CK = SLOWclk ;
+desired_ff2.AR = !RESET ;
+desired_ff2.SP = 'b'0 ;
+
+/* -------------------------------------------------------------------- */
+/* ACTUAL DESIRED (UPDATED ONLY IN ST_SWITCH) */
+/* -------------------------------------------------------------------- */
+actual_desired.D =
+    ( ST_SWITCH & desired_ff2 )
+  # ( !ST_SWITCH & actual_desired ) ;
+actual_desired.CK = SLOWclk ;
+actual_desired.AR = !RESET ;
+actual_desired.SP = 'b'0 ;
+
+/* -------------------------------------------------------------------- */
+/* GLITCH-FREE MUX CHAINS */
+/* -------------------------------------------------------------------- */
+slow_ff1.D = !actual_desired & !fast_ff2 ;
+slow_ff1.CK = SLOWclk ;
+slow_ff1.AR = !RESET ;
+slow_ff1.SP = 'b'0 ;
+
+slow_ff2.D = slow_ff1 ;
+slow_ff2.CK = !SLOWclk ;
+slow_ff2.AR = !RESET ;
+slow_ff2.SP = 'b'0 ;
+
+fast_ff1.D = actual_desired & !slow_ff2 ;
+fast_ff1.CK = FASTclk ;
+fast_ff1.AR = !RESET ;
+fast_ff1.SP = 'b'0 ;
+
+fast_ff2.D = fast_ff1 ;
+fast_ff2.CK = !FASTclk ;
+fast_ff2.AR = !RESET ;
+fast_ff2.SP = 'b'0 ;
+
+/* -------------------------------------------------------------------- */
+/* MUXED CPU CLOCK OUTPUT (COMBINATIONAL) */
+/* -------------------------------------------------------------------- */
+CPU_CLK = (SLOWclk & slow_ff2) # (FASTclk & fast_ff2) ;
+
+/* -------------------------------------------------------------------- */
+/* DOUBLE SYNC fast_ff2 TO SLOWclk DOMAIN FOR MONITORING */
+/* -------------------------------------------------------------------- */
+fast_en_sync1.D = fast_ff2 ;
+fast_en_sync1.CK = SLOWclk ;
+fast_en_sync1.AR = !RESET ;
+fast_en_sync1.SP = 'b'0 ;
+
+fast_en_sync2.D = fast_en_sync1 ;
+fast_en_sync2.CK = SLOWclk ;
+fast_en_sync2.AR = !RESET ;
+fast_en_sync2.SP = 'b'0 ;
+
+/* -------------------------------------------------------------------- */
+/* ACTUAL SPEED (FOR READBACK AND NEED_SWITCH) */
+/* -------------------------------------------------------------------- */
+SPEEDcurr = fast_en_sync2 ;
+
+/* -------------------------------------------------------------------- */
+/* STATE DECODES (NO == OR <>) */
+/* -------------------------------------------------------------------- */
+ST_IDLE = (!s2 & !s1 & !s0) ; /* 000 */
+ST_FREEZE_PRE = (!s2 & !s1 & s0) ; /* 001 */
+ST_SWITCH = (!s2 & s1 & !s0) ; /* 010 */
+ST_FREEZE_POST = (!s2 & s1 & s0) ; /* 011 */
+ST_WAIT_COMPLETE = (s2 & !s1 & !s0) ; /* 100 */
+ST_REL_MRDY = (s2 & !s1 & s0) ; /* 101 */
+ST_REL_HALT = (s2 & s1 & !s0) ; /* 110 */
+
+/* -------------------------------------------------------------------- */
+/* SWITCH MONITORING */
+/* -------------------------------------------------------------------- */
+switch_complete = (desired_ff2 & fast_en_sync2) # (!desired_ff2 & slow_ff2) ;
+need_switch = (desired_ff2 $ fast_en_sync2) ;
+
+/* -------------------------------------------------------------------- */
+/* DELAY COUNTER (2-BIT, SLOWclk domain) */
+/* -------------------------------------------------------------------- */
+in_delay = (ST_FREEZE_PRE # ST_FREEZE_POST) ;
+terminal_3 = (cnt1 & cnt0) ;
+cnt_done = (in_delay & terminal_3) ;
+
+cnt0.D = RESET & in_delay & !cnt0 ;
+cnt1.D = RESET & in_delay & (cnt0 $ cnt1) ;
+cnt0.CK = SLOWclk ;
+cnt1.CK = SLOWclk ;
+cnt0.AR = !RESET ;
+cnt1.AR = !RESET ;
+cnt0.SP = 'b'0 ;
+cnt1.SP = 'b'0 ;
+
+/* -------------------------------------------------------------------- */
+/* STATE REGISTER (SLOWclk domain) */
+/* -------------------------------------------------------------------- */
+s0.CK = SLOWclk ;
+s1.CK = SLOWclk ;
+s2.CK = SLOWclk ;
+s0.AR = !RESET ;
+s1.AR = !RESET ;
+s2.AR = !RESET ;
+s0.SP = 'b'0 ;
+s1.SP = 'b'0 ;
+s2.SP = 'b'0 ;
+
+s0.D =
+    RESET & (
+        (ST_IDLE & need_switch)
+      # (ST_FREEZE_PRE & !cnt_done)
+      # (ST_FREEZE_POST & !cnt_done)
+      # ST_REL_MRDY
+    ) ;
+
+s1.D =
+    RESET & (
+        ST_SWITCH
+      # ST_FREEZE_POST
+      # ST_REL_HALT
+      # (ST_FREEZE_PRE & cnt_done)
+      # (ST_REL_MRDY)
+    ) ;
+
+s2.D =
+    RESET & (
+        ST_WAIT_COMPLETE
+      # ST_REL_MRDY
+      # ST_REL_HALT
+      # (ST_FREEZE_POST & cnt_done)
+      # (ST_WAIT_COMPLETE & !switch_complete)
+    ) ;
+
+/* -------------------------------------------------------------------- */
+/* HALT / MRDY OUTPUTS (NO .OE) */
+/* -------------------------------------------------------------------- */
+freeze_active =
+    (ST_FREEZE_PRE)
+  # (ST_SWITCH)
+  # (ST_FREEZE_POST)
+  # (ST_WAIT_COMPLETE) ;
+halt_active = (freeze_active # ST_REL_MRDY) ;
+
+HALTout = halt_active ;
+MRDYout = freeze_active ;
+
+/* -------------------------------------------------------------------- */
+/* DATA BUS READBACK (D0) */
+/* -------------------------------------------------------------------- */
+D0 = SPEEDcurr ;
+D0.OE = speed_rd ;

@@ -1,0 +1,319 @@
+%SIGNAL
+PIN  15 =  CPU_CLK 
+PIN  14 =  D0 
+PIN   1 =  E 
+PIN   3 =  FASTclk 
+PIN  17 = !HALTout 
+PIN  18 = !MRDYout 
+PIN   6 =  RESET 
+PIN   4 =  R_W 
+PIN   2 =  SLOWclk 
+PIN   5 = !SPEEDcs 
+PIN  16 =  SPEEDcurr 
+PIN  26 =  actual_desired 
+PIN  19 =  cnt0 
+PIN  20 =  cnt1 
+PIN  27 =  desired_ff1 
+PIN  28 =  desired_ff2 
+PIN  25 =  desired_speed 
+PIN  33 =  fast_en_sync1 
+PIN  34 =  fast_en_sync2 
+PIN  31 =  fast_ff1 
+PIN  32 =  fast_ff2 
+PIN  21 =  s0 
+PIN  22 =  s1 
+PIN  23 =  s2 
+PIN  29 =  slow_ff1 
+PIN  30 =  slow_ff2 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+CPU_CLK =>
+    SLOWclk & slow_ff2
+  # FASTclk & fast_ff2
+
+D0 =>
+    SPEEDcurr
+
+D0.oe  =>
+    R_W & SPEEDcs
+
+HALTout =>
+    s0 & !s1 & !s2
+  # s1 & !s2
+  # !s1 & s2
+
+MRDYout =>
+    !s0 & !s1 & s2
+  # s1 & !s2
+  # s0 & !s2
+
+SPEEDcurr =>
+    fast_en_sync2
+
+ST_FREEZE_POST =>
+    s0 & s1 & !s2
+
+ST_FREEZE_PRE =>
+    s0 & !s1 & !s2
+
+ST_IDLE =>
+    !s0 & !s1 & !s2
+
+ST_REL_HALT =>
+    !s0 & s1 & s2
+
+ST_REL_MRDY =>
+    s0 & !s1 & s2
+
+ST_SWITCH =>
+    !s0 & s1 & !s2
+
+ST_WAIT_COMPLETE =>
+    !s0 & !s1 & s2
+
+actual_desired.d  =>
+    desired_ff2 & !s0 & s1 & !s2
+  # actual_desired & s2
+  # actual_desired & !s1
+  # actual_desired & s0
+
+actual_desired.ar  =>
+    !RESET
+
+actual_desired.ck  =>
+    SLOWclk
+
+actual_desired.sp cnt0.sp cnt1.sp desired_ff1.sp desired_ff2.sp desired_speed.sp fast_en_sync1.sp fast_en_sync2.sp fast_ff1.sp fast_ff2.sp s0.sp s1.sp s2.sp slow_ff1.sp slow_ff2.sp  =>
+    0 
+
+cnt0.d  =>
+    RESET & !cnt0 & s0 & !s2
+
+cnt0.ar  =>
+    !RESET
+
+cnt0.ck  =>
+    SLOWclk
+
+cnt0.sp  =>
+    
+cnt1.d  =>
+    RESET & cnt0 & !cnt1 & s0 & !s2
+  # RESET & !cnt0 & cnt1 & s0 & !s2
+
+cnt1.ar  =>
+    !RESET
+
+cnt1.ck  =>
+    SLOWclk
+
+cnt1.sp  =>
+    
+cnt_done =>
+    cnt0 & cnt1 & s0 & !s2
+
+desired_ff1.d  =>
+    desired_speed
+
+desired_ff1.ar  =>
+    !RESET
+
+desired_ff1.ck  =>
+    SLOWclk
+
+desired_ff1.sp  =>
+    
+desired_ff2.d  =>
+    desired_ff1
+
+desired_ff2.ar  =>
+    !RESET
+
+desired_ff2.ck  =>
+    SLOWclk
+
+desired_ff2.sp  =>
+    
+desired_speed.d  =>
+    D0 & !R_W & SPEEDcs
+  # !SPEEDcs & desired_speed
+  # R_W & desired_speed
+
+desired_speed.ar  =>
+    !RESET
+
+desired_speed.ck  =>
+    !E
+
+desired_speed.sp  =>
+    
+fast_en_sync1.d  =>
+    fast_ff2
+
+fast_en_sync1.ar  =>
+    !RESET
+
+fast_en_sync1.ck  =>
+    SLOWclk
+
+fast_en_sync1.sp  =>
+    
+fast_en_sync2.d  =>
+    fast_en_sync1
+
+fast_en_sync2.ar  =>
+    !RESET
+
+fast_en_sync2.ck  =>
+    SLOWclk
+
+fast_en_sync2.sp  =>
+    
+fast_ff1.d  =>
+    actual_desired & !slow_ff2
+
+fast_ff1.ar  =>
+    !RESET
+
+fast_ff1.ck  =>
+    FASTclk
+
+fast_ff1.sp  =>
+    
+fast_ff2.d  =>
+    fast_ff1
+
+fast_ff2.ar  =>
+    !RESET
+
+fast_ff2.ck  =>
+    !FASTclk
+
+fast_ff2.sp  =>
+    
+freeze_active =>
+    s0 & !s2
+  # !s0 & s1 & !s2
+  # !s0 & !s1 & s2
+
+halt_active =>
+    s0 & !s2
+  # !s0 & s1 & !s2
+  # !s1 & s2
+
+in_delay =>
+    s0 & !s2
+
+need_switch =>
+    desired_ff2 & !fast_en_sync2
+  # !desired_ff2 & fast_en_sync2
+
+s0.d  =>
+    RESET & desired_ff2 & !fast_en_sync2 & !s0 & !s1 & !s2
+  # RESET & !desired_ff2 & fast_en_sync2 & !s0 & !s1 & !s2
+  # RESET & s0 & !s1 & s2
+  # RESET & !cnt1 & s0 & !s2
+  # RESET & !cnt0 & s0 & !s2
+
+s0.ar  =>
+    !RESET
+
+s0.ck  =>
+    SLOWclk
+
+s0.sp  =>
+    
+s1.d  =>
+    RESET & cnt0 & cnt1 & s0 & !s1
+  # RESET & s0 & !s1 & s2
+  # RESET & !s0 & s1
+  # RESET & s1 & !s2
+
+s1.ar  =>
+    !RESET
+
+s1.ck  =>
+    SLOWclk
+
+s1.sp  =>
+    
+s2.d  =>
+    RESET & cnt0 & cnt1 & s0 & s1 & !s2
+  # RESET & !s1 & s2
+  # RESET & !s0 & s2
+
+s2.ar  =>
+    !RESET
+
+s2.ck  =>
+    SLOWclk
+
+s2.sp  =>
+    
+slow_ff1.d  =>
+    !actual_desired & !fast_ff2
+
+slow_ff1.ar  =>
+    !RESET
+
+slow_ff1.ck  =>
+    SLOWclk
+
+slow_ff1.sp  =>
+    
+slow_ff2.d  =>
+    slow_ff1
+
+slow_ff2.ar  =>
+    !RESET
+
+slow_ff2.ck  =>
+    !SLOWclk
+
+slow_ff2.sp  =>
+    
+speed_rd =>
+    R_W & !SPEEDcs
+
+speed_wr =>
+    !R_W & !SPEEDcs
+
+switch_complete =>
+    desired_ff2 & fast_en_sync2
+  # !desired_ff2 & slow_ff2
+
+terminal_3 =>
+    cnt0 & cnt1
+
+CPU_CLK.oe  =>
+    1 
+
+HALTout.oe  =>
+    1 
+
+MRDYout.oe  =>
+    1 
+
+SPEEDcurr.oe  =>
+    1 
+
+cnt0.oe  =>
+    1 
+
+cnt1.oe  =>
+    1 
+
+s0.oe  =>
+    1 
+
+s1.oe  =>
+    1 
+
+s2.oe  =>
+    1 
+
+%END

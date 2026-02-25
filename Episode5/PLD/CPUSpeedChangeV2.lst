@@ -1,0 +1,268 @@
+LISTING FOR LOGIC DESCRIPTION FILE: CPUSpeedChangeV2.pld             Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Feb 25 05:35:17 2026
+
+  1:Name     CPUSpeedChangeV2 ;
+  2:PartNo   ATF750C ;
+  3:Date     2026-02-24 ;
+  4:Revision 6.1 ;
+  5:Designer Frederic Segard ;
+  6:Company  MicroHobbyist ;
+  7:Assembly None ;
+  8:Location None ;
+  9:Device   v750c ;
+ 10:
+ 11:/* -------------------------------------------------------------------- */
+ 12:/* Glitchless 2-Speed CPU Clock Control (internal MUX) */
+ 13:/* -------------------------------------------------------------------- */
+ 14:/* -------------------------------------------------------------------- */
+ 15:/* INPUTS (INPUT-ONLY PINS) */
+ 16:/* -------------------------------------------------------------------- */
+ 17:PIN 1 = E ;         /* E strobe (may pause during MRDY) */
+ 18:PIN 2 = SLOWclk ;   /* Slow oscillator (8MHz for 2MHz E) */
+ 19:PIN 3 = FASTclk ;   /* Fast oscillator (unrelated, e.g. 20MHz for 5MHz E) */
+ 20:PIN 4 = R_W ;       /* 1=read, 0=write */
+ 21:PIN 5 = !SPEEDcs ;  /* Chip Select for $FF01 (active low) */
+ 22:PIN 6 = RESET ;     /* Reset (active low) */
+ 23:
+ 24:/* -------------------------------------------------------------------- */
+ 25:/* I/O PINS (OUTPUTS + BIDIR) */
+ 26:/* -------------------------------------------------------------------- */
+ 27:PIN 14 = D0 ;        /* Data bus D0 (bidirectional) */
+ 28:PIN 15 = CPU_CLK ;   /* Muxed clock output to 6809 EXTAL */
+ 29:PIN 16 = SPEEDcurr ; /* Mirrors ACTUAL selected speed */
+ 30:PIN 17 = !HALTout ;  /* Active-low HALT output (to ext OC buffer) */
+ 31:PIN 18 = !MRDYout ;  /* Active-low MRDY output (to ext OC buffer) */
+ 32:/* State pins (guaranteed macrocells) */
+ 33:PIN 19 = cnt0 ;      /* 2-bit delay counter */
+ 34:PIN 20 = cnt1 ;      /* 2-bit delay counter */
+ 35:PIN 21 = s0 ;        /* FSM state bit 0 */
+ 36:PIN 22 = s1 ;        /* FSM state bit 1 */
+ 37:PIN 23 = s2 ;        /* FSM state bit 2 */
+ 38:
+ 39:/* -------------------------------------------------------------------- */
+ 40:/* BURIED REGISTERED NODES */
+ 41:/* -------------------------------------------------------------------- */
+ 42:NODE desired_speed ; /* requested speed bit (0 slow, 1 fast) */
+ 43:NODE actual_desired ; /* gated desired for mux trigger */
+ 44:NODE desired_ff1, desired_ff2 ; /* double sync to slow domain */
+ 45:NODE slow_ff1, slow_ff2 ; /* slow enable chain */
+ 46:NODE fast_ff1, fast_ff2 ; /* fast enable chain */
+ 47:NODE fast_en_sync1, fast_en_sync2 ; /* double sync fast_en to slow */
+ 48:
+ 49:/* -------------------------------------------------------------------- */
+ 50:/* CPU REGISTER ACCESS (E is the clock) */
+ 51:/* -------------------------------------------------------------------- */
+ 52:speed_wr = (!SPEEDcs & !R_W) ;
+ 53:speed_rd = (!SPEEDcs & R_W) ;
+
+LISTING FOR LOGIC DESCRIPTION FILE: CPUSpeedChangeV2.pld             Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Feb 25 05:35:17 2026
+
+ 54:
+ 55:/* -------------------------------------------------------------------- */
+ 56:/* desired_speed REGISTER (CLOCKED BY !E - falling edge) */
+ 57:/* -------------------------------------------------------------------- */
+ 58:desired_speed.D =
+ 59:    ( speed_wr & D0 )
+ 60:  # ( !speed_wr & desired_speed ) ;
+ 61:desired_speed.CK = !E ;
+ 62:desired_speed.AR = !RESET ;
+ 63:desired_speed.SP = 'b'0 ;
+ 64:
+ 65:/* -------------------------------------------------------------------- */
+ 66:/* DOUBLE SYNC desired_speed TO SLOWclk DOMAIN */
+ 67:/* -------------------------------------------------------------------- */
+ 68:desired_ff1.D = desired_speed ;
+ 69:desired_ff1.CK = SLOWclk ;
+ 70:desired_ff1.AR = !RESET ;
+ 71:desired_ff1.SP = 'b'0 ;
+ 72:
+ 73:desired_ff2.D = desired_ff1 ;
+ 74:desired_ff2.CK = SLOWclk ;
+ 75:desired_ff2.AR = !RESET ;
+ 76:desired_ff2.SP = 'b'0 ;
+ 77:
+ 78:/* -------------------------------------------------------------------- */
+ 79:/* ACTUAL DESIRED (UPDATED ONLY IN ST_SWITCH) */
+ 80:/* -------------------------------------------------------------------- */
+ 81:actual_desired.D =
+ 82:    ( ST_SWITCH & desired_ff2 )
+ 83:  # ( !ST_SWITCH & actual_desired ) ;
+ 84:actual_desired.CK = SLOWclk ;
+ 85:actual_desired.AR = !RESET ;
+ 86:actual_desired.SP = 'b'0 ;
+ 87:
+ 88:/* -------------------------------------------------------------------- */
+ 89:/* GLITCH-FREE MUX CHAINS */
+ 90:/* -------------------------------------------------------------------- */
+ 91:slow_ff1.D = !actual_desired & !fast_ff2 ;
+ 92:slow_ff1.CK = SLOWclk ;
+ 93:slow_ff1.AR = !RESET ;
+ 94:slow_ff1.SP = 'b'0 ;
+ 95:
+ 96:slow_ff2.D = slow_ff1 ;
+ 97:slow_ff2.CK = !SLOWclk ;
+ 98:slow_ff2.AR = !RESET ;
+ 99:slow_ff2.SP = 'b'0 ;
+100:
+101:fast_ff1.D = actual_desired & !slow_ff2 ;
+102:fast_ff1.CK = FASTclk ;
+103:fast_ff1.AR = !RESET ;
+104:fast_ff1.SP = 'b'0 ;
+105:
+106:fast_ff2.D = fast_ff1 ;
+107:fast_ff2.CK = !FASTclk ;
+
+LISTING FOR LOGIC DESCRIPTION FILE: CPUSpeedChangeV2.pld             Page 3
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Feb 25 05:35:17 2026
+
+108:fast_ff2.AR = !RESET ;
+109:fast_ff2.SP = 'b'0 ;
+110:
+111:/* -------------------------------------------------------------------- */
+112:/* MUXED CPU CLOCK OUTPUT (COMBINATIONAL) */
+113:/* -------------------------------------------------------------------- */
+114:CPU_CLK = (SLOWclk & slow_ff2) # (FASTclk & fast_ff2) ;
+115:
+116:/* -------------------------------------------------------------------- */
+117:/* DOUBLE SYNC fast_ff2 TO SLOWclk DOMAIN FOR MONITORING */
+118:/* -------------------------------------------------------------------- */
+119:fast_en_sync1.D = fast_ff2 ;
+120:fast_en_sync1.CK = SLOWclk ;
+121:fast_en_sync1.AR = !RESET ;
+122:fast_en_sync1.SP = 'b'0 ;
+123:
+124:fast_en_sync2.D = fast_en_sync1 ;
+125:fast_en_sync2.CK = SLOWclk ;
+126:fast_en_sync2.AR = !RESET ;
+127:fast_en_sync2.SP = 'b'0 ;
+128:
+129:/* -------------------------------------------------------------------- */
+130:/* ACTUAL SPEED (FOR READBACK AND NEED_SWITCH) */
+131:/* -------------------------------------------------------------------- */
+132:SPEEDcurr = fast_en_sync2 ;
+133:
+134:/* -------------------------------------------------------------------- */
+135:/* STATE DECODES (NO == OR <>) */
+136:/* -------------------------------------------------------------------- */
+137:ST_IDLE = (!s2 & !s1 & !s0) ; /* 000 */
+138:ST_FREEZE_PRE = (!s2 & !s1 & s0) ; /* 001 */
+139:ST_SWITCH = (!s2 & s1 & !s0) ; /* 010 */
+140:ST_FREEZE_POST = (!s2 & s1 & s0) ; /* 011 */
+141:ST_WAIT_COMPLETE = (s2 & !s1 & !s0) ; /* 100 */
+142:ST_REL_MRDY = (s2 & !s1 & s0) ; /* 101 */
+143:ST_REL_HALT = (s2 & s1 & !s0) ; /* 110 */
+144:
+145:/* -------------------------------------------------------------------- */
+146:/* SWITCH MONITORING */
+147:/* -------------------------------------------------------------------- */
+148:switch_complete = (desired_ff2 & fast_en_sync2) # (!desired_ff2 & slow_ff2) ;
+149:need_switch = (desired_ff2 $ fast_en_sync2) ;
+150:
+151:/* -------------------------------------------------------------------- */
+152:/* DELAY COUNTER (2-BIT, SLOWclk domain) */
+153:/* -------------------------------------------------------------------- */
+154:in_delay = (ST_FREEZE_PRE # ST_FREEZE_POST) ;
+155:terminal_3 = (cnt1 & cnt0) ;
+156:cnt_done = (in_delay & terminal_3) ;
+157:
+158:cnt0.D = RESET & in_delay & !cnt0 ;
+159:cnt1.D = RESET & in_delay & (cnt0 $ cnt1) ;
+160:cnt0.CK = SLOWclk ;
+161:cnt1.CK = SLOWclk ;
+
+LISTING FOR LOGIC DESCRIPTION FILE: CPUSpeedChangeV2.pld             Page 4
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Feb 25 05:35:17 2026
+
+162:cnt0.AR = !RESET ;
+163:cnt1.AR = !RESET ;
+164:cnt0.SP = 'b'0 ;
+165:cnt1.SP = 'b'0 ;
+166:
+167:/* -------------------------------------------------------------------- */
+168:/* STATE REGISTER (SLOWclk domain) */
+169:/* -------------------------------------------------------------------- */
+170:s0.CK = SLOWclk ;
+171:s1.CK = SLOWclk ;
+172:s2.CK = SLOWclk ;
+173:s0.AR = !RESET ;
+174:s1.AR = !RESET ;
+175:s2.AR = !RESET ;
+176:s0.SP = 'b'0 ;
+177:s1.SP = 'b'0 ;
+178:s2.SP = 'b'0 ;
+179:
+180:s0.D =
+181:    RESET & (
+182:        (ST_IDLE & need_switch)
+183:      # (ST_FREEZE_PRE & !cnt_done)
+184:      # (ST_FREEZE_POST & !cnt_done)
+185:      # ST_REL_MRDY
+186:    ) ;
+187:
+188:s1.D =
+189:    RESET & (
+190:        ST_SWITCH
+191:      # ST_FREEZE_POST
+192:      # ST_REL_HALT
+193:      # (ST_FREEZE_PRE & cnt_done)
+194:      # (ST_REL_MRDY)
+195:    ) ;
+196:
+197:s2.D =
+198:    RESET & (
+199:        ST_WAIT_COMPLETE
+200:      # ST_REL_MRDY
+201:      # ST_REL_HALT
+202:      # (ST_FREEZE_POST & cnt_done)
+203:      # (ST_WAIT_COMPLETE & !switch_complete)
+204:    ) ;
+205:
+206:/* -------------------------------------------------------------------- */
+207:/* HALT / MRDY OUTPUTS (NO .OE) */
+208:/* -------------------------------------------------------------------- */
+209:freeze_active =
+210:    (ST_FREEZE_PRE)
+211:  # (ST_SWITCH)
+212:  # (ST_FREEZE_POST)
+213:  # (ST_WAIT_COMPLETE) ;
+214:halt_active = (freeze_active # ST_REL_MRDY) ;
+215:
+
+LISTING FOR LOGIC DESCRIPTION FILE: CPUSpeedChangeV2.pld             Page 5
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Feb 25 05:35:17 2026
+
+216:HALTout = halt_active ;
+217:MRDYout = freeze_active ;
+218:
+219:/* -------------------------------------------------------------------- */
+220:/* DATA BUS READBACK (D0) */
+221:/* -------------------------------------------------------------------- */
+222:D0 = SPEEDcurr ;
+223:D0.OE = speed_rd ;
+224:
+
+
+
+Jedec Fuse Checksum       (2d41)
+Jedec Transmit Checksum   (63a3)
