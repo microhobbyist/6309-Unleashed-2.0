@@ -1,0 +1,65 @@
+Name     IODecode ;
+PartNo   ATF750CL ;
+Date     2026/02/25 ;
+Revision 2 ;
+Designer Frederic Segard ;
+Company  MicroHobbyist ;
+Assembly None ;
+Location None ;
+Device   v750c ;
+
+/* =========================================================
+   I/O ADDRESS DECODER + WAIT-STATE OUTPUT (ATF750C)
+   ---------------------------------------------------------
+/* -------- Inputs -------- */
+PIN 1  =  CPUclk ;  /* 4x E reference clock */
+PIN 2  = !IORQ ;    /* I/O request, active-low */
+PIN 3  =  RW ;      /* Read/Write line */
+PIN 4  =  SPAREin ; /* Spare input */
+PIN 5  =  A0 ;      /* Address bit 0 */
+PIN 6  =  A1 ;      /* Address bit 1 */
+PIN 7  =  A2 ;      /* Address bit 2 */
+PIN 8  =  A3 ;      /* Address bit 3 */
+PIN 9  =  A4 ;      /* Address bit 4 */
+PIN 10 =  A5 ;      /* Address bit 5 */
+PIN 11 =  A6 ;      /* Address bit 6 */
+PIN 13 =  A7 ;      /* Address bit 7 */
+
+/* -------- Outputs -------- */
+PIN 23 = !ACIA1cs ; /* ACIA select (active-low) */
+PIN 22 = !TIMERcs ; /* Timer chip select (active-low) */
+PIN 21 = !RTCcs ;   /* RTC select (active-low) */
+PIN 20 =  RTCas ;   /* RTC address strobe (active-high) */
+PIN 19 =  RTCds ;   /* RTC data strobe (active-high) */
+PIN 18 = !ROMdis ;  /* ROM disable (active-low) */
+PIN 17 = !IRQreg ;  /* Maskable priority IRQ controller (active-low) */
+PIN 16 = !FIRQreg ; /* Maskable priority FIRQ controller (active-low) */
+PIN 15 = SPAREout ; /* SPARE output */
+PIN 14 = !MRDYout ; /* MRDY out to CPU (goes through an OC buffer) */
+
+/* =========================================================
+   ADDRESS FIELD
+   ---------------------------------------------------------
+   FIELD ADDR groups A7..A0 so we can use range syntax:
+     ADDR:[xx..yy] matches an inclusive hex range.
+   Example:
+     ADDR:[28..2F] matches $28,$29,...,$2F.
+   ========================================================= */
+FIELD ADDR = [A7..A0] ;
+
+/* =========================================================
+   CHIP SELECT DECODE (INTERNAL ACTIVE-HIGH)
+   ---------------------------------------------------------
+   All device selects are qualified by IORQ, which in turn is
+   also qualified by E, so they only assert during an I/O cycle.
+   ========================================================= */
+
+ACIA1cs = (ADDR:[00..07]) & IORQ ;	/* R65C52P3: $FF00-07 */
+TIMERcs = (ADDR:[08..0F]) & IORQ ;	/* HD63B40: $FF08-0F */
+RTCas   = (ADDR:[10]) & IORQ ;		/* DS12C887A: RTC address strobe: $FF10 */
+RTCds   = (ADDR:[11]) & IORQ ;		/* DS12C887A: RTC address strobe: $FF11 */
+RTCcs   = (RTCas # RTCds) ;			/* DS12C887A: RTC chip select: $FF10-11 */
+ROMdis  = (ADDR:[12]) & IORQ ;		/* ROM disable: $FF12 */
+IRQreg  = (ADDR:[13]) & IORQ ;		/* IRQ PLD: $FF13 */
+FIRQreg = (ADDR:[14]) & IORQ ;		/* IRQ PLD: $FF14 */
+
