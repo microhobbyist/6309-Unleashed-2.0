@@ -1,0 +1,152 @@
+Name     ClockSwitcherV2 ;
+PartNo   ATF750C ;
+Date     2026-02-28 ;
+Revision 2.0 ;
+Designer Frederic Segard;
+Company  MicroHobbyist ;
+Assembly None ;
+Location None ;
+Device   v750c ;
+
+/* INPUTS */
+PIN 1 = E ;         /* CPU E strobe */
+PIN 2 = SLOWclk ;   /* 8 MHz slow oscillator */
+PIN 3 = FASTclk ;   /* Higher freq oscillator */
+PIN 4 = R_W ;       /* 1=read, 0=write */
+PIN 5 = !SPEEDcs ;  /* Chip select $FF01 (active low) */
+PIN 6 = !RESET ;    /* Reset (active low) */
+PIN 7 = !PUSH_BTN ; /* Momentary push button (active low) */
+
+/* BIDIR */
+PIN 20 = D0 ;       /* Data bit 0 (bidir for read/write) */
+
+/* OUTPUTS */
+PIN 23 = CPU_CLK ;  /* Muxed clock to 6309 EXTAL */
+PIN 22 = RED_LED ;  /* Actual speed readback (drives red LED) */
+PIN 21 = GREEN_LED ;/* Green LED for slow speed */
+PIN 15 = !HALTout ; /* Active-low HALT to CPU */
+PIN 14 = !MRDYout ; /* Active-low MRDY to CPU */
+
+/* BURIED REGISTERED NODES (13 total) */
+PIN 16 = cnt0;          /* 2-bit delay counter */
+PIN 17 = cnt1;
+PIN 18 = desired_speed ;/* Speed select bit (0 slow, 1 fast) */
+PIN 19 = button_edge ;  /* Edge detect for push button toggle */
+NODE desired_ff1, desired_ff2 ; /* Sync to slow domain */
+NODE actual_desired ;   /* Gated select for mux trigger */
+NODE slow_ff1, slow_ff2 ; /* Slow enable chain */
+NODE fast_ff1, fast_ff2 ; /* Fast enable chain */
+NODE fast_en_sync1, fast_en_sync2 ; /* Sync fast_en to slow for monitor */
+
+
+/* CPU REGISTER ACCESS */
+speed_wr = (!SPEEDcs & !R_W) ;
+speed_rd = (!SPEEDcs & R_W) ;
+
+/* desired_speed REG (CLOCKED BY !E, TOGGLE ON BUTTON) */
+desired_speed.D = (speed_wr & D0) # (!speed_wr & desired_speed $ button_edge) ;
+desired_speed.CK = !E ;
+desired_speed.AR = RESET ;
+desired_speed.SP = 'b'0 ;
+
+/* BUTTON EDGE DETECT (TOGGLE ON RISING PUSH_BTN) */
+button_edge.D = !PUSH_BTN ;
+button_edge.CK = SLOWclk ;  /* Debounce/sample at slow rate */
+button_edge.AR = RESET ;
+button_edge.SP = 'b'0 ;
+
+/* DOUBLE SYNC desired_speed TO SLOWclk DOMAIN */
+desired_ff1.D = desired_speed ;
+desired_ff1.CK = SLOWclk ;
+desired_ff1.AR = RESET ;
+desired_ff1.SP = 'b'0 ;
+
+desired_ff2.D = desired_ff1 ;
+desired_ff2.CK = SLOWclk ;
+desired_ff2.AR = RESET ;
+desired_ff2.SP = 'b'0 ;
+
+/* ACTUAL DESIRED (UPDATED ONLY IN ST_SWITCH) */
+actual_desired.D = (ST_SWITCH & desired_ff2) # (!ST_SWITCH & actual_desired) ;
+actual_desired.CK = SLOWclk ;
+actual_desired.AR = RESET ;
+actual_desired.SP = 'b'0 ;
+
+/* GLITCH-FREE MUX CHAINS */
+slow_ff1.D = !actual_desired & !fast_ff2 ;
+slow_ff1.CK = SLOWclk ;
+slow_ff1.AR = RESET ;
+slow_ff1.SP = 'b'0 ;
+
+slow_ff2.D = slow_ff1 ;
+slow_ff2.CK = !SLOWclk ;
+slow_ff2.AR = RESET ;
+slow_ff2.SP = 'b'0 ;
+
+fast_ff1.D = actual_desired & !slow_ff2 ;
+fast_ff1.CK = FASTclk ;
+fast_ff1.AR = RESET ;
+fast_ff1.SP = 'b'0 ;
+
+fast_ff2.D = fast_ff1 ;
+fast_ff2.CK = !FASTclk ;
+fast_ff2.AR = RESET ;
+fast_ff2.SP = 'b'0 ;
+
+/* MUXED CPU CLOCK OUTPUT */
+CPU_CLK = (SLOWclk & slow_ff2) # (FASTclk & fast_ff2) ;
+
+/* DOUBLE SYNC fast_ff2 TO SLOWclk DOMAIN FOR MONITORING */
+fast_en_sync1.D = fast_ff2 ;
+fast_en_sync1.CK = SLOWclk ;
+fast_en_sync1.AR = RESET ;
+fast_en_sync1.SP = 'b'0 ;
+
+fast_en_sync2.D = fast_en_sync1 ;
+fast_en_sync2.CK = SLOWclk ;
+fast_en_sync2.AR = RESET ;
+fast_en_sync2.SP = 'b'0 ;
+
+/* ACTUAL SPEED (FOR READBACK) */
+SPEEDcurr = fast_en_sync2 ;
+
+/* STATE DECODES */
+ST_IDLE = 'b'0 ;
+ST_SWITCH = 'b'1 ;
+
+/* SWITCH MONITORING */
+switch_complete = (desired_ff2 & fast_en_sync2) # (!desired_ff2 & slow_ff2) ;
+need_switch = (desired_ff2 $ fast_en_sync2) ;
+
+/* DELAY COUNTER */
+in_delay = ST_SWITCH ;
+terminal_3 = (cnt1 & cnt0) ;
+cnt_done = (in_delay & terminal_3) ;
+
+cnt0.D = !RESET & in_delay & !cnt0 ;
+cnt1.D = !RESET & in_delay & (cnt0 $ cnt1) ;
+cnt0.CK = SLOWclk ;
+cnt1.CK = SLOWclk ;
+cnt0.AR = RESET ;
+cnt1.AR = RESET ;
+cnt0.SP = 'b'0 ;
+cnt1.SP = 'b'0 ;
+
+/* STATE REGISTER */
+s0.CK = SLOWclk ;
+s0.AR = RESET ;
+s0.SP = 'b'0 ;
+s0.D = !RESET & ((ST_IDLE & need_switch) # (ST_SWITCH & !cnt_done)) ;
+
+/* HALT / MRDY OUTPUTS */
+freeze_active = ST_SWITCH ;
+HALTout = freeze_active ;
+MRDYout = freeze_active ;
+
+/* BICOLOR LED (red for fast, green for slow, yellow during freeze) */
+GREEN_LED = !SPEEDcurr # freeze_active ;  /* High for green ON (slow or freeze) */
+RED_LED = SPEEDcurr # freeze_active ;   /* Reuse for red ON (fast or freeze) */
+
+/* DATA BUS READBACK (D0) */
+D0 = SPEEDcurr ;
+D0.OE = speed_rd ;

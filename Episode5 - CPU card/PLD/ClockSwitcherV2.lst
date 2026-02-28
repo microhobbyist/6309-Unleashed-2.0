@@ -1,0 +1,181 @@
+LISTING FOR LOGIC DESCRIPTION FILE: ClockSwitcherV2.pld              Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Feb 28 11:19:33 2026
+
+  1:Name     ClockSwitcherV2 ;
+  2:PartNo   ATF750C ;
+  3:Date     2026-02-28 ;
+  4:Revision 2.0 ;
+  5:Designer Frederic Segard;
+  6:Company  MicroHobbyist ;
+  7:Assembly None ;
+  8:Location None ;
+  9:Device   v750c ;
+ 10:
+ 11:/* INPUTS */
+ 12:PIN 1 = E ;         /* CPU E strobe */
+ 13:PIN 2 = SLOWclk ;   /* 8 MHz slow oscillator */
+ 14:PIN 3 = FASTclk ;   /* Higher freq oscillator */
+ 15:PIN 4 = R_W ;       /* 1=read, 0=write */
+ 16:PIN 5 = !SPEEDcs ;  /* Chip select $FF01 (active low) */
+ 17:PIN 6 = !RESET ;    /* Reset (active low) */
+ 18:PIN 7 = !PUSH_BTN ; /* Momentary push button (active low) */
+ 19:
+ 20:/* BIDIR */
+ 21:PIN 20 = D0 ;       /* Data bit 0 (bidir for read/write) */
+ 22:
+ 23:/* OUTPUTS */
+ 24:PIN 23 = CPU_CLK ;  /* Muxed clock to 6309 EXTAL */
+ 25:PIN 22 = RED_LED ;  /* Actual speed readback (drives red LED) */
+ 26:PIN 21 = GREEN_LED ;/* Green LED for slow speed */
+ 27:PIN 15 = !HALTout ; /* Active-low HALT to CPU */
+ 28:PIN 14 = !MRDYout ; /* Active-low MRDY to CPU */
+ 29:
+ 30:/* BURIED REGISTERED NODES (13 total) */
+ 31:PIN 16 = cnt0;          /* 2-bit delay counter */
+ 32:PIN 17 = cnt1;
+ 33:PIN 18 = desired_speed ;/* Speed select bit (0 slow, 1 fast) */
+ 34:PIN 19 = button_edge ;  /* Edge detect for push button toggle */
+ 35:NODE desired_ff1, desired_ff2 ; /* Sync to slow domain */
+ 36:NODE actual_desired ;   /* Gated select for mux trigger */
+ 37:NODE slow_ff1, slow_ff2 ; /* Slow enable chain */
+ 38:NODE fast_ff1, fast_ff2 ; /* Fast enable chain */
+ 39:NODE fast_en_sync1, fast_en_sync2 ; /* Sync fast_en to slow for monitor */
+ 40:
+ 41:
+ 42:/* CPU REGISTER ACCESS */
+ 43:speed_wr = (!SPEEDcs & !R_W) ;
+ 44:speed_rd = (!SPEEDcs & R_W) ;
+ 45:
+ 46:/* desired_speed REG (CLOCKED BY !E, TOGGLE ON BUTTON) */
+ 47:desired_speed.D = (speed_wr & D0) # (!speed_wr & desired_speed $ button_edge) ;
+ 48:desired_speed.CK = !E ;
+ 49:desired_speed.AR = RESET ;
+ 50:desired_speed.SP = 'b'0 ;
+ 51:
+ 52:/* BUTTON EDGE DETECT (TOGGLE ON RISING PUSH_BTN) */
+ 53:button_edge.D = !PUSH_BTN ;
+
+LISTING FOR LOGIC DESCRIPTION FILE: ClockSwitcherV2.pld              Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Feb 28 11:19:33 2026
+
+ 54:button_edge.CK = SLOWclk ;  /* Debounce/sample at slow rate */
+ 55:button_edge.AR = RESET ;
+ 56:button_edge.SP = 'b'0 ;
+ 57:
+ 58:/* DOUBLE SYNC desired_speed TO SLOWclk DOMAIN */
+ 59:desired_ff1.D = desired_speed ;
+ 60:desired_ff1.CK = SLOWclk ;
+ 61:desired_ff1.AR = RESET ;
+ 62:desired_ff1.SP = 'b'0 ;
+ 63:
+ 64:desired_ff2.D = desired_ff1 ;
+ 65:desired_ff2.CK = SLOWclk ;
+ 66:desired_ff2.AR = RESET ;
+ 67:desired_ff2.SP = 'b'0 ;
+ 68:
+ 69:/* ACTUAL DESIRED (UPDATED ONLY IN ST_SWITCH) */
+ 70:actual_desired.D = (ST_SWITCH & desired_ff2) # (!ST_SWITCH & actual_desired) ;
+ 71:actual_desired.CK = SLOWclk ;
+ 72:actual_desired.AR = RESET ;
+ 73:actual_desired.SP = 'b'0 ;
+ 74:
+ 75:/* GLITCH-FREE MUX CHAINS */
+ 76:slow_ff1.D = !actual_desired & !fast_ff2 ;
+ 77:slow_ff1.CK = SLOWclk ;
+ 78:slow_ff1.AR = RESET ;
+ 79:slow_ff1.SP = 'b'0 ;
+ 80:
+ 81:slow_ff2.D = slow_ff1 ;
+ 82:slow_ff2.CK = !SLOWclk ;
+ 83:slow_ff2.AR = RESET ;
+ 84:slow_ff2.SP = 'b'0 ;
+ 85:
+ 86:fast_ff1.D = actual_desired & !slow_ff2 ;
+ 87:fast_ff1.CK = FASTclk ;
+ 88:fast_ff1.AR = RESET ;
+ 89:fast_ff1.SP = 'b'0 ;
+ 90:
+ 91:fast_ff2.D = fast_ff1 ;
+ 92:fast_ff2.CK = !FASTclk ;
+ 93:fast_ff2.AR = RESET ;
+ 94:fast_ff2.SP = 'b'0 ;
+ 95:
+ 96:/* MUXED CPU CLOCK OUTPUT */
+ 97:CPU_CLK = (SLOWclk & slow_ff2) # (FASTclk & fast_ff2) ;
+ 98:
+ 99:/* DOUBLE SYNC fast_ff2 TO SLOWclk DOMAIN FOR MONITORING */
+100:fast_en_sync1.D = fast_ff2 ;
+101:fast_en_sync1.CK = SLOWclk ;
+102:fast_en_sync1.AR = RESET ;
+103:fast_en_sync1.SP = 'b'0 ;
+104:
+105:fast_en_sync2.D = fast_en_sync1 ;
+106:fast_en_sync2.CK = SLOWclk ;
+107:fast_en_sync2.AR = RESET ;
+
+LISTING FOR LOGIC DESCRIPTION FILE: ClockSwitcherV2.pld              Page 3
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Feb 28 11:19:33 2026
+
+108:fast_en_sync2.SP = 'b'0 ;
+109:
+110:/* ACTUAL SPEED (FOR READBACK) */
+111:SPEEDcurr = fast_en_sync2 ;
+112:
+113:/* STATE DECODES */
+114:ST_IDLE = 'b'0 ;
+115:ST_SWITCH = 'b'1 ;
+116:
+117:/* SWITCH MONITORING */
+118:switch_complete = (desired_ff2 & fast_en_sync2) # (!desired_ff2 & slow_ff2) ;
+119:need_switch = (desired_ff2 $ fast_en_sync2) ;
+120:
+121:/* DELAY COUNTER */
+122:in_delay = ST_SWITCH ;
+123:terminal_3 = (cnt1 & cnt0) ;
+124:cnt_done = (in_delay & terminal_3) ;
+125:
+126:cnt0.D = !RESET & in_delay & !cnt0 ;
+127:cnt1.D = !RESET & in_delay & (cnt0 $ cnt1) ;
+128:cnt0.CK = SLOWclk ;
+129:cnt1.CK = SLOWclk ;
+130:cnt0.AR = RESET ;
+131:cnt1.AR = RESET ;
+132:cnt0.SP = 'b'0 ;
+133:cnt1.SP = 'b'0 ;
+134:
+135:/* STATE REGISTER */
+136:s0.CK = SLOWclk ;
+137:s0.AR = RESET ;
+138:s0.SP = 'b'0 ;
+139:s0.D = !RESET & ((ST_IDLE & need_switch) # (ST_SWITCH & !cnt_done)) ;
+140:
+141:/* HALT / MRDY OUTPUTS */
+142:freeze_active = ST_SWITCH ;
+143:HALTout = freeze_active ;
+144:MRDYout = freeze_active ;
+145:
+146:/* BICOLOR LED (red for fast, green for slow, yellow during freeze) */
+147:GREEN_LED = !SPEEDcurr # freeze_active ;  /* High for green ON (slow or freeze) */
+148:RED_LED = SPEEDcurr # freeze_active ;   /* Reuse for red ON (fast or freeze) */
+149:
+150:/* DATA BUS READBACK (D0) */
+151:D0 = SPEEDcurr ;
+152:D0.OE = speed_rd ;
+153:
+
+
+
+Jedec Fuse Checksum       (7971)
+Jedec Transmit Checksum   (de07)
