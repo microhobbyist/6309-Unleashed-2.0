@@ -414,16 +414,32 @@
       "Root"
     ],
     [
-      "0ceebdfb-4953-4f6c-a4a7-697b591b5d1a",
-      "CPU, ROM & RAM"
-    ],
-    [
       "36fac989-7c28-48d1-a119-b59b401eed2b",
-      "Bus & Buffers"
+      "CPU, Reset, Buffers"
     ],
     [
       "26ac2467-12bf-4b98-a1f8-a015bd497890",
       "Glue Logic"
+    ],
+    [
+      "0ceebdfb-4953-4f6c-a4a7-697b591b5d1a",
+      "ROM, RAM, and RTC"
+    ],
+    [
+      "7fc097a4-f48b-45b8-a8bb-e832fa3e2731",
+      "ACIA (Serial Ports)"
+    ],
+    [
+      "00bc1f84-26cf-473c-9987-a72a111c1c2c",
+      "Timer"
+    ],
+    [
+      "9b458361-29b9-4821-935d-c7e671cea96a",
+      "Interrupt Controllers"
+    ],
+    [
+      "c6bbb39a-28a3-4d97-a8c3-a2270393e2af",
+      "Blinkenlights"
     ]
   ],
   "text_variables": {}

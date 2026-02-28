@@ -1,65 +1,134 @@
-Name     IODecode ;
-PartNo   ATF750CL ;
-Date     2026/02/25 ;
-Revision 2 ;
-Designer Frederic Segard ;
-Company  MicroHobbyist ;
-Assembly None ;
-Location None ;
-Device   v750c ;
-
 /* =========================================================
-   I/O ADDRESS DECODER + WAIT-STATE OUTPUT (ATF750C)
+   REUSABLE WAIT-STATE GENERATOR TEMPLATE (ATF750CL)
    ---------------------------------------------------------
-/* -------- Inputs -------- */
-PIN 1  =  CPUclk ;  /* 4x E reference clock */
-PIN 2  = !IORQ ;    /* I/O request, active-low */
-PIN 3  =  RW ;      /* Read/Write line */
-PIN 4  =  SPAREin ; /* Spare input */
-PIN 5  =  A0 ;      /* Address bit 0 */
-PIN 6  =  A1 ;      /* Address bit 1 */
-PIN 7  =  A2 ;      /* Address bit 2 */
-PIN 8  =  A3 ;      /* Address bit 3 */
-PIN 9  =  A4 ;      /* Address bit 4 */
-PIN 10 =  A5 ;      /* Address bit 5 */
-PIN 11 =  A6 ;      /* Address bit 6 */
-PIN 13 =  A7 ;      /* Address bit 7 */
+   Usage in any I/O decoder PLD:
 
-/* -------- Outputs -------- */
-PIN 23 = !ACIA1cs ; /* ACIA select (active-low) */
-PIN 22 = !TIMERcs ; /* Timer chip select (active-low) */
-PIN 21 = !RTCcs ;   /* RTC select (active-low) */
-PIN 20 =  RTCas ;   /* RTC address strobe (active-high) */
-PIN 19 =  RTCds ;   /* RTC data strobe (active-high) */
-PIN 18 = !ROMdis ;  /* ROM disable (active-low) */
-PIN 17 = !IRQreg ;  /* Maskable priority IRQ controller (active-low) */
-PIN 16 = !FIRQreg ; /* Maskable priority FIRQ controller (active-low) */
-PIN 15 = SPAREout ; /* SPARE output */
-PIN 14 = !MRDYout ; /* MRDY out to CPU (goes through an OC buffer) */
+   1. Define your actual address-decoded CS signals (ACIA1cs, TIMERcs, etc.)
+   2. Paste this block after the CS equations
+   3. Customize the *_SLOW_WAIT1/0 and *_FAST_WAIT1/0 constants below
+      - 'b00 = 0 waits, 'b01 = 1 wait, 'b10 = 2 waits, 'b11 = 3 waits
+   4. The final WAIT1/WAIT0 are automatically selected by SPEEDcurr (pin 4)
+      - 0 = slow mode → uses *_SLOW_WAIT values
+      - 1 = fast mode → uses *_FAST_WAIT values
 
-/* =========================================================
-   ADDRESS FIELD
-   ---------------------------------------------------------
-   FIELD ADDR groups A7..A0 so we can use range syntax:
-     ADDR:[xx..yy] matches an inclusive hex range.
-   Example:
-     ADDR:[28..2F] matches $28,$29,...,$2F.
-   ========================================================= */
-FIELD ADDR = [A7..A0] ;
+   Example for this PLD (R65C52P3 ACIA):
+     Slow (2 MHz E): 0 waits
+     Fast (6 MHz E): 2 waits
 
-/* =========================================================
-   CHIP SELECT DECODE (INTERNAL ACTIVE-HIGH)
-   ---------------------------------------------------------
-   All device selects are qualified by IORQ, which in turn is
-   also qualified by E, so they only assert during an I/O cycle.
+   For other PLDs: just change the per-device SLOW/FAST values.
    ========================================================= */
 
-ACIA1cs = (ADDR:[00..07]) & IORQ ;	/* R65C52P3: $FF00-07 */
-TIMERcs = (ADDR:[08..0F]) & IORQ ;	/* HD63B40: $FF08-0F */
-RTCas   = (ADDR:[10]) & IORQ ;		/* DS12C887A: RTC address strobe: $FF10 */
-RTCds   = (ADDR:[11]) & IORQ ;		/* DS12C887A: RTC address strobe: $FF11 */
-RTCcs   = (RTCas # RTCds) ;			/* DS12C887A: RTC chip select: $FF10-11 */
-ROMdis  = (ADDR:[12]) & IORQ ;		/* ROM disable: $FF12 */
-IRQreg  = (ADDR:[13]) & IORQ ;		/* IRQ PLD: $FF13 */
-FIRQreg = (ADDR:[14]) & IORQ ;		/* IRQ PLD: $FF14 */
+/* -------- Speed select input (must be on pin 4 or change pin number) -------- */
+PIN 4 = SPEEDcurr ;     /* 0 = slow mode, 1 = fast mode */
 
+/* -------- Per-device wait codes - SLOW mode (edit per PLD) -------- */
+ACIA_SLOW_WAIT1   = 'b0 ;
+ACIA_SLOW_WAIT0   = 'b0 ;   /* 0 waits at 2 MHz E */
+
+TIMER_SLOW_WAIT1  = 'b0 ;
+TIMER_SLOW_WAIT0  = 'b0 ;
+
+RTC_SLOW_WAIT1    = 'b0 ;
+RTC_SLOW_WAIT0    = 'b0 ;
+
+POST_SLOW_WAIT1   = 'b0 ;
+POST_SLOW_WAIT0   = 'b0 ;
+
+CONF_SLOW_WAIT1   = 'b0 ;
+CONF_SLOW_WAIT0   = 'b0 ;
+
+ROMDIS_SLOW_WAIT1 = 'b0 ;
+ROMDIS_SLOW_WAIT0 = 'b0 ;
+
+SPD_SLOW_WAIT1    = 'b0 ;
+SPD_SLOW_WAIT0    = 'b0 ;
+
+/* -------- Per-device wait codes - FAST mode (edit per PLD) -------- */
+ACIA_FAST_WAIT1   = 'b1 ;
+ACIA_FAST_WAIT0   = 'b0 ;   /* 2 waits at 6 MHz E */
+
+TIMER_FAST_WAIT1  = 'b0 ;
+TIMER_FAST_WAIT0  = 'b0 ;
+
+RTC_FAST_WAIT1    = 'b0 ;
+RTC_FAST_WAIT0    = 'b0 ;
+
+POST_FAST_WAIT1   = 'b0 ;
+POST_FAST_WAIT0   = 'b0 ;
+
+CONF_FAST_WAIT1   = 'b0 ;
+CONF_FAST_WAIT0   = 'b0 ;
+
+ROMDIS_FAST_WAIT1 = 'b0 ;
+ROMDIS_FAST_WAIT0 = 'b0 ;
+
+SPD_FAST_WAIT1    = 'b0 ;
+SPD_FAST_WAIT0    = 'b0 ;
+
+/* -------- Mux: select slow or fast wait code per device -------- */
+ACIA_WAIT1 = ( !SPEEDcurr & ACIA_SLOW_WAIT1 ) # ( SPEEDcurr & ACIA_FAST_WAIT1 ) ;
+ACIA_WAIT0 = ( !SPEEDcurr & ACIA_SLOW_WAIT0 ) # ( SPEEDcurr & ACIA_FAST_WAIT0 ) ;
+
+TIMER_WAIT1 = ( !SPEEDcurr & TIMER_SLOW_WAIT1 ) # ( SPEEDcurr & TIMER_FAST_WAIT1 ) ;
+TIMER_WAIT0 = ( !SPEEDcurr & TIMER_SLOW_WAIT0 ) # ( SPEEDcurr & TIMER_FAST_WAIT0 ) ;
+
+RTC_WAIT1   = ( !SPEEDcurr & RTC_SLOW_WAIT1 ) # ( SPEEDcurr & RTC_FAST_WAIT1 ) ;
+RTC_WAIT0   = ( !SPEEDcurr & RTC_SLOW_WAIT0 ) # ( SPEEDcurr & RTC_FAST_WAIT0 ) ;
+
+POST_WAIT1  = ( !SPEEDcurr & POST_SLOW_WAIT1 ) # ( SPEEDcurr & POST_FAST_WAIT1 ) ;
+POST_WAIT0  = ( !SPEEDcurr & POST_SLOW_WAIT0 ) # ( SPEEDcurr & POST_FAST_WAIT0 ) ;
+
+CONF_WAIT1  = ( !SPEEDcurr & CONF_SLOW_WAIT1 ) # ( SPEEDcurr & CONF_FAST_WAIT1 ) ;
+CONF_WAIT0  = ( !SPEEDcurr & CONF_SLOW_WAIT0 ) # ( SPEEDcurr & CONF_FAST_WAIT0 ) ;
+
+ROMDIS_WAIT1 = ( !SPEEDcurr & ROMDIS_SLOW_WAIT1 ) # ( SPEEDcurr & ROMDIS_FAST_WAIT1 ) ;
+ROMDIS_WAIT0 = ( !SPEEDcurr & ROMDIS_SLOW_WAIT0 ) # ( SPEEDcurr & ROMDIS_FAST_WAIT0 ) ;
+
+SPD_WAIT1   = ( !SPEEDcurr & SPD_SLOW_WAIT1 ) # ( SPEEDcurr & SPD_FAST_WAIT1 ) ;
+SPD_WAIT0   = ( !SPEEDcurr & SPD_SLOW_WAIT0 ) # ( SPEEDcurr & SPD_FAST_WAIT0 ) ;
+
+/* -------- Final WAIT1/WAIT0 mux (one-hot CS assumed) -------- */
+WAIT1 = (ACIA1cs  & ACIA_WAIT1)   #
+        (TIMERcs  & TIMER_WAIT1)  #
+        (RTCcs    & RTC_WAIT1)    #
+        (POSTcs   & POST_WAIT1)   #
+        (CONFcs   & CONF_WAIT1)   #
+        (ROMdis   & ROMDIS_WAIT1) #
+        (SPDsel   & SPD_WAIT1)    ;
+
+WAIT0 = (ACIA1cs  & ACIA_WAIT0)   #
+        (TIMERcs  & TIMER_WAIT0)  #
+        (RTCcs    & RTC_WAIT0)    #
+        (POSTcs   & POST_WAIT0)   #
+        (CONFcs   & CONF_WAIT0)   #
+        (ROMdis   & ROMDIS_WAIT0) #
+        (SPDsel   & SPD_WAIT0)    ;
+
+/* -------- Counter logic (unchanged - copy as-is) -------- */
+CYCLE_ACTIVE = !IORQ ;
+
+[C3..C0].CLK = CPUclk ;
+
+L3 = WAIT1 ;
+L2 = WAIT1 ;
+L1 = WAIT0 ;
+L0 = 'b0 ;
+
+COUNT_EN = (C3 # C2 # C1 # C0) & CYCLE_ACTIVE ;
+
+LOAD = CYCLE_ACTIVE & (WAIT1 # WAIT0) & !(C3 # C2 # C1 # C0) ;
+
+BORROW3 = C2 & C1 & C0 ;
+BORROW2 = C1 & C0 ;
+BORROW1 = C0 ;
+
+C3.D = (LOAD & L3) # (COUNT_EN & (C3 $ BORROW3)) ;
+C2.D = (LOAD & L2) # (COUNT_EN & (C2 $ BORROW2)) ;
+C1.D = (LOAD & L1) # (COUNT_EN & (C1 $ BORROW1)) ;
+C0.D = (LOAD & L0) # (COUNT_EN & !C0) ;
+
+ASSERT = C3 # C2 # C1 # C0 ;
+
+[C3..C0].AR = !CYCLE_ACTIVE ;
+
+!MRDYout = !ASSERT ;
