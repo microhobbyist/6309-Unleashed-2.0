@@ -35,7 +35,7 @@
 					(justify top)
 				)
 			)
-			(property "Footprint" "MicroHobbyist:72-pin CE connector"
+			(property "Footprint" "MicroHobbyist:72-pin Card Edge PCB"
 				(at 0 -97.79 0)
 				(effects
 					(font
@@ -4786,7 +4786,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "249d0e65-4d67-48ca-bf68-c4632ab96d3e")
-		(property "Reference" "#FLG02"
+		(property "Reference" "#FLG03"
 			(at 196.215 111.76 0)
 			(effects
 				(font
@@ -4837,7 +4837,7 @@
 		(instances
 			(project "Episode5"
 				(path "/29787633-5c1f-4e4e-91db-ab6870e032bc"
-					(reference "#FLG02")
+					(reference "#FLG03")
 					(unit 1)
 				)
 			)
@@ -4984,7 +4984,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "57d4a396-ebdc-4a32-88e9-94aa8a9527a3")
-		(property "Reference" "#FLG05"
+		(property "Reference" "#FLG02"
 			(at 196.215 60.96 0)
 			(effects
 				(font
@@ -5035,7 +5035,7 @@
 		(instances
 			(project "Episode5 - CPU card"
 				(path "/29787633-5c1f-4e4e-91db-ab6870e032bc"
-					(reference "#FLG05")
+					(reference "#FLG02")
 					(unit 1)
 				)
 			)
@@ -5580,7 +5580,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b13315c7-f95a-472a-9dae-070ac8575487")
-		(property "Reference" "#FLG04"
+		(property "Reference" "#FLG05"
 			(at 245.745 114.3 0)
 			(effects
 				(font
@@ -5631,7 +5631,7 @@
 		(instances
 			(project "Episode5"
 				(path "/29787633-5c1f-4e4e-91db-ab6870e032bc"
-					(reference "#FLG04")
+					(reference "#FLG05")
 					(unit 1)
 				)
 			)
@@ -5647,7 +5647,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d733d289-af54-426a-9912-bb037c3760a8")
-		(property "Reference" "#FLG03"
+		(property "Reference" "#FLG04"
 			(at 189.865 114.3 0)
 			(effects
 				(font
@@ -5698,7 +5698,7 @@
 		(instances
 			(project "Episode5"
 				(path "/29787633-5c1f-4e4e-91db-ab6870e032bc"
-					(reference "#FLG03")
+					(reference "#FLG04")
 					(unit 1)
 				)
 			)
